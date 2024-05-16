@@ -1,10 +1,10 @@
-import { Route, Switch } from "wouter";
 import { Home } from "./pages/home/Home";
 import { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { StatsGl, View } from "@react-three/drei";
 import { ReactLenis } from "lenis/react";
 import { useLoadData } from "./state/useLoadData";
+import "./App.css";
 
 export default function App() {
   const envMode = import.meta.env.MODE;
@@ -15,15 +15,7 @@ export default function App() {
     <ReactLenis root>
       {isLoading && "LOADING"}
       <div id="app-container" ref={appContainerRef}>
-        <Switch>
-          <Route path="/" component={Home} />
-
-          <Route path="/projects/:name">
-            {(params) => <>Project: {params.name}</>}
-          </Route>
-
-          <Route>404: No such page!</Route>
-        </Switch>
+        <Home />
 
         {/* Three js canvas */}
         <Canvas

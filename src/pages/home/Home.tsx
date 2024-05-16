@@ -1,3 +1,26 @@
+import { Link, useRoute } from "wouter";
+import styles from "./Home.module.css";
+
 export function Home() {
-  return <div>unga bunga</div>;
+  const [match] = useRoute("/");
+
+  return (
+    <>
+      <header className={styles.placeholder}>
+        Hero
+        <Link href="/work/jacky">Test link</Link>
+      </header>
+      <main>
+        <section className={styles.placeholder}>Projects</section>
+        <section className={styles.placeholder}>About - presentation</section>
+        <section className={styles.placeholder}>About - skills</section>
+        <section className={styles.placeholder}>About - techs</section>
+        <section className={styles.placeholder}>Contact</section>
+      </main>
+      <footer className={styles.placeholder} style={{ height: "50vh" }}>
+        Footer
+        <Link href="/work/jacky">Test link</Link>
+      </footer>
+    </>
+  );
 }
