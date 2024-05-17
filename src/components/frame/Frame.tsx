@@ -7,7 +7,10 @@ export function Frame() {
     <>
       <BrowserView>
         <div className={styles.container}>
-          <MenuButton />
+          <div className={styles.interfaceContainer}>
+            <div>options</div>
+            <MenuButton />
+          </div>
         </div>
       </BrowserView>
     </>

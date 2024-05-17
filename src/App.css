@@ -19,8 +19,8 @@ body {
   --color-background-two: #d9d9d9;
 
   /* Font families*/
-  --font-family-title: "Space Mono", monospace;
-  --font-family-text: "Work Sans", sans-serif;
+  --font-title: "Space Mono", monospace;
+  --font-text: "Work Sans", sans-serif;
 
   /* Font sizes */
   --font-size-xxl: 15rem;

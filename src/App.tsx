@@ -45,7 +45,7 @@ export default function App() {
             zIndex: 10,
           }}
         >
-          {envMode === "development" && <StatsGl />}
+          {/* {envMode === "development" && <StatsGl />} */}
           <View.Port />
         </Canvas>
       </div>
