@@ -1,0 +1,44 @@
+.menu-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 100px;
+  pointer-events: all;
+  transition: all var(--transition-params)
+}
+
+.menu-bar {
+  position: relative;
+  display: block;
+  height: 5px;
+  width: 50%;
+  background-color: var(--color-main);
+  mix-blend-mode: difference;
+}
+
+.menu-bar::before {
+  content: '';
+  height: 5px;
+  width: 100%;
+  background-color: var(--color-main);
+  position: absolute;
+  top: -300%;
+}
+
+.menu-bar::after {
+  content: '';
+  height: 5px;
+  width: 100%;
+  background-color: var(--color-main);
+  position: absolute;
+  top: 300%;
+}
+
+.menu-button:hover .menu-bar::before {
+  top: 300%;
+}
+
+.menu-button:hover .menu-bar::after {
+  top: -300%;
+}

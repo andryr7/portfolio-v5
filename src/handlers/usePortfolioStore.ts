@@ -4,18 +4,22 @@ import { Work } from "@/types/work";
 import { create } from "zustand";
 
 type State = {
+  isDarkTheme: boolean;
   worksData: Work[];
   skillsData: Skill[];
   techsData: Tech[];
 };
 
 type Actions = {
+  setIsDarkTheme: (newState: boolean) => void;
   setWorksData: (worksData: Work[]) => void;
   setSkillsData: (skillsData: Skill[]) => void;
   setTechsData: (worksData: Tech[]) => void;
 };
 
 export const usePortfolioStore = create<State & Actions>()((set) => ({
+  isDarkTheme: false,
+  setIsDarkTheme: (newState) => set(() => ({ isDarkTheme: newState })),
   worksData: [],
   setWorksData: (worksData) => set(() => ({ worksData: worksData })),
   skillsData: [],

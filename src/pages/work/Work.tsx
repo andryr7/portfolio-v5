@@ -12,10 +12,10 @@ export function Work() {
       </header>
       <main>
         <section className={styles.placeholder}>
-          Project name - section 1<Link href="/">Test link</Link>
+          Project name - section 1
         </section>
         <section className={styles.placeholder}>
-          Project name - section 2<Link href="/">Test link</Link>
+          Project name - section 2
         </section>
       </main>
       <footer className={styles.placeholder} style={{ height: "50vh" }}>

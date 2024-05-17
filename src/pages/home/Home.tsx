@@ -6,12 +6,12 @@ export function Home() {
 
   return (
     <>
-      <header className={styles.placeholder}>
-        Hero
-        <Link href="/work/jacky">Test link</Link>
-      </header>
+      <header className={styles.placeholder}>Hero</header>
       <main>
-        <section className={styles.placeholder}>Projects</section>
+        <section className={styles.placeholder}>
+          Projects
+          <Link href="/work/jacky">Test link</Link>
+        </section>
         <section className={styles.placeholder}>About - presentation</section>
         <section className={styles.placeholder}>About - skills</section>
         <section className={styles.placeholder}>About - techs</section>
@@ -19,7 +19,6 @@ export function Home() {
       </main>
       <footer className={styles.placeholder} style={{ height: "50vh" }}>
         Footer
-        <Link href="/work/jacky">Test link</Link>
       </footer>
     </>
   );

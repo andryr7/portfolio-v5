@@ -3,19 +3,33 @@ import { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { StatsGl, View } from "@react-three/drei";
 import { ReactLenis } from "lenis/react";
-import { useLoadData } from "./state/useLoadData";
+import { useLoadData } from "./handlers/useLoadData";
 import "./App.css";
+import { Frame } from "@/components/frame/Frame";
+import { Route, Switch } from "wouter";
+import { Work } from "./pages/work/Work";
+import { useTheme } from "./handlers/useTheme";
 
 export default function App() {
   const envMode = import.meta.env.MODE;
   const appContainerRef = useRef<any>(null);
   const { isLoading } = useLoadData();
+  useTheme();
 
   return (
     <ReactLenis root>
       {isLoading && "LOADING"}
       <div id="app-container" ref={appContainerRef}>
-        <Home />
+        <Frame />
+
+        <Switch>
+          <Route path="/" component={Home} />
+          <Route path="/work/:name">
+            <Work />
+          </Route>
+          {/* Default route in a switch */}
+          <Route>404: No such page!</Route>
+        </Switch>
 
         {/* Three js canvas */}
         <Canvas
