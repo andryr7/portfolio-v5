@@ -1,5 +1,5 @@
 import { BrowserView, isMobile } from "react-device-detect";
-import { MenuButton } from "./MenuButton";
+import { Menu } from "./Menu";
 import styles from "./Frame.module.css";
 
 export function Frame() {
@@ -9,7 +9,7 @@ export function Frame() {
         <div className={styles.container}>
           <div className={styles.interfaceContainer}>
             <div>options</div>
-            <MenuButton />
+            <Menu />
           </div>
         </div>
       </BrowserView>

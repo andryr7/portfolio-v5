@@ -1,6 +1,6 @@
-import { Link } from "wouter";
-import styles from "./MenuButton.module.css";
-import { useState } from "react";
+import styles from "./Menu.module.css";
+import React, { useState } from "react";
+import { useLenis } from "lenis/react";
 
 function CloseMenuButton({ onClick }: { onClick: () => void }) {
   return (
@@ -10,15 +10,22 @@ function CloseMenuButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-function MenuItem({ href }: { href: string }) {
+function MenuItem({ target }: { target: string }) {
+  const lenis = useLenis();
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    lenis?.scrollTo("#" + target);
+  };
+
   return (
-    <Link href={href} className={styles.menuItem}>
-      test
-    </Link>
+    <a className={styles.menuItem} href="" onClick={handleClick}>
+      {target}
+    </a>
   );
 }
 
-export function MenuButton() {
+export function Menu() {
   const [opened, open] = useState<boolean>(true);
 
   const handleClick = () => {
@@ -31,9 +38,9 @@ export function MenuButton() {
         <span>2024 portfolio</span>
         <CloseMenuButton onClick={handleClick} />
       </div>
-      <MenuItem href="/" />
-      <MenuItem href="/" />
-      <MenuItem href="/" />
+      <MenuItem target="works" />
+      <MenuItem target="about" />
+      <MenuItem target="contact" />
     </div>
   );
 }

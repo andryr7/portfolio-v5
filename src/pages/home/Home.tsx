@@ -8,14 +8,18 @@ export function Home() {
     <>
       <header className={styles.placeholder}>Hero</header>
       <main>
-        <section className={styles.placeholder}>
-          Projects
+        <section className={styles.placeholder} id="works">
+          works
           <Link href="/work/jacky">Test link</Link>
         </section>
-        <section className={styles.placeholder}>About - presentation</section>
+        <section className={styles.placeholder} id="about">
+          About - presentation
+        </section>
         <section className={styles.placeholder}>About - skills</section>
         <section className={styles.placeholder}>About - techs</section>
-        <section className={styles.placeholder}>Contact</section>
+        <section className={styles.placeholder} id="contact">
+          Contact
+        </section>
       </main>
       <footer className={styles.placeholder} style={{ height: "50vh" }}>
         Footer
