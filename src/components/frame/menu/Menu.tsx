@@ -26,7 +26,7 @@ function MenuItem({ target }: { target: string }) {
 }
 
 export function Menu() {
-  const [opened, open] = useState<boolean>(true);
+  const [opened, open] = useState<boolean>(false);
 
   const handleClick = () => {
     open((c) => !c);
