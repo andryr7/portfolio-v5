@@ -21,6 +21,16 @@ export function Home() {
           start: "top top",
           end: "bottom top",
           pin: "#about",
+          // markers: true,
+        },
+      });
+
+      gsap.to("#main-canvas", {
+        scrollTrigger: {
+          trigger: "#test",
+          start: "top bottom",
+          end: "bottom bottom",
+          pin: "#main-canvas",
           markers: true,
         },
       });
@@ -30,9 +40,23 @@ export function Home() {
 
   return (
     <>
+      <div
+        className={styles.placeholder}
+        style={{
+          position: "absolute",
+          zIndex: 10,
+          top: "-100vh",
+          opacity: 0.5,
+        }}
+        id="main-canvas"
+      >
+        Main canvas
+      </div>
       <header style={{ position: "absolute", zIndex: 20 }}>
         <div className={styles.placeholder}>Hero</div>
-        <div className={styles.placeholder}>Projects</div>
+        <div className={styles.placeholder} id="works">
+          Projects
+        </div>
       </header>
       <main style={{ position: "relative" }} id="test">
         <section className={styles.placeholder}>spacer - invisible</section>
