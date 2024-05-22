@@ -5,6 +5,9 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MainView } from "@/components/canvas/main/MainView";
+import { OverlayScene } from "@/components/canvas/main/OverlayScene";
+import { View } from "@react-three/drei";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -27,11 +30,11 @@ export function Home() {
 
       gsap.to("#main-canvas", {
         scrollTrigger: {
-          trigger: "#test",
+          trigger: "#main",
           start: "top bottom",
           end: "bottom bottom",
           pin: "#main-canvas",
-          markers: true,
+          // markers: true,
         },
       });
     }
@@ -40,25 +43,24 @@ export function Home() {
 
   return (
     <>
-      <div
-        className={styles.placeholder}
+      <View
         style={{
           position: "absolute",
-          zIndex: 10,
           top: "-100vh",
-          opacity: 0.5,
+          height: "100vh",
+          width: "100vw",
         }}
         id="main-canvas"
       >
-        Main canvas
-      </div>
-      <header style={{ position: "absolute", zIndex: 20 }}>
+        <OverlayScene />
+      </View>
+      <header style={{ position: "absolute", zIndex: 20, opacity: 0.5 }}>
         <div className={styles.placeholder}>Hero</div>
         <div className={styles.placeholder} id="works">
           Projects
         </div>
       </header>
-      <main style={{ position: "relative" }} id="test">
+      <main style={{ position: "relative" }} id="main">
         <section className={styles.placeholder}>spacer - invisible</section>
         <section className={styles.placeholder} id="about">
           About - 1 - presentation
@@ -76,6 +78,7 @@ export function Home() {
           zIndex: 40,
           height: "50vh",
           backgroundColor: "var(--color-main)",
+          border: "none",
         }}
       >
         footer
