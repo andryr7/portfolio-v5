@@ -102,9 +102,24 @@ export function Home() {
       </View>
 
       {/* HTML Content */}
-      <div style={{ position: "absolute", zIndex: 20, opacity: 0.5 }} id="hero">
-        <header className={styles.placeholder} />
-        <section className={styles.tempPlaceholder} id="works">
+      <div
+        style={{
+          position: "absolute",
+          zIndex: 20,
+          opacity: 0.5,
+          pointerEvents: "none",
+        }}
+        id="hero"
+      >
+        <header
+          className={styles.placeholder}
+          style={{ pointerEvents: "none" }}
+        />
+        <section
+          className={styles.tempPlaceholder}
+          id="works"
+          style={{ pointerEvents: "auto" }}
+        >
           Projects
         </section>
       </div>
