@@ -1,14 +1,15 @@
-import { Link, useRoute } from "wouter";
+import { useRoute } from "wouter";
 import styles from "./Home.module.css";
 
 import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MainView } from "@/components/canvas/main/MainView";
-import { OverlayScene } from "@/components/canvas/main/OverlayScene";
 import { View } from "@react-three/drei";
 import { useLenis } from "lenis/react";
+import { HeaderScene } from "@/components/canvas/home/header/HeaderScene";
+import { WorksScene } from "@/components/canvas/home/works/WorksScene";
+import { ContactScene } from "@/components/canvas/home/contact/ContactScene";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -73,7 +74,7 @@ export function Home() {
         id="hero-view"
         index={2}
       >
-        <OverlayScene name="hero view" />
+        <HeaderScene />
       </View>
       <View
         style={{
@@ -85,7 +86,7 @@ export function Home() {
         id="works-view"
         index={4}
       >
-        <OverlayScene name="projects view" />
+        <WorksScene />
       </View>
       <View
         style={{
@@ -97,32 +98,29 @@ export function Home() {
         id="contact-view"
         index={3}
       >
-        <OverlayScene name="contact view" />
+        <ContactScene />
       </View>
 
       {/* HTML Content */}
-      <header
-        style={{ position: "absolute", zIndex: 20, opacity: 0.5 }}
-        id="hero"
-      >
-        <div className={styles.placeholder}>Hero</div>
-        <div className={styles.placeholder} id="works">
+      <div style={{ position: "absolute", zIndex: 20, opacity: 0.5 }} id="hero">
+        <header className={styles.placeholder} />
+        <section className={styles.tempPlaceholder} id="works">
           Projects
-        </div>
-      </header>
-      <section className={styles.placeholder}>spacer - invisible</section>
+        </section>
+      </div>
+      <div className={styles.placeholder} />
       <main style={{ position: "relative" }} id="main">
-        <section className={styles.placeholder} id="about">
+        <section className={styles.tempPlaceholder} id="about">
           About - 1 - presentation
         </section>
-        <section className={styles.placeholder}>About - 2 - skills</section>
-        <section className={styles.placeholder}>About - 3 - techs</section>
-        <section className={styles.placeholder} id="contact">
+        <section className={styles.tempPlaceholder}>About - 2 - skills</section>
+        <section className={styles.tempPlaceholder}>About - 3 - techs</section>
+        <section className={styles.tempPlaceholder} id="contact">
           Contact
         </section>
       </main>
       <footer
-        className={styles.placeholder}
+        className={styles.tempPlaceholder}
         style={{
           position: "relative",
           zIndex: 40,

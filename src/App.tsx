@@ -5,10 +5,10 @@ import { StatsGl, View } from "@react-three/drei";
 import { ReactLenis } from "lenis/react";
 import { useLoadData } from "./handlers/useLoadData";
 import "./App.css";
-import { Frame } from "@/components/frame/Frame";
 import { Route, Switch } from "wouter";
 import { Work } from "./pages/work/Work";
 import { useTheme } from "./handlers/useTheme";
+import { Frame } from "./components/html/frame/Frame";
 
 export default function App() {
   const envMode = import.meta.env.MODE;
