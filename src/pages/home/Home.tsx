@@ -67,7 +67,7 @@ export function Home() {
       <View
         style={{
           position: "absolute",
-          top: "0vh",
+          top: "0",
           height: "100vh",
           width: "100vw",
         }}
