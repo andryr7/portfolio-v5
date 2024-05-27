@@ -105,6 +105,7 @@ export function Home() {
       <div
         style={{
           position: "absolute",
+          top: 0,
           zIndex: 20,
           pointerEvents: "none",
         }}

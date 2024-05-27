@@ -1,5 +1,6 @@
 import {
   MeshTransmissionMaterial,
+  OrbitControls,
   OrthographicCamera,
   RoundedBox,
   Text,
@@ -49,7 +50,7 @@ export function HeaderScene() {
         <Physics colliders={false} gravity={[0, 0, 0]}>
           <RigidBody
             colliders={false}
-            position={[0, 0, 1]}
+            position={[-1, -1, 2]}
             enabledTranslations={[true, true, false]}
             canSleep={false}
           >
@@ -128,7 +129,7 @@ export function HeaderScene() {
       </mesh>
 
       {/* Color background */}
-      <color args={["white"]} attach="background" />
+      <color args={[colors.main]} attach="background" />
     </>
   );
 }

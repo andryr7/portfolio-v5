@@ -1,5 +1,5 @@
 import { useThree } from "@react-three/fiber";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import * as THREE from "three";
 
 export function CameraHandler({
@@ -13,16 +13,20 @@ export function CameraHandler({
     size: { width, height },
   } = useThree();
 
+  const adjustZoom = useCallback(() => {
+    const cameraTarget = new THREE.Box3().setFromObject(target.current);
+    camera.current.zoom = Math.min(
+      width / (cameraTarget.max.x - cameraTarget.min.x),
+      height / (cameraTarget.max.y - cameraTarget.min.y)
+    );
+    camera.current.updateProjectionMatrix();
+  }, [camera, target, height, width]);
+
   useEffect(() => {
     if (camera.current !== null) {
-      const aabb = new THREE.Box3().setFromObject(target.current);
-      camera.current.zoom = Math.min(
-        width / (aabb.max.x - aabb.min.x),
-        height / (aabb.max.y - aabb.min.y)
-      );
-      camera.current.updateProjectionMatrix();
+      adjustZoom();
     }
-  }, [camera, target, height, width]);
+  }, [adjustZoom, camera]);
 
   return null;
 }

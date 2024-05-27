@@ -49,13 +49,26 @@ export const TextShaderMaterial = shaderMaterial(
   `
     uniform vec3 darkcolor;
     uniform vec3 lightcolor;
+    uniform float uTime;
 
+    varying float vDisplace;
     varying vec2 vUv;
+  
+    float random(vec2 st)
+    {
+      return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+    }
 
     void main() {
-      float strength = step(0.8, mod(vUv.x * 10.0, 1.0));
-      strength += step(0.8, mod(vUv.y * 10.0, 1.0));
+      // vec3 col = mix(darkcolor, lightcolor, 1);
+      // gl_FragColor = vec4(col, 1.);
 
+      //Handling animation
+      vec2 customUv = vUv;
+      customUv.y += uTime;
+
+      vec2 gridUv = vec2(floor(customUv.x * 10.0) / 10.0, floor(customUv.y * 10.0) / 10.0);
+      float strength = random(gridUv);
       vec3 col = mix(darkcolor, lightcolor, strength);
 
       gl_FragColor = vec4(col, 1.0);

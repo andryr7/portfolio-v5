@@ -22,7 +22,7 @@ export function PointerCollider({
       colliders={false}
       ref={ref}
     >
-      <CuboidCollider args={[0.25, 0.25, 2]} />
+      <CuboidCollider args={[0.1, 0.1, 2]} />
     </RigidBody>
   );
 }
