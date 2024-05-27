@@ -7,8 +7,8 @@ import { useLoadData } from "./handlers/useLoadData";
 import "./App.css";
 import { Route, Switch } from "wouter";
 import { Work } from "./pages/work/Work";
-import { useTheme } from "./handlers/useTheme";
 import { Frame } from "./components/html/frame/Frame";
+import { useTheme } from "./handlers/useTheme";
 
 export default function App() {
   const envMode = import.meta.env.MODE;

@@ -106,7 +106,6 @@ export function Home() {
         style={{
           position: "absolute",
           zIndex: 20,
-          opacity: 0.5,
           pointerEvents: "none",
         }}
         id="hero"
@@ -116,7 +115,7 @@ export function Home() {
           style={{ pointerEvents: "none" }}
         />
         <section
-          className={styles.tempPlaceholder}
+          className={styles.placeholder}
           id="works"
           style={{ pointerEvents: "auto" }}
         >
