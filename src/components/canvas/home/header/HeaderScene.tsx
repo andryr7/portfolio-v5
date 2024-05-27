@@ -1,9 +1,12 @@
 import {
+  Environment,
+  Grid,
   MeshTransmissionMaterial,
   OrbitControls,
   OrthographicCamera,
   RoundedBox,
   Text,
+  useTrailTexture,
 } from "@react-three/drei";
 import { extend, useThree } from "@react-three/fiber";
 import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
@@ -16,6 +19,7 @@ import * as THREE from "three";
 import { PhysicBoundaries } from "./PhysicBoundaries";
 import { PointerCollider } from "./PointerCollider";
 import { CameraHandler } from "./CameraHandler";
+import { useControls } from "leva";
 
 extend({ TextShaderMaterial });
 
@@ -27,6 +31,25 @@ export function HeaderScene() {
   const colors = useColors();
   const cameraRef = useRef(null);
   const boundsObjectRef = useRef(null);
+
+  const { debug, ease, ...conf } = useControls("Trail", {
+    size: { value: 64, min: 8, max: 256, step: 8 },
+    radius: { value: 0.3, min: 0, max: 1 },
+    maxAge: { value: 750, min: 300, max: 1000 },
+    interpolate: { value: 0, min: 0, max: 2, step: 1 },
+    smoothing: { value: 0, min: 0, max: 0.99, step: 0.01 },
+    minForce: { value: 0.3, min: 0, max: 1, step: 0.1 },
+    intensity: { value: 0.2, min: 0, max: 1, step: 0.1 },
+    blend: { value: "screen", options: ["source-over", "screen"] },
+    debug: false,
+  });
+
+  const [texture, onMove] = useTrailTexture({ ...conf });
+
+  const handleMove = (e: any) => {
+    setColliderPosition({ x: e.point.x, y: e.point.y });
+    onMove(e);
+  };
 
   return (
     <>
@@ -43,7 +66,7 @@ export function HeaderScene() {
       {/* Camera zoom handler */}
       <CameraHandler camera={cameraRef} target={boundsObjectRef} />
 
-      {/* <Environment preset="city" /> */}
+      <Environment preset="studio" />
 
       {/* Physics scene */}
       <Suspense fallback={null}>
@@ -53,9 +76,10 @@ export function HeaderScene() {
             position={[-1, -1, 2]}
             enabledTranslations={[true, true, false]}
             canSleep={false}
+            scale={0.75}
           >
-            <CuboidCollider args={[0.75, 0.75, 0.75]} />
-            <mesh ref={cubeRef} scale={1.5}>
+            <CuboidCollider args={[1, 1, 1]} />
+            <mesh ref={cubeRef} scale={2}>
               <RoundedBox>
                 <MeshTransmissionMaterial
                   clearcoat={1}
@@ -114,18 +138,16 @@ export function HeaderScene() {
       {/* Shader background */}
       <mesh
         scale={[viewportWidth, viewportHeight, 1]}
-        onPointerMove={(e) =>
-          setColliderPosition({ x: e.point.x, y: e.point.y })
-        }
+        onPointerMove={handleMove}
         ref={boundsObjectRef}
       >
         <planeGeometry args={[1, 1, 1, 1]} />
         <meshBasicMaterial color={colors.backgroundOne} />
-        <textShaderMaterial
+        {/* <textShaderMaterial
           key={TextShaderMaterial.key}
           darkcolor={new THREE.Color(colors.backgroundOne)}
           lightcolor={new THREE.Color(colors.backgroundTwo)}
-        />
+        /> */}
       </mesh>
 
       {/* Color background */}

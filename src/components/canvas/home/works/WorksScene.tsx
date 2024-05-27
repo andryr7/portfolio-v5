@@ -9,7 +9,7 @@ export function WorksScene() {
         <boxGeometry />
         <meshBasicMaterial color="blue" />
       </mesh>
-      <color args={[colors.backgroundTwo]} attach="background" />
+      <color args={["#a9a9a9"]} attach="background" />
     </>
   );
 }
