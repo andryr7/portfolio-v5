@@ -1,12 +1,10 @@
 import {
-  Bounds,
-  Environment,
   MeshTransmissionMaterial,
   OrthographicCamera,
   RoundedBox,
   Text,
 } from "@react-three/drei";
-import { extend, useFrame, useThree } from "@react-three/fiber";
+import { extend, useThree } from "@react-three/fiber";
 import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
 import { Suspense, useRef, useState } from "react";
 import { TextShaderMaterial } from "./TextShaderMaterial";
@@ -26,7 +24,8 @@ export function HeaderScene() {
   const [colliderPosition, setColliderPosition] = useState({ x: 10, y: 10 });
   const cubeRef = useRef(null);
   const colors = useColors();
-  const testRef = useRef(null);
+  const cameraRef = useRef(null);
+  const boundsObjectRef = useRef(null);
 
   return (
     <>
@@ -34,13 +33,14 @@ export function HeaderScene() {
       <OrthographicCamera
         makeDefault
         zoom={50}
-        near={0.1}
+        near={0.01}
         far={1000}
         position={[0, 0, 5]}
+        ref={cameraRef}
       />
 
       {/* Camera zoom handler */}
-      <CameraHandler target={testRef} />
+      <CameraHandler camera={cameraRef} target={boundsObjectRef} />
 
       {/* <Environment preset="city" /> */}
 
@@ -101,6 +101,7 @@ export function HeaderScene() {
           anchorY="bottom"
           position={[0, 0, 0]}
           lineHeight={1}
+          color={colors.main}
           fillOpacity={0}
           strokeWidth={0.01}
           strokeColor={colors.main}
@@ -115,7 +116,7 @@ export function HeaderScene() {
         onPointerMove={(e) =>
           setColliderPosition({ x: e.point.x, y: e.point.y })
         }
-        ref={testRef}
+        ref={boundsObjectRef}
       >
         <planeGeometry args={[1, 1, 1, 1]} />
         <meshBasicMaterial color={colors.backgroundOne} />
