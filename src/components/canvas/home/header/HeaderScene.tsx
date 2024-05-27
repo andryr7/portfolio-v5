@@ -20,6 +20,7 @@ import { PhysicBoundaries } from "./PhysicBoundaries";
 import { PointerCollider } from "./PointerCollider";
 import { CameraHandler } from "./CameraHandler";
 import { useControls } from "leva";
+import { PhysicCube } from "./PhysicCube";
 
 extend({ TextShaderMaterial });
 
@@ -71,28 +72,41 @@ export function HeaderScene() {
       {/* Physics scene */}
       <Suspense fallback={null}>
         <Physics colliders={false} gravity={[0, 0, 0]}>
-          <RigidBody
-            colliders={false}
-            position={[-1, -1, 2]}
-            enabledTranslations={[true, true, false]}
-            canSleep={false}
-            scale={0.75}
-          >
-            <CuboidCollider args={[1, 1, 1]} />
-            <mesh ref={cubeRef} scale={2}>
-              <RoundedBox>
-                <MeshTransmissionMaterial
-                  clearcoat={1}
-                  thickness={0.2}
-                  anisotropicBlur={0.1}
-                  chromaticAberration={1}
-                  samples={4}
-                  resolution={2048}
-                  backside
-                />
-              </RoundedBox>
-            </mesh>
-          </RigidBody>
+          <PhysicCube>
+            <MeshTransmissionMaterial
+              clearcoat={1}
+              thickness={0.2}
+              anisotropicBlur={0.1}
+              chromaticAberration={1}
+              samples={4}
+              resolution={2048}
+              backside
+            />
+          </PhysicCube>
+          <PhysicCube>
+            <meshStandardMaterial
+              metalness={0}
+              roughness={0}
+              color="red"
+              toneMapped={false}
+            />
+          </PhysicCube>
+          <PhysicCube>
+            <meshStandardMaterial
+              metalness={0}
+              roughness={0}
+              color="green"
+              toneMapped={false}
+            />
+          </PhysicCube>
+          <PhysicCube>
+            <meshStandardMaterial
+              metalness={0}
+              roughness={0}
+              color="blue"
+              toneMapped={false}
+            />
+          </PhysicCube>
           <PointerCollider colliderPosition={colliderPosition} />
           <PhysicBoundaries
             viewportWidth={viewportWidth}
