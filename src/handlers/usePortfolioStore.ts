@@ -8,6 +8,7 @@ type State = {
   worksData: Work[];
   skillsData: Skill[];
   techsData: Tech[];
+  hoveredWorkId: string | null;
 };
 
 type Actions = {
@@ -26,4 +27,7 @@ export const usePortfolioStore = create<State & Actions>()((set) => ({
   setSkillsData: (skillsData) => set(() => ({ skillsData: skillsData })),
   techsData: [],
   setTechsData: (techsData) => set(() => ({ techsData: techsData })),
+  hoveredWorkId: null,
+  setHoveredWorkId: (newHoveredWorkId: string) =>
+    set(() => ({ hoveredWorkId: newHoveredWorkId })),
 }));
