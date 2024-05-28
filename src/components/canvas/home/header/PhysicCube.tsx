@@ -1,11 +1,17 @@
 import { RoundedBox } from "@react-three/drei";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
-export function PhysicCube({ children }: { children: React.ReactNode }) {
+export function PhysicCube({
+  position = [0, 0, 2],
+  children,
+}: {
+  position?: [number, number, number];
+  children: React.ReactNode;
+}) {
   return (
     <RigidBody
       colliders={false}
-      position={[-1, -1, 2]}
+      position={position}
       enabledTranslations={[true, true, false]}
       canSleep={false}
       scale={0.75}

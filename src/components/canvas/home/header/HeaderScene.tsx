@@ -1,26 +1,21 @@
 import {
   Environment,
-  Grid,
-  MeshTransmissionMaterial,
-  OrbitControls,
   OrthographicCamera,
-  RoundedBox,
   Text,
   useTrailTexture,
 } from "@react-three/drei";
 import { extend, useThree } from "@react-three/fiber";
-import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
+import { Physics } from "@react-three/rapier";
 import { Suspense, useRef, useState } from "react";
 import { TextShaderMaterial } from "./TextShaderMaterial";
 import spacemono from "@/assets/fonts/space-mono.ttf";
 import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { useColors } from "@/handlers/useColors";
-import * as THREE from "three";
-import { PhysicBoundaries } from "./PhysicBoundaries";
-import { PointerCollider } from "./PointerCollider";
 import { CameraHandler } from "./CameraHandler";
 import { useControls } from "leva";
-import { PhysicCube } from "./PhysicCube";
+import { PhysicsScene } from "./PhysicsScene";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import * as THREE from "three";
 
 extend({ TextShaderMaterial });
 
@@ -28,10 +23,10 @@ export function HeaderScene() {
   const { getCurrentViewport } = useThree((state) => state.viewport);
   const { width: viewportWidth, height: viewportHeight } = getCurrentViewport();
   const [colliderPosition, setColliderPosition] = useState({ x: 10, y: 10 });
-  const cubeRef = useRef(null);
   const colors = useColors();
   const cameraRef = useRef(null);
   const boundsObjectRef = useRef(null);
+  const heroIsInView = usePortfolioStore((state) => state.heroIsInView);
 
   const { debug, ease, ...conf } = useControls("Trail", {
     size: { value: 64, min: 8, max: 256, step: 8 },
@@ -71,47 +66,8 @@ export function HeaderScene() {
 
       {/* Physics scene */}
       <Suspense fallback={null}>
-        <Physics colliders={false} gravity={[0, 0, 0]}>
-          <PhysicCube>
-            <MeshTransmissionMaterial
-              clearcoat={1}
-              thickness={0.2}
-              anisotropicBlur={0.1}
-              chromaticAberration={1}
-              samples={4}
-              resolution={2048}
-              backside
-            />
-          </PhysicCube>
-          <PhysicCube>
-            <meshStandardMaterial
-              metalness={0}
-              roughness={0}
-              color="red"
-              toneMapped={false}
-            />
-          </PhysicCube>
-          <PhysicCube>
-            <meshStandardMaterial
-              metalness={0}
-              roughness={0}
-              color="green"
-              toneMapped={false}
-            />
-          </PhysicCube>
-          <PhysicCube>
-            <meshStandardMaterial
-              metalness={0}
-              roughness={0}
-              color="blue"
-              toneMapped={false}
-            />
-          </PhysicCube>
-          <PointerCollider colliderPosition={colliderPosition} />
-          <PhysicBoundaries
-            viewportWidth={viewportWidth}
-            viewportHeight={viewportHeight}
-          />
+        <Physics colliders={false} gravity={[0, 0, 0]} paused={!heroIsInView}>
+          <PhysicsScene colliderPosition={colliderPosition} />
         </Physics>
       </Suspense>
 
@@ -156,12 +112,12 @@ export function HeaderScene() {
         ref={boundsObjectRef}
       >
         <planeGeometry args={[1, 1, 1, 1]} />
-        <meshBasicMaterial color={colors.backgroundOne} />
-        {/* <textShaderMaterial
+        {/* <meshBasicMaterial color={colors.backgroundOne} /> */}
+        <textShaderMaterial
           key={TextShaderMaterial.key}
           darkcolor={new THREE.Color(colors.backgroundOne)}
           lightcolor={new THREE.Color(colors.backgroundTwo)}
-        /> */}
+        />
       </mesh>
 
       {/* Color background */}

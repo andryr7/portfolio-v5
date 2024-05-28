@@ -9,6 +9,7 @@ type State = {
   skillsData: Skill[];
   techsData: Tech[];
   hoveredWorkId: string | null;
+  heroIsInView: boolean;
 };
 
 type Actions = {
@@ -16,6 +17,8 @@ type Actions = {
   setWorksData: (worksData: Work[]) => void;
   setSkillsData: (skillsData: Skill[]) => void;
   setTechsData: (worksData: Tech[]) => void;
+  setHoveredWorkId: (newHoveredWorkId: string | null) => void;
+  setHeroIsInView: (newStatus: boolean) => void;
 };
 
 export const usePortfolioStore = create<State & Actions>()((set) => ({
@@ -28,6 +31,9 @@ export const usePortfolioStore = create<State & Actions>()((set) => ({
   techsData: [],
   setTechsData: (techsData) => set(() => ({ techsData: techsData })),
   hoveredWorkId: null,
-  setHoveredWorkId: (newHoveredWorkId: string) =>
+  setHoveredWorkId: (newHoveredWorkId: string | null) =>
     set(() => ({ hoveredWorkId: newHoveredWorkId })),
+  heroIsInView: true,
+  setHeroIsInView: (newStatus: boolean) =>
+    set(() => ({ heroIsInView: newStatus })),
 }));

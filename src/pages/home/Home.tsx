@@ -10,10 +10,12 @@ import { useLenis } from "lenis/react";
 import { HeaderScene } from "@/components/canvas/home/header/HeaderScene";
 import { WorksScene } from "@/components/canvas/home/works/WorksScene";
 import { ContactScene } from "@/components/canvas/home/contact/ContactScene";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Home() {
+  const setHeroIsInView = usePortfolioStore((state) => state.setHeroIsInView);
   const [match] = useRoute("/");
   const container = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -44,6 +46,7 @@ export function Home() {
           start: "top top",
           end: "bottom bottom",
           pin: "#hero-view",
+          onToggle: (self) => setHeroIsInView(self.isActive),
           // markers: true,
         },
       });
