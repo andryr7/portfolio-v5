@@ -3,6 +3,11 @@ import { Tech } from "@/types/tech";
 import { Work } from "@/types/work";
 import { create } from "zustand";
 
+type ViewportSize = {
+  width: number;
+  height: number;
+};
+
 type State = {
   isDarkTheme: boolean;
   worksData: Work[];
@@ -10,6 +15,7 @@ type State = {
   techsData: Tech[];
   hoveredWorkId: string | null;
   heroIsInView: boolean;
+  viewportSize: ViewportSize;
 };
 
 type Actions = {
@@ -19,6 +25,7 @@ type Actions = {
   setTechsData: (worksData: Tech[]) => void;
   setHoveredWorkId: (newHoveredWorkId: string | null) => void;
   setHeroIsInView: (newStatus: boolean) => void;
+  setViewportSize: (newSize: ViewportSize) => void;
 };
 
 export const usePortfolioStore = create<State & Actions>()((set) => ({
@@ -36,4 +43,7 @@ export const usePortfolioStore = create<State & Actions>()((set) => ({
   heroIsInView: true,
   setHeroIsInView: (newStatus: boolean) =>
     set(() => ({ heroIsInView: newStatus })),
+  viewportSize: { width: 5, height: 5 },
+  setViewportSize: (newViewportSize) =>
+    set(() => ({ viewportSize: newViewportSize })),
 }));

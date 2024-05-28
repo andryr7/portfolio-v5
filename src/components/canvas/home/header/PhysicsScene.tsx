@@ -1,16 +1,16 @@
 import { MeshTransmissionMaterial, RoundedBox } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
 import { PhysicBoundaries } from "./PhysicBoundaries";
 import { PointerCollider } from "./PointerCollider";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useColors } from "@/handlers/useColors";
 
+import * as THREE from "three";
+
 export function PhysicsScene() {
   const heroIsInView = usePortfolioStore((state) => state.heroIsInView);
-  const { getCurrentViewport } = useThree((state) => state.viewport);
-  const { width: viewportWidth, height: viewportHeight } = getCurrentViewport();
   const colors = useColors();
+  const testcolor = new THREE.Color(colors.backgroundOne);
 
   return (
     <>
@@ -32,16 +32,13 @@ export function PhysicsScene() {
               samples={4}
               resolution={2048}
               backside
-              transmission={heroIsInView ? 1 : 0}
+              background={testcolor}
             />
           </RoundedBox>
         </mesh>
       </RigidBody>
       <PointerCollider />
-      <PhysicBoundaries
-        viewportWidth={viewportWidth}
-        viewportHeight={viewportHeight}
-      />
+      <PhysicBoundaries />
     </>
   );
 }

@@ -1,7 +1,23 @@
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { OrbitControls } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 import { useRef } from "react";
+import { useMediaQuery } from "usehooks-ts";
 
-export function PhysicBoundaries({ viewportWidth, viewportHeight }) {
+export function PhysicBoundaries() {
+  const { width: rawViewportWidth, height: rawViewportHeight } =
+    usePortfolioStore((state) => state.viewportSize);
+  const isSmallDevice = useMediaQuery("(min-width: 768px)");
+  const pixelWidthValue = rawViewportWidth / window.innerWidth;
+  const pixelHeightValue = rawViewportHeight / window.innerHeight;
+
+  const viewportWidth = isSmallDevice
+    ? rawViewportWidth - 40 * pixelWidthValue
+    : rawViewportWidth;
+  const viewportHeight = isSmallDevice
+    ? rawViewportHeight - 40 * pixelHeightValue
+    : rawViewportHeight;
+
   const topWallRef = useRef(null);
   const bottomWallRef = useRef(null);
   const leftWallRef = useRef(null);

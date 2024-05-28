@@ -10,6 +10,7 @@ import { Work } from "./pages/work/Work";
 import { Frame } from "./components/html/frame/Frame";
 import { useTheme } from "./handlers/useTheme";
 import NoiseFilter from "./components/html/noise/NoiseFilter";
+import { ViewportSizeHandler } from "./components/canvas/viewportSizeHandler";
 
 export default function App() {
   const envMode = import.meta.env.MODE;
@@ -48,6 +49,7 @@ export default function App() {
         >
           {envMode === "development" && <StatsGl />}
           <View.Port />
+          <ViewportSizeHandler />
         </Canvas>
 
         {/* Noise filter */}

@@ -7,7 +7,7 @@ import {
 } from "@react-three/drei";
 import { extend, useThree } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useRef } from "react";
 import { TextShaderMaterial } from "./TextShaderMaterial";
 import spacemono from "@/assets/fonts/space-mono.ttf";
 import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
@@ -18,11 +18,15 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 extend({ TextShaderMaterial });
 
 export function HeaderScene() {
-  const { getCurrentViewport } = useThree((state) => state.viewport);
-  const { width: viewportWidth, height: viewportHeight } = getCurrentViewport();
+  // const { getCurrentViewport } = useThree((state) => state.viewport);
+  // const { width: viewportWidth, height: viewportHeight } = getCurrentViewport();
   const colors = useColors();
   const cameraRef = useRef(null);
   const heroIsInView = usePortfolioStore((state) => state.heroIsInView);
+
+  const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
+    (state) => state.viewportSize
+  );
 
   // const { debug, ease, ...conf } = useControls("Trail", {
   //   size: { value: 64, min: 8, max: 256, step: 8 },
@@ -61,7 +65,6 @@ export function HeaderScene() {
         <Physics
           colliders={false}
           gravity={heroIsInView ? [0, 0, 0] : [0, -9.81, 0]}
-          debug
         >
           <PhysicsScene />
         </Physics>
