@@ -9,7 +9,6 @@ import { View } from "@react-three/drei";
 import { useLenis } from "lenis/react";
 import { HeaderScene } from "@/components/canvas/home/header/HeaderScene";
 import { WorksScene } from "@/components/canvas/home/works/WorksScene";
-import { ContactScene } from "@/components/canvas/home/contact/ContactScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -42,22 +41,21 @@ export function Home() {
 
       gsap.to("#hero-view", {
         scrollTrigger: {
-          trigger: "#hero",
-          start: "top top",
+          trigger: "#main",
+          start: "top bottom",
           end: "bottom bottom",
           pin: "#hero-view",
-          onToggle: (self) => setHeroIsInView(self.isActive),
           // markers: true,
         },
       });
 
-      gsap.to("#contact-view", {
+      gsap.to("#main", {
         scrollTrigger: {
           trigger: "#main",
           start: "top top",
-          end: "bottom bottom",
-          pin: "#contact-view",
-          // markers: true,
+          end: "bottom top",
+          onToggle: (self) => setHeroIsInView(!self.isActive),
+          markers: true,
         },
       });
     }
@@ -90,18 +88,6 @@ export function Home() {
         index={4}
       >
         <WorksScene />
-      </View>
-      <View
-        style={{
-          position: "absolute",
-          top: "100vh",
-          height: "100vh",
-          width: "100vw",
-        }}
-        id="contact-view"
-        index={3}
-      >
-        <ContactScene />
       </View>
 
       {/* HTML Content */}

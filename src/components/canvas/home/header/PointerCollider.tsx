@@ -1,17 +1,20 @@
+import { useMousePosition } from "@/handlers/useMousePosition";
 import { useFrame } from "@react-three/fiber";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useRef } from "react";
 import * as THREE from "three";
 
-export function PointerCollider({
-  colliderPosition,
-  vec = new THREE.Vector3(),
-}) {
+export function PointerCollider({ vec = new THREE.Vector3() }) {
   const ref = useRef(null);
+  const mousePosition = useMousePosition();
 
   useFrame((state) => {
     ref.current?.setNextKinematicTranslation(
-      vec.set(colliderPosition.x, colliderPosition.y, 0)
+      vec.set(
+        mousePosition.x * state.viewport.getCurrentViewport().width,
+        -mousePosition.y * state.viewport.getCurrentViewport().height,
+        0
+      )
     );
   });
 
