@@ -17,8 +17,9 @@ export function Home() {
       //Main view pin animation
       gsap.to("#main", {
         scrollTrigger: {
-          trigger: "#main",
-          start: "top bottom",
+          trigger: "#hero",
+          endTrigger: "#contact",
+          start: "top top",
           end: "bottom top",
           pin: "#hero-view",
           markers: true,
@@ -79,6 +80,7 @@ export function Home() {
         <header
           className={styles.placeholder}
           style={{ pointerEvents: "none" }}
+          id="hero"
         />
         <section
           className={styles.placeholder}
