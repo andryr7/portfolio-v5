@@ -1,5 +1,5 @@
 import { Home } from "./pages/home/Home";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { StatsGl, View } from "@react-three/drei";
 import { ReactLenis } from "lenis/react";

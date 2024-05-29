@@ -66,7 +66,6 @@ export function HeaderScene() {
         <Physics
           colliders={false}
           gravity={heroIsInView ? [0, 0, 0] : [0, -9.81, 0]}
-          debug
         >
           <PhysicsScene />
         </Physics>

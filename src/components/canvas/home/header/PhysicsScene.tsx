@@ -23,6 +23,8 @@ export function PhysicsScene() {
         // enabledTranslations={[true, true, false]}
         canSleep={false}
         scale={0.75}
+        linearVelocity={[2, 2, 0]}
+        angularVelocity={[1, 1, 1]}
       >
         <CuboidCollider args={[1, 1, 1]} />
         <mesh scale={2}>

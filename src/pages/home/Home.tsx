@@ -1,7 +1,7 @@
 import { useRoute } from "wouter";
 import styles from "./Home.module.css";
 
-import { useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -28,7 +28,16 @@ export function Home() {
 
   useGSAP(
     () => {
-      // gsap code here...
+      gsap.to("#hero-view", {
+        scrollTrigger: {
+          trigger: "#main",
+          start: "top bottom",
+          end: "bottom top",
+          pin: "#hero-view",
+          markers: true,
+        },
+      });
+
       gsap.to("#about", {
         scrollTrigger: {
           trigger: "#about",
@@ -36,16 +45,6 @@ export function Home() {
           end: "bottom top",
           pin: "#about",
           // markers: true,
-        },
-      });
-
-      gsap.to("#hero-view", {
-        scrollTrigger: {
-          trigger: "#main",
-          start: "top bottom",
-          end: "bottom bottom",
-          pin: "#hero-view",
-          markers: true,
         },
       });
 
@@ -68,7 +67,7 @@ export function Home() {
       <View
         style={{
           position: "absolute",
-          top: "0",
+          top: 0,
           height: "100vh",
           width: "100vw",
         }}
@@ -113,7 +112,7 @@ export function Home() {
         </section>
       </div>
       <div className={styles.placeholder} />
-      <main style={{ position: "relative" }} id="main">
+      <main className={styles.main} id="main">
         <section className={styles.tempPlaceholder} id="about">
           About - 1 - presentation
         </section>

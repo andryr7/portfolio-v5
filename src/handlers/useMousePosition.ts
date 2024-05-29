@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 
 export const useMousePosition = () => {
   const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0,
+    x: 0.5,
+    y: 0.5,
   });
 
   const updateMousePosition = useCallback((e: React.MouseEvent) => {
