@@ -27,7 +27,7 @@ export function PhysicBoundaries() {
 
   return (
     <>
-      <group key={viewportWidth + viewportHeight} position={[0, 0, 2]}>
+      <group key={viewportWidth + viewportHeight} position={[0, 0, 2.5]}>
         {/* top and bottom walls */}
         <RigidBody
           type="kinematicPosition"

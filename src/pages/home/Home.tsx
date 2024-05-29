@@ -1,34 +1,21 @@
-import { useRoute } from "wouter";
 import styles from "./Home.module.css";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { View } from "@react-three/drei";
-import { useLenis } from "lenis/react";
 import { HeaderScene } from "@/components/canvas/home/header/HeaderScene";
-import { WorksScene } from "@/components/canvas/home/works/WorksScene";
-import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Home() {
-  const setHeroIsInView = usePortfolioStore((state) => state.setHeroIsInView);
-  const [match] = useRoute("/");
-  const container = useRef(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useLenis((state) => {
-    const newScrollProgress =
-      state.animatedScroll /
-      (state.dimensions.scrollHeight - 1.5 * state.dimensions.height);
-    setScrollProgress(Math.min(newScrollProgress, 1));
-  });
+  const [worksScrollProgress, setWorksScrollProgress] = useState(0);
 
   useGSAP(
     () => {
-      gsap.to("#hero-view", {
+      //Main view pin animation
+      gsap.to("#main", {
         scrollTrigger: {
           trigger: "#main",
           start: "top bottom",
@@ -38,6 +25,7 @@ export function Home() {
         },
       });
 
+      //About underlying page pin animation
       gsap.to("#about", {
         scrollTrigger: {
           trigger: "#about",
@@ -48,12 +36,13 @@ export function Home() {
         },
       });
 
-      gsap.to("#main", {
+      //Works section scroll handling
+      gsap.to("#works", {
         scrollTrigger: {
-          trigger: "#main",
-          start: "top top",
+          trigger: "#works",
+          start: "top bottom",
           end: "bottom top",
-          onToggle: (self) => setHeroIsInView(!self.isActive),
+          onUpdate: (self) => setWorksScrollProgress(self.progress),
           // markers: true,
         },
       });
@@ -74,19 +63,7 @@ export function Home() {
         id="hero-view"
         index={2}
       >
-        <HeaderScene />
-      </View>
-      <View
-        style={{
-          position: "absolute",
-          top: "100vh",
-          height: "100vh",
-          width: "100vw",
-        }}
-        id="works-view"
-        index={4}
-      >
-        <WorksScene />
+        <HeaderScene worksScrollProgress={worksScrollProgress} />
       </View>
 
       {/* HTML Content */}
@@ -106,7 +83,13 @@ export function Home() {
         <section
           className={styles.placeholder}
           id="works"
-          style={{ pointerEvents: "auto" }}
+          style={{
+            pointerEvents: "auto",
+            display: "flex",
+            fontSize: "2rem",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
           Projects
         </section>

@@ -1,12 +1,10 @@
 import {
   Bounds,
   Environment,
-  OrbitControls,
   OrthographicCamera,
   Text,
-  useTrailTexture,
 } from "@react-three/drei";
-import { extend, useThree } from "@react-three/fiber";
+import { extend } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { Suspense, useRef } from "react";
 import { TextShaderMaterial } from "./TextShaderMaterial";
@@ -18,34 +16,19 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 extend({ TextShaderMaterial });
 
-export function HeaderScene() {
-  // const { getCurrentViewport } = useThree((state) => state.viewport);
-  // const { width: viewportWidth, height: viewportHeight } = getCurrentViewport();
+interface HeaderSceneProps {
+  worksScrollProgress: number;
+}
+
+export function HeaderScene({ worksScrollProgress }: HeaderSceneProps) {
   const colors = useColors();
   const cameraRef = useRef(null);
-  const heroIsInView = usePortfolioStore((state) => state.heroIsInView);
 
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
     (state) => state.viewportSize
   );
 
-  // const { debug, ease, ...conf } = useControls("Trail", {
-  //   size: { value: 64, min: 8, max: 256, step: 8 },
-  //   radius: { value: 0.3, min: 0, max: 1 },
-  //   maxAge: { value: 750, min: 300, max: 1000 },
-  //   interpolate: { value: 0, min: 0, max: 2, step: 1 },
-  //   smoothing: { value: 0, min: 0, max: 0.99, step: 0.01 },
-  //   minForce: { value: 0.3, min: 0, max: 1, step: 0.1 },
-  //   intensity: { value: 0.2, min: 0, max: 1, step: 0.1 },
-  //   blend: { value: "screen", options: ["source-over", "screen"] },
-  //   debug: false,
-  // });
-
-  // const [texture, onMove] = useTrailTexture({ ...conf });
-
-  // const handleMove = (e: any) => {
-  //   onMove(e);
-  // };
+  console.log(worksScrollProgress);
 
   return (
     <>
@@ -59,13 +42,12 @@ export function HeaderScene() {
         ref={cameraRef}
       />
 
-      <Environment preset="studio" />
-
       {/* Physics scene */}
       <Suspense fallback={null}>
         <Physics
           colliders={false}
-          gravity={heroIsInView ? [0, 0, 0] : [0, -9.81, 0]}
+          gravity={worksScrollProgress < 0.75 ? [0, 0, 0] : [0, -9.81, 0]}
+          debug
         >
           <PhysicsScene />
         </Physics>
@@ -79,7 +61,7 @@ export function HeaderScene() {
           0,
         ]}
         scale={Math.min(viewportWidth / 10, viewportHeight / 5)}
-        visible={heroIsInView}
+        visible={worksScrollProgress < 0.5}
       >
         <Text
           font={spacemono}
@@ -111,7 +93,7 @@ export function HeaderScene() {
         <mesh
           scale={[viewportWidth, viewportHeight, 1]}
           // onPointerMove={handleMove}
-          visible={heroIsInView}
+          visible={worksScrollProgress < 0.5}
         >
           <planeGeometry args={[1, 1, 1, 1]} />
           <meshBasicMaterial color={colors.backgroundOne} />
@@ -123,8 +105,22 @@ export function HeaderScene() {
         </mesh>
       </Bounds>
 
-      {/* Color background */}
-      {/* <color args={[colors.main]} attach="background"/> */}
+      {/* Works background */}
+      <group
+        position={[
+          0,
+          -viewportHeight + worksScrollProgress * viewportHeight * 2,
+          0.25,
+        ]}
+      >
+        <mesh scale={[viewportWidth, viewportHeight, 1]}>
+          <planeGeometry args={[1, 1, 1, 1]} />
+          <meshBasicMaterial color="#a9a9a9" />
+        </mesh>
+      </group>
+
+      {/* Environment lighting */}
+      <Environment preset="studio" />
     </>
   );
 }

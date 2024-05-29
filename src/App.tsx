@@ -17,8 +17,8 @@ export default function App() {
   const envMode = import.meta.env.MODE;
   const appContainerRef = useRef<any>(null);
   const { isLoading } = useLoadData();
-  useTheme();
   const lenisRef = useRef(null);
+  useTheme();
 
   useEffect(() => {
     function update(time) {

@@ -2,14 +2,12 @@ import { MeshTransmissionMaterial, RoundedBox } from "@react-three/drei";
 import { PhysicBoundaries } from "./PhysicBoundaries";
 import { PointerCollider } from "./PointerCollider";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
-import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useColors } from "@/handlers/useColors";
 
 import * as THREE from "three";
 import { useMemo } from "react";
 
 export function PhysicsScene() {
-  const heroIsInView = usePortfolioStore((state) => state.heroIsInView);
   const colors = useColors();
   const testcolor = useMemo(() => {
     return new THREE.Color(colors.main);
