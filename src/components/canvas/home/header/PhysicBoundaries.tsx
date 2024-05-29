@@ -1,22 +1,24 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
-import { OrbitControls } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useMediaQuery } from "usehooks-ts";
 
 export function PhysicBoundaries() {
   const { width: rawViewportWidth, height: rawViewportHeight } =
     usePortfolioStore((state) => state.viewportSize);
   const isSmallDevice = useMediaQuery("(min-width: 768px)");
-  const pixelWidthValue = rawViewportWidth / window.innerWidth;
-  const pixelHeightValue = rawViewportHeight / window.innerHeight;
 
-  const viewportWidth = isSmallDevice
-    ? rawViewportWidth - 40 * pixelWidthValue
-    : rawViewportWidth;
-  const viewportHeight = isSmallDevice
-    ? rawViewportHeight - 40 * pixelHeightValue
-    : rawViewportHeight;
+  const [viewportWidth, viewportHeight] = useMemo(() => {
+    if (isSmallDevice) {
+      const pixelWidthValue = rawViewportWidth / window.innerWidth;
+      const pixelHeightValue = rawViewportHeight / window.innerHeight;
+      return [
+        rawViewportWidth - 40 * pixelWidthValue,
+        rawViewportHeight - 40 * pixelHeightValue,
+      ];
+    }
+    return [rawViewportWidth, rawViewportHeight];
+  }, [rawViewportWidth, rawViewportHeight, isSmallDevice]);
 
   const topWallRef = useRef(null);
   const bottomWallRef = useRef(null);
@@ -25,7 +27,7 @@ export function PhysicBoundaries() {
 
   return (
     <>
-      <group key={viewportWidth + viewportHeight}>
+      <group key={viewportWidth + viewportHeight} position={[0, 0, 2]}>
         {/* top and bottom walls */}
         <RigidBody
           type="kinematicPosition"
@@ -82,6 +84,27 @@ export function PhysicBoundaries() {
           >
             <planeGeometry args={[1, 1]} />
             <meshBasicMaterial color="blue" wireframe visible={false} />
+          </mesh>
+        </RigidBody>
+        {/* Front and back walls */}
+        <RigidBody type="kinematicPosition" colliders={"cuboid"}>
+          <mesh
+            rotation={[0, 0, 0]}
+            scale={[viewportWidth, viewportHeight, 1]}
+            position={[0, 0, -2]}
+          >
+            <planeGeometry args={[1, 1]} />
+            <meshBasicMaterial color="green" wireframe visible={false} />
+          </mesh>
+        </RigidBody>
+        <RigidBody type="kinematicPosition" colliders={"cuboid"}>
+          <mesh
+            rotation={[0, 0, 0]}
+            scale={[viewportWidth, viewportHeight, 1]}
+            position={[0, 0, 2]}
+          >
+            <planeGeometry args={[1, 1]} />
+            <meshBasicMaterial color="green" wireframe visible={false} />
           </mesh>
         </RigidBody>
       </group>

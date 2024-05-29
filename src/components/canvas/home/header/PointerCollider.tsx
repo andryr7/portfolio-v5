@@ -13,7 +13,7 @@ export function PointerCollider({ vec = new THREE.Vector3() }) {
       vec.set(
         mousePosition.x * state.viewport.getCurrentViewport().width,
         -mousePosition.y * state.viewport.getCurrentViewport().height,
-        0
+        2
       )
     );
   });

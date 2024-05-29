@@ -45,7 +45,7 @@ export function Home() {
           start: "top bottom",
           end: "bottom bottom",
           pin: "#hero-view",
-          // markers: true,
+          markers: true,
         },
       });
 
@@ -55,7 +55,7 @@ export function Home() {
           start: "top top",
           end: "bottom top",
           onToggle: (self) => setHeroIsInView(!self.isActive),
-          markers: true,
+          // markers: true,
         },
       });
     }

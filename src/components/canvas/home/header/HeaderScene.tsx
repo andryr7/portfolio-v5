@@ -1,6 +1,7 @@
 import {
   Bounds,
   Environment,
+  OrbitControls,
   OrthographicCamera,
   Text,
   useTrailTexture,
@@ -65,6 +66,7 @@ export function HeaderScene() {
         <Physics
           colliders={false}
           gravity={heroIsInView ? [0, 0, 0] : [0, -9.81, 0]}
+          debug
         >
           <PhysicsScene />
         </Physics>
@@ -106,7 +108,7 @@ export function HeaderScene() {
       </group>
 
       {/* Shader background */}
-      <Bounds fit observe margin={1}>
+      <Bounds fit observe margin={1} maxDuration={0.1}>
         <mesh
           scale={[viewportWidth, viewportHeight, 1]}
           // onPointerMove={handleMove}

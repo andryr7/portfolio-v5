@@ -1,5 +1,5 @@
 import { Home } from "./pages/home/Home";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { StatsGl, View } from "@react-three/drei";
 import { ReactLenis } from "lenis/react";
@@ -11,15 +11,29 @@ import { Frame } from "./components/html/frame/Frame";
 import { useTheme } from "./handlers/useTheme";
 import NoiseFilter from "./components/html/noise/NoiseFilter";
 import { ViewportSizeHandler } from "./components/canvas/viewportSizeHandler";
+import gsap from "gsap";
 
 export default function App() {
   const envMode = import.meta.env.MODE;
   const appContainerRef = useRef<any>(null);
   const { isLoading } = useLoadData();
   useTheme();
+  const lenisRef = useRef(null);
+
+  useEffect(() => {
+    function update(time) {
+      lenisRef.current?.lenis?.raf(time * 1000);
+    }
+
+    gsap.ticker.add(update);
+
+    return () => {
+      gsap.ticker.remove(update);
+    };
+  });
 
   return (
-    <ReactLenis root>
+    <ReactLenis root ref={lenisRef} autoRaf={false}>
       {isLoading && "LOADING"}
       <div id="app-container" ref={appContainerRef}>
         <Frame />

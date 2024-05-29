@@ -6,18 +6,21 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useColors } from "@/handlers/useColors";
 
 import * as THREE from "three";
+import { useMemo } from "react";
 
 export function PhysicsScene() {
   const heroIsInView = usePortfolioStore((state) => state.heroIsInView);
   const colors = useColors();
-  const testcolor = new THREE.Color(colors.backgroundOne);
+  const testcolor = useMemo(() => {
+    return new THREE.Color(colors.main);
+  }, [colors]);
 
   return (
     <>
       <RigidBody
         colliders={false}
         position={[-1, 0, 2]}
-        enabledTranslations={[true, true, false]}
+        // enabledTranslations={[true, true, false]}
         canSleep={false}
         scale={0.75}
       >
