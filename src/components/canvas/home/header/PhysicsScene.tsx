@@ -2,10 +2,10 @@ import { PhysicBoundaries } from "./PhysicBoundaries";
 import { PointerCollider } from "./PointerCollider";
 import { InteractiveCube } from "./InteractiveCube";
 
-export function PhysicsScene({ worksScrollProgress }) {
+export function PhysicsScene() {
   return (
     <>
-      <InteractiveCube worksScrollProgress={worksScrollProgress} />
+      <InteractiveCube />
       <PointerCollider />
       <PhysicBoundaries />
     </>

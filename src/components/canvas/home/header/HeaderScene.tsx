@@ -1,7 +1,6 @@
 import {
   Bounds,
   Environment,
-  OrbitControls,
   OrthographicCamera,
   Text,
 } from "@react-three/drei";
@@ -14,15 +13,10 @@ import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { useColors } from "@/handlers/useColors";
 import { PhysicsScene } from "./PhysicsScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
-import { BoundsHandler } from "./BoundsHandler";
 
 extend({ TextShaderMaterial });
 
-interface HeaderSceneProps {
-  worksScrollProgress: number;
-}
-
-export function HeaderScene({ worksScrollProgress }: HeaderSceneProps) {
+export function HeaderScene() {
   const colors = useColors();
   const cameraRef = useRef(null);
 
@@ -30,12 +24,8 @@ export function HeaderScene({ worksScrollProgress }: HeaderSceneProps) {
     (state) => state.viewportSize
   );
 
-  const worksSceneIsActive = usePortfolioStore(
-    (state) => state.worksSceneIsActive
-  );
-
-  const contactSceneIsActive = usePortfolioStore(
-    (state) => state.contactSceneIsActive
+  const worksScrollProgress = usePortfolioStore(
+    (state) => state.worksScrollProgress
   );
 
   return (
@@ -54,11 +44,10 @@ export function HeaderScene({ worksScrollProgress }: HeaderSceneProps) {
       <Suspense fallback={null}>
         <Physics
           colliders={false}
-          gravity={[0, 0, 0]}
-          debug
-          paused={worksSceneIsActive || contactSceneIsActive}
+          gravity={worksScrollProgress >= 0.75 ? [0, -9.81, 0] : [0, 0, 0]}
+          // debug
         >
-          <PhysicsScene worksScrollProgress={worksScrollProgress} />
+          <PhysicsScene />
         </Physics>
       </Suspense>
 

@@ -1,16 +1,29 @@
 import styles from "./Home.module.css";
-
-import { useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { View } from "@react-three/drei";
 import { HeaderScene } from "@/components/canvas/home/header/HeaderScene";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Home() {
-  const [worksScrollProgress, setWorksScrollProgress] = useState(0);
+  const setWorksScrollProgress = usePortfolioStore(
+    (state) => state.setWorksScrollProgress
+  );
+
+  const setWorksSceneIsActive = usePortfolioStore(
+    (state) => state.setWorksSceneIsActive
+  );
+
+  const setContactScrollProgress = usePortfolioStore(
+    (state) => state.setContactScrollProgress
+  );
+
+  const setContactSceneIsActive = usePortfolioStore(
+    (state) => state.setContactSceneIsActive
+  );
 
   useGSAP(
     () => {
@@ -43,7 +56,26 @@ export function Home() {
           trigger: "#works",
           start: "top bottom",
           end: "bottom top",
-          onUpdate: (self) => setWorksScrollProgress(self.progress),
+          onUpdate: (self) => {
+            setWorksScrollProgress(self.progress);
+            setWorksSceneIsActive(
+              self.progress >= 0.25 && self.progress <= 0.75
+            );
+          },
+          // markers: true,
+        },
+      });
+
+      //Contact section scroll handling
+      gsap.to("#contact", {
+        scrollTrigger: {
+          trigger: "#contact",
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate: (self) => {
+            setContactScrollProgress(self.progress);
+            setContactSceneIsActive(self.progress >= 0.25);
+          },
           // markers: true,
         },
       });
@@ -64,7 +96,7 @@ export function Home() {
         id="hero-view"
         index={2}
       >
-        <HeaderScene worksScrollProgress={worksScrollProgress} />
+        <HeaderScene />
       </View>
 
       {/* HTML Content */}
