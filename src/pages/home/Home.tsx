@@ -15,14 +15,14 @@ export function Home() {
   useGSAP(
     () => {
       //Main view pin animation
-      gsap.to("#main", {
+      gsap.to("#hero-view", {
         scrollTrigger: {
           trigger: "#hero",
           endTrigger: "#contact",
           start: "top top",
           end: "bottom top",
           pin: "#hero-view",
-          markers: true,
+          // markers: true,
         },
       });
 

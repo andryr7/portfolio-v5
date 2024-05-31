@@ -15,6 +15,8 @@ type State = {
   techsData: Tech[];
   hoveredWorkId: string | null;
   viewportSize: ViewportSize;
+  worksSceneIsActive: boolean;
+  contactSceneIsActive: boolean;
 };
 
 type Actions = {
@@ -24,6 +26,8 @@ type Actions = {
   setTechsData: (worksData: Tech[]) => void;
   setHoveredWorkId: (newHoveredWorkId: string | null) => void;
   setViewportSize: (newSize: ViewportSize) => void;
+  setWorksSceneIsActive: (newActiveStatus: boolean) => void;
+  setContactSceneIsActive: (newActiveStatus: boolean) => void;
 };
 
 export const usePortfolioStore = create<State & Actions>()((set) => ({
@@ -41,4 +45,10 @@ export const usePortfolioStore = create<State & Actions>()((set) => ({
   viewportSize: { width: 5, height: 5 },
   setViewportSize: (newViewportSize) =>
     set(() => ({ viewportSize: newViewportSize })),
+  worksSceneIsActive: false,
+  contactSceneIsActive: false,
+  setWorksSceneIsActive: (newActiveStatus) =>
+    set(() => ({ worksSceneIsActive: newActiveStatus })),
+  setContactSceneIsActive: (newActiveStatus) =>
+    set(() => ({ contactSceneIsActive: newActiveStatus })),
 }));

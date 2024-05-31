@@ -1,6 +1,6 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { RigidBody } from "@react-three/rapier";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useMediaQuery } from "usehooks-ts";
 
 export function PhysicBoundaries() {
@@ -24,6 +24,11 @@ export function PhysicBoundaries() {
   const bottomWallRef = useRef(null);
   const leftWallRef = useRef(null);
   const rightWallRef = useRef(null);
+
+  // useEffect(() => {
+  //   topWallRef.current.setEnabled(false);
+  //   bottomWallRef.current.setEnabled(false);
+  // }, []);
 
   return (
     <>

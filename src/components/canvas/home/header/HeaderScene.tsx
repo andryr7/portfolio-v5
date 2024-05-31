@@ -1,6 +1,7 @@
 import {
   Bounds,
   Environment,
+  OrbitControls,
   OrthographicCamera,
   Text,
 } from "@react-three/drei";
@@ -13,6 +14,7 @@ import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { useColors } from "@/handlers/useColors";
 import { PhysicsScene } from "./PhysicsScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { BoundsHandler } from "./BoundsHandler";
 
 extend({ TextShaderMaterial });
 
@@ -28,7 +30,13 @@ export function HeaderScene({ worksScrollProgress }: HeaderSceneProps) {
     (state) => state.viewportSize
   );
 
-  console.log(worksScrollProgress);
+  const worksSceneIsActive = usePortfolioStore(
+    (state) => state.worksSceneIsActive
+  );
+
+  const contactSceneIsActive = usePortfolioStore(
+    (state) => state.contactSceneIsActive
+  );
 
   return (
     <>
@@ -46,10 +54,11 @@ export function HeaderScene({ worksScrollProgress }: HeaderSceneProps) {
       <Suspense fallback={null}>
         <Physics
           colliders={false}
-          gravity={worksScrollProgress < 0.75 ? [0, 0, 0] : [0, -9.81, 0]}
+          gravity={[0, 0, 0]}
           debug
+          paused={worksSceneIsActive || contactSceneIsActive}
         >
-          <PhysicsScene />
+          <PhysicsScene worksScrollProgress={worksScrollProgress} />
         </Physics>
       </Suspense>
 
@@ -89,7 +98,7 @@ export function HeaderScene({ worksScrollProgress }: HeaderSceneProps) {
       </group>
 
       {/* Shader background */}
-      <Bounds fit observe margin={1} maxDuration={0.1}>
+      <Bounds fit observe margin={1}>
         <mesh
           scale={[viewportWidth, viewportHeight, 1]}
           // onPointerMove={handleMove}
@@ -113,10 +122,30 @@ export function HeaderScene({ worksScrollProgress }: HeaderSceneProps) {
           0.25,
         ]}
       >
+        {/* Background */}
         <mesh scale={[viewportWidth, viewportHeight, 1]}>
           <planeGeometry args={[1, 1, 1, 1]} />
-          <meshBasicMaterial color="#a9a9a9" />
+          <meshBasicMaterial color={colors.main} toneMapped={false} />
         </mesh>
+        {/* Texts */}
+        <group>
+          <Text
+            font={spacemono}
+            color={colors.backgroundTwo}
+            position={[0, 3, 0]}
+            fontSize={viewportWidth / 10}
+          >
+            selected
+          </Text>
+          <Text
+            font={spacemono}
+            color={colors.backgroundTwo}
+            position={[0, -3, 0]}
+            fontSize={viewportWidth / 10}
+          >
+            works
+          </Text>
+        </group>
       </group>
 
       {/* Environment lighting */}
