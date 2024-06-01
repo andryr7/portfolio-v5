@@ -1,10 +1,5 @@
-import {
-  Bounds,
-  Environment,
-  OrthographicCamera,
-  Text,
-} from "@react-three/drei";
-import { extend } from "@react-three/fiber";
+import { Environment, OrthographicCamera, Text } from "@react-three/drei";
+import { extend, useFrame } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { Suspense, useRef } from "react";
 import { TextShaderMaterial } from "./TextShaderMaterial";
@@ -18,7 +13,7 @@ extend({ TextShaderMaterial });
 
 export function HeaderScene() {
   const colors = useColors();
-  const cameraRef = useRef(null);
+  const testRef = useRef(null);
 
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
     (state) => state.viewportSize
@@ -28,16 +23,22 @@ export function HeaderScene() {
     (state) => state.worksScrollProgress
   );
 
+  useFrame((state) => {
+    state.camera.zoom = Math.min(
+      window.innerWidth / viewportWidth,
+      window.innerHeight / viewportHeight
+    );
+    state.camera.updateProjectionMatrix();
+  });
+
   return (
     <>
       {/* Camera */}
       <OrthographicCamera
         makeDefault
-        zoom={50}
         near={0.01}
         far={1000}
         position={[0, 0, 10]}
-        ref={cameraRef}
       />
 
       {/* Physics scene */}
@@ -87,21 +88,20 @@ export function HeaderScene() {
       </group>
 
       {/* Shader background */}
-      <Bounds fit observe margin={1}>
-        <mesh
-          scale={[viewportWidth, viewportHeight, 1]}
-          // onPointerMove={handleMove}
-          visible={worksScrollProgress < 0.5}
-        >
-          <planeGeometry args={[1, 1, 1, 1]} />
-          <meshBasicMaterial color={colors.backgroundOne} />
-          {/* <textShaderMaterial
+      <mesh
+        scale={[viewportWidth, viewportHeight, 1]}
+        // onPointerMove={handleMove}
+        visible={worksScrollProgress < 0.5}
+        ref={testRef}
+      >
+        <planeGeometry args={[1, 1, 1, 1]} />
+        <meshBasicMaterial color={colors.backgroundOne} />
+        {/* <textShaderMaterial
           key={TextShaderMaterial.key}
           darkcolor={new THREE.Color(colors.backgroundOne)}
           lightcolor={new THREE.Color(colors.backgroundTwo)}
         /> */}
-        </mesh>
-      </Bounds>
+      </mesh>
 
       {/* Works background */}
       <group

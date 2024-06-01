@@ -9,21 +9,17 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Home() {
-  const setWorksScrollProgress = usePortfolioStore(
-    (state) => state.setWorksScrollProgress
-  );
-
-  const setWorksSceneIsActive = usePortfolioStore(
-    (state) => state.setWorksSceneIsActive
-  );
-
-  const setContactScrollProgress = usePortfolioStore(
-    (state) => state.setContactScrollProgress
-  );
-
-  const setContactSceneIsActive = usePortfolioStore(
-    (state) => state.setContactSceneIsActive
-  );
+  const {
+    setWorksScrollProgress,
+    setWorksSceneIsActive,
+    setContactScrollProgress,
+    setContactSceneIsActive,
+  } = usePortfolioStore((state) => ({
+    setWorksScrollProgress: state.setWorksScrollProgress,
+    setWorksSceneIsActive: state.setWorksSceneIsActive,
+    setContactScrollProgress: state.setContactScrollProgress,
+    setContactSceneIsActive: state.setContactSceneIsActive,
+  }));
 
   useGSAP(
     () => {
