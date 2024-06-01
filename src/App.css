@@ -54,3 +54,7 @@ body.dark {
   --color-background-one: #0e0e0e;
   --color-background-two: #2C2C2C;
 }
+
+body {
+  background-color: var(--color-main);
+}

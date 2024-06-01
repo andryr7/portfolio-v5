@@ -1,5 +1,9 @@
 import { MeshTransmissionMaterial, RoundedBox } from "@react-three/drei";
-import { CuboidCollider, RigidBody } from "@react-three/rapier";
+import {
+  CuboidCollider,
+  RapierRigidBody,
+  RigidBody,
+} from "@react-three/rapier";
 import { useColors } from "@/handlers/useColors";
 
 import * as THREE from "three";
@@ -15,25 +19,29 @@ export function InteractiveCube({
   targetRotation = new THREE.Quaternion(),
 }) {
   const colors = useColors();
-  const cubePhysicsApi = useRef(null);
-  const cubeRef = useRef(null);
+  const cubePhysicsApi = useRef<RapierRigidBody>(null);
+  const cubeRef = useRef<THREE.Group>(null);
   const testcolor = useMemo(() => {
     return new THREE.Color(colors.main);
   }, [colors]);
 
   const {
     viewportSize: { width: viewportWidth, height: viewportHeight },
-    worksSceneIsActive,
-    contactSceneIsActive,
     worksScrollProgress,
     contactScrollProgress,
   } = usePortfolioStore((state) => ({
     viewportSize: state.viewportSize,
-    worksSceneIsActive: state.worksSceneIsActive,
-    contactSceneIsActive: state.contactSceneIsActive,
     worksScrollProgress: state.worksScrollProgress,
     contactScrollProgress: state.contactScrollProgress,
   }));
+
+  const worksSceneIsActive = useMemo(() => {
+    return worksScrollProgress >= 0.25 && worksScrollProgress <= 0.75;
+  }, [worksScrollProgress]);
+
+  const contactSceneIsActive = useMemo(() => {
+    return contactScrollProgress >= 0.25;
+  }, [contactScrollProgress]);
 
   useFrame((_, delta) => {
     if (
@@ -90,7 +98,10 @@ export function InteractiveCube({
 
   //Resetting the cube position on resize
   const handleResize = useCallback(() => {
-    cubePhysicsApi.current?.setTranslation(currentPosition.set(0, 0, 2.5));
+    cubePhysicsApi.current?.setTranslation(
+      currentPosition.set(0, 0, 2.5),
+      true
+    );
   }, [currentPosition]);
 
   //Resize event listener

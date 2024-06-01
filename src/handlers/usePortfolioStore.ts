@@ -18,8 +18,6 @@ type State = {
     height: number;
   };
   //Scroll animations related values
-  worksSceneIsActive: boolean;
-  contactSceneIsActive: boolean;
   worksScrollProgress: number;
   contactScrollProgress: number;
 };
@@ -36,8 +34,6 @@ type Actions = {
   //Canvas size setter
   setViewportSize: (newSize: { width: number; height: number }) => void;
   //Scroll animations related setters
-  setWorksSceneIsActive: (newActiveStatus: boolean) => void;
-  setContactSceneIsActive: (newActiveStatus: boolean) => void;
   setWorksScrollProgress: (newScrollProgress: number) => void;
   setContactScrollProgress: (newScrollProgress: number) => void;
 };
@@ -57,12 +53,6 @@ export const usePortfolioStore = create<State & Actions>()((set) => ({
   viewportSize: { width: 5, height: 5 },
   setViewportSize: (newViewportSize) =>
     set(() => ({ viewportSize: newViewportSize })),
-  worksSceneIsActive: false,
-  contactSceneIsActive: false,
-  setWorksSceneIsActive: (newActiveStatus) =>
-    set(() => ({ worksSceneIsActive: newActiveStatus })),
-  setContactSceneIsActive: (newActiveStatus) =>
-    set(() => ({ contactSceneIsActive: newActiveStatus })),
   worksScrollProgress: 0,
   setWorksScrollProgress: (newScrollProgress) =>
     set(() => ({ worksScrollProgress: newScrollProgress })),

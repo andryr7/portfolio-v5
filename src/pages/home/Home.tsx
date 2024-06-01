@@ -9,17 +9,11 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Home() {
-  const {
-    setWorksScrollProgress,
-    setWorksSceneIsActive,
-    setContactScrollProgress,
-    setContactSceneIsActive,
-  } = usePortfolioStore((state) => ({
-    setWorksScrollProgress: state.setWorksScrollProgress,
-    setWorksSceneIsActive: state.setWorksSceneIsActive,
-    setContactScrollProgress: state.setContactScrollProgress,
-    setContactSceneIsActive: state.setContactSceneIsActive,
-  }));
+  const { setWorksScrollProgress, setContactScrollProgress } =
+    usePortfolioStore((state) => ({
+      setWorksScrollProgress: state.setWorksScrollProgress,
+      setContactScrollProgress: state.setContactScrollProgress,
+    }));
 
   useGSAP(
     () => {
@@ -54,9 +48,6 @@ export function Home() {
           end: "bottom top",
           onUpdate: (self) => {
             setWorksScrollProgress(self.progress);
-            setWorksSceneIsActive(
-              self.progress >= 0.25 && self.progress <= 0.75
-            );
           },
           // markers: true,
         },
@@ -70,7 +61,6 @@ export function Home() {
           end: "bottom top",
           onUpdate: (self) => {
             setContactScrollProgress(self.progress);
-            setContactSceneIsActive(self.progress >= 0.25);
           },
           // markers: true,
         },
