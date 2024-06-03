@@ -1,11 +1,8 @@
 import { useColors } from "@/handlers/useColors";
-import { Bounds, OrbitControls } from "@react-three/drei";
-import {
-  ReactThreeFiber,
-  ThreeEvent,
-  extend,
-  useFrame,
-} from "@react-three/fiber";
+import { useMousePosition } from "@/handlers/useMousePosition";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { ReactThreeFiber, extend, useFrame } from "@react-three/fiber";
+import { easing } from "maath";
 import { useRef } from "react";
 import * as THREE from "three";
 
@@ -265,43 +262,71 @@ const coordBuilder = (index: number, t: number) => {
 };
 
 export function Tesseract() {
-  const colors = useColors();
   const linesRef = useRef<THREE.Line[]>(Array(lines.length).fill(null));
   const meshRef = useRef<THREE.Mesh>(null);
-  const timeRef = useRef(0);
+  const timeRef = useRef<number>(0);
+  const colors = useColors();
+  const mousePosition = useMousePosition();
+
+  const contactScrollProgress = usePortfolioStore(
+    (state) => state.contactScrollProgress
+  );
+
+  const contactSceneIsActive = contactScrollProgress > 0;
 
   useFrame((_, delta) => {
-    timeRef.current += delta / 100;
+    if (contactSceneIsActive) {
+      timeRef.current += delta / 25;
+      const time = timeRef.current % 1;
 
-    if (linesRef.current !== null) {
-      //Building the new vertex coordinates
-      const newVertexCoords: VectorCoords[] = vertexCoords.map((_, i) =>
-        coordBuilder(i, timeRef.current)
-      );
+      if (linesRef.current !== null) {
+        //Building the new vertex coordinates
+        const newVertexCoords: VectorCoords[] = vertexCoords.map((_, i) =>
+          coordBuilder(i, time)
+        );
 
-      //Defining the new coordinates of each line of the tesseract
-      linesRef.current.forEach((line, i) => {
-        const [startVertex, endVertex] = vertexJoins[i];
-        const newLineCoords = new Float32Array([
-          newVertexCoords[startVertex].x,
-          newVertexCoords[startVertex].y,
-          newVertexCoords[startVertex].z,
-          newVertexCoords[endVertex].x,
-          newVertexCoords[endVertex].y,
-          newVertexCoords[endVertex].z,
-        ]);
+        //Defining the new coordinates of each line of the tesseract
+        linesRef.current.forEach((line, i) => {
+          const [startVertex, endVertex] = vertexJoins[i];
+          const newLineCoords = new Float32Array([
+            newVertexCoords[startVertex].x,
+            newVertexCoords[startVertex].y,
+            newVertexCoords[startVertex].z,
+            newVertexCoords[endVertex].x,
+            newVertexCoords[endVertex].y,
+            newVertexCoords[endVertex].z,
+          ]);
 
-        // @ts-expect-error : Updating the array directly works
-        line.geometry.attributes.position.array = newLineCoords;
-        line.geometry.attributes.position.needsUpdate = true;
-      });
+          // @ts-expect-error : Updating the array directly works
+          line.geometry.attributes.position.array = newLineCoords;
+          line.geometry.attributes.position.needsUpdate = true;
+        });
+
+        // meshRef.current.rotation.x += delta * 0.05;
+        // meshRef.current.rotation.y += delta * 0.05;
+        if (meshRef.current !== null) {
+          easing.damp(
+            meshRef.current.rotation,
+            "x",
+            mousePosition.y,
+            0.25,
+            delta
+          );
+          easing.damp(
+            meshRef.current.rotation,
+            "y",
+            -mousePosition.x,
+            0.25,
+            delta
+          );
+        }
+      }
     }
   });
 
   return (
     <>
-      <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} />
-      <mesh scale={1 / 50} ref={meshRef}>
+      <mesh scale={1 / 250} ref={meshRef}>
         {lines.map((line, i) => (
           <line_ key={i} ref={(el: THREE.Line) => (linesRef.current[i] = el)}>
             <bufferGeometry>
@@ -311,12 +336,10 @@ export function Tesseract() {
           </line_>
         ))}
       </mesh>
-      <Bounds fit clip observe margin={1.25}>
-        <mesh>
-          <boxGeometry args={[4, 4, 4]} />
-          <meshBasicMaterial color="red" wireframe visible={false} />
-        </mesh>
-      </Bounds>
+      <mesh>
+        <boxGeometry args={[4, 4, 4]} />
+        <meshBasicMaterial color="red" wireframe visible={false} />
+      </mesh>
     </>
   );
 }

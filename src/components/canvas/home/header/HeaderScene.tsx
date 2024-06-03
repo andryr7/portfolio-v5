@@ -8,8 +8,10 @@ import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { useColors } from "@/handlers/useColors";
 import { PhysicsScene } from "./PhysicsScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { geometry } from "maath";
 
 extend({ TextShaderMaterial });
+extend(geometry);
 
 export function HeaderScene() {
   const colors = useColors();
@@ -113,7 +115,15 @@ export function HeaderScene() {
       >
         {/* Background */}
         <mesh scale={[viewportWidth, viewportHeight, 1]}>
-          <planeGeometry args={[1, 1, 1, 1]} />
+          {/* <planeGeometry args={[1, 1, 1, 1]} /> */}
+          <roundedPlaneGeometry
+            args={[
+              1,
+              1,
+              0.1 -
+                Math.min(1, 2 - Math.abs(worksScrollProgress - 0.5) * 4) * 0.1,
+            ]}
+          />
           <meshBasicMaterial color="#747474" toneMapped={false} />
         </mesh>
         {/* Texts */}

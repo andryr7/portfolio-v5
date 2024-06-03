@@ -1,4 +1,8 @@
-import { MeshTransmissionMaterial, RoundedBox } from "@react-three/drei";
+import {
+  MeshTransmissionMaterial,
+  Outlines,
+  RoundedBox,
+} from "@react-three/drei";
 import {
   CuboidCollider,
   RapierRigidBody,
@@ -11,6 +15,7 @@ import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { easing } from "maath";
+import { Tesseract } from "../contact/Tesseract";
 
 export function InteractiveCube({
   currentPosition = new THREE.Vector3(),
@@ -21,8 +26,9 @@ export function InteractiveCube({
   const colors = useColors();
   const cubePhysicsApi = useRef<RapierRigidBody>(null);
   const cubeRef = useRef<THREE.Group>(null);
+  const cubeMaterialRef = useRef<any>(null);
   const testcolor = useMemo(() => {
-    return new THREE.Color(colors.main);
+    return new THREE.Color(colors.backgroundOne);
   }, [colors]);
 
   const {
@@ -43,7 +49,32 @@ export function InteractiveCube({
     return contactScrollProgress >= 0.25;
   }, [contactScrollProgress]);
 
+  useEffect(() => {
+    if (cubePhysicsApi.current !== null && worksSceneIsActive) {
+      cubePhysicsApi.current.applyImpulse(new THREE.Vector3(10, 10, 10), true);
+    }
+  }, [worksSceneIsActive, contactSceneIsActive]);
+
+  //Resetting the cube position on resize
+  const handleResize = useCallback(() => {
+    cubePhysicsApi.current?.setTranslation(
+      currentPosition.set(0, 0, 2.5),
+      true
+    );
+  }, [currentPosition]);
+
+  //Resize event listener
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    // Step 4: Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
+
   useFrame((_, delta) => {
+    //Position pinning animations
     if (
       cubePhysicsApi.current !== null &&
       (worksSceneIsActive || contactSceneIsActive)
@@ -71,6 +102,7 @@ export function InteractiveCube({
       cubePhysicsApi.current.setNextKinematicRotation(currentRotation);
     }
 
+    //Scale animations
     if (cubeRef.current !== null) {
       easing.damp(
         cubeRef.current.scale,
@@ -94,25 +126,18 @@ export function InteractiveCube({
         delta
       );
     }
+
+    //Contact section animation
+    if (cubeMaterialRef.current !== null) {
+      easing.damp(
+        cubeMaterialRef.current,
+        "opacity",
+        contactSceneIsActive ? 0 : 1,
+        0.25,
+        delta
+      );
+    }
   });
-
-  //Resetting the cube position on resize
-  const handleResize = useCallback(() => {
-    cubePhysicsApi.current?.setTranslation(
-      currentPosition.set(0, 0, 2.5),
-      true
-    );
-  }, [currentPosition]);
-
-  //Resize event listener
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-
-    // Step 4: Clean up the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [handleResize]);
 
   return (
     <RigidBody
@@ -123,9 +148,10 @@ export function InteractiveCube({
       linearVelocity={[2, 2, 0]}
       angularVelocity={[1, 1, 1]}
       ref={cubePhysicsApi}
-      linearDamping={worksSceneIsActive || contactSceneIsActive ? 10 : 0}
-      angularDamping={worksSceneIsActive || contactSceneIsActive ? 10 : 0}
+      linearDamping={worksSceneIsActive || contactSceneIsActive ? 10 : 1}
+      angularDamping={worksSceneIsActive || contactSceneIsActive ? 10 : 1}
       enabledTranslations={[true, true, false]}
+      // enabledRotations={[false, false, true]}
       type={
         worksSceneIsActive || contactSceneIsActive
           ? "kinematicPosition"
@@ -134,18 +160,25 @@ export function InteractiveCube({
     >
       <CuboidCollider args={[1, 1, 1]} />
       <group scale={2} ref={cubeRef}>
-        <RoundedBox>
-          <MeshTransmissionMaterial
-            clearcoat={0}
-            thickness={0.2}
-            anisotropicBlur={0.1}
-            chromaticAberration={1}
-            samples={4}
-            resolution={2048}
-            backside
-            background={testcolor}
-          />
-        </RoundedBox>
+        <mesh>
+          <RoundedBox>
+            <MeshTransmissionMaterial
+              clearcoat={0}
+              thickness={0.25}
+              anisotropicBlur={0.1}
+              chromaticAberration={1}
+              samples={4}
+              resolution={2048}
+              backside
+              background={testcolor}
+              transparent
+              ref={cubeMaterialRef}
+            />
+          </RoundedBox>
+        </mesh>
+        <mesh visible={contactSceneIsActive}>
+          <Tesseract />
+        </mesh>
       </group>
     </RigidBody>
   );
