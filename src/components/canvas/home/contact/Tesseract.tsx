@@ -261,22 +261,16 @@ const coordBuilder = (index: number, t: number) => {
   }
 };
 
-export function Tesseract() {
+export function Tesseract({ active = true }: { active: boolean }) {
   const linesRef = useRef<THREE.Line[]>(Array(lines.length).fill(null));
   const meshRef = useRef<THREE.Mesh>(null);
   const timeRef = useRef<number>(0);
   const colors = useColors();
   const mousePosition = useMousePosition();
 
-  const contactScrollProgress = usePortfolioStore(
-    (state) => state.contactScrollProgress
-  );
-
-  const contactSceneIsActive = contactScrollProgress > 0;
-
   useFrame((_, delta) => {
-    if (contactSceneIsActive) {
-      timeRef.current += delta / 25;
+    if (active) {
+      timeRef.current += delta / 50;
       const time = timeRef.current % 1;
 
       if (linesRef.current !== null) {

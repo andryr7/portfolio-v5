@@ -1,7 +1,9 @@
 import {
   MeshTransmissionMaterial,
+  OrbitControls,
   Outlines,
   RoundedBox,
+  Text,
 } from "@react-three/drei";
 import {
   CuboidCollider,
@@ -9,13 +11,13 @@ import {
   RigidBody,
 } from "@react-three/rapier";
 import { useColors } from "@/handlers/useColors";
-
 import * as THREE from "three";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { easing } from "maath";
 import { Tesseract } from "../contact/Tesseract";
+import spacemono from "@/assets/fonts/space-mono.ttf";
 
 export function InteractiveCube({
   currentPosition = new THREE.Vector3(),
@@ -160,6 +162,7 @@ export function InteractiveCube({
     >
       <CuboidCollider args={[1, 1, 1]} />
       <group scale={2} ref={cubeRef}>
+        {/* 3d cube */}
         <mesh>
           <RoundedBox>
             <MeshTransmissionMaterial
@@ -173,11 +176,21 @@ export function InteractiveCube({
               background={testcolor}
               transparent
               ref={cubeMaterialRef}
+              // transmission={0}
             />
+            {/* <Outlines color={colors.main} /> */}
           </RoundedBox>
         </mesh>
+
+        {/* <mesh position={[0, 0, 0.51]}>
+          <Text fontSize={0.2} font={spacemono} color={colors.main}>
+            contact
+          </Text>
+        </mesh> */}
+
+        {/* 4d cube */}
         <mesh visible={contactSceneIsActive}>
-          <Tesseract />
+          <Tesseract active={contactSceneIsActive} />
         </mesh>
       </group>
     </RigidBody>
