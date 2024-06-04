@@ -1,4 +1,9 @@
-import { MeshTransmissionMaterial, RoundedBox } from "@react-three/drei";
+import {
+  MeshTransmissionMaterial,
+  Outlines,
+  RoundedBox,
+  Text,
+} from "@react-three/drei";
 import {
   CuboidCollider,
   RapierRigidBody,
@@ -23,6 +28,8 @@ export function InteractiveCube({
   const cubePhysicsApi = useRef<RapierRigidBody>(null);
   const cubeRef = useRef<THREE.Group>(null);
   const cubeMaterialRef = useRef<any>(null);
+  const squareMaterialRef = useRef<any>(null);
+  const cubeTextMaterialRef = useRef<any>(null);
   const testcolor = useMemo(() => {
     return new THREE.Color(colors.backgroundOne);
   }, [colors]);
@@ -96,12 +103,12 @@ export function InteractiveCube({
       // Calculating and applying position translation
       currentPosition.copy(cubePhysicsApi.current.translation());
       targetPosition.set(...sceneTargetPosition);
-      currentPosition.lerp(targetPosition, 0.2);
+      currentPosition.lerp(targetPosition, 0.1);
       cubePhysicsApi.current.setNextKinematicTranslation(currentPosition);
 
       //Calculating and applying rotation
       currentRotation.copy(cubePhysicsApi.current.rotation());
-      currentRotation.slerp(targetRotation, 0.2);
+      currentRotation.slerp(targetRotation, 0.1);
       cubePhysicsApi.current.setNextKinematicRotation(currentRotation);
     }
 
@@ -116,12 +123,41 @@ export function InteractiveCube({
       );
     }
 
-    //Contact section animation
+    //3d cube material opacity animation
     if (cubeMaterialRef.current !== null) {
       easing.damp(
         cubeMaterialRef.current,
         "opacity",
-        contactSceneIsActive ? 0 : 1,
+        !worksSceneIsActive && worksScrollProgress > 0.5 ? 0 : 1,
+        0.25,
+        delta
+      );
+    }
+
+    //2d cube material opacity animation
+    if (squareMaterialRef.current !== null) {
+      easing.damp(
+        squareMaterialRef.current,
+        "opacity",
+        !worksSceneIsActive &&
+          !contactSceneIsActive &&
+          worksScrollProgress > 0.5
+          ? 1
+          : 0,
+        0.25,
+        delta
+      );
+    }
+
+    if (cubeTextMaterialRef.current !== null) {
+      easing.damp(
+        cubeTextMaterialRef.current,
+        "opacity",
+        !worksSceneIsActive &&
+          !contactSceneIsActive &&
+          worksScrollProgress > 0.5
+          ? 1
+          : 0,
         0.25,
         delta
       );
@@ -140,7 +176,9 @@ export function InteractiveCube({
       linearDamping={sceneIsActive ? 10 : 1}
       angularDamping={sceneIsActive ? 10 : 1}
       enabledTranslations={[true, true, false]}
-      // enabledRotations={[false, false, true]}
+      enabledRotations={
+        worksScrollProgress > 0.5 ? [false, false, true] : [true, true, true]
+      }
       type={sceneIsActive ? "kinematicPosition" : "dynamic"}
     >
       <CuboidCollider args={[1, 1, 1]} />
@@ -165,11 +203,41 @@ export function InteractiveCube({
           </RoundedBox>
         </mesh>
 
-        {/* <mesh position={[0, 0, 0.51]}>
-          <Text fontSize={0.2} font={spacemono} color={colors.main}>
-            contact
-          </Text>
-        </mesh> */}
+        {/* 2d cube */}
+        <group
+          visible={
+            !worksSceneIsActive &&
+            !contactSceneIsActive &&
+            worksScrollProgress > 0.5
+          }
+        >
+          <mesh>
+            <RoundedBox>
+              <meshBasicMaterial
+                color={colors.backgroundOne}
+                toneMapped={false}
+                transparent
+                ref={squareMaterialRef}
+              />
+              <Outlines thickness={0.025} color={colors.main} />
+            </RoundedBox>
+          </mesh>
+          <mesh position={[0, 0, 0.51]}>
+            <Text
+              fontSize={0.2}
+              font={spacemono}
+              color={colors.main}
+              textAlign="center"
+            >
+              scroll
+              {"\n"}
+              to
+              {"\n"}
+              contact
+              <meshBasicMaterial transparent ref={cubeTextMaterialRef} />
+            </Text>
+          </mesh>
+        </group>
 
         {/* 4d cube */}
         <mesh visible={contactSceneIsActive}>

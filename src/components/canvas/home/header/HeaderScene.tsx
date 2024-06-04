@@ -97,7 +97,7 @@ export function HeaderScene() {
         ref={testRef}
       >
         <planeGeometry args={[1, 1, 1, 1]} />
-        <meshBasicMaterial color={colors.backgroundOne} />
+        <meshBasicMaterial color={colors.backgroundOne} toneMapped={false} />
         {/* <textShaderMaterial
           key={TextShaderMaterial.key}
           darkcolor={new THREE.Color(colors.backgroundOne)}
