@@ -1,10 +1,4 @@
-import {
-  MeshTransmissionMaterial,
-  OrbitControls,
-  Outlines,
-  RoundedBox,
-  Text,
-} from "@react-three/drei";
+import { MeshTransmissionMaterial, RoundedBox } from "@react-three/drei";
 import {
   CuboidCollider,
   RapierRigidBody,
@@ -12,7 +6,7 @@ import {
 } from "@react-three/rapier";
 import { useColors } from "@/handlers/useColors";
 import * as THREE from "three";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { easing } from "maath";
@@ -21,8 +15,8 @@ import spacemono from "@/assets/fonts/space-mono.ttf";
 
 export function InteractiveCube({
   currentPosition = new THREE.Vector3(),
-  targetPosition = new THREE.Vector3(0, 0, 2.5),
   currentRotation = new THREE.Quaternion(),
+  targetPosition = new THREE.Vector3(),
   targetRotation = new THREE.Quaternion(),
 }) {
   const colors = useColors();
@@ -32,9 +26,6 @@ export function InteractiveCube({
   const testcolor = useMemo(() => {
     return new THREE.Color(colors.backgroundOne);
   }, [colors]);
-  // const [targetPosition, setTargetPosition] = useState(new THREE.Vector3());
-  // const [targetRotation, setTargetRotation] = useState(new THREE.Quaternion());
-
   const {
     viewportSize: { width: viewportWidth, height: viewportHeight },
     worksScrollProgress,
@@ -53,7 +44,31 @@ export function InteractiveCube({
     return contactScrollProgress >= 0.25;
   }, [contactScrollProgress]);
 
-  //Resize event listener
+  const sceneIsActive = worksSceneIsActive || contactSceneIsActive;
+
+  const sceneTargetPosition = useMemo(() => {
+    const worksSceneTargetPosition: [number, number, number] = [
+      0,
+      -viewportHeight + worksScrollProgress * viewportHeight * 2,
+      2.5,
+    ];
+    const contactSceneTargetPosition: [number, number, number] = [
+      0,
+      -viewportHeight +
+        Math.min(contactScrollProgress, 0.5) * viewportHeight * 2,
+      2.5,
+    ];
+    return worksSceneIsActive
+      ? worksSceneTargetPosition
+      : contactSceneTargetPosition;
+  }, [
+    viewportHeight,
+    worksScrollProgress,
+    contactScrollProgress,
+    worksSceneIsActive,
+  ]);
+
+  //Resetting the cube position on window resize
   useEffect(() => {
     const handleResize = () => {
       cubePhysicsApi.current?.setTranslation(
@@ -64,61 +79,38 @@ export function InteractiveCube({
 
     window.addEventListener("resize", handleResize);
 
-    // Step 4: Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [currentPosition]);
+
+  useEffect(() => {
+    if (!worksSceneIsActive && !contactSceneIsActive) {
+      cubePhysicsApi.current?.applyImpulse(new THREE.Vector3(25, 25, 0), true);
+    }
+  }, [worksSceneIsActive, contactSceneIsActive]);
 
   useFrame((_, delta) => {
     //Position pinning animations
-    if (
-      cubePhysicsApi.current !== null &&
-      (worksSceneIsActive || contactSceneIsActive)
-    ) {
-      // Calculating the target position
+    if (cubePhysicsApi.current !== null && sceneIsActive) {
+      // Calculating and applying position translation
       currentPosition.copy(cubePhysicsApi.current.translation());
-      targetPosition.set(
-        0,
-        worksSceneIsActive
-          ? -viewportHeight + worksScrollProgress * viewportHeight * 2
-          : -viewportHeight +
-              Math.min(contactScrollProgress, 0.5) * viewportHeight * 2,
-        2.5
-      );
+      targetPosition.set(...sceneTargetPosition);
       currentPosition.lerp(targetPosition, 0.2);
-
-      // Setting the position
       cubePhysicsApi.current.setNextKinematicTranslation(currentPosition);
 
-      //Calculating the rotation
+      //Calculating and applying rotation
       currentRotation.copy(cubePhysicsApi.current.rotation());
       currentRotation.slerp(targetRotation, 0.2);
-
-      // Setting the rotation
       cubePhysicsApi.current.setNextKinematicRotation(currentRotation);
     }
 
     //Scale animations
     if (cubeRef.current !== null) {
-      easing.damp(
+      const targetScale = sceneIsActive ? 5 : 2;
+      easing.damp3(
         cubeRef.current.scale,
-        "x",
-        worksSceneIsActive || contactSceneIsActive ? 5 : 2,
-        0.25,
-        delta
-      );
-      easing.damp(
-        cubeRef.current.scale,
-        "y",
-        worksSceneIsActive || contactSceneIsActive ? 5 : 2,
-        0.25,
-        delta
-      );
-      easing.damp(
-        cubeRef.current.scale,
-        "z",
-        worksSceneIsActive || contactSceneIsActive ? 5 : 2,
+        [targetScale, targetScale, targetScale],
         0.25,
         delta
       );
@@ -136,15 +128,6 @@ export function InteractiveCube({
     }
   });
 
-  useEffect(() => {
-    if (worksSceneIsActive || contactSceneIsActive) {
-      cubePhysicsApi.current?.setBodyType(2, true);
-    } else {
-      cubePhysicsApi.current?.setBodyType(0, true);
-      cubePhysicsApi.current?.applyImpulse(new THREE.Vector3(25, 25, 0), true);
-    }
-  }, [worksSceneIsActive, contactSceneIsActive]);
-
   return (
     <RigidBody
       colliders={false}
@@ -154,15 +137,11 @@ export function InteractiveCube({
       linearVelocity={[2, 2, 0]}
       angularVelocity={[1, 1, 1]}
       ref={cubePhysicsApi}
-      linearDamping={worksSceneIsActive || contactSceneIsActive ? 10 : 1}
-      angularDamping={worksSceneIsActive || contactSceneIsActive ? 10 : 1}
+      linearDamping={sceneIsActive ? 10 : 1}
+      angularDamping={sceneIsActive ? 10 : 1}
       enabledTranslations={[true, true, false]}
       // enabledRotations={[false, false, true]}
-      // type={
-      //   worksSceneIsActive || contactSceneIsActive
-      //     ? "kinematicPosition"
-      //     : "dynamic"
-      // }
+      type={sceneIsActive ? "kinematicPosition" : "dynamic"}
     >
       <CuboidCollider args={[1, 1, 1]} />
       <group scale={2} ref={cubeRef}>
