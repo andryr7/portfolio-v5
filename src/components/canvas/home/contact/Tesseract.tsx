@@ -1,6 +1,5 @@
 import { useColors } from "@/handlers/useColors";
 import { useMousePosition } from "@/handlers/useMousePosition";
-import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { ReactThreeFiber, extend, useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import { useRef } from "react";
@@ -128,137 +127,34 @@ const lines = vertexJoins.map(
     ])
 );
 
+const coordMap: { [key: number]: [number, number, number, number] } = {
+  0: [8, 9, 1, 0],
+  1: [0, 8, 9, 1],
+  2: [3, 11, 10, 2],
+  3: [11, 10, 2, 3],
+  4: [12, 13, 5, 4],
+  5: [4, 12, 13, 5],
+  6: [7, 15, 14, 6],
+  7: [15, 14, 6, 7],
+  8: [9, 1, 0, 8],
+  9: [1, 0, 8, 9],
+  10: [2, 3, 11, 10],
+  11: [10, 2, 3, 11],
+  12: [13, 5, 4, 12],
+  13: [5, 4, 12, 13],
+  14: [6, 7, 15, 14],
+  15: [14, 6, 7, 15],
+};
+
 const coordBuilder = (index: number, t: number) => {
-  switch (index) {
-    case 0:
-      return path(
-        vertexCoords[8],
-        vertexCoords[9],
-        vertexCoords[1],
-        vertexCoords[0],
-        t
-      );
-    case 1:
-      return path(
-        vertexCoords[0],
-        vertexCoords[8],
-        vertexCoords[9],
-        vertexCoords[1],
-        t
-      );
-    case 2:
-      return path(
-        vertexCoords[3],
-        vertexCoords[11],
-        vertexCoords[10],
-        vertexCoords[2],
-        t
-      );
-    case 3:
-      return path(
-        vertexCoords[11],
-        vertexCoords[10],
-        vertexCoords[2],
-        vertexCoords[3],
-        t
-      );
-    case 4:
-      return path(
-        vertexCoords[12],
-        vertexCoords[13],
-        vertexCoords[5],
-        vertexCoords[4],
-        t
-      );
-    case 5:
-      return path(
-        vertexCoords[4],
-        vertexCoords[12],
-        vertexCoords[13],
-        vertexCoords[5],
-        t
-      );
-    case 6:
-      return path(
-        vertexCoords[7],
-        vertexCoords[15],
-        vertexCoords[14],
-        vertexCoords[6],
-        t
-      );
-    case 7:
-      return path(
-        vertexCoords[15],
-        vertexCoords[14],
-        vertexCoords[6],
-        vertexCoords[7],
-        t
-      );
-    case 8:
-      return path(
-        vertexCoords[9],
-        vertexCoords[1],
-        vertexCoords[0],
-        vertexCoords[8],
-        t
-      );
-    case 9:
-      return path(
-        vertexCoords[1],
-        vertexCoords[0],
-        vertexCoords[8],
-        vertexCoords[9],
-        t
-      );
-    case 10:
-      return path(
-        vertexCoords[2],
-        vertexCoords[3],
-        vertexCoords[11],
-        vertexCoords[10],
-        t
-      );
-    case 11:
-      return path(
-        vertexCoords[10],
-        vertexCoords[2],
-        vertexCoords[3],
-        vertexCoords[11],
-        t
-      );
-    case 12:
-      return path(
-        vertexCoords[13],
-        vertexCoords[5],
-        vertexCoords[4],
-        vertexCoords[12],
-        t
-      );
-    case 13:
-      return path(
-        vertexCoords[5],
-        vertexCoords[4],
-        vertexCoords[12],
-        vertexCoords[13],
-        t
-      );
-    case 14:
-      return path(
-        vertexCoords[6],
-        vertexCoords[7],
-        vertexCoords[15],
-        vertexCoords[14],
-        t
-      );
-    default:
-      return path(
-        vertexCoords[14],
-        vertexCoords[6],
-        vertexCoords[7],
-        vertexCoords[15],
-        t
-      );
-  }
+  const coords = coordMap[index] || coordMap[15];
+  return path(
+    vertexCoords[coords[0]],
+    vertexCoords[coords[1]],
+    vertexCoords[coords[2]],
+    vertexCoords[coords[3]],
+    t
+  );
 };
 
 export function Tesseract({ active = true }: { active: boolean }) {
@@ -296,8 +192,6 @@ export function Tesseract({ active = true }: { active: boolean }) {
           line.geometry.attributes.position.needsUpdate = true;
         });
 
-        // meshRef.current.rotation.x += delta * 0.05;
-        // meshRef.current.rotation.y += delta * 0.05;
         if (meshRef.current !== null) {
           easing.damp(
             meshRef.current.rotation,
