@@ -12,7 +12,7 @@ import {
 } from "@react-three/rapier";
 import { useColors } from "@/handlers/useColors";
 import * as THREE from "three";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { easing } from "maath";
@@ -32,6 +32,8 @@ export function InteractiveCube({
   const testcolor = useMemo(() => {
     return new THREE.Color(colors.backgroundOne);
   }, [colors]);
+  // const [targetPosition, setTargetPosition] = useState(new THREE.Vector3());
+  // const [targetRotation, setTargetRotation] = useState(new THREE.Quaternion());
 
   const {
     viewportSize: { width: viewportWidth, height: viewportHeight },
@@ -51,29 +53,22 @@ export function InteractiveCube({
     return contactScrollProgress >= 0.25;
   }, [contactScrollProgress]);
 
-  useEffect(() => {
-    if (cubePhysicsApi.current !== null && worksSceneIsActive) {
-      cubePhysicsApi.current.applyImpulse(new THREE.Vector3(10, 10, 10), true);
-    }
-  }, [worksSceneIsActive, contactSceneIsActive]);
-
-  //Resetting the cube position on resize
-  const handleResize = useCallback(() => {
-    cubePhysicsApi.current?.setTranslation(
-      currentPosition.set(0, 0, 2.5),
-      true
-    );
-  }, [currentPosition]);
-
   //Resize event listener
   useEffect(() => {
+    const handleResize = () => {
+      cubePhysicsApi.current?.setTranslation(
+        currentPosition.set(0, 0, 2.5),
+        true
+      );
+    };
+
     window.addEventListener("resize", handleResize);
 
     // Step 4: Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [handleResize]);
+  }, []);
 
   useFrame((_, delta) => {
     //Position pinning animations
@@ -91,14 +86,14 @@ export function InteractiveCube({
               Math.min(contactScrollProgress, 0.5) * viewportHeight * 2,
         2.5
       );
-      currentPosition.lerp(targetPosition, 0.1);
+      currentPosition.lerp(targetPosition, 0.2);
 
       // Setting the position
       cubePhysicsApi.current.setNextKinematicTranslation(currentPosition);
 
       //Calculating the rotation
       currentRotation.copy(cubePhysicsApi.current.rotation());
-      currentRotation.slerp(targetRotation, 0.1);
+      currentRotation.slerp(targetRotation, 0.2);
 
       // Setting the rotation
       cubePhysicsApi.current.setNextKinematicRotation(currentRotation);
@@ -141,6 +136,15 @@ export function InteractiveCube({
     }
   });
 
+  useEffect(() => {
+    if (worksSceneIsActive || contactSceneIsActive) {
+      cubePhysicsApi.current?.setBodyType(2, true);
+    } else {
+      cubePhysicsApi.current?.setBodyType(0, true);
+      cubePhysicsApi.current?.applyImpulse(new THREE.Vector3(25, 25, 0), true);
+    }
+  }, [worksSceneIsActive, contactSceneIsActive]);
+
   return (
     <RigidBody
       colliders={false}
@@ -154,11 +158,11 @@ export function InteractiveCube({
       angularDamping={worksSceneIsActive || contactSceneIsActive ? 10 : 1}
       enabledTranslations={[true, true, false]}
       // enabledRotations={[false, false, true]}
-      type={
-        worksSceneIsActive || contactSceneIsActive
-          ? "kinematicPosition"
-          : "dynamic"
-      }
+      // type={
+      //   worksSceneIsActive || contactSceneIsActive
+      //     ? "kinematicPosition"
+      //     : "dynamic"
+      // }
     >
       <CuboidCollider args={[1, 1, 1]} />
       <group scale={2} ref={cubeRef}>
