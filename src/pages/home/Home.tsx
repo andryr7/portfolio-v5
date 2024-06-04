@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { View } from "@react-three/drei";
 import { HeaderScene } from "@/components/canvas/home/header/HeaderScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { WorksSection } from "@/components/html/home/WorksSection";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -100,18 +101,8 @@ export function Home() {
           style={{ pointerEvents: "none" }}
           id="hero"
         />
-        <section
-          className={styles.placeholder}
-          id="works"
-          style={{
-            pointerEvents: "auto",
-            display: "flex",
-            fontSize: "2rem",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          Projects
+        <section className={styles.placeholder} id="works">
+          <WorksSection />
         </section>
       </div>
       <div className={styles.placeholder} />

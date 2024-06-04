@@ -11,7 +11,7 @@ type State = {
   skillsData: Skill[];
   techsData: Tech[];
   //Works hovering
-  hoveredWorkId: string | null;
+  hoveredWorkIndex: number | null;
   //Canvas size
   viewportSize: {
     width: number;
@@ -30,7 +30,7 @@ type Actions = {
   setSkillsData: (skillsData: Skill[]) => void;
   setTechsData: (worksData: Tech[]) => void;
   //Works hovering setter
-  setHoveredWorkId: (newHoveredWorkId: string | null) => void;
+  setHoveredWorkIndex: (newHoveredWorkIndex: number | null) => void;
   //Canvas size setter
   setViewportSize: (newSize: { width: number; height: number }) => void;
   //Scroll animations related setters
@@ -47,9 +47,9 @@ export const usePortfolioStore = create<State & Actions>()((set) => ({
   setSkillsData: (skillsData) => set(() => ({ skillsData: skillsData })),
   techsData: [],
   setTechsData: (techsData) => set(() => ({ techsData: techsData })),
-  hoveredWorkId: null,
-  setHoveredWorkId: (newHoveredWorkId: string | null) =>
-    set(() => ({ hoveredWorkId: newHoveredWorkId })),
+  hoveredWorkIndex: null,
+  setHoveredWorkIndex: (newHoveredWorkIndex: number | null) =>
+    set(() => ({ hoveredWorkIndex: newHoveredWorkIndex })),
   viewportSize: { width: 5, height: 5 },
   setViewportSize: (newViewportSize) =>
     set(() => ({ viewportSize: newViewportSize })),

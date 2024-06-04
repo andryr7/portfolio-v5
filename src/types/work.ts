@@ -14,6 +14,7 @@ interface WorkUsedTech {
 }
 
 export interface Work {
+  _id: string;
   order: number;
   backgroundColor: string;
   mainColor: string;
