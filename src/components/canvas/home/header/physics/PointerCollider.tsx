@@ -5,17 +5,19 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 export function PointerCollider({ vec = new THREE.Vector3() }) {
-  const ref = useRef(null);
+  const ref = useRef<any>(null);
   const mousePosition = useMousePosition();
 
   useFrame((state) => {
-    ref.current?.setNextKinematicTranslation(
-      vec.set(
-        mousePosition.x * state.viewport.getCurrentViewport().width,
-        -mousePosition.y * state.viewport.getCurrentViewport().height,
-        2
-      )
-    );
+    if (ref.current !== null) {
+      ref.current.setNextKinematicTranslation(
+        vec.set(
+          mousePosition.x * state.viewport.getCurrentViewport().width,
+          -mousePosition.y * state.viewport.getCurrentViewport().height,
+          2
+        )
+      );
+    }
   });
 
   return (

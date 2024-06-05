@@ -6,12 +6,21 @@ import { TextShaderMaterial } from "./TextShaderMaterial";
 import spacemono from "@/assets/fonts/space-mono.ttf";
 import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { useColors } from "@/handlers/useColors";
-import { PhysicsScene } from "./PhysicsScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { geometry } from "maath";
+import { PhysicsScene } from "./physics/PhysicsScene";
 
 extend({ TextShaderMaterial });
 extend(geometry);
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      roundedPlaneGeometry: any;
+    }
+  }
+}
 
 export function HeaderScene() {
   const colors = useColors();

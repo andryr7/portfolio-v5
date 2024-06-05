@@ -7,7 +7,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
 import { Suspense, useRef } from "react";
 import { useColors } from "@/handlers/useColors";
-import { PhysicBoundaries } from "../header/PhysicBoundaries";
+import { PhysicBoundaries } from "../header/physics/PhysicBoundaries";
 import { Tesseract } from "./Tesseract";
 
 export function ContactScene() {
