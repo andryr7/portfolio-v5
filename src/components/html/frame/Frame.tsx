@@ -1,4 +1,4 @@
-import { BrowserView, isMobile } from "react-device-detect";
+import { BrowserView } from "react-device-detect";
 import { Menu } from "./menu/Menu";
 import styles from "./Frame.module.css";
 import { Options } from "./options/Options";

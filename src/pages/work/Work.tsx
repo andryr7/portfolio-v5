@@ -1,8 +1,8 @@
-import { Link, useRoute } from "wouter";
+import { Link } from "wouter";
 import styles from "./Work.module.css";
 
 export function Work() {
-  const [match, params] = useRoute("/work/:workname");
+  // const [match, params] = useRoute("/work/:workname");
 
   return (
     <>
