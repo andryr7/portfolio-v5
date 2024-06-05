@@ -1,24 +1,17 @@
 import {
-  Box,
-  MeshTransmissionMaterial,
-  Outlines,
-  RoundedBox,
-  Text,
-} from "@react-three/drei";
-import {
   CuboidCollider,
   RapierRigidBody,
   RigidBody,
 } from "@react-three/rapier";
-import { useColors } from "@/handlers/useColors";
 import * as THREE from "three";
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { easing } from "maath";
 import { Tesseract } from "../contact/Tesseract";
-import spacemono from "@/assets/fonts/space-mono.ttf";
-import { ProjectCubeFace } from "./ProjectCubeFace";
+import { WorksCube } from "./WorksCube";
+import { ToyCube } from "./ToyCube";
+import { TransparentCube } from "./TransparentCube";
 
 export function InteractiveCube({
   currentPosition = new THREE.Vector3(),
@@ -26,14 +19,10 @@ export function InteractiveCube({
   targetPosition = new THREE.Vector3(),
   targetRotation = new THREE.Quaternion(),
 }) {
-  const colors = useColors();
   const cubePhysicsApi = useRef<RapierRigidBody>(null);
   const cubeRef = useRef<THREE.Group>(null);
-  const cubeMaterialRef = useRef<any>(null);
-  const squareMaterialRef = useRef<any>(null);
-  const cubeTextMaterialRef = useRef<any>(null);
   const {
-    viewportSize: { width: viewportWidth, height: viewportHeight },
+    viewportSize: { height: viewportHeight },
     worksScrollProgress,
     contactScrollProgress,
   } = usePortfolioStore((state) => ({
@@ -41,7 +30,6 @@ export function InteractiveCube({
     worksScrollProgress: state.worksScrollProgress,
     contactScrollProgress: state.contactScrollProgress,
   }));
-  const works = usePortfolioStore((state) => state.worksData);
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
 
   const worksSceneIsActive = useMemo(() => {
@@ -79,15 +67,15 @@ export function InteractiveCube({
   const sceneTargetRotation = useMemo(() => {
     switch (hoveredWorkIndex) {
       case 0:
-        return [0, 0, 0];
+        return [-Math.PI / 2, 0, 0];
       case 1:
-        return [0, -Math.PI / 2, 0];
+        return [-Math.PI / 2, 0, -Math.PI / 2];
       case 2:
-        return [0, (-2 * Math.PI) / 2, 0];
+        return [-Math.PI / 2, 0, (-2 * Math.PI) / 2];
       case 3:
-        return [0, (-3 * Math.PI) / 2, 0];
+        return [-Math.PI / 2, 0, (-3 * Math.PI) / 2];
       default:
-        return [Math.PI / 2, 0, 0];
+        return [0, 0, 0];
     }
   }, [hoveredWorkIndex]);
 
@@ -107,26 +95,19 @@ export function InteractiveCube({
     };
   }, [currentPosition]);
 
+  //Setting cube position and applying impulse on work and contact section exit
   useEffect(() => {
     if (!worksSceneIsActive && !contactSceneIsActive) {
       cubePhysicsApi.current?.applyImpulse(new THREE.Vector3(25, 25, 0), true);
     }
-  }, [worksSceneIsActive, contactSceneIsActive]);
 
-  useEffect(() => {
     if (cubePhysicsApi.current !== null && !worksSceneIsActive) {
       cubePhysicsApi.current.setRotation(
         new THREE.Quaternion(0, 0, 0, 1),
         true
       );
     }
-  }, [worksSceneIsActive]);
-
-  useEffect(() => {
-    if (hoveredWorkIndex !== null) {
-      cubeMaterialRef.current.chromaticAberration = 1;
-    }
-  }, [hoveredWorkIndex]);
+  }, [worksSceneIsActive, contactSceneIsActive]);
 
   useFrame((_, delta) => {
     //Position pinning animations
@@ -156,69 +137,16 @@ export function InteractiveCube({
         delta
       );
     }
-
-    //3d cube material opacity animation
-    if (cubeMaterialRef.current !== null) {
-      easing.damp(
-        cubeMaterialRef.current,
-        "opacity",
-        !worksSceneIsActive && worksScrollProgress > 0.5 ? 0 : 1,
-        0.25,
-        delta
-      );
-    }
-
-    //3d cube material chromatic aberration animation
-    if (cubeMaterialRef.current !== null) {
-      easing.damp(
-        cubeMaterialRef.current,
-        "chromaticAberration",
-        worksSceneIsActive && hoveredWorkIndex !== null ? 0 : 1,
-        0.25,
-        delta / 2
-      );
-    }
-
-    //2d cube material opacity animation
-    if (squareMaterialRef.current !== null) {
-      easing.damp(
-        squareMaterialRef.current,
-        "opacity",
-        !worksSceneIsActive &&
-          !contactSceneIsActive &&
-          worksScrollProgress > 0.5
-          ? 1
-          : 0,
-        0.25,
-        delta
-      );
-    }
-
-    //2d cube text material opacity animation
-    if (cubeTextMaterialRef.current !== null) {
-      easing.damp(
-        cubeTextMaterialRef.current,
-        "opacity",
-        !worksSceneIsActive &&
-          !contactSceneIsActive &&
-          worksScrollProgress > 0.5
-          ? 1
-          : 0,
-        0.25,
-        delta
-      );
-    }
   });
 
   return (
     <RigidBody
       colliders={false}
-      position={[-1, 0, 2]}
       canSleep={false}
       scale={0.75}
+      position={[-1, 0, 2]}
       linearVelocity={[2, 2, 0]}
       angularVelocity={[1, 1, 1]}
-      ref={cubePhysicsApi}
       linearDamping={sceneIsActive ? 10 : 1}
       angularDamping={sceneIsActive ? 10 : 1}
       enabledTranslations={[true, true, false]}
@@ -226,90 +154,27 @@ export function InteractiveCube({
         worksScrollProgress > 0.5 ? [false, false, true] : [true, true, true]
       }
       type={sceneIsActive ? "kinematicPosition" : "dynamic"}
+      ref={cubePhysicsApi}
     >
       <CuboidCollider args={[1, 1, 1]} />
       <group scale={2} ref={cubeRef}>
         {/* 3d cube */}
-        <mesh>
-          <RoundedBox>
-            <MeshTransmissionMaterial
-              clearcoat={0}
-              thickness={worksSceneIsActive ? 0.05 : 0.2}
-              anisotropicBlur={0.1}
-              chromaticAberration={1}
-              samples={4}
-              resolution={2048}
-              backside
-              transparent
-              ref={cubeMaterialRef}
-            />
-          </RoundedBox>
-        </mesh>
+        <TransparentCube />
 
-        {/* Works cube */}
-        <mesh scale={0.96} visible={worksSceneIsActive}>
-          <Box>
-            {/* Cube top face */}
-            <meshBasicMaterial
-              attach={"material-2"}
-              color={colors.backgroundOne}
-            />
-            {/* Cube project faces */}
-            {works.map((work, index) => (
-              <ProjectCubeFace
-                key={work.slug.current}
-                index={index}
-                highlighted={hoveredWorkIndex === index}
-                work={work}
-              />
-            ))}
-            <meshBasicMaterial
-              attach={"material-3"}
-              color={colors.backgroundOne}
-            />
-          </Box>
-        </mesh>
+        {/* 3d works cube */}
+        <WorksCube />
 
         {/* 2d cube */}
-        <group
+        <ToyCube
           visible={
             !worksSceneIsActive &&
             !contactSceneIsActive &&
             worksScrollProgress > 0.5
           }
-        >
-          <mesh>
-            <RoundedBox>
-              <meshBasicMaterial
-                color={colors.backgroundOne}
-                toneMapped={false}
-                transparent
-                ref={squareMaterialRef}
-              />
-              <Outlines thickness={0.01} color={colors.main} />
-            </RoundedBox>
-          </mesh>
-          <mesh position={[0, 0, 0.51]}>
-            <Text
-              fontSize={0.15}
-              font={spacemono}
-              color={colors.main}
-              textAlign="center"
-            >
-              scroll
-              {"\n"}
-              to
-              {"\n"}
-              contact
-              <meshBasicMaterial transparent ref={cubeTextMaterialRef} />
-            </Text>
-          </mesh>
-        </group>
+        />
 
         {/* 4d cube */}
-        <mesh visible={contactSceneIsActive}>
-          <Tesseract active={contactSceneIsActive} />
-        </mesh>
+        <Tesseract visible={contactSceneIsActive} />
       </group>
     </RigidBody>
   );

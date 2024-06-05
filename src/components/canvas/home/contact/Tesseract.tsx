@@ -157,7 +157,7 @@ const coordBuilder = (index: number, t: number) => {
   );
 };
 
-export function Tesseract({ active = true }: { active: boolean }) {
+export function Tesseract({ visible = true }: { visible: boolean }) {
   const linesRef = useRef<THREE.Line[]>(Array(lines.length).fill(null));
   const meshRef = useRef<THREE.Mesh>(null);
   const timeRef = useRef<number>(0);
@@ -165,7 +165,7 @@ export function Tesseract({ active = true }: { active: boolean }) {
   const mousePosition = useMousePosition();
 
   useFrame((_, delta) => {
-    if (active) {
+    if (visible) {
       timeRef.current += delta / 50;
       const time = timeRef.current % 1;
 
@@ -214,7 +214,7 @@ export function Tesseract({ active = true }: { active: boolean }) {
 
   return (
     <>
-      <mesh scale={1 / 250} ref={meshRef}>
+      <mesh scale={1 / 250} ref={meshRef} visible={visible}>
         {lines.map((line, i) => (
           <line_ key={i} ref={(el: THREE.Line) => (linesRef.current[i] = el)}>
             <bufferGeometry>
