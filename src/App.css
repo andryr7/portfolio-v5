@@ -10,8 +10,8 @@ html {
   -ms-overflow-style: none;  /* IE and Edge */
 }
 
-/* Vars */
 body {
+  /* Vars */
   /* Colors */
   --color-main: #0e0e0e;
   --color-accent: green;
@@ -39,6 +39,7 @@ body {
   --br-s: 10px;
   --br-xs: 5px;
 }
+
 
 /* Text selection */
 ::selection {

@@ -1,0 +1,17 @@
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-main);
+  color: var(--color-background-one);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 33vh;
+  font-family: "Space Mono", monospace;
+  overflow: hidden;
+}
+
+.container span {
+  white-space: nowrap;
+}

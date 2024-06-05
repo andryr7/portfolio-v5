@@ -192,6 +192,7 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
           line.geometry.attributes.position.needsUpdate = true;
         });
 
+        //Mouse rotation animation
         if (meshRef.current !== null) {
           easing.damp(
             meshRef.current.rotation,
@@ -203,7 +204,7 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
           easing.damp(
             meshRef.current.rotation,
             "y",
-            -mousePosition.x,
+            mousePosition.x,
             0.25,
             delta
           );

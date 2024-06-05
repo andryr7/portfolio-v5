@@ -10,6 +10,7 @@
   top: 0;
   z-index: 20;
   pointer-events: none;
+  font-family: "Space Mono", monospace;
 }
 
 .hero-section-container {
@@ -23,6 +24,7 @@
   top: 0;
   box-sizing: border-box;
   margin-top: 100vh;
+  font-family: "Space Mono", monospace;
 }
 
 .section-container {
@@ -43,11 +45,4 @@
   z-index: 40;
   height: 50vh;
   width: 100vw;
-  background-color: var(--color-main);
-  color: var(--color-main);
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 10vw;
 }

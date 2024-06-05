@@ -6,6 +6,7 @@ import { View } from "@react-three/drei";
 import { HeaderScene } from "@/components/canvas/home/header/HeaderScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { WorksSection } from "@/components/html/home/works/WorksSection";
+import { Footer } from "@/components/html/home/footer/Footer";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -100,7 +101,9 @@ export function Home() {
           Contact
         </section>
       </main>
-      <footer className={styles.footerContainer}>footer</footer>
+      <footer className={styles.footerContainer}>
+        <Footer />
+      </footer>
     </>
   );
 }
