@@ -1,4 +1,31 @@
-.temp-placeholder {
+.overlay-view {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.hero-container {
+  position: absolute;
+  top: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.hero-section-container {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+.main-container {
+  position: relative;
+  top: 0;
+  box-sizing: border-box;
+  margin-top: 100vh;
+}
+
+.section-container {
   height: 100vh;
   width: 100vw;
   background-color: var(--color-background-one);
@@ -11,22 +38,16 @@
   color: var(--color-main)
 }
 
-.placeholder {
-  height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
-}
-
-.main {
+.footer-container {
   position: relative;
-  top: 0;
+  z-index: 40;
+  height: 50vh;
+  width: 100vw;
+  background-color: var(--color-main);
+  color: var(--color-main);
   box-sizing: border-box;
-}
-
-.test {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 150;
-  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10vw;
 }
