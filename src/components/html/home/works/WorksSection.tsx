@@ -1,5 +1,6 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./WorksSection.module.css";
+import { Link } from "wouter";
 
 export function WorksSection() {
   const worksData = usePortfolioStore((state) => state.worksData);
@@ -9,11 +10,20 @@ export function WorksSection() {
 
   return (
     <div className={styles.container}>
-      <ul onMouseLeave={() => setHoveredWorkIndex(null)}>
+      <ul
+        className={styles.worksContainer}
+        onMouseLeave={() => setHoveredWorkIndex(null)}
+      >
         {worksData.map((work, index) => (
-          <li key={index} onMouseEnter={() => setHoveredWorkIndex(index)}>
-            {work.title}
-          </li>
+          <Link
+            href={`/works/${work.slug.current}`}
+            className={styles.workLine}
+            key={index}
+            onMouseEnter={() => setHoveredWorkIndex(index)}
+          >
+            <h3>{work.title}</h3>
+            <span>{work.caption}</span>
+          </Link>
         ))}
       </ul>
     </div>
