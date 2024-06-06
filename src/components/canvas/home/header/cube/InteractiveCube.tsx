@@ -50,7 +50,7 @@ export function InteractiveCube({
     ];
     const contactSceneTargetPosition: [number, number, number] = [
       0,
-      -viewportHeight +
+      -0.9 * viewportHeight +
         Math.min(contactScrollProgress, 0.5) * viewportHeight * 2,
       2.5,
     ];
