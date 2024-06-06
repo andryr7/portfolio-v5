@@ -6,6 +6,12 @@
   justify-content: flex-end;
 }
 
+.section-title {
+  text-align: center;
+  font-size: 22vw;
+  color: var(--color-background-two);
+}
+
 .links-container-wrapper {
   background-color: var(--color-main);
   height: 20%;
@@ -24,4 +30,20 @@
 
 .caption-container {
   grid-column: span 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-link {
+  border-left: 2px solid var(--color-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.contact-link:hover {
+  background-color: var(--color-main);
+  color: var(--color-background-one);
 }
