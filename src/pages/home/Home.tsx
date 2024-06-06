@@ -7,6 +7,7 @@ import { HeaderScene } from "@/components/canvas/home/header/HeaderScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { WorksSection } from "@/components/html/home/works/WorksSection";
 import { Footer } from "@/components/html/home/footer/Footer";
+import { ContactSection } from "@/components/html/home/contact/ContactSection";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -98,7 +99,7 @@ export function Home() {
         </section>
         <section className={styles.sectionContainer}>About - 3 - techs</section>
         <section className={styles.sectionContainer} id="contact">
-          Contact
+          <ContactSection />
         </section>
       </main>
       <footer className={styles.footerContainer}>

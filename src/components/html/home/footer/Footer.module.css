@@ -52,5 +52,5 @@
 .marquee {
   white-space: nowrap;
   font-size: 33vh;
-  animation: first-marquee-animation 20s linear infinite forwards;
+  animation: first-marquee-animation 30s linear infinite forwards;
 }

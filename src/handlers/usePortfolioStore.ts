@@ -20,6 +20,7 @@ type State = {
   //Scroll animations related values
   worksScrollProgress: number;
   contactScrollProgress: number;
+  hoveredContactLink: number | null;
 };
 
 type Actions = {
@@ -36,6 +37,8 @@ type Actions = {
   //Scroll animations related setters
   setWorksScrollProgress: (newScrollProgress: number) => void;
   setContactScrollProgress: (newScrollProgress: number) => void;
+  //Contact link hovering setter
+  setHoveredContactLink: (newHoveredContactLink: number | null) => void;
 };
 
 export const usePortfolioStore = create<State & Actions>()((set) => ({
@@ -59,4 +62,7 @@ export const usePortfolioStore = create<State & Actions>()((set) => ({
   contactScrollProgress: 0,
   setContactScrollProgress: (newScrollProgress) =>
     set(() => ({ contactScrollProgress: newScrollProgress })),
+  hoveredContactLink: null,
+  setHoveredContactLink: (newHoveredContactLink: number | null) =>
+    set(() => ({ hoveredContactLink: newHoveredContactLink })),
 }));

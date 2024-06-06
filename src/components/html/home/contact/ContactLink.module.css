@@ -1,0 +1,7 @@
+.container {
+  border-left: 2px solid var(--color-main);
+}
+
+.container:hover {
+  background-color: red;
+}

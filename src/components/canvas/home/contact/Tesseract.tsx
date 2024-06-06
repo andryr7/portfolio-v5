@@ -1,8 +1,8 @@
 import { useColors } from "@/handlers/useColors";
-import { useMousePosition } from "@/handlers/useMousePosition";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { ReactThreeFiber, extend, useFrame } from "@react-three/fiber";
 import { easing } from "maath";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
 extend({ Line_: THREE.Line });
@@ -162,7 +162,34 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const timeRef = useRef<number>(0);
   const colors = useColors();
-  const mousePosition = useMousePosition();
+  const hoveredContactLink = usePortfolioStore(
+    (state) => state.hoveredContactLink
+  );
+
+  const modelRotation = useMemo(() => {
+    switch (hoveredContactLink) {
+      case 0:
+        return {
+          x: -Math.PI / 4,
+          y: 0,
+        };
+      case 1:
+        return {
+          x: 0,
+          y: 0,
+        };
+      case 2:
+        return {
+          x: 0,
+          y: Math.PI / 2,
+        };
+      default:
+        return {
+          x: Math.PI / 12,
+          y: Math.PI / 4,
+        };
+    }
+  }, [hoveredContactLink]);
 
   useFrame((_, delta) => {
     if (visible) {
@@ -197,14 +224,14 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
           easing.damp(
             meshRef.current.rotation,
             "x",
-            mousePosition.y,
+            modelRotation.x,
             0.25,
             delta
           );
           easing.damp(
             meshRef.current.rotation,
             "y",
-            mousePosition.x,
+            modelRotation.y,
             0.25,
             delta
           );
