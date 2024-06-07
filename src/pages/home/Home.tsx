@@ -68,6 +68,18 @@ export function Home() {
           // markers: true,
         },
       });
+
+      //About section title
+      gsap.to(".about-title", {
+        scrollTrigger: {
+          trigger: "#main",
+          endTrigger: "#contact",
+          start: "top top",
+          end: "top bottom",
+          pin: "#about-title",
+          // markers: true,
+        },
+      });
     }
     // { scope: container }
   );
@@ -91,13 +103,20 @@ export function Home() {
         </section>
       </div>
       <main className={styles.mainContainer} id="main">
-        <section className={styles.sectionContainer} id="about">
-          About - 1 - presentation
+        <section style={{ position: "relative" }}>
+          <article className={styles.sectionContainer} id="about">
+            About - 1 - presentation
+          </article>
+          <article className={styles.sectionContainer}>
+            About - 2 - skills
+          </article>
+          <article className={styles.sectionContainer}>
+            About - 3 - techs
+          </article>
         </section>
-        <section className={styles.sectionContainer}>
-          About - 2 - skills
-        </section>
-        <section className={styles.sectionContainer}>About - 3 - techs</section>
+        <div className={styles.aboutTitle} id="about-title">
+          about
+        </div>
         <section className={styles.sectionContainer} id="contact">
           <ContactSection />
         </section>

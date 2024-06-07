@@ -193,7 +193,7 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
 
   useFrame((_, delta) => {
     if (visible) {
-      timeRef.current += delta / 50;
+      timeRef.current += delta / 75;
       const time = timeRef.current % 1;
 
       if (linesRef.current !== null) {

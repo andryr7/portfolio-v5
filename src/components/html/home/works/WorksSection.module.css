@@ -27,7 +27,6 @@
 }
 
 .work-line:hover {
-  backdrop-filter: blur(5px);
   background-color: #e9e9e955;
 }
 
