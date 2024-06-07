@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: "Space Mono", monospace;
+  font-family: var(--font-title);
   overflow: hidden;
 }
 

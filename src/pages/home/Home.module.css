@@ -10,7 +10,7 @@
   top: 0;
   z-index: 20;
   pointer-events: none;
-  font-family: "Space Mono", monospace;
+  font-family: var(--font-title);
 }
 
 .hero-section-container {
@@ -24,7 +24,8 @@
   top: 0;
   box-sizing: border-box;
   margin-top: 100vh;
-  font-family: "Space Mono", monospace;
+  font-family: var(--font-title);
+  background-color: var(--color-background-one);
 }
 
 @media (min-width: 768px) {
@@ -38,9 +39,10 @@
   position: absolute;
   top: 100vh;
   left: 0;
-  font-size: 15vw;
+  font-size: 12.5vw;
   color: var(--color-background-two);
   transform: translateY(-100%);
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {
@@ -53,11 +55,12 @@
 .section-container {
   height: 100vh;
   width: 100%;
-  background-color: var(--color-background-one);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--color-main)
+  color: var(--color-main);
+  z-index: 2;
+  position: relative;
 }
 
 .footer-container {

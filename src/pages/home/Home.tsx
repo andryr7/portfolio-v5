@@ -8,6 +8,7 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { WorksSection } from "@/components/html/home/works/WorksSection";
 import { Footer } from "@/components/html/home/footer/Footer";
 import { ContactSection } from "@/components/html/home/contact/ContactSection";
+import { Presentation } from "@/components/html/home/about/presentation/Presentation";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -70,7 +71,7 @@ export function Home() {
       });
 
       //About section title
-      gsap.to(".about-title", {
+      gsap.to("#about-title", {
         scrollTrigger: {
           trigger: "#main",
           endTrigger: "#contact",
@@ -105,7 +106,7 @@ export function Home() {
       <main className={styles.mainContainer} id="main">
         <section style={{ position: "relative" }}>
           <article className={styles.sectionContainer} id="about">
-            About - 1 - presentation
+            <Presentation />
           </article>
           <article className={styles.sectionContainer}>
             About - 2 - skills
