@@ -28,13 +28,6 @@ export function ContactSection() {
           <a
             className={styles.contactLink}
             onMouseEnter={() => setHoveredContactLink(0)}
-            onClick={handleDesktopEmailClick}
-          >
-            {emailWasCopied ? "email was copied" : "-> email"}
-          </a>
-          <a
-            className={styles.contactLink}
-            onMouseEnter={() => setHoveredContactLink(1)}
             target="_blank"
             rel="noreferrer noopener"
             href="https://www.linkedin.com/in/andryratsimba/"
@@ -43,12 +36,19 @@ export function ContactSection() {
           </a>
           <a
             className={styles.contactLink}
-            onMouseEnter={() => setHoveredContactLink(2)}
+            onMouseEnter={() => setHoveredContactLink(1)}
             target="_blank"
             rel="noreferrer noopener"
             href="https://github.com/andryr7"
           >
             {"-> "}github
+          </a>
+          <a
+            className={styles.contactLink}
+            onMouseEnter={() => setHoveredContactLink(2)}
+            onClick={handleDesktopEmailClick}
+          >
+            {emailWasCopied ? "email was copied" : "-> email"}
           </a>
         </div>
       </div>

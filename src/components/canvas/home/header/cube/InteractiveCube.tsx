@@ -8,7 +8,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { easing } from "maath";
-import { Tesseract } from "../../contact/Tesseract";
+import { Tesseract } from "./Tesseract";
 import { ToyCube } from "./ToyCube";
 import { TransparentCube } from "./TransparentCube";
 import { WorksCube } from "./WorksCube";

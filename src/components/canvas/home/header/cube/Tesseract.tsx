@@ -170,12 +170,12 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
     switch (hoveredContactLink) {
       case 0:
         return {
-          x: -Math.PI / 4,
+          x: 0,
           y: 0,
         };
       case 1:
         return {
-          x: 0,
+          x: -Math.PI / 4,
           y: 0,
         };
       case 2:
@@ -242,7 +242,7 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
 
   return (
     <>
-      <mesh scale={1 / 250} ref={meshRef} visible={visible}>
+      <mesh scale={1 / 275} ref={meshRef} visible={visible}>
         {lines.map((line, i) => (
           <line_ key={i} ref={(el: THREE.Line) => (linesRef.current[i] = el)}>
             <bufferGeometry>
