@@ -25,7 +25,7 @@ export function WorksSection() {
             style={
               hoveredWorkIndex !== null
                 ? hoveredWorkIndex !== index
-                  ? { opacity: 0.5, borderColor: "#0e0e0e11" }
+                  ? { opacity: 0.25, borderColor: "#0e0e0e11" }
                   : { borderColor: "#0e0e0e11" }
                 : {}
             }
