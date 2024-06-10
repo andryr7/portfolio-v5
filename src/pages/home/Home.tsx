@@ -9,15 +9,20 @@ import { WorksSection } from "@/components/html/home/works/WorksSection";
 import { Footer } from "@/components/html/home/footer/Footer";
 import { ContactSection } from "@/components/html/home/contact/ContactSection";
 import { Presentation } from "@/components/html/home/about/presentation/Presentation";
+import { Technologies } from "@/components/html/home/about/technologies/Technologies";
+import { useShallow } from "zustand/react/shallow";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Home() {
+  //TODO Use shallow
   const { setWorksScrollProgress, setContactScrollProgress } =
-    usePortfolioStore((state) => ({
-      setWorksScrollProgress: state.setWorksScrollProgress,
-      setContactScrollProgress: state.setContactScrollProgress,
-    }));
+    usePortfolioStore(
+      useShallow((state) => ({
+        setWorksScrollProgress: state.setWorksScrollProgress,
+        setContactScrollProgress: state.setContactScrollProgress,
+      }))
+    );
 
   useGSAP(
     () => {
@@ -112,7 +117,7 @@ export function Home() {
             About - 2 - skills
           </article>
           <article className={styles.sectionContainer}>
-            About - 3 - techs
+            <Technologies />
           </article>
         </section>
         <div className={styles.aboutTitle} id="about-title">

@@ -21,6 +21,8 @@ type State = {
   worksScrollProgress: number;
   contactScrollProgress: number;
   hoveredContactLink: number | null;
+  draggedTechCubeId: string | null;
+  selectedTechCubeId: string | null;
 };
 
 type Actions = {
@@ -39,6 +41,9 @@ type Actions = {
   setContactScrollProgress: (newScrollProgress: number) => void;
   //Contact link hovering setter
   setHoveredContactLink: (newHoveredContactLink: number | null) => void;
+  //Technologies scene setters
+  setDraggedTechCubeId: (newDraggedTechCubeId: string | null) => void;
+  setSelectedTechCubeId: (newSelectedTechCubeId: string | null) => void;
 };
 
 export const usePortfolioStore = create<State & Actions>()((set) => ({
@@ -65,4 +70,10 @@ export const usePortfolioStore = create<State & Actions>()((set) => ({
   hoveredContactLink: null,
   setHoveredContactLink: (newHoveredContactLink: number | null) =>
     set(() => ({ hoveredContactLink: newHoveredContactLink })),
+  draggedTechCubeId: null,
+  setDraggedTechCubeId: (newDraggedTechCubeId: string | null) =>
+    set(() => ({ draggedTechCubeId: newDraggedTechCubeId })),
+  selectedTechCubeId: null,
+  setSelectedTechCubeId: (newSelectedTechCubeId: string | null) =>
+    set(() => ({ selectedTechCubeId: newSelectedTechCubeId })),
 }));
