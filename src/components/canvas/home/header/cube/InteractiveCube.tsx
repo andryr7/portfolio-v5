@@ -12,6 +12,7 @@ import { Tesseract } from "./Tesseract";
 import { ToyCube } from "./ToyCube";
 import { TransparentCube } from "./TransparentCube";
 import { WorksCube } from "./WorksCube";
+import { useShallow } from "zustand/react/shallow";
 
 export function InteractiveCube({
   currentPosition = new THREE.Vector3(),
@@ -25,12 +26,15 @@ export function InteractiveCube({
     viewportSize: { height: viewportHeight },
     worksScrollProgress,
     contactScrollProgress,
-  } = usePortfolioStore((state) => ({
-    viewportSize: state.viewportSize,
-    worksScrollProgress: state.worksScrollProgress,
-    contactScrollProgress: state.contactScrollProgress,
-  }));
-  const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
+    hoveredWorkIndex,
+  } = usePortfolioStore(
+    useShallow((state) => ({
+      viewportSize: state.viewportSize,
+      worksScrollProgress: state.worksScrollProgress,
+      contactScrollProgress: state.contactScrollProgress,
+      hoveredWorkIndex: state.hoveredWorkIndex,
+    }))
+  );
 
   const worksSceneIsActive = useMemo(() => {
     return worksScrollProgress >= 0.25 && worksScrollProgress <= 0.75;

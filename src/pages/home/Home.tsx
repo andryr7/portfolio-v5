@@ -15,7 +15,6 @@ import { useShallow } from "zustand/react/shallow";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Home() {
-  //TODO Use shallow
   const { setWorksScrollProgress, setContactScrollProgress } =
     usePortfolioStore(
       useShallow((state) => ({

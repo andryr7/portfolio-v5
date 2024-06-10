@@ -25,9 +25,11 @@ declare global {
 export function HeaderScene() {
   const colors = useColors();
   const testRef = useRef(null);
+
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
     (state) => state.viewportSize
   );
+
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress
   );

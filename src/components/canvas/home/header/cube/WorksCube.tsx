@@ -4,16 +4,19 @@ import { ProjectCubeFace } from "./ProjectCubeFace";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import { easing } from "maath";
+import { useShallow } from "zustand/react/shallow";
 
 export function WorksCube() {
   const topFaceRef = useRef(null);
   const bottomFaceRef = useRef(null);
   const { worksScrollProgress, worksData, hoveredWorkIndex } =
-    usePortfolioStore((state) => ({
-      worksScrollProgress: state.worksScrollProgress,
-      worksData: state.worksData,
-      hoveredWorkIndex: state.hoveredWorkIndex,
-    }));
+    usePortfolioStore(
+      useShallow((state) => ({
+        worksScrollProgress: state.worksScrollProgress,
+        worksData: state.worksData,
+        hoveredWorkIndex: state.hoveredWorkIndex,
+      }))
+    );
 
   const worksSceneIsActive = useMemo(() => {
     return worksScrollProgress >= 0.25 && worksScrollProgress <= 0.75;

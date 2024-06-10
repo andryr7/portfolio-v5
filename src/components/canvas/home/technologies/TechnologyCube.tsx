@@ -6,6 +6,7 @@ import { Box, Outlines, useCursor, useTexture } from "@react-three/drei";
 import { RapierRigidBody, RigidBody, quat } from "@react-three/rapier";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useColors } from "@/handlers/useColors";
+import { useShallow } from "zustand/react/shallow";
 
 interface TechnologyCubeProps {
   position?: [number, number, number];
@@ -22,12 +23,14 @@ export function TechnologyCube({
 
   // Cube state
   const [draggedCubeId, setDraggedCubeId, selectedTechId, setSelectedTechId] =
-    usePortfolioStore((state) => [
-      state.draggedTechCubeId,
-      state.setDraggedTechCubeId,
-      state.selectedTechCubeId,
-      state.setSelectedTechCubeId,
-    ]);
+    usePortfolioStore(
+      useShallow((state) => [
+        state.draggedTechCubeId,
+        state.setDraggedTechCubeId,
+        state.selectedTechCubeId,
+        state.setSelectedTechCubeId,
+      ])
+    );
   const isDragged = useMemo(
     () => draggedCubeId === tech._id,
     [draggedCubeId, tech]
