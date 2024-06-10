@@ -45,4 +45,5 @@
   pointer-events: auto;
   cursor: pointer;
   font-size: var(--font-size-s);
+  color: #d9d9d9;
 }

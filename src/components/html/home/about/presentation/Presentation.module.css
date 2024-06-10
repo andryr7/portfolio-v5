@@ -27,7 +27,7 @@
 }
 
 .text-container h2 {
-  font-size: var(--font-size-s);
+  font-size: var(--font-size-m);
 }
 
 .text-container p {
@@ -42,6 +42,7 @@
   overflow: hidden;
   filter: grayscale(1);
   background-size: cover;
+  transition: filter var(--transition-normal);
 }
 
 .image-container:hover {
