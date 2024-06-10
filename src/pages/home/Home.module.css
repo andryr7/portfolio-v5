@@ -39,7 +39,7 @@
   position: absolute;
   top: 100vh;
   left: 0;
-  font-size: 12.5vw;
+  font-size: min(12.5vw, 15vh);
   color: var(--color-background-two);
   transform: translateY(-100%);
   pointer-events: none;

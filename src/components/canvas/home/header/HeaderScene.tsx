@@ -140,18 +140,10 @@ export function HeaderScene() {
           <Text
             font={spacemono}
             color="#d9d9d9"
-            position={[0, 3, 0]}
-            fontSize={viewportWidth / 10}
+            position={[0, 2.75, 0]}
+            fontSize={viewportWidth / 15}
           >
-            selected
-          </Text>
-          <Text
-            font={spacemono}
-            color="#d9d9d9"
-            position={[0, -3, 0]}
-            fontSize={viewportWidth / 10}
-          >
-            works
+            selected works
           </Text>
         </group>
       </group>

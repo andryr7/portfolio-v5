@@ -8,7 +8,7 @@
 
 .section-title {
   text-align: center;
-  font-size: 22vw;
+  font-size: min(22vw, 33vh);
   color: var(--color-background-two);
 }
 
