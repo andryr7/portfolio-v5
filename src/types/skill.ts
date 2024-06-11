@@ -1,7 +1,3 @@
-interface SkillItem {
-  name: string;
-}
-
 interface SanityImage {
   asset: {
     _ref: string;
@@ -16,5 +12,5 @@ export interface Skill {
   order: number;
   description: string;
   image: SanityImage;
-  skillItem: SkillItem[];
+  skillItem: string[];
 }

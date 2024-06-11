@@ -11,6 +11,7 @@ import { ContactSection } from "@/components/html/home/contact/ContactSection";
 import { Presentation } from "@/components/html/home/about/presentation/Presentation";
 import { Technologies } from "@/components/html/home/about/technologies/Technologies";
 import { useShallow } from "zustand/react/shallow";
+import { Skills } from "@/components/html/home/about/skills/Skills";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -85,6 +86,18 @@ export function Home() {
           // markers: true,
         },
       });
+
+      //About section title
+      gsap.to("#about-title", {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: "#about-title",
+          start: "center center",
+          end: "top bottom",
+          scrub: true,
+          // markers: true,
+        },
+      });
     }
     // { scope: container }
   );
@@ -113,7 +126,7 @@ export function Home() {
             <Presentation />
           </article>
           <article className={styles.sectionContainer}>
-            About - 2 - skills
+            <Skills />
           </article>
           <article className={styles.sectionContainer}>
             <Technologies />
