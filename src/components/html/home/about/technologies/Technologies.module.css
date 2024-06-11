@@ -30,7 +30,7 @@
   position:absolute;
   right: 0;
   height: 100%;
-  width: 30%;
+  width: 25%;
   box-sizing: border-box;
   background-color: var(--color-background-two);
   border-left: 7px solid var(--color-background-one);
@@ -56,5 +56,25 @@
 
 .tech-details-wrapper button:hover {
   background-color: var(--color-main);
+  color: var(--color-background-one);
+}
+
+.details-container h4 {
+  font-size: var(--font-size-s);
+}
+
+.details-container span {
+  opacity: 0.75;
+}
+
+.details-container p {
+  font-family: var(--font-text);
+}
+
+.details-container a {
+  text-decoration: underline;
+}
+
+.details-container a:hover {
   color: var(--color-background-one);
 }
