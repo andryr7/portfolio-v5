@@ -30,9 +30,9 @@ export function HeaderScene() {
     (state) => state.viewportSize
   );
 
-  const worksScrollProgress = usePortfolioStore(
-    (state) => state.worksScrollProgress
-  );
+  const { worksScrollProgress } = usePortfolioStore((state) => ({
+    worksScrollProgress: state.worksScrollProgress,
+  }));
 
   useFrame((state) => {
     state.camera.zoom = Math.min(

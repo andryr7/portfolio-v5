@@ -3,18 +3,19 @@ import styles from "./Technologies.module.css";
 import { TechnologiesScene } from "@/components/canvas/home/technologies/TechnologiesScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useMemo } from "react";
+import { useShallow } from "zustand/react/shallow";
 
 export function Technologies() {
-  const techs = usePortfolioStore((state) =>
-    state.techsData.filter((tech) => tech.showcased)
+  const techs = usePortfolioStore(
+    useShallow((state) => state.techsData.filter((tech) => tech.showcased))
   );
 
   const selectedTechCubeId = usePortfolioStore(
-    (state) => state.selectedTechCubeId
+    useShallow((state) => state.selectedTechCubeId)
   );
 
   const setSelectedTechCubeId = usePortfolioStore(
-    (state) => state.setSelectedTechCubeId
+    useShallow((state) => state.setSelectedTechCubeId)
   );
 
   const selectedTech = useMemo(() => {
@@ -53,6 +54,7 @@ export function Technologies() {
             <button onClick={() => setSelectedTechCubeId(null)}>close</button>
           </div>
         </div>
+        <span className={styles.tips}>select or drag</span>
       </div>
     );
 }

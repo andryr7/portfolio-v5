@@ -78,3 +78,10 @@
 .details-container a:hover {
   color: var(--color-background-one);
 }
+
+.tips {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(150%);
+}

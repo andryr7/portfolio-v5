@@ -4,14 +4,14 @@ import { TechnologyCube } from "./TechnologyCube";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 export function TechnologiesPhysicalScene() {
-  const techs = usePortfolioStore((state) =>
-    state.techsData.filter((tech) => tech.showcased === true)
-  );
+  const { techs } = usePortfolioStore((state) => ({
+    techs: state.techsData.filter((tech) => tech.showcased === true),
+  }));
 
   //Handling cube dragging state
-  const setDraggedTechCubeId = usePortfolioStore(
-    (state) => state.setDraggedTechCubeId
-  );
+  const { setDraggedTechCubeId } = usePortfolioStore((state) => ({
+    setDraggedTechCubeId: state.setDraggedTechCubeId,
+  }));
 
   //Handling mouse drops
   useEffect(() => {

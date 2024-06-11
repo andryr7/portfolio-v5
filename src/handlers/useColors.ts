@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { usePortfolioStore } from "./usePortfolioStore";
+import { useShallow } from "zustand/react/shallow";
 
 export function useColors() {
   const [colors, setColors] = useState({
@@ -9,7 +10,9 @@ export function useColors() {
     backgroundTwo: "#000000",
   });
 
-  const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
+  const { isDarkTheme } = usePortfolioStore(
+    useShallow((state) => ({ isDarkTheme: state.isDarkTheme }))
+  );
 
   //Handling initial state
   useEffect(() => {

@@ -10,9 +10,9 @@ export function ToyCube({ visible }: { visible: boolean }) {
   const colors = useColors();
   const cubeMaterialRef = useRef(null);
   const textMaterialRef = useRef(null);
-  const worksScrollProgress = usePortfolioStore(
-    (state) => state.worksScrollProgress
-  );
+  const { worksScrollProgress } = usePortfolioStore((state) => ({
+    worksScrollProgress: state.worksScrollProgress,
+  }));
 
   useFrame((_, delta) => {
     //2d cube material opacity animation
