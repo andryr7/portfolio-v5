@@ -50,10 +50,9 @@ export function TransparentCube() {
   });
 
   return (
-    <mesh>
+    <mesh visible={worksScrollProgress < 1}>
       <RoundedBox>
         <MeshTransmissionMaterial
-          clearcoat={0}
           thickness={worksSceneIsActive ? 0.05 : 0.2}
           anisotropicBlur={0.1}
           chromaticAberration={1}
