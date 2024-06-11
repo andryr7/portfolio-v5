@@ -4,9 +4,9 @@ import { useCallback, useState } from "react";
 
 export function ContactSection() {
   const [emailWasCopied, setEmailWasCopied] = useState<boolean>(false);
-  const setHoveredContactLink = usePortfolioStore(
-    (state) => state.setHoveredContactLink
-  );
+  const { setHoveredContactLink } = usePortfolioStore((state) => ({
+    setHoveredContactLink: state.setHoveredContactLink,
+  }));
 
   const handleDesktopEmailClick = useCallback(() => {
     navigator.clipboard.writeText("contact@andryratsimba.com");

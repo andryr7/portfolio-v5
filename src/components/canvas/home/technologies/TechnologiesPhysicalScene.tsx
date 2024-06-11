@@ -5,9 +5,11 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useShallow } from "zustand/react/shallow";
 
 export function TechnologiesPhysicalScene() {
-  const { techs } = usePortfolioStore((state) => ({
-    techs: state.techsData.filter((tech) => tech.showcased === true),
-  }));
+  const { techs } = usePortfolioStore(
+    useShallow((state) => ({
+      techs: state.techsData.filter((tech) => tech.showcased === true),
+    }))
+  );
 
   //Handling cube dragging state
   const { setDraggedTechCubeId } = usePortfolioStore(
@@ -24,7 +26,11 @@ export function TechnologiesPhysicalScene() {
     );
   });
 
-  console.log("render");
+  // function getRandomInt(min, max) {
+  //   min = Math.ceil(min);
+  //   max = Math.floor(max);
+  //   return Math.floor(Math.random() * (max - min + 1)) + min;
+  // }
 
   return (
     <>

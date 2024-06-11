@@ -5,22 +5,24 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useMemo } from "react";
 import { useShallow } from "zustand/react/shallow";
 
+let count = 0;
+
 export function Technologies() {
-  const techs = usePortfolioStore(
-    useShallow((state) => state.techsData.filter((tech) => tech.showcased))
-  );
-
-  const selectedTechCubeId = usePortfolioStore(
-    useShallow((state) => state.selectedTechCubeId)
-  );
-
-  const setSelectedTechCubeId = usePortfolioStore(
-    useShallow((state) => state.setSelectedTechCubeId)
-  );
+  const { techs, selectedTechCubeId, setSelectedTechCubeId } =
+    usePortfolioStore(
+      useShallow((state) => ({
+        techs: state.techsData.filter((tech) => tech.showcased),
+        selectedTechCubeId: state.selectedTechCubeId,
+        setSelectedTechCubeId: state.setSelectedTechCubeId,
+      }))
+    );
 
   const selectedTech = useMemo(() => {
     return techs.find((tech) => tech._id === selectedTechCubeId);
   }, [techs, selectedTechCubeId]);
+
+  count++;
+  console.log("component render number: ", count);
 
   if (techs.length > 0)
     return (

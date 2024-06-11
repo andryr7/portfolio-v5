@@ -2,8 +2,12 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./Options.module.css";
 
 function ThemeButton() {
-  const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
-  const setIsDarkTheme = usePortfolioStore((state) => state.setIsDarkTheme);
+  const { isDarkTheme } = usePortfolioStore((state) => ({
+    isDarkTheme: state.isDarkTheme,
+  }));
+  const { setIsDarkTheme } = usePortfolioStore((state) => ({
+    setIsDarkTheme: state.setIsDarkTheme,
+  }));
 
   const handleClick = () => {
     setIsDarkTheme(isDarkTheme ? false : true);
