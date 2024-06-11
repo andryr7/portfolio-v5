@@ -2,6 +2,7 @@ import { Physics } from "@react-three/rapier";
 import { useEffect } from "react";
 import { TechnologyCube } from "./TechnologyCube";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { useShallow } from "zustand/react/shallow";
 
 export function TechnologiesPhysicalScene() {
   const { techs } = usePortfolioStore((state) => ({
@@ -9,9 +10,11 @@ export function TechnologiesPhysicalScene() {
   }));
 
   //Handling cube dragging state
-  const { setDraggedTechCubeId } = usePortfolioStore((state) => ({
-    setDraggedTechCubeId: state.setDraggedTechCubeId,
-  }));
+  const { setDraggedTechCubeId } = usePortfolioStore(
+    useShallow((state) => ({
+      setDraggedTechCubeId: state.setDraggedTechCubeId,
+    }))
+  );
 
   //Handling mouse drops
   useEffect(() => {
@@ -20,6 +23,8 @@ export function TechnologiesPhysicalScene() {
       setDraggedTechCubeId(null)
     );
   });
+
+  console.log("render");
 
   return (
     <>

@@ -9,6 +9,7 @@ import { useColors } from "@/handlers/useColors";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { geometry } from "maath";
 import { PhysicsScene } from "./physics/PhysicsScene";
+import { useShallow } from "zustand/react/shallow";
 
 extend({ TextShaderMaterial });
 extend(geometry);
@@ -27,12 +28,14 @@ export function HeaderScene() {
   const testRef = useRef(null);
 
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
-    (state) => state.viewportSize
+    useShallow((state) => state.viewportSize)
   );
 
-  const { worksScrollProgress } = usePortfolioStore((state) => ({
-    worksScrollProgress: state.worksScrollProgress,
-  }));
+  const { worksScrollProgress } = usePortfolioStore(
+    useShallow((state) => ({
+      worksScrollProgress: state.worksScrollProgress,
+    }))
+  );
 
   useFrame((state) => {
     state.camera.zoom = Math.min(

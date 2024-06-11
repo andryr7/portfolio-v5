@@ -58,7 +58,7 @@ export function TechnologiesScene() {
       </Environment>
       <color attach={"background"} args={[colors.backgroundTwo]} />
 
-      {/* Actual scene */}
+      {/* Physical scene scene */}
       <Suspense fallback={null}>
         <TechnologiesPhysicalScene />
       </Suspense>
