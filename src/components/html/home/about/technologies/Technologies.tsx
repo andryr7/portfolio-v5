@@ -3,26 +3,19 @@ import styles from "./Technologies.module.css";
 import { TechnologiesScene } from "@/components/canvas/home/technologies/TechnologiesScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useMemo } from "react";
-import { useShallow } from "zustand/react/shallow";
-
-let count = 0;
 
 export function Technologies() {
-  const { techs, selectedTechCubeId, setSelectedTechCubeId } =
-    usePortfolioStore(
-      useShallow((state) => ({
-        techs: state.techsData.filter((tech) => tech.showcased),
-        selectedTechCubeId: state.selectedTechCubeId,
-        setSelectedTechCubeId: state.setSelectedTechCubeId,
-      }))
-    );
+  const selectedTechCubeId = usePortfolioStore(
+    (state) => state.selectedTechCubeId
+  );
+  const setSelectedTechCubeId = usePortfolioStore(
+    (state) => state.setSelectedTechCubeId
+  );
+  const techs = usePortfolioStore((state) => state.techsData);
 
   const selectedTech = useMemo(() => {
     return techs.find((tech) => tech._id === selectedTechCubeId);
   }, [techs, selectedTechCubeId]);
-
-  count++;
-  console.log("component render number: ", count);
 
   if (techs.length > 0)
     return (

@@ -162,9 +162,10 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const timeRef = useRef<number>(0);
   const colors = useColors();
-  const { hoveredContactLink } = usePortfolioStore((state) => ({
-    hoveredContactLink: state.hoveredContactLink,
-  }));
+
+  const hoveredContactLink = usePortfolioStore(
+    (state) => state.hoveredContactLink
+  );
 
   const modelRotation = useMemo(() => {
     switch (hoveredContactLink) {

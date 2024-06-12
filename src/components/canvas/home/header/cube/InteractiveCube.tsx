@@ -22,18 +22,17 @@ export function InteractiveCube({
 }) {
   const cubePhysicsApi = useRef<RapierRigidBody>(null);
   const cubeRef = useRef<THREE.Group>(null);
-  const {
-    viewportSize: { height: viewportHeight },
-    worksScrollProgress,
-    contactScrollProgress,
-    hoveredWorkIndex,
-  } = usePortfolioStore(
-    useShallow((state) => ({
-      viewportSize: state.viewportSize,
-      worksScrollProgress: state.worksScrollProgress,
-      contactScrollProgress: state.contactScrollProgress,
-      hoveredWorkIndex: state.hoveredWorkIndex,
-    }))
+  const { height: viewportHeight } = usePortfolioStore(
+    (state) => state.viewportSize
+  );
+  const worksScrollProgress = usePortfolioStore(
+    useShallow((state) => state.worksScrollProgress)
+  );
+  const contactScrollProgress = usePortfolioStore(
+    useShallow((state) => state.contactScrollProgress)
+  );
+  const hoveredWorkIndex = usePortfolioStore(
+    useShallow((state) => state.hoveredWorkIndex)
   );
 
   const worksSceneIsActive = useMemo(() => {
@@ -46,21 +45,13 @@ export function InteractiveCube({
 
   const sceneIsActive = worksSceneIsActive || contactSceneIsActive;
 
-  const sceneTargetPosition = useMemo(() => {
-    const worksSceneTargetPosition: [number, number, number] = [
-      0,
-      -viewportHeight + worksScrollProgress * viewportHeight * 2,
-      2.5,
-    ];
-    const contactSceneTargetPosition: [number, number, number] = [
-      0,
+  const sceneTargetPosition = useMemo<[number, number, number]>(() => {
+    const yWorks = -viewportHeight + worksScrollProgress * viewportHeight * 2;
+    const yContact =
       -0.9 * viewportHeight +
-        Math.min(contactScrollProgress, 0.5) * viewportHeight * 2,
-      2.5,
-    ];
-    return worksSceneIsActive
-      ? worksSceneTargetPosition
-      : contactSceneTargetPosition;
+      Math.min(contactScrollProgress, 0.5) * viewportHeight * 2;
+
+    return [0, worksSceneIsActive ? yWorks : yContact, 2.5];
   }, [
     viewportHeight,
     worksScrollProgress,
@@ -86,18 +77,15 @@ export function InteractiveCube({
   //Resetting the cube position on window resize
   useEffect(() => {
     const handleResize = () => {
-      cubePhysicsApi.current?.setTranslation(
-        currentPosition.set(0, 0, 2.5),
-        true
-      );
+      const newPosition = new THREE.Vector3(0, 0, 2.5);
+      cubePhysicsApi.current?.setTranslation(newPosition, true);
     };
-
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [currentPosition]);
+  }, []);
 
   //Setting cube position and applying impulse on work and contact section exit
   useEffect(() => {

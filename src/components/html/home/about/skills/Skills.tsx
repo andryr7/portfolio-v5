@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Skills.module.css";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { Skill } from "@/types/skill";
@@ -12,7 +12,7 @@ function SkillCard({
   index: number;
   skill: Skill;
   selected: boolean;
-  setSelectedSkill: any;
+  setSelectedSkill: Dispatch<SetStateAction<number>>;
 }) {
   return (
     <div
@@ -43,10 +43,7 @@ function SkillCard({
 
 export function Skills() {
   const [selectedSkill, setSelectedSkill] = useState(0);
-
-  const { skills } = usePortfolioStore((state) => ({
-    skills: state.skillsData,
-  }));
+  const skills = usePortfolioStore((state) => state.skillsData);
 
   if (skills.length > 0)
     return (

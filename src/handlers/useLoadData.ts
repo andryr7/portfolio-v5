@@ -1,11 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { usePortfolioStore } from "./usePortfolioStore";
+import { useShallow } from "zustand/react/shallow";
 
 export function useLoadData() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const setWorksData = usePortfolioStore((state) => state.setWorksData);
-  const setSkillsData = usePortfolioStore((state) => state.setSkillsData);
-  const setTechsData = usePortfolioStore((state) => state.setTechsData);
+  const { setWorksData, setSkillsData, setTechsData } = usePortfolioStore(
+    useShallow((state) => ({
+      setWorksData: state.setWorksData,
+      setSkillsData: state.setSkillsData,
+      setTechsData: state.setTechsData,
+    }))
+  );
 
   const fetchData = useCallback(
     async (

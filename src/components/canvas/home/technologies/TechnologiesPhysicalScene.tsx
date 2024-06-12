@@ -1,21 +1,15 @@
-import { Physics } from "@react-three/rapier";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { TechnologyCube } from "./TechnologyCube";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
-import { useShallow } from "zustand/react/shallow";
 
 export function TechnologiesPhysicalScene() {
-  const { techs } = usePortfolioStore(
-    useShallow((state) => ({
-      techs: state.techsData.filter((tech) => tech.showcased === true),
-    }))
+  const setDraggedTechCubeId = usePortfolioStore(
+    (state) => state.setDraggedTechCubeId
   );
-
-  //Handling cube dragging state
-  const { setDraggedTechCubeId } = usePortfolioStore(
-    useShallow((state) => ({
-      setDraggedTechCubeId: state.setDraggedTechCubeId,
-    }))
+  const techs = usePortfolioStore((state) => state.techsData);
+  const showcasedTechs = useMemo(
+    () => techs.filter((tech) => tech.showcased),
+    [techs]
   );
 
   //Handling mouse drops
@@ -24,27 +18,19 @@ export function TechnologiesPhysicalScene() {
     return document.removeEventListener("mouseup", () =>
       setDraggedTechCubeId(null)
     );
-  });
-
-  // function getRandomInt(min, max) {
-  //   min = Math.ceil(min);
-  //   max = Math.floor(max);
-  //   return Math.floor(Math.random() * (max - min + 1)) + min;
-  // }
+  }, [setDraggedTechCubeId]);
 
   return (
     <>
-      <Physics gravity={[0, 0, 0]}>
-        <group>
-          {techs.map((tech, index) => (
-            <TechnologyCube
-              key={tech._id}
-              position={[index * 2, index * 1, index * 0.5]}
-              tech={tech}
-            />
-          ))}
-        </group>
-      </Physics>
+      <group>
+        {showcasedTechs.map((tech, index) => (
+          <TechnologyCube
+            key={tech._id}
+            position={[index, index % 2, index / 2]}
+            tech={tech}
+          />
+        ))}
+      </group>
     </>
   );
 }

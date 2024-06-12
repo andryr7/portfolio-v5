@@ -6,6 +6,7 @@ import {
   Lightformer,
   PerspectiveCamera,
 } from "@react-three/drei";
+import { Physics } from "@react-three/rapier";
 import { Suspense } from "react";
 
 export function TechnologiesScene() {
@@ -60,7 +61,9 @@ export function TechnologiesScene() {
 
       {/* Physical scene scene */}
       <Suspense fallback={null}>
-        <TechnologiesPhysicalScene />
+        <Physics gravity={[0, 0, 0]}>
+          <TechnologiesPhysicalScene />
+        </Physics>
       </Suspense>
 
       {/* Scene bounds */}
