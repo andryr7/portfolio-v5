@@ -3,8 +3,8 @@ import { useMemo, useRef } from "react";
 import { easing } from "maath";
 import { useTexture } from "@react-three/drei";
 import { Work } from "@/types/work";
-import { useColors } from "@/handlers/useColors";
 import { ProjectShaderMaterial } from "./ProjectShaderMaterial";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 extend({ ProjectShaderMaterial });
 
@@ -19,7 +19,7 @@ export function ProjectCubeFace({
   highlighted,
   work,
 }: ProjectCubeFaceProps) {
-  const colors = useColors();
+  const colors = usePortfolioStore((state) => state.colors);
   const ref = useRef<any>(null);
   const texture = useTexture("/images/works/" + work.previewImagePath);
 

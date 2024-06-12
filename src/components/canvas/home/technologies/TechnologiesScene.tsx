@@ -1,5 +1,5 @@
 import { TechnologiesPhysicalScene } from "@/components/canvas/home/technologies/TechnologiesPhysicalScene";
-import { useColors } from "@/handlers/useColors";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import {
   Bounds,
   Environment,
@@ -10,7 +10,7 @@ import { Physics } from "@react-three/rapier";
 import { Suspense } from "react";
 
 export function TechnologiesScene() {
-  const colors = useColors();
+  const colors = usePortfolioStore((state) => state.colors);
 
   return (
     <>

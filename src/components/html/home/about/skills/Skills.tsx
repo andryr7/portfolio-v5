@@ -20,7 +20,10 @@ function SkillCard({
       style={{ width: selected ? "75%" : "12.5%" }}
       onClick={() => setSelectedSkill(index)}
     >
-      <div className={styles.skillTitle} style={{ opacity: selected ? 0 : 1 }}>
+      <div
+        className={styles.skillTitle}
+        style={{ left: selected ? "-50%" : "50%" }}
+      >
         {skill.name}
       </div>
       <div

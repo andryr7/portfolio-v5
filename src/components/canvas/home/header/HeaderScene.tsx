@@ -5,11 +5,9 @@ import { Suspense, useRef } from "react";
 import { TextShaderMaterial } from "./TextShaderMaterial";
 import spacemono from "@/assets/fonts/space-mono.ttf";
 import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
-import { useColors } from "@/handlers/useColors";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { geometry } from "maath";
 import { PhysicsScene } from "./physics/PhysicsScene";
-import { useShallow } from "zustand/react/shallow";
 
 extend({ TextShaderMaterial });
 extend(geometry);
@@ -24,17 +22,15 @@ declare global {
 }
 
 export function HeaderScene() {
-  const colors = useColors();
+  const colors = usePortfolioStore((state) => state.colors);
   const testRef = useRef(null);
 
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
-    useShallow((state) => state.viewportSize)
+    (state) => state.viewportSize
   );
 
-  const { worksScrollProgress } = usePortfolioStore(
-    useShallow((state) => ({
-      worksScrollProgress: state.worksScrollProgress,
-    }))
+  const worksScrollProgress = usePortfolioStore(
+    (state) => state.worksScrollProgress
   );
 
   useFrame((state) => {

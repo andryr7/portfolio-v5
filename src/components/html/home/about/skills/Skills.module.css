@@ -36,7 +36,7 @@
   text-align: center;
   transform-origin: left top;
   font-size: var(--font-size-s);
-  transition: opacity var(--transition-normal);
+  transition: opacity var(--transition-normal), left var(--transition-normal);
 }
 
 .skill-content-container {

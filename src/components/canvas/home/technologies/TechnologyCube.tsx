@@ -5,7 +5,6 @@ import { ThreeEvent, useFrame } from "@react-three/fiber";
 import { Box, Outlines, useCursor, useTexture } from "@react-three/drei";
 import { RapierRigidBody, RigidBody, quat } from "@react-three/rapier";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
-import { useColors } from "@/handlers/useColors";
 import { useShallow } from "zustand/react/shallow";
 
 interface TechnologyCubeProps {
@@ -19,7 +18,7 @@ export function TechnologyCube({
 }: TechnologyCubeProps) {
   //Refs
   const physicsApiRef = useRef<RapierRigidBody | null>(null);
-  const colors = useColors();
+  const colors = usePortfolioStore((state) => state.colors);
 
   // Cube state
   const [draggedCubeId, setDraggedCubeId, selectedTechId, setSelectedTechId] =

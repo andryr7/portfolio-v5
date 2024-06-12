@@ -1,4 +1,3 @@
-import { useColors } from "@/handlers/useColors";
 import { RoundedBox, Text } from "@react-three/drei";
 import spacemono from "@/assets/fonts/space-mono.ttf";
 import { useRef } from "react";
@@ -7,7 +6,7 @@ import { easing } from "maath";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 export function ToyCube({ visible }: { visible: boolean }) {
-  const colors = useColors();
+  const colors = usePortfolioStore((state) => state.colors);
   const cubeMaterialRef = useRef(null);
   const textMaterialRef = useRef(null);
   const { worksScrollProgress } = usePortfolioStore((state) => ({

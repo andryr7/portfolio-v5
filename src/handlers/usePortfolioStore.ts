@@ -3,9 +3,17 @@ import { Skill } from "@/types/skill";
 import { Tech } from "@/types/tech";
 import { Work } from "@/types/work";
 
+type Colors = {
+  main: string;
+  accent: string;
+  backgroundOne: string;
+  backgroundTwo: string;
+};
+
 type State = {
-  //Theme
+  //Theme and colors
   isDarkTheme: boolean;
+  colors: Colors;
   // App data
   worksData: Work[];
   skillsData: Skill[];
@@ -26,8 +34,9 @@ type State = {
 };
 
 type Actions = {
-  //Theme setter
+  //Theme and colors setter
   setIsDarkTheme: (newState: boolean) => void;
+  setColors: (newColors: Colors) => void;
   //App data setters
   setWorksData: (worksData: Work[]) => void;
   setSkillsData: (skillsData: Skill[]) => void;
@@ -49,6 +58,13 @@ type Actions = {
 export const usePortfolioStore = create<State & Actions>()((set) => ({
   isDarkTheme: false,
   setIsDarkTheme: (newState) => set(() => ({ isDarkTheme: newState })),
+  colors: {
+    main: "#000000",
+    accent: "#000000",
+    backgroundOne: "#000000",
+    backgroundTwo: "#000000",
+  },
+  setColors: (newColors: Colors) => set(() => ({ colors: newColors })),
   worksData: [],
   setWorksData: (worksData) => set(() => ({ worksData: worksData })),
   skillsData: [],
