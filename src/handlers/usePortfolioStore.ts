@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { Skill } from "@/types/skill";
 import { Tech } from "@/types/tech";
 import { Work } from "@/types/work";
+import { lightColors } from "./useTheme";
 
 type Colors = {
   main: string;
@@ -58,12 +59,7 @@ type Actions = {
 export const usePortfolioStore = create<State & Actions>()((set) => ({
   isDarkTheme: false,
   setIsDarkTheme: (newState) => set(() => ({ isDarkTheme: newState })),
-  colors: {
-    main: "#000000",
-    accent: "#000000",
-    backgroundOne: "#000000",
-    backgroundTwo: "#000000",
-  },
+  colors: lightColors,
   setColors: (newColors: Colors) => set(() => ({ colors: newColors })),
   worksData: [],
   setWorksData: (worksData) => set(() => ({ worksData: worksData })),

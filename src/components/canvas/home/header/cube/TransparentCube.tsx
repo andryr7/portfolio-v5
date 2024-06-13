@@ -7,13 +7,10 @@ import { useEffect, useMemo, useRef } from "react";
 export function TransparentCube() {
   const materialRef = useRef<any>(null);
 
-  const { worksScrollProgress } = usePortfolioStore((state) => ({
-    worksScrollProgress: state.worksScrollProgress,
-  }));
-
-  const { hoveredWorkIndex } = usePortfolioStore((state) => ({
-    hoveredWorkIndex: state.hoveredWorkIndex,
-  }));
+  const worksScrollProgress = usePortfolioStore(
+    (state) => state.worksScrollProgress
+  );
+  const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
 
   const worksSceneIsActive = useMemo(() => {
     return worksScrollProgress >= 0.25 && worksScrollProgress <= 0.75;

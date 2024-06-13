@@ -51,5 +51,5 @@ export function useLoadData() {
     getData();
   }, [getData]);
 
-  return { isLoading: isLoading };
+  return isLoading;
 }

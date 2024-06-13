@@ -1,53 +1,44 @@
 import { useCallback, useEffect } from "react";
 import { usePortfolioStore } from "./usePortfolioStore";
-import { useLocalStorage, useMediaQuery } from "usehooks-ts";
+
+export const lightColors = {
+  main: "#0e0e0e",
+  accent: "green",
+  backgroundOne: "#e9e9e9",
+  backgroundTwo: "#d9d9d9",
+};
+
+const darkColors = {
+  main: "#d9d9d9",
+  accent: "darkorange",
+  backgroundOne: "#0e0e0e",
+  backgroundTwo: "#2c2c2c",
+};
 
 export function useTheme() {
-  const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
-  const setIsDarkTheme = usePortfolioStore((state) => state.setIsDarkTheme);
   const setColors = usePortfolioStore((state) => state.setColors);
-  const browserPreference = useMediaQuery("(prefers-color-scheme: dark)");
-  const [storedThemePreference, setStoredThemePreference] = useLocalStorage(
-    "themePreference",
-    browserPreference ? "dark" : "light"
+  const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
+  const theme = isDarkTheme ? "dark" : "light";
+
+  const updateStateColors = useCallback(
+    (theme: "dark" | "light") => {
+      setColors(theme === "dark" ? darkColors : lightColors);
+    },
+    [setColors]
   );
 
-  //Handling initial stored and browser preference
-  useEffect(() => {
-    if (storedThemePreference === "dark") {
-      setIsDarkTheme(true);
+  const updateCssColors = (theme: "dark" | "light") => {
+    if (theme === "dark") {
+      !document.body.classList.contains("dark") &&
+        document.body.classList.add("dark");
+    } else if (theme === "light") {
+      document.body.classList.contains("dark") &&
+        document.body.classList.remove("dark");
     }
-  }, [storedThemePreference, setIsDarkTheme]);
-
-  // Handling css and local storage modifications
-  useEffect(() => {
-    if (isDarkTheme) {
-      document.body.classList.add("dark");
-      setStoredThemePreference(() => "dark");
-    } else {
-      document.body.classList.remove("dark");
-      setStoredThemePreference(() => "light");
-    }
-  }, [isDarkTheme, setStoredThemePreference]);
-
-  const updateColors = useCallback(() => {
-    const style = getComputedStyle(document.body);
-    setColors({
-      main: style.getPropertyValue("--color-main"),
-      accent: style.getPropertyValue("--color-accent"),
-      backgroundOne: style.getPropertyValue("--color-background-one"),
-      backgroundTwo: style.getPropertyValue("--color-background-two"),
-    });
-  }, [setColors]);
-
-  //Handling color storage
-  useEffect(() => {
-    updateColors();
-  }, [isDarkTheme, setColors, updateColors]);
+  };
 
   useEffect(() => {
-    updateColors();
-  }, [updateColors]);
-
-  return { isDarkTheme, setIsDarkTheme };
+    updateStateColors(theme);
+    updateCssColors(theme);
+  }, [theme, updateStateColors]);
 }

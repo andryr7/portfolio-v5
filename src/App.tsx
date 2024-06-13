@@ -17,7 +17,7 @@ export default function App() {
   const envMode = import.meta.env.MODE;
   const appContainerRef = useRef<any>(null);
   const lenisRef = useRef<any>(null);
-  const { isLoading } = useLoadData();
+  const isLoading = useLoadData();
   useTheme();
 
   useEffect(() => {
@@ -34,17 +34,22 @@ export default function App() {
 
   return (
     <ReactLenis root ref={lenisRef} autoRaf={false}>
-      {isLoading && "LOADING"}
       <div id="app-container" ref={appContainerRef}>
         <Frame />
 
         <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/work/:name">
-            <Work />
-          </Route>
-          {/* Default route in a switch */}
-          <Route>404: No such page!</Route>
+          {isLoading ? (
+            "LOADING"
+          ) : (
+            <>
+              <Route path="/" component={Home} />
+              <Route path="/work/:name">
+                <Work />
+              </Route>
+              {/* Default route in a switch */}
+              <Route>404: No such page!</Route>
+            </>
+          )}
         </Switch>
 
         {/* Three js canvas */}
