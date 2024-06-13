@@ -41,7 +41,7 @@
 
 .skill-content-container {
   box-sizing: border-box;
-  width: calc(60vw - 3rem);
+  width: calc(min(60vw, 1920 * 0.6) - 3rem);
   height: 100%;
   padding: 2rem;
   display: flex;
@@ -63,6 +63,7 @@
   width: 100%;
   gap: 1rem;
   justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .skill-item {

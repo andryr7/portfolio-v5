@@ -19,6 +19,7 @@ export function InteractiveCube({
   currentRotation = new THREE.Quaternion(),
   targetPosition = new THREE.Vector3(),
   targetRotation = new THREE.Quaternion(),
+  angle = new THREE.Euler(),
 }) {
   const cubePhysicsApi = useRef<RapierRigidBody>(null);
   const cubeRef = useRef<THREE.Group>(null);
@@ -59,7 +60,7 @@ export function InteractiveCube({
     worksSceneIsActive,
   ]);
 
-  const sceneTargetRotation = useMemo(() => {
+  const sceneTargetRotation = useMemo<[number, number, number]>(() => {
     switch (hoveredWorkIndex) {
       case 0:
         return [-Math.PI / 2, 0, 0];
@@ -113,8 +114,8 @@ export function InteractiveCube({
       //Calculating and applying rotation
       currentRotation.copy(cubePhysicsApi.current.rotation());
       worksSceneIsActive
-        ? targetRotation.setFromEuler(new THREE.Euler(...sceneTargetRotation))
-        : targetRotation.setFromEuler(new THREE.Euler(0, 0, 0));
+        ? targetRotation.setFromEuler(angle.set(...sceneTargetRotation))
+        : targetRotation.setFromEuler(angle.set(0, 0, 0));
       currentRotation.slerp(targetRotation, 0.1);
       cubePhysicsApi.current.setNextKinematicRotation(currentRotation);
     }

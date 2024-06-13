@@ -55,7 +55,7 @@ export function TransparentCube() {
           chromaticAberration={1}
           samples={4}
           resolution={2048}
-          backside
+          backside={!worksSceneIsActive}
           transparent
           ref={materialRef}
         />
