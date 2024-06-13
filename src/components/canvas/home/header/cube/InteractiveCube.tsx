@@ -75,6 +75,18 @@ export function InteractiveCube({
     }
   }, [hoveredWorkIndex]);
 
+  const toyCubeVisibility = useMemo(() => {
+    return (
+      !worksSceneIsActive && !contactSceneIsActive && worksScrollProgress > 0.5
+    );
+  }, [worksSceneIsActive, contactSceneIsActive, worksScrollProgress]);
+
+  const enabledCubeRotations = useMemo((): [boolean, boolean, boolean] => {
+    return worksScrollProgress > 0.5
+      ? [false, false, true]
+      : [true, true, true];
+  }, [worksScrollProgress]);
+
   //Resetting the cube position on window resize
   useEffect(() => {
     const handleResize = () => {
@@ -143,9 +155,7 @@ export function InteractiveCube({
       linearDamping={sceneIsActive ? 10 : 1}
       angularDamping={sceneIsActive ? 10 : 1}
       enabledTranslations={[true, true, false]}
-      enabledRotations={
-        worksScrollProgress > 0.5 ? [false, false, true] : [true, true, true]
-      }
+      enabledRotations={enabledCubeRotations}
       type={sceneIsActive ? "kinematicPosition" : "dynamic"}
       ref={cubePhysicsApi}
     >
@@ -158,13 +168,7 @@ export function InteractiveCube({
         <WorksCube />
 
         {/* 2d cube */}
-        <ToyCube
-          visible={
-            !worksSceneIsActive &&
-            !contactSceneIsActive &&
-            worksScrollProgress > 0.5
-          }
-        />
+        <ToyCube visible={toyCubeVisibility} />
 
         {/* 4d cube */}
         <Tesseract visible={contactSceneIsActive} />

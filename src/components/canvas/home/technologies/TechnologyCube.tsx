@@ -10,11 +10,21 @@ import { useShallow } from "zustand/react/shallow";
 interface TechnologyCubeProps {
   position?: [number, number, number];
   tech: Tech;
+  vec: THREE.Vector3;
+  vec2: THREE.Vector3;
+  vecOffset: THREE.Vector3;
+  currentRotation: THREE.Quaternion;
+  targetRotation: THREE.Quaternion;
 }
 
 export function TechnologyCube({
   position = [0, 0, 0],
   tech,
+  vec = new THREE.Vector3(),
+  vec2 = new THREE.Vector3(),
+  vecOffset = new THREE.Vector3(0, 0, 1.5),
+  currentRotation = new THREE.Quaternion(),
+  targetRotation = new THREE.Quaternion(),
 }: TechnologyCubeProps) {
   //Refs
   const physicsApiRef = useRef<RapierRigidBody | null>(null);
@@ -59,7 +69,7 @@ export function TechnologyCube({
     //Cube centering
     if (!isSelected) {
       physicsApiRef.current?.applyImpulse(
-        new THREE.Vector3()
+        vec
           .copy(physicsApiRef.current.translation())
           .negate()
           .multiplyScalar(0.2),
@@ -69,7 +79,6 @@ export function TechnologyCube({
 
     //Cube dragging
     if (isDragged) {
-      const vec2 = new THREE.Vector3();
       physicsApiRef.current?.applyImpulse(
         vec2.set(state.pointer.x * 0.5, state.pointer.y * 0.5, 0),
         true
@@ -79,16 +88,16 @@ export function TechnologyCube({
     //If the cube is selected, rotate it and center it
     if (isSelected) {
       //Cube translation
-      //Calculating the necessary translation
-      const offset = new THREE.Vector3(0, 0, 1.5);
-      const cubeTranslation = new THREE.Vector3()
-        .copy(physicsApiRef.current.translation())
-        .negate()
-        .multiplyScalar(0.2)
-        .add(offset);
 
       //Applying the translation
-      physicsApiRef.current?.applyImpulse(cubeTranslation, true);
+      physicsApiRef.current?.applyImpulse(
+        vec
+          .copy(physicsApiRef.current.translation())
+          .negate()
+          .multiplyScalar(0.2)
+          .add(vecOffset),
+        true
+      );
 
       //Cube rotation
       //Calculating the necessary rotation
@@ -98,8 +107,7 @@ export function TechnologyCube({
         z = 0,
         w = 1,
       } = physicsApiRef.current?.rotation() || {};
-      const currentRotation = new THREE.Quaternion(x, y, z, w);
-      const targetRotation = new THREE.Quaternion();
+      currentRotation.set(x, y, z, w);
 
       //Smoothing the rotation
       const slerpFactor = 0.5; // Adjust this value for the speed of rotation
