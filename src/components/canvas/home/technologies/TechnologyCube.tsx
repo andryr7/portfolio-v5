@@ -10,11 +10,11 @@ import { useShallow } from "zustand/react/shallow";
 interface TechnologyCubeProps {
   position?: [number, number, number];
   tech: Tech;
-  vec: THREE.Vector3;
-  vec2: THREE.Vector3;
-  vecOffset: THREE.Vector3;
-  currentRotation: THREE.Quaternion;
-  targetRotation: THREE.Quaternion;
+  vec?: THREE.Vector3;
+  vec2?: THREE.Vector3;
+  vecOffset?: THREE.Vector3;
+  currentRotation?: THREE.Quaternion;
+  targetRotation?: THREE.Quaternion;
 }
 
 export function TechnologyCube({

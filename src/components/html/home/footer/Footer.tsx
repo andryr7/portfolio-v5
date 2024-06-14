@@ -12,8 +12,12 @@ export function Footer() {
         <a onClick={() => lenis?.scrollTo(0)}>{"<- "}back to the top</a>
       </div>
       <div className={styles.marqueeContainer}>
-        <span className={styles.marquee}>©{year} - Andry Ratsimba&nbsp; </span>
-        <span className={styles.marquee}>©{year} - Andry Ratsimba&nbsp; </span>
+        <div className={styles.nameContainer}>
+          Andry
+          <br />
+          Ratsimba
+        </div>
+        <div className={styles.copyrightContainer}>©{year}</div>
       </div>
     </div>
   );

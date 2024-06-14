@@ -1,7 +1,7 @@
 import { Environment, OrthographicCamera, Text } from "@react-three/drei";
 import { extend, useFrame } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useMemo } from "react";
 import { TextShaderMaterial } from "./TextShaderMaterial";
 import spacemono from "@/assets/fonts/space-mono.ttf";
 import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
