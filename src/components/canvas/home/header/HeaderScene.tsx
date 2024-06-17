@@ -1,15 +1,12 @@
 import { Environment, OrthographicCamera, Text } from "@react-three/drei";
-import { extend, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { Suspense, useMemo } from "react";
-import { TextShaderMaterial } from "./TextShaderMaterial";
 import spacemono from "@/assets/fonts/space-mono.ttf";
 import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { PhysicsScene } from "./physics/PhysicsScene";
-import * as THREE from "three";
-
-extend({ TextShaderMaterial });
+import { HeaderBackground } from "../HeaderBackground";
 
 export function HeaderScene() {
   const colors = usePortfolioStore((state) => state.colors);
@@ -73,7 +70,7 @@ export function HeaderScene() {
           -viewportHeight / 2 + viewportWidth / 30,
           0,
         ]}
-        scale={Math.min(viewportWidth / 10, viewportHeight / 5)}
+        scale={Math.min(viewportWidth / 8.5, viewportHeight / 5)}
         visible={heroVisibility}
       >
         <Text
@@ -92,28 +89,15 @@ export function HeaderScene() {
           anchorY="bottom"
           position={[0, 0, 0]}
           lineHeight={1}
-          color={colors.main}
-          fillOpacity={0}
           strokeWidth={0.01}
           strokeColor={colors.main}
         >
           Independent{"\n"}Web developer
+          {/* <meshBasicMaterial color={colors.backgroundOne} toneMapped={false} /> */}
         </Text>
       </group>
 
-      {/* Shader background */}
-      <mesh
-        scale={[viewportWidth, viewportHeight, 1]}
-        // onPointerMove={handleMove}
-        visible={heroVisibility}
-      >
-        <planeGeometry args={[1, 1, 1, 1]} />
-        <textShaderMaterial
-          key={TextShaderMaterial.key}
-          darkcolor={new THREE.Color(colors.backgroundOne)}
-          lightcolor={new THREE.Color(colors.backgroundTwo)}
-        />
-      </mesh>
+      <HeaderBackground visible={heroVisibility} />
 
       {/* Works background */}
       <group position={worksBackgroundPosition}>
