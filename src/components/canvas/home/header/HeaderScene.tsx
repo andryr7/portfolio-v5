@@ -7,6 +7,7 @@ import spacemono from "@/assets/fonts/space-mono.ttf";
 import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { PhysicsScene } from "./physics/PhysicsScene";
+import * as THREE from "three";
 
 extend({ TextShaderMaterial });
 
@@ -107,12 +108,11 @@ export function HeaderScene() {
         visible={heroVisibility}
       >
         <planeGeometry args={[1, 1, 1, 1]} />
-        <meshBasicMaterial color={colors.backgroundOne} toneMapped={false} />
-        {/* <textShaderMaterial
+        <textShaderMaterial
           key={TextShaderMaterial.key}
           darkcolor={new THREE.Color(colors.backgroundOne)}
           lightcolor={new THREE.Color(colors.backgroundTwo)}
-        /> */}
+        />
       </mesh>
 
       {/* Works background */}

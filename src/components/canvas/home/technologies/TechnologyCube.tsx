@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { Tech } from "@/types/tech";
 import * as THREE from "three";
 import { ThreeEvent, useFrame } from "@react-three/fiber";
@@ -48,19 +48,44 @@ export function TechnologyCube({
     () => selectedTechId === tech._id,
     [selectedTechId, tech]
   );
-
+  //Hover handling
+  const [hovered, hover] = useState<boolean>(false);
+  useCursor(hovered || draggedCubeId !== null, "grab");
   //Texture
   const texture = useTexture(`images/techs/${tech.imageUrl}`);
   texture.center = new THREE.Vector2(0.5, 0.5);
 
-  //Hover handling
-  const [hovered, hover] = useState<boolean>(false);
-  useCursor(hovered || draggedCubeId !== null, "grab");
+  const handlePointerEnter = useCallback((event: ThreeEvent<PointerEvent>) => {
+    //Prevent the pointer hover from affecting underlying cubes
+    event.stopPropagation();
+    hover(true);
+  }, []);
 
-  //Waking up the rigid body if anything changes
-  useEffect(() => {
-    physicsApiRef.current?.wakeUp();
-  }, [selectedTechId, draggedCubeId]);
+  const handlePointerLeave = useCallback((event: ThreeEvent<PointerEvent>) => {
+    //Prevent the pointer hover from affecting underlying cubes
+    event.stopPropagation();
+    hover(false);
+  }, []);
+
+  const handlePointerDown = useCallback(
+    (event: ThreeEvent<PointerEvent>) => {
+      //Prevent the drag from affecting underlying cubes
+      event.stopPropagation();
+      setDraggedCubeId(tech._id);
+    },
+    [setDraggedCubeId, tech]
+  );
+
+  const handleClick = useCallback(
+    (event: ThreeEvent<MouseEvent>) => {
+      event.stopPropagation();
+      //Ensuring click/drag accuracy
+      if (event.delta < 10) {
+        setSelectedTechId(selectedTechId === tech._id ? null : tech._id);
+      }
+    },
+    [selectedTechId, setSelectedTechId, tech._id]
+  );
 
   useFrame((state) => {
     //Do nothing if the ref is not yet assigned
@@ -124,46 +149,14 @@ export function TechnologyCube({
     }
   });
 
-  const handlePointerEnter = useCallback((event: ThreeEvent<PointerEvent>) => {
-    //Prevent the pointer hover from affecting underlying cubes
-    event.stopPropagation();
-    hover(true);
-  }, []);
-
-  const handlePointerLeave = useCallback((event: ThreeEvent<PointerEvent>) => {
-    //Prevent the pointer hover from affecting underlying cubes
-    event.stopPropagation();
-    hover(false);
-  }, []);
-
-  const handlePointerDown = useCallback(
-    (event: ThreeEvent<PointerEvent>) => {
-      //Prevent the drag from affecting underlying cubes
-      event.stopPropagation();
-      setDraggedCubeId(tech._id);
-    },
-    [setDraggedCubeId, tech]
-  );
-
-  const handleClick = useCallback(
-    (event: ThreeEvent<MouseEvent>) => {
-      event.stopPropagation();
-      //Ensuring click/drag accuracy
-      if (event.delta < 10) {
-        setSelectedTechId(selectedTechId === tech._id ? null : tech._id);
-      }
-    },
-    [selectedTechId, setSelectedTechId, tech._id]
-  );
-
   return (
     <RigidBody
+      ref={physicsApiRef}
+      position={position}
+      colliders={"cuboid"}
+      friction={0.1}
       linearDamping={isSelected ? 15 : 4}
       angularDamping={isSelected ? 15 : 1}
-      friction={0.1}
-      ref={physicsApiRef}
-      colliders={"cuboid"}
-      position={position}
     >
       <mesh
         castShadow

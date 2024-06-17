@@ -8,11 +8,11 @@ import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { easing } from "maath";
-import { Tesseract } from "./Tesseract";
-import { ToyCube } from "./ToyCube";
+import { Tesseract } from "../../contact/Tesseract";
+import { OverlayCube } from "./OverlayCube";
 import { TransparentCube } from "./TransparentCube";
-import { WorksCube } from "./WorksCube";
 import { useShallow } from "zustand/react/shallow";
+import { WorksCube } from "../../works/WorksCube";
 
 export function InteractiveCube({
   currentPosition = new THREE.Vector3(),
@@ -168,7 +168,7 @@ export function InteractiveCube({
         <WorksCube />
 
         {/* 2d cube */}
-        <ToyCube visible={toyCubeVisibility} />
+        <OverlayCube visible={toyCubeVisibility} />
 
         {/* 4d cube */}
         <Tesseract visible={contactSceneIsActive} />

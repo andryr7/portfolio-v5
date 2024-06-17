@@ -1,10 +1,10 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { Box } from "@react-three/drei";
-import { ProjectCubeFace } from "./ProjectCubeFace";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import { easing } from "maath";
 import { useShallow } from "zustand/react/shallow";
+import { ProjectCubeFace } from "./ProjectCubeFace";
 
 export function WorksCube() {
   const topFaceRef = useRef(null);

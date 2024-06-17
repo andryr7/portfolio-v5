@@ -5,7 +5,7 @@ import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
-export function ToyCube({ visible }: { visible: boolean }) {
+export function OverlayCube({ visible }: { visible: boolean }) {
   const colors = usePortfolioStore((state) => state.colors);
   const cubeMaterialRef = useRef(null);
   const textMaterialRef = useRef(null);
