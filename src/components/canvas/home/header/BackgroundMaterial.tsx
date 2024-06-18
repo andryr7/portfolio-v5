@@ -64,8 +64,7 @@ export const BackgroundMaterial = shaderMaterial(
     }
 
     //Distort function
-    vec2 distort(in vec2 uv, float time, float amount) {    
-      // vec2 uv2 = uv + vec2(time);
+    vec2 distort(in vec2 uv, float time, float amount) {
       vec2 uv2 = uv;
       uv2.y -= time;
       uv2 *= NOISE_SCALE;  //scale noise  
@@ -83,7 +82,6 @@ export const BackgroundMaterial = shaderMaterial(
       float strength = step(0.9 - (displace * 0.45), mod(distortedvUv.x * 75.0, 1.));
       strength *= step(0.9 - (displace * 0.45), mod(distortedvUv.y * 75.0, 1.));
       
-
       vec3 col = mix(darkcolor, lightcolor, strength);
 
       gl_FragColor = vec4(col, 1.0);

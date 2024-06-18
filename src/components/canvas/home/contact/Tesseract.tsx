@@ -1,7 +1,7 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { ReactThreeFiber, extend, useFrame } from "@react-three/fiber";
 import { easing } from "maath";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
 extend({ Line_: THREE.Line });
@@ -161,6 +161,9 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const timeRef = useRef<number>(0);
   const colors = usePortfolioStore((state) => state.colors);
+  const contactScrollProgress = usePortfolioStore(
+    (state) => state.contactScrollProgress
+  );
 
   const hoveredContactLink = usePortfolioStore(
     (state) => state.hoveredContactLink
@@ -218,25 +221,25 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
           line.geometry.attributes.position.array = newLineCoords;
           line.geometry.attributes.position.needsUpdate = true;
         });
-
-        //Mouse rotation animation
-        if (meshRef.current !== null) {
-          easing.damp(
-            meshRef.current.rotation,
-            "x",
-            modelRotation.x,
-            0.25,
-            delta
-          );
-          easing.damp(
-            meshRef.current.rotation,
-            "y",
-            modelRotation.y,
-            0.25,
-            delta
-          );
-        }
       }
+    }
+
+    //Tesseract rotation animation
+    if (meshRef.current !== null) {
+      easing.damp(
+        meshRef.current.rotation,
+        "x",
+        visible ? modelRotation.x : 0,
+        0.25,
+        delta
+      );
+      easing.damp(
+        meshRef.current.rotation,
+        "y",
+        visible ? modelRotation.y : Math.PI / 2,
+        0.25,
+        delta
+      );
     }
   });
 

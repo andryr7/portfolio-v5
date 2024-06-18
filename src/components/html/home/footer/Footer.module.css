@@ -10,6 +10,7 @@
   align-items: center;
   font-family: var(--font-title);
   overflow: hidden;
+  padding-bottom: 20px;
 }
 
 .links-container {
@@ -48,10 +49,10 @@
 }
 
 .name-container {
-  font-size: 6vh;
+  font-size: 5vw;
 }
 
 .copyright-container {
-  font-size: 33vh;
+  font-size: 5vw;
   line-height: 83%;
 }

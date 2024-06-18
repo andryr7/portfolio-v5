@@ -47,7 +47,7 @@ export default function App() {
                 <Work />
               </Route>
               {/* Default route in a switch */}
-              <Route>404: No such page!</Route>
+              {/* <Route>404: No such page!</Route> */}
             </>
           )}
         </Switch>
