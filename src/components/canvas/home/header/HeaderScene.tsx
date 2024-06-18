@@ -89,6 +89,7 @@ export function HeaderScene() {
           anchorY="bottom"
           position={[0, 0, 0]}
           lineHeight={1}
+          fillOpacity={0}
           strokeWidth={0.01}
           strokeColor={colors.main}
         >

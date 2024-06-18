@@ -7,7 +7,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      textShaderMaterial: ReactThreeFiber.Object3DNode<
+      backgroundMaterial: ReactThreeFiber.Object3DNode<
         THREE.ShaderMaterial & {
           key: string;
           darkcolor: THREE.Color;
@@ -16,13 +16,13 @@ declare global {
           uTime: number;
           map: THREE.Texture;
         },
-        typeof TextShaderMaterial
+        typeof BackgroundMaterial
       >;
     }
   }
 }
 
-export const TextShaderMaterial = shaderMaterial(
+export const BackgroundMaterial = shaderMaterial(
   {
     map: null,
     darkcolor: new Color("black"),
@@ -46,7 +46,7 @@ export const TextShaderMaterial = shaderMaterial(
     uniform vec3 darkcolor;
     uniform vec3 lightcolor;
     uniform float uTime;
-    const float NOISE_SCALE = 1.8;
+    const float NOISE_SCALE = 7.;
 
     //Hash function
     float hashV(vec2 p) {
@@ -74,14 +74,14 @@ export const TextShaderMaterial = shaderMaterial(
     }
 
     void main() {
-      // vec2 distortedvUv;
-      // distortedvUv = distort(vUv, uTime / 2.0, .2);
+      vec2 distortedvUv;
+      distortedvUv = distort(vUv, uTime / 2.0, 0.01);
 
       float displace = texture2D(map, vUv).r;
 
       //Square grid pattern
-      float strength = step(0.9 - (displace * 0.1), mod(vUv.x * 25.0, 1.));
-      strength *= step(0.9 - (displace * 0.1), mod(vUv.y * 25.0, 1.));
+      float strength = step(0.9 - (displace * 0.45), mod(distortedvUv.x * 75.0, 1.));
+      strength *= step(0.9 - (displace * 0.45), mod(distortedvUv.y * 75.0, 1.));
       
 
       vec3 col = mix(darkcolor, lightcolor, strength);

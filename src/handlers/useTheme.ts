@@ -3,14 +3,14 @@ import { usePortfolioStore } from "./usePortfolioStore";
 
 export const lightColors = {
   main: "#0e0e0e",
-  accent: "green",
+  accent: "#d9d9d9",
   backgroundOne: "#e9e9e9",
   backgroundTwo: "#d9d9d9",
 };
 
 const darkColors = {
   main: "#d9d9d9",
-  accent: "darkorange",
+  accent: "grey",
   backgroundOne: "#0e0e0e",
   backgroundTwo: "#2c2c2c",
 };
