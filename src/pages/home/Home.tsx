@@ -120,6 +120,7 @@ export function Home() {
           <WorksSection />
         </section>
       </div>
+      <a id={"aboutanchor"} className={styles.aboutAnchor} />
       <main className={styles.mainContainer} id="main">
         <section style={{ position: "relative" }}>
           <article className={styles.sectionContainer} id="about">

@@ -11,8 +11,6 @@ function CloseMenuButton({ onClick }: { onClick: () => void }) {
 }
 
 function MenuItem({ target }: { target: string }) {
-  const lenis = useLenis();
-
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     lenis?.scrollTo("#" + target);
@@ -27,9 +25,15 @@ function MenuItem({ target }: { target: string }) {
 
 export function Menu() {
   const [opened, open] = useState<boolean>(false);
+  const lenis = useLenis();
 
   const handleClick = () => {
     open((c) => !c);
+  };
+
+  const handleLinkClick = (e: React.MouseEvent, target: string) => {
+    e.preventDefault();
+    lenis?.scrollTo("#" + target);
   };
 
   return (
@@ -38,9 +42,27 @@ export function Menu() {
         <span>2024 portfolio</span>
         <CloseMenuButton onClick={handleClick} />
       </div>
-      <MenuItem target="works" />
-      <MenuItem target="about" />
-      <MenuItem target="contact" />
+      <a
+        className={styles.menuItem}
+        href=""
+        onClick={(e) => handleLinkClick(e, "works")}
+      >
+        works
+      </a>
+      <a
+        className={styles.menuItem}
+        href=""
+        onClick={(e) => handleLinkClick(e, "aboutanchor")}
+      >
+        about
+      </a>
+      <a
+        className={styles.menuItem}
+        href=""
+        onClick={(e) => handleLinkClick(e, "contact")}
+      >
+        contact
+      </a>
     </div>
   );
 }

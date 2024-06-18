@@ -19,6 +19,11 @@
   box-sizing: border-box;
 }
 
+.about-anchor {
+  position: absolute;
+  top: 200vh;
+}
+
 .main-container {
   position: relative;
   top: 0;
