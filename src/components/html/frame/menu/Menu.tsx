@@ -1,34 +1,19 @@
 import styles from "./Menu.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLenis } from "lenis/react";
-
-function CloseMenuButton({ onClick }: { onClick: () => void }) {
-  return (
-    <button className={styles.closeButton} onClick={onClick}>
-      <div />
-    </button>
-  );
-}
-
-function MenuItem({ target }: { target: string }) {
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    lenis?.scrollTo("#" + target);
-  };
-
-  return (
-    <a className={styles.menuItem} href="" onClick={handleClick}>
-      {target}
-    </a>
-  );
-}
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 export function Menu() {
-  const [opened, open] = useState<boolean>(false);
+  const [opened, open] = useState<boolean>(true);
+  const [manualMode, setManualMode] = useState<boolean>(false);
   const lenis = useLenis();
+  const worksScrollProgress = usePortfolioStore(
+    (state) => state.worksScrollProgress
+  );
 
   const handleClick = () => {
     open((c) => !c);
+    setManualMode(true);
   };
 
   const handleLinkClick = (e: React.MouseEvent, target: string) => {
@@ -36,33 +21,55 @@ export function Menu() {
     lenis?.scrollTo("#" + target);
   };
 
+  useEffect(() => {
+    if (manualMode) return;
+    if (worksScrollProgress < 0.1) {
+      open(true);
+    } else {
+      open(false);
+    }
+  }, [manualMode, worksScrollProgress]);
+
   return (
-    <div className={`${styles.container} ${opened ? "" : styles.closed}`}>
-      <div className={styles.options}>
-        <span>2024 portfolio</span>
-        <CloseMenuButton onClick={handleClick} />
+    <div className={styles.container} onClick={handleClick}>
+      <div
+        className={`${styles.menuBar} ${opened ? styles.openedMenuBar : ""}`}
+      />
+      <div
+        className={`${styles.menuBar} ${opened ? styles.openedMenuBar : ""}`}
+      />
+      <div
+        className={`${styles.menuBar} ${opened ? styles.openedMenuBar : ""}`}
+      />
+      <div
+        className={styles.menuContentContainer}
+        style={{ opacity: opened ? 1 : 0 }}
+      >
+        <div className={styles.menuTitle}>
+          <span>portfolio v5</span>
+          <span>X</span>
+        </div>
+        <div className={styles.linksContainer}>
+          <a
+            className={styles.link}
+            onClick={(e) => handleLinkClick(e, "works")}
+          >
+            works
+          </a>
+          <a
+            className={styles.link}
+            onClick={(e) => handleLinkClick(e, "aboutanchor")}
+          >
+            about
+          </a>
+          <a
+            className={styles.link}
+            onClick={(e) => handleLinkClick(e, "contact")}
+          >
+            contact
+          </a>
+        </div>
       </div>
-      <a
-        className={styles.menuItem}
-        href=""
-        onClick={(e) => handleLinkClick(e, "works")}
-      >
-        works
-      </a>
-      <a
-        className={styles.menuItem}
-        href=""
-        onClick={(e) => handleLinkClick(e, "aboutanchor")}
-      >
-        about
-      </a>
-      <a
-        className={styles.menuItem}
-        href=""
-        onClick={(e) => handleLinkClick(e, "contact")}
-      >
-        contact
-      </a>
     </div>
   );
 }
