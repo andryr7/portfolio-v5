@@ -11,6 +11,7 @@
   font-family: var(--font-title);
   overflow: hidden;
   padding-bottom: 20px;
+  gap: 5vh;
 }
 
 .links-container {
@@ -49,10 +50,10 @@
 }
 
 .name-container {
-  font-size: 5vw;
+  font-size: 2vw;
 }
 
 .copyright-container {
-  font-size: 5vw;
-  line-height: 83%;
+  font-size: 2vw;
+  text-align: end;
 }

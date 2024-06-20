@@ -23,7 +23,7 @@ export function Menu() {
 
   useEffect(() => {
     if (manualMode) return;
-    if (worksScrollProgress < 0.1) {
+    if (worksScrollProgress < 0.01) {
       open(true);
     } else {
       open(false);

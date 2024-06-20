@@ -46,7 +46,7 @@ export const BackgroundMaterial = shaderMaterial(
     uniform vec3 darkcolor;
     uniform vec3 lightcolor;
     uniform float uTime;
-    const float NOISE_SCALE = 7.;
+    const float NOISE_SCALE = 5.;
 
     //Hash function
     float hashV(vec2 p) {
@@ -74,7 +74,7 @@ export const BackgroundMaterial = shaderMaterial(
 
     void main() {
       vec2 distortedvUv;
-      distortedvUv = distort(vUv, uTime / 2.0, 0.01);
+      distortedvUv = distort(vUv, uTime / 3.0, 0.015);
 
       float displace = texture2D(map, vUv).r;
 

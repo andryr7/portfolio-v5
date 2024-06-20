@@ -52,6 +52,7 @@
   padding: 1rem;
   border-top: 6px solid var(--color-background-one);
   cursor: pointer;
+  font-size: var(--font-size-s);
 }
 
 .tech-details-wrapper button:hover {

@@ -94,7 +94,6 @@ export function HeaderScene() {
           strokeColor={colors.main}
         >
           Independent{"\n"}Web developer
-          {/* <meshBasicMaterial color={colors.backgroundOne} toneMapped={false} /> */}
         </Text>
       </group>
 
