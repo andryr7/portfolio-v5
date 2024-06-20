@@ -22,11 +22,7 @@ function ThemeButton() {
     storedThemePreference === "dark" && setIsDarkTheme(true);
   }, [setIsDarkTheme, storedThemePreference]);
 
-  return (
-    <div className={styles.buttonContainer} onClick={handleClick}>
-      dark
-    </div>
-  );
+  return <div className={styles.darkModeButton} onClick={handleClick} />;
 }
 
 function LanguageButton() {
@@ -37,7 +33,7 @@ export function Options() {
   return (
     <div className={styles.container}>
       <ThemeButton />
-      <LanguageButton />
+      {/* <LanguageButton /> */}
     </div>
   );
 }

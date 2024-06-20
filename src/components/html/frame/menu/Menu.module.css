@@ -27,11 +27,11 @@
 }
 
 .opened-menu-bar:first-of-type {
-  border-radius: var(--br-s) var(--br-s) 0 0;
+  border-radius: var(--br-xs) var(--br-xs) 0 0;
 }
 
 .opened-menu-bar:nth-of-type(n + 3) {
-  border-radius: 0 0 var(--br-s) var(--br-s);
+  border-radius: 0 0 var(--br-xs) var(--br-xs);
 }
 
 .menu-content-container {
