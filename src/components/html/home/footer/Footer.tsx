@@ -15,7 +15,9 @@ export function Footer() {
         <div className={styles.nameContainer}>
           designed and
           <br />
-          developed at home
+          developed
+          <br />
+          at home
         </div>
         <div className={styles.copyrightContainer}>
           ©{year}

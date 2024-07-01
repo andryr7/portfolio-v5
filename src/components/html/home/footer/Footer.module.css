@@ -40,6 +40,8 @@
   justify-content: space-between;
   box-sizing: border-box;
   align-items: flex-end;
+  font-size: 1.5vw;
+  line-height: 125%;
 }
 
 @media (min-width: 768px) {
@@ -49,11 +51,6 @@
   }
 }
 
-.name-container {
-  font-size: 2vw;
-}
-
 .copyright-container {
-  font-size: 2vw;
   text-align: end;
 }
