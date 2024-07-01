@@ -1,80 +1,49 @@
 .container {
   margin: 20px;
-  pointer-events: all;
   cursor: pointer;
-  min-height: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  mix-blend-mode: color-burn;
-  position: relative;
-  color: var(--color-background-one);
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  pointer-events: all;
 }
 
-.menu-bar {
-  width: 3.5rem;
-  height: 7px;
+.opened-container {
+  pointer-events: none;
+  gap: 12px;
+}
+
+.menu-item {
   background-color: var(--color-main);
-  border-radius: 2px;
-  transition: width var(--transition-normal), height var(--transition-normal), border-radius var(--transition-normal);
-}
-
-.opened-menu-bar {
-  width: 15rem;
-  height: 5rem;
-  border-radius: 0px;
-}
-
-.opened-menu-bar:first-of-type {
-  border-radius: var(--br-xs) var(--br-xs) 0 0;
-}
-
-.opened-menu-bar:nth-of-type(n + 3) {
-  border-radius: 0 0 var(--br-xs) var(--br-xs);
-}
-
-.menu-content-container {
-  position: absolute;
-  top: 0;
-  width: 15rem;
-  height: 15rem;
+  border-radius: var(--br-xs);
+  width: 24px;
+  height: 24px;
+  transition: 
+    width var(--transition-normal),
+    height var(--transition-normal),
+    color var(--transition-normal)
+  ;
+  pointer-events: none;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-main);
+  overflow: hidden;
   box-sizing: border-box;
-  transition: opacity var(--transition-normal);
 }
 
-.menu-title {
-  padding-bottom: 1rem;
-  border-bottom: 1px solid;
-  display: flex;
-  justify-content: space-between;
+.opened-container .menu-item {
+  width: 12vh;
+  height: 12vh;
+  pointer-events: all;
+  color: var(--color-background-one);
 }
 
-.links-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.opened-container .menu-item:hover {
+  background-color: var(--color-background-one);
+  border: 2px solid var(--color-main);
+  color: var(--color-main);
 }
 
-.link {
-  font-size: var(--font-size-s);
-  position: relative;
-}
-
-.link::after {
-  font-size: var(--font-size-s);
-  content: '->';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 1rem;
-  height: 1rem;
-}
-
-.link:hover {
-  color: blue;
+.menu-item:nth-child(3) {
+  grid-column: 2;
 }
