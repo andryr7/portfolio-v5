@@ -43,56 +43,17 @@ export function Menu() {
       </div>
       <div
         className={styles.menuItem}
-        onClick={(e) => handleLinkClick(e, "contact")}
-      >
-        {`-> contact`}
-      </div>
-      <div
-        className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "aboutanchor")}
       >
         {`-> about`}
       </div>
+      <div className={styles.closeButton}>{`X`}</div>
+      <div
+        className={styles.menuItem}
+        onClick={(e) => handleLinkClick(e, "contact")}
+      >
+        {`-> contact`}
+      </div>
     </div>
   );
 }
-
-// return (
-//   <div className={styles.container} onClick={handleClick}>
-//     <div
-//       className={`${styles.menuBar} ${opened ? styles.openedMenuBar : ""}`}
-//     />
-//     <div
-//       className={`${styles.menuBar} ${opened ? styles.openedMenuBar : ""}`}
-//     />
-//     <div
-//       className={`${styles.menuBar} ${opened ? styles.openedMenuBar : ""}`}
-//     />
-//     <div
-//       className={styles.menuContentContainer}
-//       style={{ opacity: opened ? 1 : 0 }}
-//     >
-//       <div className={styles.menuTitle}>
-//         <span>portfolio v5</span>
-//         <span>X</span>
-//       </div>
-//       <div className={styles.linksContainer}>
-//         <a className={styles.link} onClick={(e) => handleLinkClick(e, "works")}>
-//           works
-//         </a>
-//         <a
-//           className={styles.link}
-//           onClick={(e) => handleLinkClick(e, "aboutanchor")}
-//         >
-//           about
-//         </a>
-//         <a
-//           className={styles.link}
-//           onClick={(e) => handleLinkClick(e, "contact")}
-//         >
-//           contact
-//         </a>
-//       </div>
-//     </div>
-//   </div>
-// );

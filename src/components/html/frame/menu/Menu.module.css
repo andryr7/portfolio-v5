@@ -14,9 +14,9 @@
 
 .menu-item {
   background-color: var(--color-main);
-  border-radius: var(--br-xs);
   width: 24px;
   height: 24px;
+  border-radius: var(--br-xs);
   transition: 
     width var(--transition-normal),
     height var(--transition-normal),
@@ -44,6 +44,33 @@
   color: var(--color-main);
 }
 
-.menu-item:nth-child(3) {
-  grid-column: 2;
+.close-button {
+  opacity: 0;
+  width: 0px;
+  height: 0px;
+  background-color: var(--color-main);
+  border-radius: var(--br-xs);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  box-sizing: border-box;
+  transition: 
+    width var(--transition-normal),
+    height var(--transition-normal),
+    color var(--transition-normal)
+  ;
+}
+
+.opened-container .close-button {
+  opacity: 1;
+  width: 36px;
+  height: 36px;
+  pointer-events: all;
+}
+
+.opened-container .close-button:hover {
+  background-color: var(--color-background-one);
+  border: 2px solid var(--color-main);
+  color: var(--color-main);
 }
