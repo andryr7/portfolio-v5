@@ -70,7 +70,7 @@ export function HeaderScene() {
           -viewportHeight / 2 + viewportWidth / 30,
           0,
         ]}
-        scale={Math.min(viewportWidth / 8.5, viewportHeight / 5)}
+        scale={Math.min(viewportWidth / 8.5, viewportHeight / 7)}
         visible={heroVisibility}
       >
         <Text

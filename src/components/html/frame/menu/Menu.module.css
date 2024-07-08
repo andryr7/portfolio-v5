@@ -58,7 +58,8 @@
   transition: 
     width var(--transition-normal),
     height var(--transition-normal),
-    color var(--transition-normal)
+    color var(--transition-normal),
+    opacity var(--transition-normal)
   ;
 }
 
@@ -67,6 +68,7 @@
   width: 36px;
   height: 36px;
   pointer-events: all;
+  color: var(--color-background-one);
 }
 
 .opened-container .close-button:hover {

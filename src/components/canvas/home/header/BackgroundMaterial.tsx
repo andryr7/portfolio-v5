@@ -86,6 +86,5 @@ export const BackgroundMaterial = shaderMaterial(
 
       gl_FragColor = vec4(col, 1.0);
     }
-
   `
 );

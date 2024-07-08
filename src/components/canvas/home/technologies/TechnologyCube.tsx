@@ -50,7 +50,8 @@ export function TechnologyCube({
   );
   //Hover handling
   const [hovered, hover] = useState<boolean>(false);
-  useCursor(hovered || draggedCubeId !== null, "grab");
+  useCursor(hovered || draggedCubeId !== null, "pointer");
+
   //Texture
   const texture = useTexture(`images/techs/${tech.imageUrl}`);
   texture.center = new THREE.Vector2(0.5, 0.5);
