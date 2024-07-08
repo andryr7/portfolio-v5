@@ -4,7 +4,7 @@ export function Presentation() {
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
-        <h2>who I am</h2>
+        <h2>Hello there</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit,{" "}
           <a href="https://google.com" target="_blank">

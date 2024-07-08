@@ -1,6 +1,6 @@
 import { RoundedBox, Text } from "@react-three/drei";
 import spacemono from "@/assets/fonts/space-mono.ttf";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
@@ -9,9 +9,19 @@ export function OverlayCube({ visible }: { visible: boolean }) {
   const colors = usePortfolioStore((state) => state.colors);
   const cubeMaterialRef = useRef(null);
   const textMaterialRef = useRef(null);
+
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress
   );
+  const aboutScrollProgress = usePortfolioStore(
+    (state) => state.aboutScrollProgress
+  );
+
+  const cubeText = useMemo(() => {
+    if (aboutScrollProgress < 0.25) return "who I am";
+    else if (aboutScrollProgress > 0.75) return "what I use";
+    else return "what I do";
+  }, [aboutScrollProgress]);
 
   useFrame((_, delta) => {
     //2d cube material opacity animation
@@ -51,16 +61,12 @@ export function OverlayCube({ visible }: { visible: boolean }) {
       </mesh>
       <mesh position={[0, 0, 0.51]}>
         <Text
-          fontSize={0.15}
+          fontSize={0.1}
           font={spacemono}
           color={colors.backgroundOne}
           textAlign="center"
         >
-          scroll
-          {"\n"}
-          to
-          {"\n"}
-          contact
+          {cubeText}
           <meshBasicMaterial transparent ref={textMaterialRef} />
         </Text>
       </mesh>

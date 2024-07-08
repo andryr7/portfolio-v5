@@ -20,7 +20,7 @@ export function Technologies() {
   if (techs.length > 0)
     return (
       <div className={styles.container}>
-        <h3 className={styles.title}>What I use</h3>
+        <h3 className={styles.title}>Technologies</h3>
         <div className={styles.viewContainer}>
           <View
             className={styles.view}

@@ -51,7 +51,7 @@ export function Skills() {
   if (skills.length > 0)
     return (
       <div className={styles.container}>
-        <h3 className={styles.title}>What I do</h3>
+        <h3 className={styles.title}>Skills</h3>
         <div className={styles.skillsContainer}>
           {skills.map((skill, index) => (
             <SkillCard

@@ -16,13 +16,17 @@ import { Skills } from "@/components/html/home/about/skills/Skills";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Home() {
-  const { setWorksScrollProgress, setContactScrollProgress } =
-    usePortfolioStore(
-      useShallow((state) => ({
-        setWorksScrollProgress: state.setWorksScrollProgress,
-        setContactScrollProgress: state.setContactScrollProgress,
-      }))
-    );
+  const {
+    setWorksScrollProgress,
+    setAboutScrollProgress,
+    setContactScrollProgress,
+  } = usePortfolioStore(
+    useShallow((state) => ({
+      setWorksScrollProgress: state.setWorksScrollProgress,
+      setAboutScrollProgress: state.setAboutScrollProgress,
+      setContactScrollProgress: state.setContactScrollProgress,
+    }))
+  );
 
   useGSAP(
     () => {
@@ -72,6 +76,18 @@ export function Home() {
             setContactScrollProgress(self.progress);
           },
           // markers: true,
+        },
+      });
+
+      //About section scroll handling
+      gsap.to("#aboutCenter", {
+        scrollTrigger: {
+          trigger: "#aboutCenter",
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate: (self) => {
+            setAboutScrollProgress(self.progress);
+          },
         },
       });
 
@@ -126,7 +142,7 @@ export function Home() {
           <article className={styles.sectionContainer} id="about">
             <Presentation />
           </article>
-          <article className={styles.sectionContainer}>
+          <article className={styles.sectionContainer} id="aboutCenter">
             <Skills />
           </article>
           <article className={styles.sectionContainer}>
