@@ -1,7 +1,7 @@
 .container {
   position: relative;
   width: 80%;
-  height: 50%;
+  height: 40%;
   max-width: 1920px;
 }
 
@@ -31,7 +31,7 @@
 .skill-title {
   position: absolute;
   left: 50%;
-  width: 50vh;
+  width: 40vh;
   transform: rotate(270deg) translateX(-100%) translateY(-50%);
   text-align: center;
   transform-origin: left top;
