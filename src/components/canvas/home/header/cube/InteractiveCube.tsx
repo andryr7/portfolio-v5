@@ -37,7 +37,7 @@ export function InteractiveCube({
   );
 
   const worksSceneIsActive = useMemo(() => {
-    return worksScrollProgress >= 0.25 && worksScrollProgress <= 0.75;
+    return worksScrollProgress >= 0.3 && worksScrollProgress <= 0.7;
   }, [worksScrollProgress]);
 
   const contactSceneIsActive = useMemo(() => {
