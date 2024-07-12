@@ -1,0 +1,18 @@
+.info-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.links-container {
+  display: flex;
+  gap: 1rem;
+  align-items: start;
+}
+
+.section-title {
+  font-size: var(--font-size-m);
+}
+
+.tech-container {
+  background-color: green;
+}

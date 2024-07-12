@@ -40,6 +40,7 @@ export default function App() {
         style={{
           backgroundColor: "var(--color-background-one)",
           fontFamily: "var(--font-title)",
+          color: "var(--color-main)",
         }}
       >
         <Frame />

@@ -1,38 +1,37 @@
-import { Link, useRoute } from "wouter";
+import { useRoute } from "wouter";
 import styles from "./Work.module.css";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { WorkHeader } from "@/components/html/work/header/WorkHeader";
+import { WorkFooter } from "@/components/html/work/footer/WorkFooter";
+import { TechnologiesSection } from "@/components/html/work/technologies/TechnologiesSection";
+import { GeneralSection } from "@/components/html/work/general/GeneralSection";
 
 export function Work() {
   const [match, params] = useRoute("/work/:workname");
   const currentWork = usePortfolioStore((state) => state.worksData).find(
     (work) => work.slug.current === params?.workname
   );
-  // console.log(currentWork);
 
   return (
     <>
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <div />
-          <div className={styles.infoBlock}>
-            <span>{currentWork?.caption}</span>
-            <span>{currentWork?.type}</span>
+      {currentWork && (
+        <>
+          <div className={styles.container}>
+            <WorkHeader work={currentWork} />
+            <main>
+              <section className={styles.section}>
+                <GeneralSection work={currentWork} />
+              </section>
+              <div style={{ height: "20rem" }} />
+              <section className={styles.section}>
+                <TechnologiesSection work={currentWork} />
+              </section>
+              <div style={{ height: "20rem" }} />
+            </main>
           </div>
-          <div className={styles.titleBlock}>
-            <h1>{currentWork?.title}</h1>
-            <span>{currentWork?.year}</span>
-          </div>
-        </header>
-        <main>
-          <section className={styles.section}>Project name - section 1</section>
-          <section className={styles.section}>Project name - section 2</section>
-        </main>
-      </div>
-      <footer className={styles.footerContainer}>
-        <div className={styles.footerButton}>test 1</div>
-        <div className={styles.footerButton}>test 2</div>
-        <div className={styles.footerButton}>test 3</div>
-      </footer>
+          <WorkFooter />
+        </>
+      )}
     </>
   );
 }
