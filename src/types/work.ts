@@ -16,18 +16,20 @@ interface WorkUsedTech {
 export interface Work {
   _id: string;
   order: number;
-  backgroundColor: string;
-  mainColor: string;
-  previewImagePath: string;
-  technicalDescription: string;
-  generalDescription: string;
   slug: {
     current: string;
   };
   title: string;
+  caption: string;
+  type: string;
+  year: string;
+  mainColor: string;
+  backgroundColor: string;
+  previewImagePath: string;
+  images?: WorkImage[];
+  generalDescription: string;
+  technicalDescription: string;
+  usedTechs: WorkUsedTech[];
   liveUrl?: string;
   githubUrl?: string;
-  caption: string;
-  usedTechs: WorkUsedTech[];
-  images?: WorkImage[];
 }

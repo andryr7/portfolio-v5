@@ -27,7 +27,7 @@ export function WorksSection() {
         >
           {worksData.map((work, index) => (
             <Link
-              href={`/works/${work.slug.current}`}
+              href={`/work/${work.slug.current}`}
               className={styles.workLine}
               key={index}
               onMouseEnter={() => setHoveredWorkIndex(index)}

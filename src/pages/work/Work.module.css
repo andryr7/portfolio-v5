@@ -9,3 +9,80 @@
   align-items: center;
   font-size: 10vw;
 }
+
+.container {
+  color: var(--color-main);
+  display: flex;
+  flex-direction: column;
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.header {
+  width: 100%;
+  height: 66vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: var(--font-size-m);
+}
+
+.info-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.title-block h1 {
+  font-size: min(10vw, 200px);
+}
+
+.section {
+  height: 50vh;
+  background-color: green;
+}
+
+.footer-container {
+  background-color: var(--color-background-two);
+  height: 20vh;
+  border-top: 2px solid var(--color-main);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (min-width: 768px) {
+  .footer-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.footer-button:not(:first-of-type) {
+  border-left: 2px solid var(--color-main);
+}
+
+.footer-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.footer-button:hover {
+  background-color: var(--color-main);
+  color: var(--color-background-one);
+}

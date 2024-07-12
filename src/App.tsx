@@ -34,7 +34,14 @@ export default function App() {
 
   return (
     <ReactLenis root ref={lenisRef} autoRaf={false}>
-      <div id="app-container" ref={appContainerRef}>
+      <div
+        id="app-container"
+        ref={appContainerRef}
+        style={{
+          backgroundColor: "var(--color-background-one)",
+          fontFamily: "var(--font-title)",
+        }}
+      >
         <Frame />
 
         <Switch>
@@ -43,9 +50,7 @@ export default function App() {
           ) : (
             <>
               <Route path="/" component={Home} />
-              <Route path="/work/:name">
-                <Work />
-              </Route>
+              <Route path="/work/:name" component={Work} />
               {/* Default route in a switch */}
               {/* <Route>404: No such page!</Route> */}
             </>
