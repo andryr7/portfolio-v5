@@ -44,6 +44,10 @@
   color: var(--color-main);
 }
 
+/* .opened-container .menu-item:last-of-type {
+  background-color: var(--color-accent);
+} */
+
 .close-button {
   opacity: 0;
   width: 0px;
