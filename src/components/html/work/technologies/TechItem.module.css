@@ -1,0 +1,15 @@
+.container {
+  border: 2px solid var(--color-main);
+  padding: 1rem;
+  border-radius: var(--br-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--color-background-two);
+}
+
+.item-link {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-s);
+}

@@ -5,7 +5,7 @@ export function LinkButton({ label, url }: { label: string; url: string }) {
     <a
       href={url}
       target="_blank"
-      rel="noreferrer nofollow"
+      rel="noreferrer noopener"
       className={styles.container}
     >
       {label + " ->"}

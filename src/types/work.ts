@@ -1,3 +1,5 @@
+import { Tech } from "./tech";
+
 interface WorkImage {
   _type: "image";
   _key: string;
@@ -7,10 +9,11 @@ interface WorkImage {
   };
 }
 
-interface WorkUsedTech {
+export interface WorkUsedTech {
   _id: string;
   name: string;
   url: string;
+  type: string;
 }
 
 export interface Work {
