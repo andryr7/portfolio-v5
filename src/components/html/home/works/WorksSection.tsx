@@ -4,17 +4,21 @@ import { Link } from "wouter";
 import { useLenis } from "lenis/react";
 
 export function WorksSection() {
+  const lenis = useLenis();
   const worksData = usePortfolioStore((state) => state.worksData);
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
   const setHoveredWorkIndex = usePortfolioStore(
     (state) => state.setHoveredWorkIndex
   );
 
-  const lenis = useLenis();
+  const handleClick = () => {
+    lenis?.scrollTo(0);
+    setHoveredWorkIndex(null);
+  };
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    lenis?.scrollTo("#" + "contact");
+    lenis?.scrollTo("#contact");
   };
 
   return (
@@ -31,6 +35,7 @@ export function WorksSection() {
               className={styles.workLine}
               key={index}
               onMouseEnter={() => setHoveredWorkIndex(index)}
+              onClick={handleClick}
               style={
                 hoveredWorkIndex !== null
                   ? hoveredWorkIndex !== index
@@ -46,7 +51,7 @@ export function WorksSection() {
         </ul>
       </div>
       <div className={styles.contactLinkContainer}>
-        <div onClick={handleClick}>add yours</div>
+        <div onClick={handleContactClick}>add yours</div>
       </div>
     </>
   );

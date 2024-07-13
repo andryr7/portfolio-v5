@@ -29,7 +29,7 @@ export function Work() {
               <div style={{ height: "20rem" }} />
             </main>
           </div>
-          <WorkFooter />
+          <WorkFooter work={currentWork} />
         </>
       )}
     </>

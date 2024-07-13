@@ -8,6 +8,11 @@
   background-color: var(--color-background-two);
 }
 
+.container:hover {
+  background-color: var(--color-main);
+  color: var(--color-background-one);
+}
+
 .item-link {
   display: flex;
   justify-content: space-between;
