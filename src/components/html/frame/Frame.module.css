@@ -38,6 +38,15 @@
   align-items: normal;
 }
 
+.home-link {
+  pointer-events: all;
+}
+
+@media (min-width: 768px) {
+  .home-link {padding: 20px;
+  }
+}
+
 .indicator {
   position: absolute;
   bottom: 50%;
