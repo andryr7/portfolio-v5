@@ -11,7 +11,6 @@ import { easing } from "maath";
 import { Tesseract } from "../../contact/Tesseract";
 import { OverlayCube } from "./OverlayCube";
 import { TransparentCube } from "./TransparentCube";
-import { useShallow } from "zustand/react/shallow";
 import { WorksCube } from "../../works/WorksCube";
 
 export function InteractiveCube({
@@ -27,17 +26,15 @@ export function InteractiveCube({
     (state) => state.viewportSize
   );
   const worksScrollProgress = usePortfolioStore(
-    useShallow((state) => state.worksScrollProgress)
+    (state) => state.worksScrollProgress
   );
   const contactScrollProgress = usePortfolioStore(
-    useShallow((state) => state.contactScrollProgress)
+    (state) => state.contactScrollProgress
   );
-  const hoveredWorkIndex = usePortfolioStore(
-    useShallow((state) => state.hoveredWorkIndex)
-  );
+  const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
 
   const worksSceneIsActive = useMemo(() => {
-    return worksScrollProgress >= 0.3 && worksScrollProgress <= 0.7;
+    return worksScrollProgress >= 0.25 && worksScrollProgress <= 0.75;
   }, [worksScrollProgress]);
 
   const contactSceneIsActive = useMemo(() => {
