@@ -14,6 +14,11 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+.info-container p {
+  line-height: 125%;
+  font-family: var(--font-text);
+}
+
 .links-container {
   display: flex;
   gap: 1rem;

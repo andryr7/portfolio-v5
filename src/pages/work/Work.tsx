@@ -7,7 +7,7 @@ import { TechnologiesSection } from "@/components/html/work/technologies/Technol
 import { GeneralSection } from "@/components/html/work/general/GeneralSection";
 
 export function Work() {
-  const [match, params] = useRoute("/work/:workname");
+  const [_, params] = useRoute("/work/:workname");
   const currentWork = usePortfolioStore((state) => state.worksData).find(
     (work) => work.slug.current === params?.workname
   );
