@@ -44,7 +44,7 @@ export default function App() {
         }}
       >
         <Frame />
-
+        {/* Routing */}
         <Switch>
           {isLoading ? (
             "LOADING"
@@ -57,8 +57,7 @@ export default function App() {
             </>
           )}
         </Switch>
-
-        {/* Three js canvas */}
+        ;{/* Three js canvas */}
         <Canvas
           eventSource={appContainerRef}
           eventPrefix="offset"
@@ -76,7 +75,6 @@ export default function App() {
           <View.Port />
           <ViewportSizeHandler />
         </Canvas>
-
         {/* Noise filter */}
         <NoiseFilter opacity={0.25} />
       </div>

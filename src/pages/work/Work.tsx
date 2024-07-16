@@ -15,7 +15,7 @@ export function Work() {
   return (
     <>
       {currentWork && (
-        <>
+        <div className={styles.pageContainer}>
           <div className={styles.container}>
             <WorkHeader work={currentWork} />
             <main>
@@ -30,7 +30,7 @@ export function Work() {
             </main>
           </div>
           <WorkFooter work={currentWork} />
-        </>
+        </div>
       )}
     </>
   );

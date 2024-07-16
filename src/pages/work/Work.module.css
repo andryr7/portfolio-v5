@@ -1,13 +1,5 @@
-.placeholder {
-  height: 100vh;
-  width: 100vw;
-  background-color: blue;
-  border: 5px solid black;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 10vw;
+.page-container {
+  z-index: 25;
 }
 
 .container {

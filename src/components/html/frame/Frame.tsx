@@ -11,7 +11,7 @@ export function Frame() {
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress
   );
-  const [match] = useRoute("/");
+  const [isHomepage] = useRoute("/");
 
   return (
     <>
@@ -19,8 +19,8 @@ export function Frame() {
         <div className={styles.container}>
           <div className={styles.interfaceContainer}>
             <Options />
-            {match && <Menu />}
-            {!match && (
+            {isHomepage && <Menu />}
+            {!isHomepage && (
               <Link
                 href="/"
                 className={styles.homeLink}
@@ -30,7 +30,7 @@ export function Frame() {
               </Link>
             )}
           </div>
-          {match && (
+          {isHomepage && (
             <div
               className={styles.indicator}
               style={{ opacity: worksScrollProgress === 0 ? 1 : 0 }}
