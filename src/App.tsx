@@ -45,18 +45,14 @@ export default function App() {
       >
         <Frame />
         {/* Routing */}
-        <Switch>
-          {isLoading ? (
-            "LOADING"
-          ) : (
-            <>
-              <Route path="/" component={Home} />
-              <Route path="/work/:name" component={Work} />
-              {/* Default route in a switch */}
-              {/* <Route>404: No such page!</Route> */}
-            </>
-          )}
-        </Switch>
+        {isLoading ? (
+          "LOADING"
+        ) : (
+          <>
+            <Home />
+            <Work />
+          </>
+        )}
         ;{/* Three js canvas */}
         <Canvas
           eventSource={appContainerRef}
@@ -81,3 +77,16 @@ export default function App() {
     </ReactLenis>
   );
 }
+
+// <Switch>
+//   {isLoading ? (
+//     "LOADING"
+//   ) : (
+//     <>
+//       <Route path="/" component={Home} />
+//       <Route path="/work/:name" component={Work} />
+//       {/* Default route in a switch */}
+//       {/* <Route>404: No such page!</Route> */}
+//     </>
+//   )}
+// </Switch>;

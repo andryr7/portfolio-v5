@@ -126,39 +126,41 @@ export function Home() {
       </View>
 
       {/* HTML Content */}
-      <div className={styles.heroContainer} id="hero">
-        <header
-          className={styles.heroSectionContainer}
-          style={{ pointerEvents: "none" }}
-          id="hero"
-        />
-        <section className={styles.heroSectionContainer} id="works">
-          <WorksSection />
-        </section>
-      </div>
-      <a id={"aboutanchor"} className={styles.aboutAnchor} />
-      <main className={styles.mainContainer} id="main">
-        <section style={{ position: "relative" }}>
-          <article className={styles.sectionContainer} id="about">
-            <Presentation />
-          </article>
-          <article className={styles.sectionContainer} id="aboutCenter">
-            <Skills />
-          </article>
-          <article className={styles.sectionContainer}>
-            <Technologies />
-          </article>
-        </section>
-        <div className={styles.aboutTitle} id="about-title">
-          about
+      <div>
+        <div className={styles.heroContainer} id="hero">
+          <header
+            className={styles.heroSectionContainer}
+            style={{ pointerEvents: "none" }}
+            id="hero"
+          />
+          <section className={styles.heroSectionContainer} id="works">
+            <WorksSection />
+          </section>
         </div>
-        <section className={styles.sectionContainer} id="contact">
-          <ContactSection />
-        </section>
-      </main>
-      <footer className={styles.footerContainer}>
-        <Footer />
-      </footer>
+        <a id={"aboutanchor"} className={styles.aboutAnchor} />
+        <main className={styles.mainContainer} id="main">
+          <section style={{ position: "relative" }}>
+            <article className={styles.sectionContainer} id="about">
+              <Presentation />
+            </article>
+            <article className={styles.sectionContainer} id="aboutCenter">
+              <Skills />
+            </article>
+            <article className={styles.sectionContainer}>
+              <Technologies />
+            </article>
+          </section>
+          <div className={styles.aboutTitle} id="about-title">
+            about
+          </div>
+          <section className={styles.sectionContainer} id="contact">
+            <ContactSection />
+          </section>
+        </main>
+        <footer className={styles.footerContainer}>
+          <Footer />
+        </footer>
+      </div>
     </>
   );
 }
