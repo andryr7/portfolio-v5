@@ -7,7 +7,7 @@ html {
   scrollbar-width: none;
   scrollbar-gutter: stable;
   background-color: white;
-  -ms-overflow-style: none;  /* IE and Edge */
+  -ms-overflow-style: none; 
 }
 
 body {
@@ -63,4 +63,8 @@ body {
 /* Splide style customization */
 .splide:not(.is-overflow) .splide__arrows {
   display: none;
+}
+
+.noscroll {
+  overflow: hidden;
 }

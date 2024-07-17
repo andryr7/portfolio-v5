@@ -24,7 +24,7 @@ export function Frame() {
               <Link
                 href="/"
                 className={styles.homeLink}
-                onClick={() => lenis?.scrollTo(0)}
+                // onClick={() => lenis?.scrollTo(0)}
               >
                 Back to homepage
               </Link>

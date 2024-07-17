@@ -53,7 +53,7 @@ export function TechnologyCube({
   useCursor(hovered || draggedCubeId !== null, "pointer");
 
   //Texture
-  const texture = useTexture(`images/techs/${tech.imageUrl}`);
+  const texture = useTexture(`/images/techs/${tech.imageUrl}`);
   texture.center = new THREE.Vector2(0.5, 0.5);
 
   const handlePointerEnter = useCallback((event: ThreeEvent<PointerEvent>) => {

@@ -12,7 +12,7 @@ export function WorksSection() {
   );
 
   const handleClick = () => {
-    lenis?.scrollTo(0);
+    // lenis?.scrollTo(0);
     setHoveredWorkIndex(null);
   };
 

@@ -1,10 +1,10 @@
-import { useRoute } from "wouter";
 import styles from "./Work.module.css";
-import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { WorkHeader } from "@/components/html/work/header/WorkHeader";
 import { WorkFooter } from "@/components/html/work/footer/WorkFooter";
 import { TechnologiesSection } from "@/components/html/work/technologies/TechnologiesSection";
 import { GeneralSection } from "@/components/html/work/general/GeneralSection";
+import { useRoute } from "wouter";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 export function Work() {
   const [_, params] = useRoute("/work/:workname");
@@ -15,7 +15,7 @@ export function Work() {
   return (
     <>
       {currentWork && (
-        <div className={styles.pageContainer}>
+        <div className={styles.pageContainer} id="work-page">
           <div className={styles.container}>
             <WorkHeader work={currentWork} />
             <main>

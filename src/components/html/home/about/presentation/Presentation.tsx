@@ -21,7 +21,7 @@ export function Presentation() {
       </div>
       <div
         className={styles.imageContainer}
-        style={{ backgroundImage: `url('images/about/me.jpg')` }}
+        style={{ backgroundImage: `url('/images/about/me.jpg')` }}
       />
     </div>
   );

@@ -1,9 +1,9 @@
 import { Work } from "@/types/work";
-import { Footer } from "../../home/footer/Footer";
 import styles from "./WorkFooter.module.css";
 import { Link } from "wouter";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useLenis } from "lenis/react";
+import { Footer } from "../../home/footer/Footer";
 
 export function WorkFooter({ work }: { work: Work }) {
   const lenis = useLenis();
@@ -21,17 +21,23 @@ export function WorkFooter({ work }: { work: Work }) {
             href="/"
             className={styles.footerButton}
             style={{ borderLeft: "none" }}
-            onClick={() => lenis?.scrollTo(0)}
+            // onClick={() => lenis?.scrollTo("#works")}
           >
             back to homepage
           </Link>
-          <Link href="/" className={styles.footerButton}>
+          <Link
+            href="/"
+            className={styles.footerButton}
+            onClick={() => lenis?.scrollTo("#contact")}
+          >
             contact
           </Link>
           <Link
             href={`/work/${nextProject.slug.current}`}
             className={styles.footerButton}
-            onClick={() => lenis?.scrollTo(0)}
+            onClick={() =>
+              (document.getElementById("work-page")!.scrollTop = 0)
+            }
           >
             next project: {nextProject.title}
           </Link>

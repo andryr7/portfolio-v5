@@ -12,6 +12,7 @@ import { useTheme } from "./handlers/useTheme";
 import NoiseFilter from "./components/html/noise/NoiseFilter";
 import { ViewportSizeHandler } from "./handlers/viewportSizeHandler";
 import gsap from "gsap";
+import { AppRouter } from "./AppRouter";
 
 export default function App() {
   const envMode = import.meta.env.MODE;
@@ -33,7 +34,12 @@ export default function App() {
   });
 
   return (
-    <ReactLenis root ref={lenisRef} autoRaf={false}>
+    <ReactLenis
+      root
+      ref={lenisRef}
+      autoRaf={false}
+      options={{ prevent: (node) => node.id === "work-page" }}
+    >
       <div
         id="app-container"
         ref={appContainerRef}
@@ -45,15 +51,8 @@ export default function App() {
       >
         <Frame />
         {/* Routing */}
-        {isLoading ? (
-          "LOADING"
-        ) : (
-          <>
-            <Home />
-            <Work />
-          </>
-        )}
-        ;{/* Three js canvas */}
+        {isLoading ? "LOADING" : <AppRouter />}
+        {/* Three js canvas */}
         <Canvas
           eventSource={appContainerRef}
           eventPrefix="offset"
@@ -77,16 +76,3 @@ export default function App() {
     </ReactLenis>
   );
 }
-
-// <Switch>
-//   {isLoading ? (
-//     "LOADING"
-//   ) : (
-//     <>
-//       <Route path="/" component={Home} />
-//       <Route path="/work/:name" component={Work} />
-//       {/* Default route in a switch */}
-//       {/* <Route>404: No such page!</Route> */}
-//     </>
-//   )}
-// </Switch>;
