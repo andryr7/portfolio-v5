@@ -3,22 +3,22 @@ import { WorkHeader } from "@/components/html/work/header/WorkHeader";
 import { WorkFooter } from "@/components/html/work/footer/WorkFooter";
 import { TechnologiesSection } from "@/components/html/work/technologies/TechnologiesSection";
 import { GeneralSection } from "@/components/html/work/general/GeneralSection";
-import { useRoute } from "wouter";
-import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import ReactLenis, { useLenis } from "lenis/react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { Work as WorkType } from "@/types/work";
 
-export function Work() {
-  const [_, params] = useRoute("/work/:workname");
-  const currentWork = usePortfolioStore((state) => state.worksData).find(
-    (work) => work.slug.current === params?.workname
-  );
-
+export function Work({ currentWork }: { currentWork: WorkType }) {
   const globalLenisInstance = useLenis();
+
+  useGSAP(() => {
+    gsap.to(".work-page-container", { opacity: 1 });
+  });
 
   return (
     <>
       {currentWork && (
-        <ReactLenis className={styles.pageContainer}>
+        <ReactLenis className={styles.pageContainer + " work-page-container"}>
           <div className={styles.container}>
             <WorkHeader work={currentWork} />
             <main>

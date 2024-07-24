@@ -11,11 +11,6 @@ export function WorksSection() {
     (state) => state.setHoveredWorkIndex
   );
 
-  const handleClick = () => {
-    // lenis?.scrollTo(0);
-    setHoveredWorkIndex(null);
-  };
-
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
     lenis?.scrollTo("#contact");
@@ -35,7 +30,6 @@ export function WorksSection() {
               className={styles.workLine}
               key={index}
               onMouseEnter={() => setHoveredWorkIndex(index)}
-              onClick={handleClick}
               style={
                 hoveredWorkIndex !== null
                   ? hoveredWorkIndex !== index

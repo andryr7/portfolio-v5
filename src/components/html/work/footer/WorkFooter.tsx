@@ -22,7 +22,11 @@ export function WorkFooter({
 
   return (
     <>
-      <div style={{ backgroundColor: "var(--color-main)" }}>
+      <div
+        style={{
+          backgroundColor: "var(--color-main)",
+        }}
+      >
         <div className={styles.footerLinksContainer}>
           <Link
             href="/"

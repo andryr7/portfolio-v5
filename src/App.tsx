@@ -11,6 +11,8 @@ import { ViewportSizeHandler } from "./handlers/viewportSizeHandler";
 import gsap from "gsap";
 import { Home } from "./pages/home/Home";
 import { Work } from "./pages/work/Work";
+import { useRoute } from "wouter";
+import { usePortfolioStore } from "./handlers/usePortfolioStore";
 
 export default function App() {
   const envMode = import.meta.env.MODE;
@@ -31,6 +33,12 @@ export default function App() {
     };
   });
 
+  //Work page Routing
+  const [_, params] = useRoute("/work/:workname");
+  const currentWork = usePortfolioStore((state) => state.worksData).find(
+    (work) => work.slug.current === params?.workname
+  );
+
   return (
     <ReactLenis root ref={lenisRef} autoRaf={false}>
       <div
@@ -49,7 +57,7 @@ export default function App() {
         ) : (
           <>
             <Home />
-            <Work />
+            {currentWork && <Work currentWork={currentWork} />}
           </>
         )}
         {/* Three js canvas */}

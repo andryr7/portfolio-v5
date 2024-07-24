@@ -4,11 +4,13 @@
   bottom: 0;
   left: 0;
   right: 0;
-  max-width: 100%;
-  max-height: 100%;
   z-index: 25;
   overflow-y: auto;
   background-color: var(--color-background-one);
+  scrollbar-width: none;
+  scrollbar-gutter: stable;
+  -ms-overflow-style: none;
+  opacity: 0;
 }
 
 .container {
