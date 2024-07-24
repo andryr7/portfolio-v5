@@ -4,10 +4,8 @@ import styles from "./Frame.module.css";
 import { Options } from "./options/Options";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { Link, useRoute } from "wouter";
-import { useLenis } from "lenis/react";
 
 export function Frame() {
-  const lenis = useLenis();
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress
   );
@@ -21,11 +19,7 @@ export function Frame() {
             <Options />
             {isHomepage && <Menu />}
             {!isHomepage && (
-              <Link
-                href="/"
-                className={styles.homeLink}
-                // onClick={() => lenis?.scrollTo(0)}
-              >
+              <Link href="/" className={styles.homeLink}>
                 Back to homepage
               </Link>
             )}

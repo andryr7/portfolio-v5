@@ -64,7 +64,3 @@ body {
 .splide:not(.is-overflow) .splide__arrows {
   display: none;
 }
-
-.noscroll {
-  overflow: hidden;
-}

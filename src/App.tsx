@@ -1,18 +1,16 @@
-import { Home } from "./pages/home/Home";
 import { useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { StatsGl, View } from "@react-three/drei";
 import { ReactLenis } from "lenis/react";
 import { useLoadData } from "./handlers/useLoadData";
 import "./App.css";
-import { Route, Switch } from "wouter";
-import { Work } from "./pages/work/Work";
 import { Frame } from "./components/html/frame/Frame";
 import { useTheme } from "./handlers/useTheme";
 import NoiseFilter from "./components/html/noise/NoiseFilter";
 import { ViewportSizeHandler } from "./handlers/viewportSizeHandler";
 import gsap from "gsap";
-import { AppRouter } from "./AppRouter";
+import { Home } from "./pages/home/Home";
+import { Work } from "./pages/work/Work";
 
 export default function App() {
   const envMode = import.meta.env.MODE;
@@ -38,7 +36,7 @@ export default function App() {
       root
       ref={lenisRef}
       autoRaf={false}
-      options={{ prevent: (node) => node.id === "work-page" }}
+      // options={{ prevent: (node) => node.id === "work-page" }}
     >
       <div
         id="app-container"
@@ -51,7 +49,14 @@ export default function App() {
       >
         <Frame />
         {/* Routing */}
-        {isLoading ? "LOADING" : <AppRouter />}
+        {isLoading ? (
+          "LOADING"
+        ) : (
+          <>
+            <Home />
+            <Work />
+          </>
+        )}
         {/* Three js canvas */}
         <Canvas
           eventSource={appContainerRef}

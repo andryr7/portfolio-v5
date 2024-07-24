@@ -5,6 +5,7 @@ import { TechnologiesSection } from "@/components/html/work/technologies/Technol
 import { GeneralSection } from "@/components/html/work/general/GeneralSection";
 import { useRoute } from "wouter";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import ReactLenis, { useLenis } from "lenis/react";
 
 export function Work() {
   const [_, params] = useRoute("/work/:workname");
@@ -12,10 +13,12 @@ export function Work() {
     (work) => work.slug.current === params?.workname
   );
 
+  const globalLenisInstance = useLenis();
+
   return (
     <>
       {currentWork && (
-        <div className={styles.pageContainer} id="work-page">
+        <ReactLenis className={styles.pageContainer}>
           <div className={styles.container}>
             <WorkHeader work={currentWork} />
             <main>
@@ -29,8 +32,11 @@ export function Work() {
               <div style={{ height: "20rem" }} />
             </main>
           </div>
-          <WorkFooter work={currentWork} />
-        </div>
+          <WorkFooter
+            work={currentWork}
+            globalLenisInstance={globalLenisInstance}
+          />
+        </ReactLenis>
       )}
     </>
   );

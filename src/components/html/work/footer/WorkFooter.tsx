@@ -4,8 +4,15 @@ import { Link } from "wouter";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useLenis } from "lenis/react";
 import { Footer } from "../../home/footer/Footer";
+import Lenis from "lenis";
 
-export function WorkFooter({ work }: { work: Work }) {
+export function WorkFooter({
+  work,
+  globalLenisInstance,
+}: {
+  work: Work;
+  globalLenisInstance: Lenis | undefined;
+}) {
   const lenis = useLenis();
   const worksData = usePortfolioStore((state) => state.worksData);
 
@@ -28,16 +35,14 @@ export function WorkFooter({ work }: { work: Work }) {
           <Link
             href="/"
             className={styles.footerButton}
-            onClick={() => lenis?.scrollTo("#contact")}
+            onClick={() => globalLenisInstance?.scrollTo("#contact")}
           >
             contact
           </Link>
           <Link
             href={`/work/${nextProject.slug.current}`}
             className={styles.footerButton}
-            onClick={() =>
-              (document.getElementById("work-page")!.scrollTop = 0)
-            }
+            onClick={() => lenis?.scrollTo(0)}
           >
             next project: {nextProject.title}
           </Link>
