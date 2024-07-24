@@ -21,7 +21,7 @@ export function TechnologiesSection({ work }: { work: Work }) {
           }}
           aria-label={`${work?.title} technologies slider`}
         >
-          {work?.usedTechs?.map((tech, index) => (
+          {work?.usedTechs?.map((tech) => (
             <SplideSlide key={tech._id}>
               <TechItem item={tech} />
             </SplideSlide>

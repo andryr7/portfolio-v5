@@ -1,11 +1,6 @@
 import { TechnologiesPhysicalScene } from "@/components/canvas/home/technologies/TechnologiesPhysicalScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
-import {
-  Bounds,
-  Environment,
-  Lightformer,
-  PerspectiveCamera,
-} from "@react-three/drei";
+import { Bounds, Environment, PerspectiveCamera } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
 import { Suspense } from "react";
 

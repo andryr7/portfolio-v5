@@ -1,7 +1,7 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { ReactThreeFiber, extend, useFrame } from "@react-three/fiber";
 import { easing } from "maath";
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
 extend({ Line_: THREE.Line });
@@ -161,9 +161,6 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const timeRef = useRef<number>(0);
   const colors = usePortfolioStore((state) => state.colors);
-  const contactScrollProgress = usePortfolioStore(
-    (state) => state.contactScrollProgress
-  );
 
   const hoveredContactLink = usePortfolioStore(
     (state) => state.hoveredContactLink

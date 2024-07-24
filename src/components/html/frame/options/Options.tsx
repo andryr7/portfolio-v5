@@ -25,10 +25,6 @@ function ThemeButton() {
   return <div className={styles.darkModeButton} onClick={handleClick} />;
 }
 
-function LanguageButton() {
-  return <div className={styles.buttonContainer}>lang</div>;
-}
-
 export function Options() {
   return (
     <div className={styles.container}>

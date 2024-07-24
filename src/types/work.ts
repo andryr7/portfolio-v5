@@ -1,5 +1,3 @@
-import { Tech } from "./tech";
-
 interface WorkImage {
   _type: "image";
   _key: string;

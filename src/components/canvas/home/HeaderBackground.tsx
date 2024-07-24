@@ -36,7 +36,7 @@ export function HeaderBackground({ visible }: { visible: boolean }) {
   //   ease: { value: "easeBackOut", options: Object.keys(easings) },
   // });
 
-  const [texture, onMove] = useTrailTexture<any>({
+  const [texture, onMove] = useTrailTexture({
     size: 64,
     radius: 0.1,
     maxAge: 2000,

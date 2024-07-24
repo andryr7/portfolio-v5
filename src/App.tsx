@@ -32,12 +32,7 @@ export default function App() {
   });
 
   return (
-    <ReactLenis
-      root
-      ref={lenisRef}
-      autoRaf={false}
-      // options={{ prevent: (node) => node.id === "work-page" }}
-    >
+    <ReactLenis root ref={lenisRef} autoRaf={false}>
       <div
         id="app-container"
         ref={appContainerRef}
