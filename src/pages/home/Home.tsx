@@ -12,6 +12,7 @@ import { Presentation } from "@/components/html/home/about/presentation/Presenta
 import { Technologies } from "@/components/html/home/about/technologies/Technologies";
 import { useShallow } from "zustand/react/shallow";
 import { Skills } from "@/components/html/home/about/skills/Skills";
+import { Header } from "@/components/html/home/header/Header";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -132,7 +133,9 @@ export function Home() {
             className={styles.heroSectionContainer}
             style={{ pointerEvents: "none" }}
             id="hero"
-          />
+          >
+            <Header />
+          </header>
           <section className={styles.heroSectionContainer} id="works">
             <WorksSection />
           </section>
