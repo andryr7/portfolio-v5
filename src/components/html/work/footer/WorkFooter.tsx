@@ -32,7 +32,7 @@ export function WorkFooter({
             href="/"
             className={styles.footerButton}
             style={{ borderLeft: "none" }}
-            // onClick={() => lenis?.scrollTo("#works")}
+            onClick={() => globalLenisInstance?.scrollTo("#works")}
           >
             back to homepage
           </Link>

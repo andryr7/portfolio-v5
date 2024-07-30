@@ -23,7 +23,7 @@ export function Work({ currentWork }: { currentWork: WorkType }) {
             <WorkHeader work={currentWork} />
             <main>
               <section className={styles.section}>
-                <GeneralSection work={currentWork} />
+                <GeneralSection work={currentWork} key={currentWork._id} />
               </section>
               <div style={{ height: "20rem" }} />
               <section className={styles.section}>

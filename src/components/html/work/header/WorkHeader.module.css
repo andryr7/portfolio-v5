@@ -11,7 +11,7 @@
 .info-block {
   display: flex;
   justify-content: space-between;
-  font-size: max(1rem, min(2.5vw, 50px));
+  font-size: max(1rem, min(2vw, 50px));
 }
 
 .title-block {
@@ -25,5 +25,5 @@
 }
 
 .title-block span {
-  font-size: max(1rem, min(2.5vw, 50px));
+  font-size: max(1rem, min(2vw, 50px));
 }
