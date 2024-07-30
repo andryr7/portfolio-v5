@@ -20,7 +20,7 @@ export function Loader({ loadingStatus }: { loadingStatus: boolean }) {
     gsap.delayedCall(2, () => {
       tl.current.pause();
       gsap.to(containerRef.current, { opacity: 0 });
-      gsap.to(cubeRef.current, { width: "200vw", height: "200vw" });
+      gsap.to(cubeRef.current, { scale: 10 });
     });
   });
 

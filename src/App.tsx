@@ -42,7 +42,6 @@ export default function App() {
 
   return (
     <>
-      <Loader loadingStatus={isLoading} />
       <ReactLenis root ref={lenisRef} autoRaf={false}>
         <div
           id="app-container"
@@ -53,6 +52,7 @@ export default function App() {
             color: "var(--color-main)",
           }}
         >
+          <Loader loadingStatus={isLoading} />
           <Frame />
           {/* Routing */}
           {isLoading ? (
