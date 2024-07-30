@@ -34,7 +34,7 @@ export function WorkFooter({
             style={{ borderLeft: "none" }}
             onClick={() => globalLenisInstance?.scrollTo("#works")}
           >
-            back to homepage
+            back to works list
           </Link>
           <Link
             href="/"

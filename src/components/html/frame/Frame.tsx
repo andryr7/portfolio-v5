@@ -20,7 +20,7 @@ export function Frame() {
             {isHomepage && <Menu />}
             {!isHomepage && (
               <Link href="/" className={styles.homeLink}>
-                Back to homepage
+                back to homepage
               </Link>
             )}
           </div>
