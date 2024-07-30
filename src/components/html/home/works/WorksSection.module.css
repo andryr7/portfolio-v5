@@ -10,14 +10,14 @@
 
 .works-container {
   width: 90%;
-  border-radius: var(--br-s);
+  border-radius: var(--br-xs);
   overflow: hidden;
   border: 2px solid #0e0e0e;
   transition: all var(--transition-normal);
 }
 
 .work-line {
-  padding: 2rem;
+  padding: 2.5vh;
   display: flex;
   justify-content: space-between;
   align-items: center;

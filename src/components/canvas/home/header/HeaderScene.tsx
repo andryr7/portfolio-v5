@@ -93,7 +93,7 @@ export function HeaderScene() {
           strokeWidth={0.01}
           strokeColor={colors.main}
         >
-          Independent{"\n"}Web developer
+          independent{"\n"}web developer
         </Text>
       </group>
 

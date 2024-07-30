@@ -39,20 +39,20 @@ export function Menu() {
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "works")}
       >
-        {`-> works`}
+        {`works`}
       </div>
       <div
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "aboutanchor")}
       >
-        {`-> about`}
+        {`about`}
       </div>
       <div className={styles.closeButton}>{`X`}</div>
       <div
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "contact")}
       >
-        {`-> contact`}
+        {`contact`}
       </div>
     </div>
   );

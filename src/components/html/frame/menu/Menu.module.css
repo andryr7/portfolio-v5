@@ -5,11 +5,13 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 6px;
   pointer-events: all;
+  font-size: 0rem;
 }
 
 .opened-container {
   pointer-events: none;
   gap: 12px;
+  font-size: 1rem;
 }
 
 .menu-item {
@@ -20,7 +22,8 @@
   transition: 
     width var(--transition-normal),
     height var(--transition-normal),
-    color var(--transition-normal)
+    color var(--transition-normal),
+    font-size var(--transition-normal)
   ;
   pointer-events: none;
   display: flex;
