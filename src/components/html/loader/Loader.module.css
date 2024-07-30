@@ -1,0 +1,19 @@
+.container {
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  background-color: var(--color-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.cube {
+  width: 20vw;
+  height: 20vw;
+  background-color: var(--color-background-one);
+  border-radius: var(--br-s);
+}

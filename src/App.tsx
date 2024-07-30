@@ -13,6 +13,7 @@ import { Home } from "./pages/home/Home";
 import { Work } from "./pages/work/Work";
 import { useRoute } from "wouter";
 import { usePortfolioStore } from "./handlers/usePortfolioStore";
+import { Loader } from "./components/html/loader/Loader";
 
 export default function App() {
   const envMode = import.meta.env.MODE;
@@ -40,47 +41,50 @@ export default function App() {
   );
 
   return (
-    <ReactLenis root ref={lenisRef} autoRaf={false}>
-      <div
-        id="app-container"
-        ref={appContainerRef}
-        style={{
-          backgroundColor: "var(--color-background-one)",
-          fontFamily: "var(--font-title)",
-          color: "var(--color-main)",
-        }}
-      >
-        <Frame />
-        {/* Routing */}
-        {isLoading ? (
-          "LOADING"
-        ) : (
-          <>
-            <Home />
-            {currentWork && <Work currentWork={currentWork} />}
-          </>
-        )}
-        {/* Three js canvas */}
-        <Canvas
-          eventSource={appContainerRef}
-          eventPrefix="offset"
+    <>
+      <Loader loadingStatus={isLoading} />
+      <ReactLenis root ref={lenisRef} autoRaf={false}>
+        <div
+          id="app-container"
+          ref={appContainerRef}
           style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            overflow: "hidden",
-            zIndex: 10,
+            backgroundColor: "var(--color-background-one)",
+            fontFamily: "var(--font-title)",
+            color: "var(--color-main)",
           }}
         >
-          {envMode === "development" && <StatsGl />}
-          <View.Port />
-          <ViewportSizeHandler />
-        </Canvas>
-        {/* Noise filter */}
-        <NoiseFilter opacity={0.25} />
-      </div>
-    </ReactLenis>
+          <Frame />
+          {/* Routing */}
+          {isLoading ? (
+            "LOADING"
+          ) : (
+            <>
+              <Home />
+              {currentWork && <Work currentWork={currentWork} />}
+            </>
+          )}
+          {/* Three js canvas */}
+          <Canvas
+            eventSource={appContainerRef}
+            eventPrefix="offset"
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              overflow: "hidden",
+              zIndex: 10,
+            }}
+          >
+            {envMode === "development" && <StatsGl />}
+            <View.Port />
+            <ViewportSizeHandler />
+          </Canvas>
+          {/* Noise filter */}
+          <NoiseFilter opacity={0.25} />
+        </div>
+      </ReactLenis>
+    </>
   );
 }
