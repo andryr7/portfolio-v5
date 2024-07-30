@@ -1,7 +1,12 @@
-import { Environment, OrthographicCamera, Text } from "@react-three/drei";
+import {
+  Environment,
+  OrthographicCamera,
+  Text,
+  useProgress,
+} from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
-import { Suspense, useMemo } from "react";
+import { Suspense, useEffect, useMemo } from "react";
 import spacemono from "@/assets/fonts/space-mono.ttf";
 import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
@@ -9,6 +14,7 @@ import { PhysicsScene } from "./physics/PhysicsScene";
 import { HeaderBackground } from "../HeaderBackground";
 
 export function HeaderScene() {
+  const setIsLoaded = usePortfolioStore((state) => state.setIsLoaded);
   const colors = usePortfolioStore((state) => state.colors);
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
     (state) => state.viewportSize
@@ -41,6 +47,14 @@ export function HeaderScene() {
     );
     state.camera.updateProjectionMatrix();
   });
+
+  //Loading handling
+  const loadingProgress = useProgress();
+  useEffect(() => {
+    if (loadingProgress.progress === 100) {
+      setIsLoaded(true);
+    }
+  }, [loadingProgress, setIsLoaded]);
 
   return (
     <>

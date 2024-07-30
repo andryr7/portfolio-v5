@@ -12,6 +12,8 @@ type Colors = {
 };
 
 type State = {
+  //Loading state
+  isLoaded: boolean;
   //Theme and colors
   isDarkTheme: boolean;
   colors: Colors;
@@ -36,6 +38,8 @@ type State = {
 };
 
 type Actions = {
+  //Loading status
+  setIsLoaded: (newLoadingStatus: boolean) => void;
   //Theme and colors setter
   setIsDarkTheme: (newState: boolean) => void;
   setColors: (newColors: Colors) => void;
@@ -59,6 +63,9 @@ type Actions = {
 };
 
 export const usePortfolioStore = create<State & Actions>()((set) => ({
+  isLoaded: false,
+  setIsLoaded: (newLoadingStatus) =>
+    set(() => ({ isLoaded: newLoadingStatus })),
   isDarkTheme: false,
   setIsDarkTheme: (newState) => set(() => ({ isDarkTheme: newState })),
   colors: lightColors,

@@ -52,7 +52,7 @@ export default function App() {
             color: "var(--color-main)",
           }}
         >
-          <Loader loadingStatus={isLoading} />
+          <Loader />
           <Frame />
           {/* Routing */}
           {isLoading ? (

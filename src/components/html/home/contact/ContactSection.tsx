@@ -32,7 +32,7 @@ export function ContactSection() {
             rel="noreferrer noopener"
             href="https://www.linkedin.com/in/andryratsimba/"
           >
-            {"-> "}linkedin
+            linkedin
           </a>
           <a
             className={styles.contactLink}
@@ -41,14 +41,14 @@ export function ContactSection() {
             rel="noreferrer noopener"
             href="https://github.com/andryr7"
           >
-            {"-> "}github
+            github
           </a>
           <a
             className={styles.contactLink}
             onMouseEnter={() => setHoveredContactLink(2)}
             onClick={handleDesktopEmailClick}
           >
-            {emailWasCopied ? "email was copied" : "-> email"}
+            {emailWasCopied ? "email was copied" : "email"}
           </a>
         </div>
       </div>
