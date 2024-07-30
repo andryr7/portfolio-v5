@@ -103,7 +103,11 @@ export function InteractiveCube({
       cubePhysicsApi.current?.applyImpulse(new THREE.Vector3(25, 25, 0), true);
     }
 
-    if (cubePhysicsApi.current !== null && !worksSceneIsActive) {
+    if (
+      cubePhysicsApi.current !== null &&
+      !worksSceneIsActive &&
+      !contactSceneIsActive
+    ) {
       cubePhysicsApi.current.setRotation(
         new THREE.Quaternion(0, 0, 0, 1),
         true
