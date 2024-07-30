@@ -46,7 +46,17 @@ export function Technologies() {
                 </a>
               )}
             </div>
-            <button onClick={() => setSelectedTechCubeId(null)}>close</button>
+            <button
+              onClick={() => setSelectedTechCubeId(null)}
+              style={{
+                transition: "transform var(--transition-normal)",
+                transform: selectedTechCubeId
+                  ? "translateY(0%)"
+                  : "translateY(100%)",
+              }}
+            >
+              close
+            </button>
           </div>
         </div>
         <span className={styles.tips}>select or drag</span>
