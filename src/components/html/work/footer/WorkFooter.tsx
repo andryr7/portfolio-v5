@@ -3,7 +3,7 @@ import styles from "./WorkFooter.module.css";
 import { Link } from "wouter";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useLenis } from "lenis/react";
-import { Footer } from "../../home/footer/Footer";
+import { Footer } from "../../footer/Footer";
 import Lenis from "lenis";
 
 export function WorkFooter({

@@ -6,7 +6,7 @@ import { View } from "@react-three/drei";
 import { HeaderScene } from "@/components/canvas/home/header/HeaderScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { WorksSection } from "@/components/html/home/works/WorksSection";
-import { Footer } from "@/components/html/home/footer/Footer";
+import { Footer } from "@/components/html/footer/Footer";
 import { ContactSection } from "@/components/html/home/contact/ContactSection";
 import { Presentation } from "@/components/html/home/about/presentation/Presentation";
 import { Technologies } from "@/components/html/home/about/technologies/Technologies";

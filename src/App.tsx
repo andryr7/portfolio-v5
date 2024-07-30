@@ -3,42 +3,35 @@ import { Canvas } from "@react-three/fiber";
 import { StatsGl, View } from "@react-three/drei";
 import { ReactLenis } from "lenis/react";
 import { useLoadData } from "./handlers/useLoadData";
-import "./App.css";
 import { Frame } from "./components/html/frame/Frame";
 import { useTheme } from "./handlers/useTheme";
 import NoiseFilter from "./components/html/noise/NoiseFilter";
 import { ViewportSizeHandler } from "./handlers/viewportSizeHandler";
 import gsap from "gsap";
-import { Home } from "./pages/home/Home";
-import { Work } from "./pages/work/Work";
-import { useRoute } from "wouter";
-import { usePortfolioStore } from "./handlers/usePortfolioStore";
 import { Loader } from "./components/html/loader/Loader";
+import { DesktopRouter } from "./components/html/DesktopRouter";
+import "./App.css";
 
 export default function App() {
   const envMode = import.meta.env.MODE;
   const appContainerRef = useRef<any>(null);
   const lenisRef = useRef<any>(null);
   const isLoading = useLoadData();
+
+  //Theme handling
   useTheme();
 
+  //GSAP and lenis RAF handling
   useEffect(() => {
     function update(time: number) {
       lenisRef.current?.lenis?.raf(time * 1000);
     }
-
     gsap.ticker.add(update);
 
     return () => {
       gsap.ticker.remove(update);
     };
   });
-
-  //Work page Routing
-  const [_, params] = useRoute("/work/:workname");
-  const currentWork = usePortfolioStore((state) => state.worksData).find(
-    (work) => work.slug.current === params?.workname
-  );
 
   return (
     <>
@@ -55,14 +48,7 @@ export default function App() {
           <Loader />
           <Frame />
           {/* Routing */}
-          {isLoading ? (
-            "LOADING"
-          ) : (
-            <>
-              <Home />
-              {currentWork && <Work currentWork={currentWork} />}
-            </>
-          )}
+          {!isLoading && <DesktopRouter />}
           {/* Three js canvas */}
           <Canvas
             eventSource={appContainerRef}

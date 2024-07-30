@@ -1,5 +1,6 @@
 import { useLenis } from "lenis/react";
 import styles from "./Footer.module.css";
+import { Link } from "wouter";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -8,7 +9,7 @@ export function Footer() {
   return (
     <div className={styles.container}>
       <div className={styles.linksContainer}>
-        <a>data policy{" ->"}</a>
+        <Link to="/legals">legals{" ->"}</Link>
         <a onClick={() => lenis?.scrollTo(0)}>{"<- "}back to the top</a>
       </div>
       <div className={styles.marqueeContainer}>
