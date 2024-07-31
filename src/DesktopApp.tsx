@@ -3,16 +3,16 @@ import { Canvas } from "@react-three/fiber";
 import { StatsGl, View } from "@react-three/drei";
 import { ReactLenis } from "lenis/react";
 import { useLoadData } from "./handlers/useLoadData";
-import { Frame } from "./components/html/frame/Frame";
+import { Frame } from "./components/html/desktop/frame/Frame";
 import { useTheme } from "./handlers/useTheme";
-import NoiseFilter from "./components/html/noise/NoiseFilter";
+import NoiseFilter from "./components/html/desktop/noise/NoiseFilter";
 import { ViewportSizeHandler } from "./handlers/viewportSizeHandler";
 import gsap from "gsap";
-import { Loader } from "./components/html/loader/Loader";
-import { DesktopRouter } from "./components/html/DesktopRouter";
-import "./App.css";
+import { Loader } from "./components/html/desktop/loader/Loader";
+import { DesktopRouter } from "./components/html/desktop/DesktopRouter";
+import "./DesktopApp.css";
 
-export default function App() {
+export default function DesktopApp() {
   const envMode = import.meta.env.MODE;
   const appContainerRef = useRef<any>(null);
   const lenisRef = useRef<any>(null);

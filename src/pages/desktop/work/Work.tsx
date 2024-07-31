@@ -1,8 +1,8 @@
 import styles from "./Work.module.css";
-import { WorkHeader } from "@/components/html/work/header/WorkHeader";
-import { WorkFooter } from "@/components/html/work/footer/WorkFooter";
-import { TechnologiesSection } from "@/components/html/work/technologies/TechnologiesSection";
-import { GeneralSection } from "@/components/html/work/general/GeneralSection";
+import { WorkHeader } from "@/components/html/desktop/work/header/WorkHeader";
+import { WorkFooter } from "@/components/html/desktop/work/footer/WorkFooter";
+import { TechnologiesSection } from "@/components/html/desktop/work/technologies/TechnologiesSection";
+import { GeneralSection } from "@/components/html/desktop/work/general/GeneralSection";
 import ReactLenis, { useLenis } from "lenis/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
