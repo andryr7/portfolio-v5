@@ -1,6 +1,11 @@
 import { TechnologiesPhysicalScene } from "@/components/canvas/home/technologies/TechnologiesPhysicalScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
-import { Bounds, Environment, PerspectiveCamera } from "@react-three/drei";
+import {
+  Bounds,
+  Environment,
+  Lightformer,
+  PerspectiveCamera,
+} from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
 import { Suspense } from "react";
 
@@ -20,7 +25,39 @@ export function TechnologiesScene() {
         intensity={1}
         castShadow
       />
-      <Environment preset="city" />
+      {/* <Environment preset="city" /> */}
+      <Environment resolution={256}>
+        <group rotation={[-Math.PI / 3, 0, 1]}>
+          <Lightformer
+            form="circle"
+            intensity={4}
+            rotation-x={Math.PI / 2}
+            position={[0, 5, -9]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={Math.PI / 2}
+            position={[-5, 1, -1]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={Math.PI / 2}
+            position={[-5, -1, -1]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={-Math.PI / 2}
+            position={[10, 1, 0]}
+            scale={8}
+          />
+        </group>
+      </Environment>
       <color attach={"background"} args={[colors.backgroundTwo]} />
 
       {/* Physical scene scene */}
