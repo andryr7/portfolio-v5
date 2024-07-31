@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 
+const letters = "abcdefghijklmnopqrstuvwxyz ";
+
 export function useAnimatedText(targetText: string) {
   const [text, setText] = useState(targetText);
 
   // Text animation handler
   const handleAnimateText = useCallback(() => {
-    const letters = "abcdefghijklmnopqrstuvwxyz ";
     const targetWord = targetText;
     let iteration = 0;
     const maxIterations = targetWord.length;

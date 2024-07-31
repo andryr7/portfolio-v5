@@ -1,11 +1,27 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./ContactSection.module.css";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import { useAnimatedText } from "@/handlers/useAnimatedText";
 
 export function ContactSection() {
   const [emailWasCopied, setEmailWasCopied] = useState<boolean>(false);
   const setHoveredContactLink = usePortfolioStore(
     (state) => state.setHoveredContactLink
+  );
+  const hoveredContactLink = usePortfolioStore(
+    (state) => state.hoveredContactLink
+  );
+
+  const linkedinLinkText = useAnimatedText(
+    hoveredContactLink === 0 ? "professional profile" : "linkedIn"
+  );
+
+  const githubLinkText = useAnimatedText(
+    hoveredContactLink === 1 ? "developer profile" : "gitHub"
+  );
+
+  const emailLinkText = useAnimatedText(
+    hoveredContactLink === 2 ? "copy personal contact" : "email"
   );
 
   const handleDesktopEmailClick = useCallback(() => {
@@ -32,7 +48,7 @@ export function ContactSection() {
             rel="noreferrer noopener"
             href="https://www.linkedin.com/in/andryratsimba/"
           >
-            linkedin
+            {linkedinLinkText}
           </a>
           <a
             className={styles.contactLink}
@@ -41,14 +57,14 @@ export function ContactSection() {
             rel="noreferrer noopener"
             href="https://github.com/andryr7"
           >
-            github
+            {githubLinkText}
           </a>
           <a
             className={styles.contactLink}
             onMouseEnter={() => setHoveredContactLink(2)}
             onClick={handleDesktopEmailClick}
           >
-            {emailWasCopied ? "email was copied" : "email"}
+            {emailWasCopied ? "email was copied" : emailLinkText}
           </a>
         </div>
       </div>
