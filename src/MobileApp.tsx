@@ -15,15 +15,25 @@ export default function MobileApp() {
       <Loader isLoading={isLoading} />
       <Frame />
       {!isLoading && (
-        <>
-          <header className="page">header</header>
+        <div className="mobile-app-container">
+          <header className="page" style={{ backgroundColor: "yellow" }}>
+            header
+          </header>
           <main>
-            <section className="page">section 1</section>
-            <section className="page">section 2</section>
-            <section className="page">section 3</section>
+            <section className="page" style={{ backgroundColor: "red" }}>
+              section 1
+            </section>
+            <section className="page" style={{ backgroundColor: "blue" }}>
+              section 2
+            </section>
+            <section className="page" style={{ backgroundColor: "green" }}>
+              section 3
+            </section>
           </main>
-          <footer className="page">footer</footer>
-        </>
+          <footer className="page" style={{ backgroundColor: "purple" }}>
+            footer
+          </footer>
+        </div>
       )}
     </>
   );
