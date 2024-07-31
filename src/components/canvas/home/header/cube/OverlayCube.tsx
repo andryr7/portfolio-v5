@@ -1,15 +1,15 @@
 import { RoundedBox, Text } from "@react-three/drei";
 import spacemono from "@/assets/fonts/space-mono.ttf";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { useAnimatedText } from "@/handlers/useAnimatedText";
 
 export function OverlayCube({ visible }: { visible: boolean }) {
   const colors = usePortfolioStore((state) => state.colors);
   const cubeMaterialRef = useRef(null);
   const textMaterialRef = useRef(null);
-  const [cubeTextResult, setCubeTextResult] = useState("who I am");
 
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress
@@ -19,41 +19,13 @@ export function OverlayCube({ visible }: { visible: boolean }) {
     (state) => state.aboutScrollProgress
   );
 
+  //Cube text and text animation
   const cubeText = useMemo(() => {
     if (aboutScrollProgress < 0.25) return "who I am";
     else if (aboutScrollProgress > 0.75) return "what I use";
     else return "what I do";
   }, [aboutScrollProgress]);
-
-  // Cube text animation process
-  const handleAnimateText = useCallback(() => {
-    const letters = "abcdefghijklmnopqrstuvwxyz ";
-    const targetWord = cubeText;
-    let iteration = 0;
-    const maxIterations = targetWord.length;
-    const interval = setInterval(() => {
-      if (iteration > maxIterations) {
-        clearInterval(interval);
-        return;
-      }
-      const randomizedWord = targetWord
-        .split("")
-        .map((_, index) => {
-          if (index < iteration) {
-            return targetWord[index];
-          }
-          return letters[Math.floor(Math.random() * 27)];
-        })
-        .join("");
-      setCubeTextResult(randomizedWord);
-      iteration += 1;
-    }, 35);
-  }, [cubeText]);
-
-  //Triggering text animation
-  useEffect(() => {
-    handleAnimateText();
-  }, [cubeText, handleAnimateText]);
+  const cubeTextResult = useAnimatedText(cubeText);
 
   useFrame((_, delta) => {
     //2d cube material opacity animation
