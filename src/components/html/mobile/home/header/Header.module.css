@@ -1,11 +1,11 @@
 .container {
-  min-height: 75vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: end;
   padding: 1rem;
   box-sizing: border-box;
-  font-size: min(11vw, 10vh);
+  font-size: min(11.25vw, 10vh);
   line-height: 115%;
 }
 
