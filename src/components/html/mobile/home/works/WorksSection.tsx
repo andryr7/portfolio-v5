@@ -6,7 +6,7 @@ export function WorksSection() {
   const worksData = usePortfolioStore((state) => state.worksData);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="works">
       <span className={styles.sectionTitle}>selected works</span>
       <div className={styles.workList}>
         {worksData.map((work) => (

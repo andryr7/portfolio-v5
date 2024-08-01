@@ -38,7 +38,7 @@
 .image-container {
   aspect-ratio: 3/4;
   width: 100%;
-  max-width: min(50vw, 500px);
+  max-width: min(33vw, 500px);
   border-radius: var(--br-xs);
   overflow: hidden;
   filter: grayscale(1);

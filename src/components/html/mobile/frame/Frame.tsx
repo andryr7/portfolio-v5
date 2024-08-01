@@ -1,16 +1,27 @@
 import styles from "./Frame.module.css";
-import { useRoute } from "wouter";
-import { Options } from "./options/Options";
+import { useEffect, useState } from "react";
+import { Menu, MenuButton } from "./menu/Menu";
 
 export function Frame() {
-  const [isHomepage] = useRoute("/");
+  const [menuIsOpened, setMenuIsOpened] = useState(false);
+
+  useEffect(() => {
+    if (menuIsOpened) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+  });
 
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.interfaceContainer}>
-          <Options />
-        </div>
+        {!menuIsOpened && (
+          <div className={styles.optionsContainer}>
+            <MenuButton setMenuIsOpened={setMenuIsOpened} />
+          </div>
+        )}
+        {menuIsOpened && <Menu setMenuIsOpened={setMenuIsOpened} />}
       </div>
     </>
   );

@@ -18,3 +18,15 @@
   color: var(--color-main);
   background-color: var(--color-background-one);
 }
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25vh;
+}
+
+.noscroll {
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+}

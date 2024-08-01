@@ -21,8 +21,11 @@ export default function MobileApp() {
         <div className="mobile-app-container">
           <Header />
           <WorksSection />
-          <main>
+          <main className="about-container" id="about">
             <Presentation />
+            <section className="page" style={{ backgroundColor: "green" }}>
+              section 2
+            </section>
             <section className="page" style={{ backgroundColor: "green" }}>
               section 3
             </section>

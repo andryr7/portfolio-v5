@@ -1,0 +1,35 @@
+
+
+.menu-button {
+  background-color: red;
+  pointer-events: all;
+  margin-left: auto;
+  width: 50px;
+  height: 50px;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-background-one);
+  background-color: var(--color-main);
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  padding: 1rem;
+  box-sizing: border-box;
+  pointer-events: all;
+}
+
+.menu-top-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.menu-center-container {
+  display: flex;
+  flex-direction: column;
+  font-size: min(15vw, 15vh);
+  gap: 1rem;
+}
