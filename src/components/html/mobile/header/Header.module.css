@@ -1,0 +1,16 @@
+.container {
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-size: min(11vw, 10vh);
+  line-height: 115%;
+}
+
+.container h2 {
+  color: var(--color-background-one);
+  font-style: italic;
+  text-shadow: -1px -1px 0 var(--color-main), 1px -1px 0 var(--color-main), -1px 1px 0 var(--color-main), 1px 1px 0 var(--color-main);
+}

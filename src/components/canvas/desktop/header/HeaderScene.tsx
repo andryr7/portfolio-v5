@@ -12,7 +12,7 @@ import spacemono from "@/assets/fonts/space-mono.ttf";
 import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { PhysicsScene } from "./physics/PhysicsScene";
-import { HeaderBackground } from "../HeaderBackground";
+import { HeaderBackground } from "./HeaderBackground";
 
 export function HeaderScene() {
   const setIsLoaded = usePortfolioStore((state) => state.setIsLoaded);

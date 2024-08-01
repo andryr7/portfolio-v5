@@ -1,4 +1,5 @@
 import { Frame } from "./components/html/mobile/frame/Frame";
+import { Header } from "./components/html/mobile/header/Header";
 import { Loader } from "./components/html/mobile/loader/Loader";
 import { useLoadData } from "./handlers/useLoadData";
 import { useTheme } from "./handlers/useTheme";
@@ -16,9 +17,7 @@ export default function MobileApp() {
       <Frame />
       {!isLoading && (
         <div className="mobile-app-container">
-          <header className="page" style={{ backgroundColor: "yellow" }}>
-            header
-          </header>
+          <Header />
           <main>
             <section className="page" style={{ backgroundColor: "red" }}>
               section 1

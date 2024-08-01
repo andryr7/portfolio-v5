@@ -1,4 +1,4 @@
-import { InteractiveCube } from "../cube/InteractiveCube";
+import { InteractiveCube } from "../../../desktop/cube/InteractiveCube";
 import { PhysicBoundaries } from "./PhysicBoundaries";
 import { PointerCollider } from "./PointerCollider";
 

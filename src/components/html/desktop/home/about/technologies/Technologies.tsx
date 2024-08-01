@@ -1,8 +1,8 @@
 import { View } from "@react-three/drei";
 import styles from "./Technologies.module.css";
-import { TechnologiesScene } from "@/components/canvas/home/technologies/TechnologiesScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useMemo } from "react";
+import { TechnologiesScene } from "@/components/canvas/desktop/technologies/TechnologiesScene";
 
 export function Technologies() {
   const selectedTechCubeId = usePortfolioStore(

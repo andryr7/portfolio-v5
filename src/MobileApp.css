@@ -1,5 +1,8 @@
 .mobile-app-container {
   box-sizing: border-box;
+  color: var(--color-main);
+  background-color: var(--color-background-one);
+  font-family: var(--font-title);
 }
 
 /* Frame border */

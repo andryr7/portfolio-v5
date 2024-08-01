@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { View } from "@react-three/drei";
-import { HeaderScene } from "@/components/canvas/home/header/HeaderScene";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { WorksSection } from "@/components/html/desktop/home/works/WorksSection";
 import { ContactSection } from "@/components/html/desktop/home/contact/ContactSection";
@@ -13,6 +12,7 @@ import { useShallow } from "zustand/react/shallow";
 import { Skills } from "@/components/html/desktop/home/about/skills/Skills";
 import { Header } from "@/components/html/desktop/home/header/Header";
 import { Footer } from "@/components/html/desktop/footer/Footer";
+import { HeaderScene } from "@/components/canvas/desktop/header/HeaderScene";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
