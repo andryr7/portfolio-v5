@@ -1,4 +1,4 @@
-import { View } from "@react-three/drei";
+import { PerspectiveCamera, View } from "@react-three/drei";
 import styles from "./Technologies.module.css";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useMemo } from "react";
@@ -26,6 +26,7 @@ export function Technologies() {
             className={styles.view}
             style={{ width: selectedTechCubeId === null ? "100%" : "75%" }}
           >
+            <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={10} />
             <TechnologiesScene />
           </View>
           <div

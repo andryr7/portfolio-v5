@@ -1,10 +1,5 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
-import {
-  Bounds,
-  Environment,
-  Lightformer,
-  PerspectiveCamera,
-} from "@react-three/drei";
+import { Bounds, Environment, Lightformer } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
 import { Suspense } from "react";
 import { TechnologiesPhysicalScene } from "./TechnologiesPhysicalScene";
@@ -14,8 +9,6 @@ export function TechnologiesScene() {
 
   return (
     <>
-      <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={10} />
-
       {/* Lighting and environment */}
       <ambientLight intensity={1} />
       <spotLight

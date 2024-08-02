@@ -1,6 +1,6 @@
 import { TechnologiesScene } from "@/components/canvas/desktop/technologies/TechnologiesScene";
 import styles from "./Technologies.module.css";
-import { View } from "@react-three/drei";
+import { PerspectiveCamera, View } from "@react-three/drei";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useMemo } from "react";
 
@@ -21,6 +21,12 @@ export function Technologies() {
     <div className={styles.container}>
       <span className={styles.sectionTitle}>Technologies</span>
       <View className={styles.viewContainer}>
+        <PerspectiveCamera
+          makeDefault
+          position={[0, 0, 5]}
+          fov={10}
+          zoom={0.75}
+        />
         <TechnologiesScene />
       </View>
       <div
