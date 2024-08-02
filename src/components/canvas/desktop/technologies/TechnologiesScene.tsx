@@ -62,7 +62,7 @@ export function TechnologiesScene() {
 
       {/* Physical scene scene */}
       <Suspense fallback={null}>
-        <Physics gravity={[0, 0, 0]}>
+        <Physics gravity={[0, 0, 0]} timeStep="vary">
           <TechnologiesPhysicalScene />
         </Physics>
       </Suspense>

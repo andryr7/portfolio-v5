@@ -17,12 +17,14 @@
   gap: 10vh;
   padding: 1rem;
   box-sizing: border-box;
+  max-width: 500px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .skill-list  {
     flex-direction: row;
     gap: 5vh;
+    max-width: unset;
   }
 }
 
