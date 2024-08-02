@@ -2,12 +2,19 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.section-title {
+  font-size: var(--font-size-s);
+  box-sizing: border-box;
+  padding: 5vh;
 }
 
 .skill-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 10vh;
   padding: 1rem;
   box-sizing: border-box;
 }
@@ -15,6 +22,7 @@
 @media (min-width: 768px) {
   .skill-list  {
     flex-direction: row;
+    gap: 5vh;
   }
 }
 
@@ -27,6 +35,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-height: 50vh;
 }
 
 .skill-container h4 {

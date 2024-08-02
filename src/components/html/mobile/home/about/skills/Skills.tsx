@@ -24,7 +24,7 @@ export function Skills() {
   if (skills.length > 0) {
     return (
       <div className={styles.container}>
-        Skills
+        <span className={styles.sectionTitle}>Skills</span>
         <div className={styles.skillList}>
           {skills.map((skill) => (
             <SkillCard key={skill._id} skill={skill} />
