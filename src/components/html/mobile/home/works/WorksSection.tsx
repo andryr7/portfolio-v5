@@ -13,6 +13,7 @@ export function WorksSection() {
           <Link
             href={`/work/${work.slug.current}`}
             className={styles.workContainer}
+            key={work._id}
           >
             <img
               src={"/images/works/" + work.previewImagePath}

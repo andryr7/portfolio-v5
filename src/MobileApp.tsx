@@ -1,5 +1,7 @@
 import { Frame } from "./components/html/mobile/frame/Frame";
 import { Presentation } from "./components/html/mobile/home/about/presentation/Presentation";
+import { Skills } from "./components/html/mobile/home/about/skills/Skills";
+import { Technologies } from "./components/html/mobile/home/about/technologies/Technologies";
 import { Header } from "./components/html/mobile/home/header/Header";
 import { WorksSection } from "./components/html/mobile/home/works/WorksSection";
 import { Loader } from "./components/html/mobile/loader/Loader";
@@ -23,12 +25,8 @@ export default function MobileApp() {
           <WorksSection />
           <main className="about-container" id="about">
             <Presentation />
-            <section className="page" style={{ backgroundColor: "green" }}>
-              section 2
-            </section>
-            <section className="page" style={{ backgroundColor: "green" }}>
-              section 3
-            </section>
+            <Skills />
+            <Technologies />
           </main>
           <footer className="page" style={{ backgroundColor: "purple" }}>
             footer
