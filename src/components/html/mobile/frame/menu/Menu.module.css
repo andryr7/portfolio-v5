@@ -30,6 +30,6 @@
 .menu-center-container {
   display: flex;
   flex-direction: column;
-  font-size: min(15vw, 15vh);
+  font-size: min(100px, min(15vw, 15vh));
   gap: 1rem;
 }

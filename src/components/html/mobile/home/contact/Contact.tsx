@@ -4,7 +4,7 @@ import { Tesseract } from "@/components/canvas/desktop/contact/Tesseract";
 
 export function Contact() {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="contact">
       <View className={styles.viewContainer}>
         <PerspectiveCamera makeDefault position={[0, 0, 2]} fov={45} />
         <Tesseract visible={true} />
