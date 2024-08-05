@@ -12,6 +12,7 @@ import "./MobileApp.css";
 import { useRef } from "react";
 import { StatsGl, View } from "@react-three/drei";
 import { Contact } from "./components/html/mobile/home/contact/Contact";
+import { Footer } from "./components/html/mobile/footer/Footer";
 
 export default function MobileApp() {
   const appContainerRef = useRef<any>(null);
@@ -34,9 +35,7 @@ export default function MobileApp() {
             <Technologies />
           </main>
           <Contact />
-          <footer className="page" style={{ backgroundColor: "purple" }}>
-            footer
-          </footer>
+          <Footer />
         </div>
       )}
       <Canvas
