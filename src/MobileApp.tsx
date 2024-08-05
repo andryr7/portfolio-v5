@@ -1,18 +1,12 @@
 import { Canvas } from "@react-three/fiber";
 import { Frame } from "./components/html/mobile/frame/Frame";
-import { Presentation } from "./components/html/mobile/home/about/presentation/Presentation";
-import { Skills } from "./components/html/mobile/home/about/skills/Skills";
-import { Technologies } from "./components/html/mobile/home/about/technologies/Technologies";
-import { Header } from "./components/html/mobile/home/header/Header";
-import { WorksSection } from "./components/html/mobile/home/works/WorksSection";
 import { Loader } from "./components/html/mobile/loader/Loader";
 import { useLoadData } from "./handlers/useLoadData";
 import { useTheme } from "./handlers/useTheme";
-import "./MobileApp.css";
 import { useRef } from "react";
 import { StatsGl, View } from "@react-three/drei";
-import { Contact } from "./components/html/mobile/home/contact/Contact";
-import { Footer } from "./components/html/mobile/footer/Footer";
+import { MobileRouter } from "./components/html/mobile/MobileRouter";
+import "./MobileApp.css";
 
 export default function MobileApp() {
   const appContainerRef = useRef<any>(null);
@@ -25,19 +19,9 @@ export default function MobileApp() {
     <>
       <Loader isLoading={isLoading} />
       <Frame />
-      {!isLoading && (
-        <div className="mobile-app-container" ref={appContainerRef}>
-          <Header />
-          <WorksSection />
-          <main className="about-container" id="about">
-            <Presentation />
-            <Skills />
-            <Technologies />
-          </main>
-          <Contact />
-          <Footer />
-        </div>
-      )}
+      <div className="mobile-app-container" ref={appContainerRef}>
+        {!isLoading && <MobileRouter />}
+      </div>
       <Canvas
         eventSource={appContainerRef}
         eventPrefix="offset"

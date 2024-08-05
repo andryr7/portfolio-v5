@@ -13,7 +13,7 @@ import {
 extend({ BackgroundMaterial });
 
 export function HeaderScene() {
-  const cubeRef = useRef<THREE.Mesh>(null);
+  const cubeRef = useRef<THREE.Mesh | null>(null);
   const colors = usePortfolioStore((state) => state.colors);
 
   const mainColor = useMemo(() => {

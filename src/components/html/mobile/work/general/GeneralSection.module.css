@@ -1,0 +1,37 @@
+
+
+.work-image-container {
+  aspect-ratio: 16 / 9;
+}
+
+.work-image {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-main)77;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-container p {
+  line-height: 125%;
+  font-family: var(--font-text);
+  text-align: justify;
+}
+
+.links-container {
+  display: flex;
+  gap: 1rem;
+  align-items: start;
+}
+
+.section-title {
+  font-size: var(--font-size-m);
+}
+
+.tech-container {
+  background-color: green;
+}
