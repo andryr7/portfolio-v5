@@ -103,18 +103,6 @@ export function Home() {
           // markers: true,
         },
       });
-
-      //About section title
-      gsap.to("#about-title", {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: "#about-title",
-          start: "center center",
-          end: "top bottom",
-          scrub: true,
-          // markers: true,
-        },
-      });
     }
     // { scope: container }
   );
