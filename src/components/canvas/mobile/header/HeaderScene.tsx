@@ -1,18 +1,18 @@
-import { extend, useFrame } from "@react-three/fiber";
-import { BackgroundMaterial } from "../../desktop/header/BackgroundMaterial";
+import { useFrame } from "@react-three/fiber";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import {
-  Grid,
-  MeshTransmissionMaterial,
-  OrbitControls,
-  RoundedBox,
+  Environment,
+  Lightformer,
+  OrthographicCamera,
 } from "@react-three/drei";
 
-extend({ BackgroundMaterial });
-
 export function HeaderScene() {
+  const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
+    (state) => state.viewportSize
+  );
+
   const cubeRef = useRef<THREE.Mesh | null>(null);
   const colors = usePortfolioStore((state) => state.colors);
 
@@ -24,32 +24,59 @@ export function HeaderScene() {
     return new THREE.Color(colors.backgroundOne);
   }, [colors]);
 
-  useFrame((_, delta) => {
-    if (cubeRef.current !== null) {
-      cubeRef.current.rotation.x += delta;
-      cubeRef.current.rotation.y += delta;
-      cubeRef.current.rotation.z += delta;
-    }
+  useFrame((state) => {
+    state.camera.zoom = Math.min(
+      window.innerWidth / viewportWidth,
+      window.innerHeight / viewportHeight
+    );
+    state.camera.updateProjectionMatrix();
   });
 
   return (
     <>
+      <OrthographicCamera
+        makeDefault
+        near={0.01}
+        far={1000}
+        position={[0, 0, 10]}
+      />
       <color attach="background" args={[colors.backgroundOne]} />
-      <OrbitControls />
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <Grid
-          args={[10, 10]}
-          sectionSize={0}
-          cellSize={1}
-          cellColor={mainColor}
-          cellThickness={1}
-        />
+      <ambientLight />
+      <mesh>
+        <boxGeometry />
       </mesh>
-      <mesh position={[0, 0, 2]} scale={2} ref={cubeRef}>
-        <RoundedBox>
-          <MeshTransmissionMaterial />
-        </RoundedBox>
-      </mesh>
+      <Environment resolution={256}>
+        <group rotation={[-Math.PI / 3, 0, 1]}>
+          <Lightformer
+            form="circle"
+            intensity={4}
+            rotation-x={Math.PI / 2}
+            position={[0, 5, -9]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={Math.PI / 2}
+            position={[-5, 1, -1]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={Math.PI / 2}
+            position={[-5, -1, -1]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={-Math.PI / 2}
+            position={[10, 1, 0]}
+            scale={8}
+          />
+        </group>
+      </Environment>
     </>
   );
 }
