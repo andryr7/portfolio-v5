@@ -32,10 +32,10 @@ export function GeneralSection({ work }: { work: Work }) {
       </Splide>
       <div className={styles.infoContainer}>
         <p>{work?.generalDescription}</p>
-        {work?.liveUrl && (
-          <LinkButton url={work?.liveUrl} label={"live website"} />
-        )}
       </div>
+      {work?.liveUrl && (
+        <LinkButton url={work?.liveUrl} label={"live website"} />
+      )}
     </>
   );
 }

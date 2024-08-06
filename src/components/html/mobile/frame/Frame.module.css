@@ -34,3 +34,11 @@
   padding: 1rem;
   width: 100%;
 }
+
+.home-link {
+  margin-left: auto;
+  padding: 1rem;
+  pointer-events: all;
+  height: fit-content;
+  width: fit-content;
+}

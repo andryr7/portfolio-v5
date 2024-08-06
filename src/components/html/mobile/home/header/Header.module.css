@@ -18,13 +18,7 @@
   left: 0;
 }
 
-.container h2 {
-  color: var(--color-background-one);
-  font-style: italic;
-  text-shadow: -1px -1px 0 var(--color-main), 1px -1px 0 var(--color-main), -1px 1px 0 var(--color-main), 1px 1px 0 var(--color-main);
-}
-
 .title-container {
-  z-index: 11;
+  opacity: 0;
   pointer-events: none;
 }

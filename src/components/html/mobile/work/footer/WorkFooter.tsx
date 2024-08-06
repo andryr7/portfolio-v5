@@ -25,23 +25,17 @@ export function WorkFooter({ work }: { work: Work }) {
         <Link
           href="/"
           className={styles.footerButton}
-          style={{ borderLeft: "none" }}
-          // onClick={() => globalLenisInstance?.scrollTo("#works")}
-        >
-          back to works list
-        </Link>
-        <Link
-          href="/"
-          className={styles.footerButton}
           // onClick={() => globalLenisInstance?.scrollTo("#contact")}
         >
-          contact
+          back to homepage
         </Link>
         <Link
           href={`/work/${nextProject.slug.current}`}
           className={styles.footerButton}
         >
-          next project: {nextProject.title}
+          next project:
+          <br />
+          {nextProject.title}
         </Link>
       </div>
     </>

@@ -3,33 +3,27 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import {
+  Bounds,
   Environment,
   Lightformer,
+  MeshTransmissionMaterial,
   OrthographicCamera,
+  RoundedBox,
+  Text,
 } from "@react-three/drei";
+import spacemono from "@/assets/fonts/space-mono.ttf";
+import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 
 export function HeaderScene() {
-  const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
-    (state) => state.viewportSize
-  );
-
   const cubeRef = useRef<THREE.Mesh | null>(null);
   const colors = usePortfolioStore((state) => state.colors);
 
-  const mainColor = useMemo(() => {
-    return new THREE.Color(colors.main);
-  }, [colors]);
-
-  const backgroundColor = useMemo(() => {
-    return new THREE.Color(colors.backgroundOne);
-  }, [colors]);
-
-  useFrame((state) => {
-    state.camera.zoom = Math.min(
-      window.innerWidth / viewportWidth,
-      window.innerHeight / viewportHeight
-    );
-    state.camera.updateProjectionMatrix();
+  useFrame((_, delta) => {
+    if (cubeRef.current !== null) {
+      cubeRef.current.rotation.x += delta * 0.1;
+      cubeRef.current.rotation.y += delta * 0.1;
+      cubeRef.current.rotation.z += delta * 0.1;
+    }
   });
 
   return (
@@ -38,13 +32,48 @@ export function HeaderScene() {
         makeDefault
         near={0.01}
         far={1000}
-        position={[0, 0, 10]}
+        position={[0, 0, 1]}
       />
       <color attach="background" args={[colors.backgroundOne]} />
       <ambientLight />
-      <mesh>
-        <boxGeometry />
+      <Bounds fit clip observe margin={1}>
+        <mesh>
+          <boxGeometry args={[8.5, 5, 5]} />
+          <meshBasicMaterial color="red" wireframe />
+        </mesh>
+      </Bounds>
+      <mesh scale={3} position={[0, 0, -2]} ref={cubeRef}>
+        <RoundedBox>
+          <MeshTransmissionMaterial
+            thickness={0.25}
+            chromaticAberration={0.5}
+          />
+        </RoundedBox>
       </mesh>
+      <group>
+        <Text
+          font={spacemono}
+          anchorX="center"
+          anchorY="bottom"
+          lineHeight={1}
+          color={colors.main}
+          textAlign="center"
+        >
+          Andry{"\n"}Ratsimba
+        </Text>
+        <Text
+          font={spacemonoitalic}
+          anchorX="center"
+          anchorY="top"
+          lineHeight={1}
+          fillOpacity={0}
+          strokeWidth={0.01}
+          strokeColor={colors.main}
+          textAlign="center"
+        >
+          independent{"\n"}web developer
+        </Text>
+      </group>
       <Environment resolution={256}>
         <group rotation={[-Math.PI / 3, 0, 1]}>
           <Lightformer

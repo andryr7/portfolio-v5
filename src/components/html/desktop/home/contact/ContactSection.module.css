@@ -10,6 +10,7 @@
   text-align: center;
   font-size: min(22vw, 33vh);
   color: var(--color-background-two);
+  user-select: none;
 }
 
 .links-container-wrapper {

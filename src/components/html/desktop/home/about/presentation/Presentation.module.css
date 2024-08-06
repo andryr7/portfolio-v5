@@ -32,6 +32,7 @@
 
 .text-container p {
   font-family: var(--font-text);
+  text-align: justify;
 }
 
 .image-container {

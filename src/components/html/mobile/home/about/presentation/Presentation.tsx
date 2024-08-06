@@ -3,6 +3,10 @@ import styles from "./Presentation.module.css";
 export function Presentation() {
   return (
     <div className={styles.container}>
+      <div
+        className={styles.imageContainer}
+        style={{ backgroundImage: `url('/images/about/me.jpg')` }}
+      />
       <div className={styles.textContainer}>
         <h2>Hello there</h2>
         <p>
@@ -19,10 +23,6 @@ export function Presentation() {
           laborum.
         </p>
       </div>
-      <div
-        className={styles.imageContainer}
-        style={{ backgroundImage: `url('/images/about/me.jpg')` }}
-      />
     </div>
   );
 }

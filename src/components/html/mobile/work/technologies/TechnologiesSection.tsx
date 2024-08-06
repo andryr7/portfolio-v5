@@ -17,6 +17,7 @@ export function TechnologiesSection({ work }: { work: Work }) {
             rewind: true,
             lazyLoad: false,
             perPage: 5,
+            gap: "1rem",
             breakpoints: {
               1920: {
                 perPage: 4,
@@ -43,10 +44,10 @@ export function TechnologiesSection({ work }: { work: Work }) {
       </div>
       <div className={styles.infoContainer}>
         <p>{work?.technicalDescription}</p>
-        {work?.githubUrl && (
-          <LinkButton url={work?.githubUrl} label={"github repo"} />
-        )}
       </div>
+      {work?.githubUrl && (
+        <LinkButton url={work?.githubUrl} label={"github repo"} />
+      )}
     </>
   );
 }

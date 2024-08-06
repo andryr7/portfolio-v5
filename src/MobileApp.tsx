@@ -7,7 +7,6 @@ import { useRef } from "react";
 import { StatsGl, View } from "@react-three/drei";
 import { MobileRouter } from "./components/html/mobile/MobileRouter";
 import "./MobileApp.css";
-import { ViewportSizeHandler } from "./handlers/viewportSizeHandler";
 
 export default function MobileApp() {
   const appContainerRef = useRef<any>(null);
@@ -36,7 +35,6 @@ export default function MobileApp() {
           zIndex: 10,
         }}
       >
-        <ViewportSizeHandler />
         <StatsGl />
         <View.Port />
       </Canvas>

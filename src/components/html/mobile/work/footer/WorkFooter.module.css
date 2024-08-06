@@ -2,10 +2,11 @@
   height: 20vh;
   border-top: 2px solid var(--color-main);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-radius: 0 0px var(--br-l) var(--br-l);
+  grid-template-columns: repeat(2, 1fr);
   box-sizing: border-box;
   width: 100%;
+  background-color: var(--color-main);
+  text-align: center;
 }
 
 /* @media (min-width: 768px) {
@@ -16,11 +17,17 @@
 } */
 
 .footer-button {
-  border-left: 2px solid var(--color-main);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border-radius: 0px 0px 0px var(--br-l);
+  background-color: var(--color-background-one);
+}
+
+.footer-button:last-of-type {
+  border-left: 2px solid var(--color-main);
+  border-radius: 0px 0px var(--br-l) 0px;
 }
 
 .footer-button:hover {

@@ -4,21 +4,13 @@ import { HeaderScene } from "@/components/canvas/mobile/header/HeaderScene";
 
 export function Header() {
   return (
-    <header className={styles.container}>
+    <header className={styles.container} id="header">
       <View className={styles.viewContainer}>
         <HeaderScene />
       </View>
       <div className={styles.titleContainer}>
-        <h1>
-          Andry
-          <br />
-          Ratsimba
-        </h1>
-        <h2>
-          independent
-          <br />
-          web developer
-        </h2>
+        <h1>Andry Ratsimba</h1>
+        <h2>independent web developer</h2>
       </div>
     </header>
   );

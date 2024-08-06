@@ -11,14 +11,3 @@
     padding: 20px;
   }
 }
-
-.about-container {
-  display: flex;
-  flex-direction: column;
-}
-
-/* .noscroll {
-  overflow: hidden;
-  height: 100%;
-  position: relative;
-} */

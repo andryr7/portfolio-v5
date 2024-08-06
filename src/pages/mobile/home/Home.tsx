@@ -4,13 +4,27 @@ import { Technologies } from "@/components/html/mobile/home/about/technologies/T
 import { Contact } from "@/components/html/mobile/home/contact/Contact";
 import { Header } from "@/components/html/mobile/home/header/Header";
 import { WorksSection } from "@/components/html/mobile/home/works/WorksSection";
+import styles from "./Home.module.css";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export function Home() {
+  // useGSAP(() => {
+  //   gsap.to("#works", {
+  //     scrollTrigger: {
+  //       trigger: "#about",
+  //       start: "top top",
+  //       end: "bottom top",
+  //       pin: "#works",
+  //     },
+  //   });
+  // });
+
   return (
     <>
       <Header />
       <WorksSection />
-      <main className="about-container" id="about">
+      <main className={styles.aboutContainer} id="about">
         <Presentation />
         <Skills />
         <Technologies />
