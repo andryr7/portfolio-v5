@@ -41,6 +41,18 @@
 .home-link {
   pointer-events: all;
   padding: 20px;
+  position: relative;
+}
+
+.home-link::before {
+  content: '->';
+  position: absolute;
+  left: 0rem;
+  transition: var(--transition-normal);
+}
+
+.home-link:hover::before {
+  left: 0.5rem;
 }
 
 .indicator {
