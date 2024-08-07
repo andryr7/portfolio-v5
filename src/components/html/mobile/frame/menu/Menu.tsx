@@ -3,8 +3,10 @@ import { ThemeButton } from "../themebutton/ThemeButton";
 import styles from "./Menu.module.css";
 
 export function MenuButton({
+  menuIsOpened,
   setMenuIsOpened,
 }: {
+  menuIsOpened: boolean;
   setMenuIsOpened: (newStatus: any) => void;
 }) {
   return (
@@ -12,14 +14,17 @@ export function MenuButton({
       onClick={() => setMenuIsOpened((c) => !c)}
       className={styles.menuButton}
     >
-      menu
+      {menuIsOpened && <div className={styles.closedMenuBar} />}
+      {!menuIsOpened && <div className={styles.openedMenuBar} />}
     </div>
   );
 }
 
 export function Menu({
+  menuIsOpened,
   setMenuIsOpened,
 }: {
+  menuIsOpened: boolean;
   setMenuIsOpened: (newStatus: any) => void;
 }) {
   const handleSectionLinkClick = (target: string) => {
@@ -33,7 +38,10 @@ export function Menu({
     <div className={styles.menuContainer}>
       <div className={styles.menuTopContainer}>
         <ThemeButton />
-        <MenuButton setMenuIsOpened={setMenuIsOpened} />
+        <MenuButton
+          menuIsOpened={menuIsOpened}
+          setMenuIsOpened={setMenuIsOpened}
+        />
       </div>
       <div className={styles.menuCenterContainer}>
         <a onClick={() => handleSectionLinkClick("#works")}>works</a>

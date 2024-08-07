@@ -1,12 +1,4 @@
-
-
-.menu-button {
-  background-color: red;
-  pointer-events: all;
-  margin-left: auto;
-  width: 50px;
-  height: 50px;
-}
+/* MENU */
 
 .menu-container {
   display: flex;
@@ -32,4 +24,67 @@
   flex-direction: column;
   font-size: min(100px, min(15vw, 15vh));
   gap: 1rem;
+}
+
+/* MENU BUTTON */
+
+.menu-button {
+  border-radius: var(--br-xs);
+  pointer-events: all;
+  margin-left: auto;
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+.opened-menu-bar {
+  position: absolute;
+  width: 80%;
+  height: 5px;
+  left: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--color-main);
+}
+
+.opened-menu-bar::before {
+  content: '';
+  background-color: var(--color-main);
+  position: absolute;
+  top: -250%;
+  width: 100%;
+  height: 100%;
+  left: 0
+}
+
+.opened-menu-bar::after {
+  content: '';
+  background-color: var(--color-main);
+  position: absolute;
+  top: 250%;
+  width: 100%;
+  height: 100%;
+  left: 0
+}
+
+.closed-menu-bar {
+  position: absolute;
+  width: 80%;
+  height: 5px;
+  left: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--color-background-one);
+  transform: rotate(-45deg);
+}
+
+.closed-menu-bar::before {
+  content: '';
+  background-color: var(--color-background-one);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  transform: rotate(90deg);
 }

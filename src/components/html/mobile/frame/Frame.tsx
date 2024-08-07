@@ -24,7 +24,7 @@ export function Frame() {
           </div>
         )}
         {menuIsOpened && isHomepage && (
-          <Menu setMenuIsOpened={setMenuIsOpened} />
+          <Menu menuIsOpened={menuIsOpened} setMenuIsOpened={setMenuIsOpened} />
         )}
         {!isHomepage && (
           <Link href="/" className={styles.homeLink}>
