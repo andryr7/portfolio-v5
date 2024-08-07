@@ -34,4 +34,5 @@
   align-items: center;
   transform: rotate(-90deg);
   font-size: 2rem;
+  cursor: pointer;
 }

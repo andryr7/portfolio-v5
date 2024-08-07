@@ -21,13 +21,13 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: 0px 0px 0px var(--br-l);
+  border-radius: 0px 0px 0px var(--br-m);
   background-color: var(--color-background-one);
 }
 
 .footer-button:last-of-type {
   border-left: 2px solid var(--color-main);
-  border-radius: 0px 0px var(--br-l) 0px;
+  border-radius: 0px 0px var(--br-m) 0px;
 }
 
 .footer-button:hover {

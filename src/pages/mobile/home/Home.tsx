@@ -5,8 +5,6 @@ import { Contact } from "@/components/html/mobile/home/contact/Contact";
 import { Header } from "@/components/html/mobile/home/header/Header";
 import { WorksSection } from "@/components/html/mobile/home/works/WorksSection";
 import styles from "./Home.module.css";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 
 export function Home() {
   // useGSAP(() => {
