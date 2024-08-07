@@ -2,9 +2,9 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { extend, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useMemo, useRef } from "react";
-import { BackgroundMaterial } from "./BackgroundMaterial";
+import { MobileBackgroundMaterial } from "./MobileBackgroundMaterial";
 
-extend({ BackgroundMaterial });
+extend({ MobileBackgroundMaterial });
 
 export function HeaderBackground() {
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
@@ -34,8 +34,8 @@ export function HeaderBackground() {
       ]}
     >
       <planeGeometry args={[1, 1, 1, 1]} />
-      <backgroundMaterial
-        key={BackgroundMaterial.key}
+      <mobileBackgroundMaterial
+        key={MobileBackgroundMaterial.key}
         darkcolor={shaderDarkColor}
         lightcolor={shaderLightColor}
         ref={materialRef}

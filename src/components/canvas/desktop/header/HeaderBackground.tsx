@@ -1,13 +1,13 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { extend, useFrame } from "@react-three/fiber";
-import { BackgroundMaterial } from "./BackgroundMaterial";
+import { DesktopBackgroundMaterial } from "./DesktopBackgroundMaterial";
 import * as THREE from "three";
 // import { useControls } from "leva";
 import { useTrailTexture } from "@react-three/drei";
 import * as easings from "d3-ease";
 import { useMemo, useRef } from "react";
 
-extend({ BackgroundMaterial });
+extend({ DesktopBackgroundMaterial });
 
 export function HeaderBackground({ visible }: { visible: boolean }) {
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
@@ -23,18 +23,6 @@ export function HeaderBackground({ visible }: { visible: boolean }) {
   const shaderLightColor = useMemo(() => {
     return new THREE.Color(colors.accent);
   }, [colors]);
-
-  // const { ease, ...conf } = useControls("Trail", {
-  //   size: { value: 64, min: 8, max: 256, step: 8 },
-  //   radius: { value: 0.1, min: 0, max: 1 },
-  //   maxAge: { value: 2000, min: 300, max: 10000 },
-  //   interpolate: { value: 0, min: 0, max: 2, step: 1 },
-  //   smoothing: { value: 0.5, min: 0, max: 0.99, step: 0.01 },
-  //   minForce: { value: 0.3, min: 0, max: 1, step: 0.1 },
-  //   intensity: { value: 0.2, min: 0, max: 1, step: 0.1 },
-  //   blend: { value: "screen", options: ["source-over", "screen"] },
-  //   ease: { value: "easeBackOut", options: Object.keys(easings) },
-  // });
 
   const [texture, onMove] = useTrailTexture({
     size: 64,
@@ -63,8 +51,8 @@ export function HeaderBackground({ visible }: { visible: boolean }) {
       visible={visible}
     >
       <planeGeometry args={[1, 1, 1, 1]} />
-      <backgroundMaterial
-        key={BackgroundMaterial.key}
+      <desktopBackgroundMaterial
+        key={DesktopBackgroundMaterial.key}
         darkcolor={shaderDarkColor}
         lightcolor={shaderLightColor}
         map={texture}
