@@ -41,4 +41,5 @@
   pointer-events: all;
   height: fit-content;
   width: fit-content;
+  color: var(--color-main);
 }
