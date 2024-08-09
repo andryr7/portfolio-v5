@@ -4,7 +4,7 @@ import { Loader } from "./components/html/mobile/loader/Loader";
 import { useLoadData } from "./handlers/useLoadData";
 import { useTheme } from "./handlers/useTheme";
 import { useRef } from "react";
-import { View } from "@react-three/drei";
+import { StatsGl, View } from "@react-three/drei";
 import { MobileRouter } from "./components/html/mobile/MobileRouter";
 import "./MobileApp.css";
 import { ViewportSizeHandler } from "./handlers/viewportSizeHandler";
@@ -37,7 +37,7 @@ export default function MobileApp() {
         }}
       >
         <ViewportSizeHandler />
-        {/* <StatsGl /> */}
+        <StatsGl />
         <View.Port />
       </Canvas>
     </>

@@ -46,8 +46,8 @@
   font-size: min(12.5vw, 15vh);
   color: var(--color-background-two);
   transform: translateY(-100%);
-  pointer-events: none;
   transition: opacity var(--transition-normal);
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {

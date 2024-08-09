@@ -2,7 +2,6 @@ import {
   Environment,
   Lightformer,
   MeshTransmissionMaterial,
-  OrbitControls,
   OrthographicCamera,
   RoundedBox,
   Text,
@@ -13,9 +12,10 @@ import spacemono from "@/assets/fonts/space-mono.ttf";
 import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { HeaderBackground } from "./HeaderBackground";
+import { Mesh } from "three";
 
 export function HeaderScene() {
-  const cubeRef = useRef(null);
+  const cubeRef = useRef<Mesh | null>(null);
   const colors = usePortfolioStore((state) => state.colors);
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
     (state) => state.viewportSize

@@ -11,7 +11,7 @@ export function MenuButton({
 }) {
   return (
     <div
-      onClick={() => setMenuIsOpened((c) => !c)}
+      onClick={() => setMenuIsOpened((c: boolean) => !c)}
       className={styles.menuButton}
     >
       {menuIsOpened && <div className={styles.closedMenuBar} />}

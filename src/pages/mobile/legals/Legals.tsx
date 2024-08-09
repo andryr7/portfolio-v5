@@ -1,3 +1,5 @@
+import styles from "./Legals.module.css";
+
 export function Legals() {
-  return <div>legals</div>;
+  return <div className={styles.container}>legals</div>;
 }
