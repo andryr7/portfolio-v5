@@ -20,7 +20,10 @@ export function Frame() {
       <div className={styles.container}>
         {!menuIsOpened && isHomepage && (
           <div className={styles.optionsContainer}>
-            <MenuButton setMenuIsOpened={setMenuIsOpened} />
+            <MenuButton
+              menuIsOpened={menuIsOpened}
+              setMenuIsOpened={setMenuIsOpened}
+            />
           </div>
         )}
         {menuIsOpened && isHomepage && (
@@ -28,7 +31,7 @@ export function Frame() {
         )}
         {!isHomepage && (
           <Link href="/" className={styles.homeLink}>
-            back to homepage
+            {"-> "}back to homepage
           </Link>
         )}
       </div>

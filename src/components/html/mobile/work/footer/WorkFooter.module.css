@@ -34,8 +34,3 @@
   background-color: var(--color-main);
   color: var(--color-background-one);
 }
-
-.footer-container {
-  position: relative;
-  z-index: 40;
-}
