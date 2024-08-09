@@ -1,4 +1,5 @@
 .about-container {
+  margin-top: 20svh;
   display: flex;
   flex-direction: column;
   gap: 20svh;

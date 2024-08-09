@@ -8,12 +8,14 @@ import styles from "./Home.module.css";
 
 export function Home() {
   // useGSAP(() => {
-  //   gsap.to("#works", {
+  //   gsap.to("#header", {
   //     scrollTrigger: {
-  //       trigger: "#about",
-  //       start: "top top",
-  //       end: "bottom top",
-  //       pin: "#works",
+  //       trigger: "#works",
+  //       start: "top bottom",
+  //       end: "top top",
+  //       pin: "#header",
+  //       markers: true,
+  //       pinSpacing: false,
   //     },
   //   });
   // });

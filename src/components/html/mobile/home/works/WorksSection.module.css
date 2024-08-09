@@ -6,6 +6,8 @@
   padding-bottom: 1rem;
   box-sizing: border-box;
   align-items: center;
+  z-index: 20;
+  position: relative;
 }
 
 .work-list {
