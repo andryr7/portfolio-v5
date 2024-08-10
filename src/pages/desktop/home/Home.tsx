@@ -130,7 +130,7 @@ export function Home() {
         </div>
         <a id={"aboutanchor"} className={styles.aboutAnchor} />
         <main className={styles.mainContainer} id="main">
-          <section style={{ position: "relative" }}>
+          <section style={{ position: "relative", zIndex: 1 }}>
             <article className={styles.sectionContainer} id="about">
               <Presentation />
             </article>

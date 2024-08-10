@@ -6,7 +6,6 @@
   display: grid;
   grid-template-rows: 1fr 1fr;
   align-items: end;
-  padding-top: 20px;
 }
 
 .info-block {
