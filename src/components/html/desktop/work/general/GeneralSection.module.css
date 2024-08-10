@@ -11,19 +11,35 @@
 }
 
 .info-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .info-container p {
   line-height: 125%;
   font-family: var(--font-text);
+  width: 50%;
 }
 
 .links-container {
   display: flex;
   gap: 1rem;
   align-items: start;
+}
+
+@media (max-width: 768px) {
+  .info-container {
+    flex-direction: column-reverse;
+  }
+
+  .info-container p {
+    width: 100%;
+  }
+
+  .links-container {
+    align-self: flex-end;
+  }
 }
 
 .section-title {

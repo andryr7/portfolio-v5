@@ -27,15 +27,13 @@ export function Work({ workSlug }: { workSlug: string }) {
           <>
             <div className={styles.container}>
               <WorkHeader work={currentWork} />
-              <main>
+              <main className={styles.mainContainer}>
                 <section className={styles.section}>
                   <GeneralSection work={currentWork} key={currentWork._id} />
                 </section>
-                <div style={{ height: "20rem" }} />
                 <section className={styles.section}>
                   <TechnologiesSection work={currentWork} />
                 </section>
-                <div style={{ height: "20rem" }} />
               </main>
             </div>
             <WorkFooter

@@ -31,6 +31,13 @@
   }
 }
 
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20vh;
+  padding-bottom: 20vh;
+}
+
 .section {
   display: flex;
   flex-direction: column;
