@@ -29,7 +29,7 @@ export function Contact() {
           rel="noreferrer noopener"
           href="mailto:contact@andryratsimba.com"
         >
-          {"-> email"}
+          {"-> e-mail"}
         </a>
       </div>
     </div>

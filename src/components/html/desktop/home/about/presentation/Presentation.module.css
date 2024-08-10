@@ -33,6 +33,7 @@
 .text-container p {
   font-family: var(--font-text);
   text-align: justify;
+  line-height: 125%;
 }
 
 .image-container {

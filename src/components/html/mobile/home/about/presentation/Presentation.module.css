@@ -23,11 +23,13 @@
 
 .text-container h2 {
   font-size: var(--font-size-s);
+  text-align: center;
 }
 
 .text-container p {
   font-family: var(--font-text);
   text-align: justify;
+  line-height: 125%;
 }
 
 .image-container {
