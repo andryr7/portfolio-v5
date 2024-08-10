@@ -20,6 +20,8 @@ export async function getTechsData() {
 }
 
 export async function getSkillsData() {
-  const skillsData = await client.fetch('*[_type == "skill"]');
+  const skillsData = await client.fetch(
+    '*[_type == "skill"] | order(order asc)'
+  );
   return skillsData;
 }

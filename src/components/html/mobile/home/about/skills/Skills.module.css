@@ -35,7 +35,6 @@
   background-color: var(--color-background-two);
   padding: 1rem;
   box-sizing: border-box;
-  border: 1px solid var(--color-main);
   border-radius: var(--br-xs);
   display: flex;
   flex-direction: column;
