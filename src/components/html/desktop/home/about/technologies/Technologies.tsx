@@ -60,7 +60,9 @@ export function Technologies() {
             </button>
           </div>
         </div>
-        <span className={styles.tips}>select or drag</span>
+        <span className={styles.tips}>
+          some technologies I use - select or drag
+        </span>
       </div>
     );
 }
