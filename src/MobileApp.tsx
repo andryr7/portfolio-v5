@@ -6,10 +6,11 @@ import { useTheme } from "./handlers/useTheme";
 import { useRef } from "react";
 import { StatsGl, View } from "@react-three/drei";
 import { MobileRouter } from "./components/html/mobile/MobileRouter";
-import "./MobileApp.css";
 import { ViewportSizeHandler } from "./handlers/viewportSizeHandler";
+import "./MobileApp.css";
 
 export default function MobileApp() {
+  const envMode = import.meta.env.MODE;
   const appContainerRef = useRef<any>(null);
   const isLoading = useLoadData();
 
@@ -36,8 +37,8 @@ export default function MobileApp() {
           zIndex: 10,
         }}
       >
+        {envMode === "development" && <StatsGl />}
         <ViewportSizeHandler />
-        <StatsGl />
         <View.Port />
       </Canvas>
     </>

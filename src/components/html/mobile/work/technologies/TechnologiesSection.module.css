@@ -6,6 +6,7 @@
 .info-container p {
   line-height: 150%;
   font-family: var(--font-text);
+  text-align: justify;
 }
 
 .links-container {
