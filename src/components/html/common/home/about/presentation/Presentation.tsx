@@ -1,6 +1,9 @@
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./Presentation.module.css";
 
 export function Presentation() {
+  const generalInfoData = usePortfolioStore((state) => state.generalInfoData);
+
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
@@ -9,15 +12,7 @@ export function Presentation() {
           {/* <a href="https://google.com" target="_blank">
             sed
           </a> */}
-          Originally trained in marketing and communication, my passion for
-          computers dates back to childhood. Following a successful career
-          transition in 2022, I became a web developer. While my main focus is
-          on frontend development, I also enjoy delving into backend aspects and
-          deployment challenges, which cater to my versatile nature. I have a
-          particular fondness for 3D technologies, a passion I've nurtured since
-          childhood and love incorporating into my projects. Having worked as a
-          freelancer for nearly two years, I've developed a broad skill set and
-          am open to new opportunities.
+          {generalInfoData.presentationText}
         </p>
       </div>
       <div
