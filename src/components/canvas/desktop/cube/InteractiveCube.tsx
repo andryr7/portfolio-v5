@@ -34,7 +34,7 @@ export function InteractiveCube({
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
 
   const worksSceneIsActive = useMemo(() => {
-    return worksScrollProgress >= 0.25 && worksScrollProgress <= 0.75;
+    return worksScrollProgress >= 0.33 && worksScrollProgress <= 0.66;
   }, [worksScrollProgress]);
 
   const contactSceneIsActive = useMemo(() => {

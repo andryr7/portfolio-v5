@@ -52,7 +52,7 @@ export function OverlayCube({ visible }: { visible: boolean }) {
   });
 
   return (
-    <group visible={worksScrollProgress >= 0.25}>
+    <group visible={worksScrollProgress >= 0.33}>
       <mesh>
         <RoundedBox>
           <meshBasicMaterial

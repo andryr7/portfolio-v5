@@ -25,7 +25,7 @@ export function HeaderScene() {
   );
 
   const physicsGravity = useMemo((): [number, number, number] => {
-    return worksScrollProgress >= 0.7 ? [0, -9.81, 0] : [0, 0, 0];
+    return worksScrollProgress >= 0.66 ? [0, -9.81, 0] : [0, 0, 0];
   }, [worksScrollProgress]);
 
   const heroVisibility = useMemo((): boolean => {
