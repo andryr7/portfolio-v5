@@ -7,6 +7,7 @@
   justify-content: space-between;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  font-size: 3.5vw;
 }
 
 /* Frame border */
@@ -27,12 +28,8 @@
 }
 
 .scroll-up-button {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: rotate(-90deg);
-  font-size: 2rem;
   cursor: pointer;
+  transform: rotate(-90deg) translateX(-100%);
+  font-size: 7vw;
+  transform-origin: center left;
 }

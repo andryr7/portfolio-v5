@@ -69,11 +69,7 @@ export function HeaderScene() {
 
       {/* Physics scene */}
       <Suspense fallback={null}>
-        <Physics
-          colliders={false}
-          gravity={physicsGravity}
-          // debug
-        >
+        <Physics colliders={false} gravity={physicsGravity}>
           <PhysicsScene />
         </Physics>
       </Suspense>

@@ -2,7 +2,6 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { extend, useFrame } from "@react-three/fiber";
 import { DesktopBackgroundMaterial } from "./DesktopBackgroundMaterial";
 import * as THREE from "three";
-// import { useControls } from "leva";
 import { useTrailTexture } from "@react-three/drei";
 import * as easings from "d3-ease";
 import { useMemo, useRef } from "react";

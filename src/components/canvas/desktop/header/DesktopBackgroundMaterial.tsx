@@ -74,9 +74,9 @@ export const DesktopBackgroundMaterial = shaderMaterial(
 
     void main() {
       vec2 distortedvUv;
-      distortedvUv = distort(vUv, uTime / 3.0, 0.015);
-
       float displace = texture2D(map, vUv).r;
+
+      distortedvUv = distort(vUv, uTime / 3.0, 0.02);
 
       //Square grid pattern
       float strength = step(0.9 - (displace * 0.45), mod(distortedvUv.x * 75.0, 1.));

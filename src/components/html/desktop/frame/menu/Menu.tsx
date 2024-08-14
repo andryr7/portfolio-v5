@@ -21,6 +21,7 @@ export function Menu() {
     lenis?.scrollTo("#" + target);
   };
 
+  //Closing the menu on first scroll
   useEffect(() => {
     if (manualMode) return;
     if (worksScrollProgress < 0.01) {
@@ -29,6 +30,11 @@ export function Menu() {
       open(false);
     }
   }, [manualMode, worksScrollProgress]);
+
+  //Opening the menu on scroll back to top
+  useEffect(() => {
+    worksScrollProgress === 0 && !opened && setManualMode(false);
+  }, [worksScrollProgress, opened]);
 
   return (
     <div
