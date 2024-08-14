@@ -32,7 +32,6 @@ export function InteractiveCube({
     (state) => state.contactScrollProgress
   );
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
-
   const worksSceneIsActive = useMemo(() => {
     return worksScrollProgress >= 0.33 && worksScrollProgress <= 0.66;
   }, [worksScrollProgress]);
@@ -72,51 +71,14 @@ export function InteractiveCube({
     }
   }, [hoveredWorkIndex]);
 
-  const toyCubeVisibility = useMemo(() => {
-    return (
-      !worksSceneIsActive && !contactSceneIsActive && worksScrollProgress > 0.5
-    );
-  }, [worksSceneIsActive, contactSceneIsActive, worksScrollProgress]);
-
   const enabledCubeRotations = useMemo((): [boolean, boolean, boolean] => {
     return worksScrollProgress > 0.5
       ? [false, false, true]
       : [true, true, true];
   }, [worksScrollProgress]);
 
-  //Resetting the cube position on window resize
-  useEffect(() => {
-    const handleResize = () => {
-      const newPosition = new THREE.Vector3(0, 0, 2.5);
-      cubePhysicsApi.current?.setTranslation(newPosition, true);
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  //Setting cube position and applying impulse on work and contact section exit
-  useEffect(() => {
-    if (!worksSceneIsActive && !contactSceneIsActive) {
-      cubePhysicsApi.current?.applyImpulse(new THREE.Vector3(25, 25, 0), true);
-    }
-
-    if (
-      cubePhysicsApi.current !== null &&
-      !worksSceneIsActive &&
-      !contactSceneIsActive
-    ) {
-      cubePhysicsApi.current.setRotation(
-        new THREE.Quaternion(0, 0, 0, 1),
-        true
-      );
-    }
-  }, [worksSceneIsActive, contactSceneIsActive]);
-
   useFrame((_, delta) => {
-    //Position pinning animations
+    //Position and rotation animations
     if (cubePhysicsApi.current !== null && sceneIsActive) {
       // Calculating and applying position translation
       currentPosition.copy(cubePhysicsApi.current.translation());
@@ -145,6 +107,33 @@ export function InteractiveCube({
     }
   });
 
+  //Resetting the cube position on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      const newPosition = new THREE.Vector3(0, 0, 2.5);
+      cubePhysicsApi.current?.setTranslation(newPosition, true);
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  //Setting cube position and applying impulse on work and contact section exit
+  useEffect(() => {
+    if (!worksSceneIsActive && !contactSceneIsActive) {
+      cubePhysicsApi.current?.applyImpulse(new THREE.Vector3(25, 25, 0), true);
+    }
+
+    if (!worksSceneIsActive && !contactSceneIsActive) {
+      cubePhysicsApi.current?.setRotation(
+        new THREE.Quaternion(0, 0, 0, 1),
+        true
+      );
+    }
+  }, [worksSceneIsActive, contactSceneIsActive]);
+
   return (
     <RigidBody
       colliders={false}
@@ -169,7 +158,13 @@ export function InteractiveCube({
         <WorksCube />
 
         {/* 2d cube */}
-        <OverlayCube visible={toyCubeVisibility} />
+        <OverlayCube
+          visible={
+            !worksSceneIsActive &&
+            !contactSceneIsActive &&
+            worksScrollProgress > 0.5
+          }
+        />
 
         {/* 4d cube */}
         <Tesseract
