@@ -1,13 +1,15 @@
 import { RoundedBox, Text } from "@react-three/drei";
 import spacemono from "@/assets/fonts/space-mono.ttf";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useAnimatedText } from "@/handlers/useAnimatedText";
+import { Group } from "three";
 
 export function OverlayCube({ visible }: { visible: boolean }) {
   const colors = usePortfolioStore((state) => state.colors);
+  const overlayCubeRef = useRef<Group | null>(null);
   const cubeMaterialRef = useRef(null);
   const textMaterialRef = useRef(null);
 
@@ -26,6 +28,43 @@ export function OverlayCube({ visible }: { visible: boolean }) {
     else return "what I do";
   }, [aboutScrollProgress]);
   const cubeTextResult = useAnimatedText(cubeText);
+
+  const hoveredContactLink = usePortfolioStore(
+    (state) => state.hoveredContactLink
+  );
+
+  const contactScrollProgress = usePortfolioStore(
+    (state) => state.contactScrollProgress
+  );
+
+  const contactSceneIsActive = useMemo(() => {
+    return contactScrollProgress >= 0.25;
+  }, [contactScrollProgress]);
+
+  const modelRotation = useMemo(() => {
+    switch (hoveredContactLink) {
+      case 0:
+        return {
+          x: 0,
+          y: 0,
+        };
+      case 1:
+        return {
+          x: -Math.PI / 4,
+          y: 0,
+        };
+      case 2:
+        return {
+          x: 0,
+          y: Math.PI / 2,
+        };
+      default:
+        return {
+          x: Math.PI / 12,
+          y: Math.PI / 4,
+        };
+    }
+  }, [hoveredContactLink]);
 
   useFrame((_, delta) => {
     //2d cube material opacity animation
@@ -49,10 +88,37 @@ export function OverlayCube({ visible }: { visible: boolean }) {
         delta
       );
     }
+
+    //Tesseract rotation sync
+    if (overlayCubeRef.current !== null) {
+      easing.damp(
+        overlayCubeRef.current.rotation,
+        "x",
+        contactSceneIsActive ? modelRotation.x : 0,
+        0.25,
+        delta
+      );
+      easing.damp(
+        overlayCubeRef.current.rotation,
+        "y",
+        contactSceneIsActive ? -modelRotation.y : 0,
+        0.25,
+        delta
+      );
+    }
   });
 
+  //Fixing rotation when scrolling fast from contact to works
+  useEffect(() => {
+    if (worksScrollProgress < 1 && overlayCubeRef.current) {
+      overlayCubeRef.current.rotation.x = 0;
+      overlayCubeRef.current.rotation.y = 0;
+      overlayCubeRef.current.rotation.z = 0;
+    }
+  }, [worksScrollProgress]);
+
   return (
-    <group visible={worksScrollProgress >= 0.33}>
+    <group visible={worksScrollProgress >= 0.33} ref={overlayCubeRef}>
       <mesh>
         <RoundedBox>
           <meshBasicMaterial

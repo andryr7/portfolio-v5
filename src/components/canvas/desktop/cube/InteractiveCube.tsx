@@ -135,7 +135,7 @@ export function InteractiveCube({
 
     //Scale animations
     if (cubeRef.current !== null) {
-      const targetScale = sceneIsActive ? (worksSceneIsActive ? 5 : 7.5) : 2;
+      const targetScale = sceneIsActive ? 5 : 2;
       easing.damp3(
         cubeRef.current.scale,
         [targetScale, targetScale, targetScale],
@@ -172,7 +172,11 @@ export function InteractiveCube({
         <OverlayCube visible={toyCubeVisibility} />
 
         {/* 4d cube */}
-        <Tesseract visible={contactSceneIsActive} />
+        <Tesseract
+          active={contactSceneIsActive}
+          visible={contactScrollProgress > 0}
+          scale={1 / 210}
+        />
       </group>
     </RigidBody>
   );

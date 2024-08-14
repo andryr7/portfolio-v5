@@ -1,7 +1,7 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { ReactThreeFiber, extend, useFrame } from "@react-three/fiber";
 import { easing } from "maath";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
 extend({ Line_: THREE.Line });
@@ -156,12 +156,19 @@ const coordBuilder = (index: number, t: number) => {
   );
 };
 
-export function Tesseract({ visible = true }: { visible: boolean }) {
+export function Tesseract({
+  active,
+  visible,
+  scale,
+}: {
+  active: boolean;
+  visible: boolean;
+  scale: number;
+}) {
   const linesRef = useRef<THREE.Line[]>(Array(lines.length).fill(null));
   const meshRef = useRef<THREE.Mesh>(null);
   const timeRef = useRef<number>(0);
   const colors = usePortfolioStore((state) => state.colors);
-
   const hoveredContactLink = usePortfolioStore(
     (state) => state.hoveredContactLink
   );
@@ -192,7 +199,8 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
   }, [hoveredContactLink]);
 
   useFrame((_, delta) => {
-    if (visible) {
+    //4th dimension revolving
+    if (active) {
       timeRef.current += delta / 75;
       const time = timeRef.current % 1;
 
@@ -226,23 +234,29 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
       easing.damp(
         meshRef.current.rotation,
         "x",
-        visible ? modelRotation.x : 0,
+        active ? modelRotation.x : 0,
         0.25,
         delta
       );
       easing.damp(
         meshRef.current.rotation,
         "y",
-        visible ? modelRotation.y : Math.PI / 2,
+        active ? modelRotation.y : Math.PI / 2,
         0.25,
         delta
       );
     }
   });
 
+  useEffect(() => {
+    if (active) {
+      timeRef.current = 0;
+    }
+  }, [active]);
+
   return (
     <>
-      <mesh scale={1 / 275} ref={meshRef} visible={visible}>
+      <mesh scale={scale} ref={meshRef} visible={visible}>
         {lines.map((line, i) => (
           <line_ key={i} ref={(el: THREE.Line) => (linesRef.current[i] = el)}>
             <bufferGeometry>
@@ -251,10 +265,6 @@ export function Tesseract({ visible = true }: { visible: boolean }) {
             <lineBasicMaterial color={colors.main} linewidth={1} />
           </line_>
         ))}
-      </mesh>
-      <mesh>
-        <boxGeometry args={[4, 4, 4]} />
-        <meshBasicMaterial color="red" wireframe visible={false} />
       </mesh>
     </>
   );

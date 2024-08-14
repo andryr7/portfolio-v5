@@ -7,7 +7,7 @@ export function Contact() {
     <div className={styles.container} id="contact">
       <View className={styles.viewContainer}>
         <PerspectiveCamera makeDefault position={[0, 0, 2]} fov={45} />
-        <Tesseract visible={true} />
+        <Tesseract active={true} visible={true} scale={1 / 275} />
       </View>
       <div className={styles.linkContainer}>
         <a
