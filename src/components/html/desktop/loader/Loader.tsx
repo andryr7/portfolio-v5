@@ -35,6 +35,7 @@ export function Loader() {
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.cube} ref={cubeRef} />
+      <div className={styles.text}>loading</div>
     </div>
   );
 }

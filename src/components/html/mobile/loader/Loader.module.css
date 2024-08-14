@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   pointer-events: none;
+  font-family: var(--font-title);
 }
 
 .cube {
@@ -16,4 +17,13 @@
   height: 20vw;
   background-color: var(--color-background-one);
   border-radius: var(--br-s);
+}
+
+.text {
+  position: absolute;
+  right: 1rem;
+  bottom: 0;
+  font-size: 3.5vw;
+  color: var(--color-background-one);
+  line-height: 150%;
 }
