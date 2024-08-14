@@ -6,8 +6,7 @@ import DesktopApp from "./DesktopApp.tsx";
 import MobileApp from "./MobileApp.tsx";
 import ReactGA from "react-ga4";
 
-const TRACKING_ID = import.meta.env.VITE_GOOGLE_TRACKING_UNIT; // your Measurement ID
-
+const TRACKING_ID = import.meta.env.VITE_GOOGLE_TRACKING_UNIT;
 ReactGA.initialize(TRACKING_ID);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
