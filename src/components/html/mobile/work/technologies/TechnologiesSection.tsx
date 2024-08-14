@@ -45,9 +45,7 @@ export function TechnologiesSection({ work }: { work: Work }) {
       <div className={styles.infoContainer}>
         <p>{work?.technicalDescription}</p>
       </div>
-      {work?.githubUrl && (
-        <LinkButton url={work?.githubUrl} label={"github repo"} />
-      )}
+      {work?.githubUrl && <LinkButton url={work?.githubUrl} label={"github"} />}
     </>
   );
 }

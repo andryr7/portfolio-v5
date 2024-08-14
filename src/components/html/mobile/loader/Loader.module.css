@@ -23,7 +23,7 @@
   position: absolute;
   right: 1rem;
   bottom: 0;
-  font-size: 3.5vw;
+  font-size: max(3.5vw, 2rem);
   color: var(--color-background-one);
   line-height: 150%;
 }

@@ -35,6 +35,7 @@ export function Technologies() {
           transform: selectedTechCubeId
             ? "translateY(0%)"
             : "translateY(-100%)",
+          opacity: selectedTechCubeId ? 1 : 0,
           pointerEvents: selectedTechCubeId ? "all" : "none",
         }}
       >
