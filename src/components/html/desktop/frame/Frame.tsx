@@ -3,7 +3,6 @@ import styles from "./Frame.module.css";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { Link, useRoute } from "wouter";
 import { ThemeButton } from "./options/ThemeButton";
-import { LanguageButton } from "./options/LanguageButton";
 
 export function Frame() {
   const worksScrollProgress = usePortfolioStore(

@@ -3,6 +3,8 @@
   width: 80%;
   height: 50%;
   max-width: 1920px;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
@@ -81,8 +83,6 @@
 }
 
 .tips {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  transform: translateY(150%);
+  padding: 0.5rem;
+  align-self: flex-end;
 }

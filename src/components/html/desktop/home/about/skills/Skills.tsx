@@ -63,6 +63,7 @@ export function Skills() {
             />
           ))}
         </div>
+        <span className={styles.tips}>some things I can help you with</span>
       </div>
     );
 }
