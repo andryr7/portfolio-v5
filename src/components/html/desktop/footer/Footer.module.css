@@ -42,7 +42,7 @@
   align-items: flex-end;
   /* font-size: max(1rem, 1.5vw); */
   font-size: 3.5vw;
-  line-height: 125%;
+  line-height: 110%;
 }
 
 @media (min-width: 768px) {

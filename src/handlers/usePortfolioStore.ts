@@ -13,6 +13,8 @@ type Colors = {
 };
 
 type State = {
+  //Localization
+  language: string;
   //Loading state
   isLoaded: boolean;
   //Theme and colors
@@ -40,6 +42,8 @@ type State = {
 };
 
 type Actions = {
+  //Localization
+  setLanguage: (newLanguage: string) => void;
   //Loading status
   setIsLoaded: (newLoadingStatus: boolean) => void;
   //Theme and colors setter
@@ -66,6 +70,8 @@ type Actions = {
 };
 
 export const usePortfolioStore = create<State & Actions>()((set) => ({
+  language: "en",
+  setLanguage: (newLanguage) => set(() => ({ language: newLanguage })),
   isLoaded: false,
   setIsLoaded: (newLoadingStatus) =>
     set(() => ({ isLoaded: newLoadingStatus })),

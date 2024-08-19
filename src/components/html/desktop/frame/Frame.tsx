@@ -1,8 +1,9 @@
 import { Menu } from "./menu/Menu";
 import styles from "./Frame.module.css";
-import { Options } from "./options/Options";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { Link, useRoute } from "wouter";
+import { ThemeButton } from "./options/ThemeButton";
+import { LanguageButton } from "./options/LanguageButton";
 
 export function Frame() {
   const worksScrollProgress = usePortfolioStore(
@@ -14,7 +15,10 @@ export function Frame() {
     <>
       <div className={styles.container}>
         <div className={styles.interfaceContainer}>
-          <Options />
+          <div className={styles.optionsContainer}>
+            <ThemeButton />
+            {/* <LanguageButton /> */}
+          </div>
           {isHomepage && <Menu />}
           {!isHomepage && (
             <Link href="/" className={styles.homeLink}>

@@ -1,9 +1,9 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
-import styles from "./Options.module.css";
 import { useLocalStorage, useMediaQuery } from "usehooks-ts";
 import { useEffect } from "react";
+import styles from "./ThemeButton.module.css";
 
-function ThemeButton() {
+export function ThemeButton() {
   const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
   const setIsDarkTheme = usePortfolioStore((state) => state.setIsDarkTheme);
   const browserPrefersDark = useMediaQuery("(prefers-color-scheme: dark)");
@@ -23,13 +23,4 @@ function ThemeButton() {
   }, [setIsDarkTheme, storedThemePreference]);
 
   return <div className={styles.darkModeButton} onClick={handleClick} />;
-}
-
-export function Options() {
-  return (
-    <div className={styles.container}>
-      <ThemeButton />
-      {/* <LanguageButton /> */}
-    </div>
-  );
 }
