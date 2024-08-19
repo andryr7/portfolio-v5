@@ -53,7 +53,13 @@ export function Menu() {
       >
         {`about`}
       </div>
-      <div className={styles.closeButton}>{`X`}</div>
+      <div
+        style={{
+          visibility: manualMode ? "visible" : "hidden",
+          opacity: manualMode ? 1 : 0,
+        }}
+        className={styles.closeButton}
+      >{`X`}</div>
       <div
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "contact")}
