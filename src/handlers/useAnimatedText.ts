@@ -34,5 +34,5 @@ export function useAnimatedText(targetText: string) {
     handleAnimateText();
   }, [targetText, handleAnimateText]);
 
-  return text;
+  return [text, handleAnimateText] as const;
 }

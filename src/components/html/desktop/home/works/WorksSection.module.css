@@ -8,13 +8,14 @@
   flex-direction: column;
   position: relative;
   z-index: 20;
+  color: var(--color-main);
 }
 
 .works-container {
   width: 90%;
   border-radius: var(--br-xs);
   overflow: hidden;
-  border: 2px solid #0e0e0e;
+  border: 2px solid var(--color-main);
   transition: all var(--transition-normal);
 }
 
@@ -23,9 +24,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #0e0e0e;
+  border-bottom: 2px solid var(--color-main);
   transition: all var(--transition-normal);
-  color: #0e0e0e;
 }
 
 .work-line:last-child {

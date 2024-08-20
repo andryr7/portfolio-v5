@@ -27,7 +27,7 @@ export function OverlayCube({ visible }: { visible: boolean }) {
     else if (aboutScrollProgress > 0.75) return "what I use";
     else return "what I do";
   }, [aboutScrollProgress]);
-  const cubeTextResult = useAnimatedText(cubeText);
+  const [cubeTextResult] = useAnimatedText(cubeText);
 
   const hoveredContactLink = usePortfolioStore(
     (state) => state.hoveredContactLink

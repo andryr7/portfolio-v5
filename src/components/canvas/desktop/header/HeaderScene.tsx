@@ -116,13 +116,13 @@ export function HeaderScene() {
         <mesh scale={[viewportWidth, viewportHeight, 1]}>
           {/* <planeGeometry args={[1, 1, 1, 1]} /> */}
           <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial color="#747474" toneMapped={false} />
+          <meshBasicMaterial color={colors.backgroundTwo} toneMapped={false} />
         </mesh>
         {/* Texts */}
         <group>
           <Text
             font={spacemono}
-            color="#d9d9d9"
+            color={colors.main}
             position={[0, 2.75, 0]}
             fontSize={viewportWidth / 15}
           >
