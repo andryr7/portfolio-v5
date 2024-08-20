@@ -2,6 +2,7 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./WorksSection.module.css";
 import { Link } from "wouter";
 import { useLenis } from "lenis/react";
+import { useRef } from "react";
 
 export function WorksSection() {
   const lenis = useLenis();
@@ -10,11 +11,28 @@ export function WorksSection() {
   const setHoveredWorkIndex = usePortfolioStore(
     (state) => state.setHoveredWorkIndex
   );
+  const worksScrollProgress = usePortfolioStore(
+    (state) => state.worksScrollProgress
+  );
+  const scrollProgressRef = useRef(worksScrollProgress);
+  scrollProgressRef.current = worksScrollProgress;
 
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
     lenis?.scrollTo("#contact");
   };
+
+  //Works section scroll snap
+  useLenis((instance) => {
+    if (instance.__isScrolling === false) {
+      if (
+        scrollProgressRef.current > 0.33 &&
+        scrollProgressRef.current < 0.66
+      ) {
+        lenis?.scrollTo("#works");
+      }
+    }
+  });
 
   return (
     <>

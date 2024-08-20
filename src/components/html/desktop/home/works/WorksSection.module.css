@@ -50,4 +50,5 @@
   font-size: var(--font-size-s);
   color: #d9d9d9;
   z-index: 20;
+  color: var(--color-main);
 }
