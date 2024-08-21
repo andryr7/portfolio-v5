@@ -38,27 +38,29 @@
   border-radius: var(--br-xs);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  min-height: 50vh;
+  gap: 1rem;
 }
 
 .skill-container h4 {
-  font-size: var(--font-size-s);
+  font-size: var(--font-size-xs);
 }
 
 .skill-container p {
   line-height: 150%;
   font-family: var(--font-text);
   text-align: justify;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .skill-item-container {
-  margin-top: auto;
   display: flex;
   width: 100%;
   gap: 0.5rem;
   justify-content: flex-end;
   flex-wrap: wrap;
+  font-size: 0.75rem;
+  margin-top: auto;
 }
 
 .skill-item {

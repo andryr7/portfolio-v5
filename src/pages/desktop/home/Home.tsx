@@ -6,13 +6,13 @@ import { View } from "@react-three/drei";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { WorksSection } from "@/components/html/desktop/home/works/WorksSection";
 import { ContactSection } from "@/components/html/desktop/home/contact/ContactSection";
-import { Presentation } from "@/components/html/common/home/about/presentation/Presentation";
 import { Technologies } from "@/components/html/desktop/home/about/technologies/Technologies";
 import { useShallow } from "zustand/react/shallow";
 import { Skills } from "@/components/html/desktop/home/about/skills/Skills";
 import { Header } from "@/components/html/desktop/home/header/Header";
 import { Footer } from "@/components/html/desktop/footer/Footer";
 import { HeaderScene } from "@/components/canvas/desktop/header/HeaderScene";
+import { Presentation } from "@/components/html/desktop/home/about/presentation/Presentation";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
