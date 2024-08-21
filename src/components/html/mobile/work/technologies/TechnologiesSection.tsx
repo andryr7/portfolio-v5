@@ -19,16 +19,16 @@ export function TechnologiesSection({ work }: { work: Work }) {
             perPage: 5,
             gap: "1rem",
             breakpoints: {
-              1920: {
+              1440: {
                 perPage: 4,
               },
-              1440: {
+              1024: {
                 perPage: 3,
               },
-              1024: {
+              768: {
                 perPage: 2,
               },
-              500: {
+              450: {
                 perPage: 1,
               },
             },

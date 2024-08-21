@@ -3,6 +3,7 @@
   border: 2px solid var(--color-main);
   border-radius: var(--br-xs);
   align-self: flex-end;
+  font-size: 0.75rem;
 }
 
 .container:hover {

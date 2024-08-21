@@ -13,11 +13,18 @@
 .work-list {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(264px, 1fr) );
+  grid-template-columns: minmax(264px, 1fr);
   padding: 1rem;
   box-sizing: border-box;
   gap: 10vh;
   justify-items: center;
+  max-width: 1024px;
+}
+
+@media (min-width: 768px) {
+  .work-list {
+    grid-template-columns: minmax(264px, 1fr) minmax(264px, 1fr);
+  }
 }
 
 .section-title {
