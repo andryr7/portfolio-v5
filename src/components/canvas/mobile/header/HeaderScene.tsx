@@ -95,7 +95,7 @@ export function HeaderScene() {
         </Text>
       </group>
 
-      <mesh position={[0, 0, 1]} ref={cubeRef} scale={1.25}>
+      <mesh position={[0, 0, 1]} ref={cubeRef} scale={1.5}>
         <RoundedBox>
           <MeshTransmissionMaterial thickness={1} />
         </RoundedBox>
