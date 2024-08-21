@@ -1,14 +1,13 @@
 .container {
   background-color: var(--color-main);
   color: var(--color-background-one);
-  min-height: 25svh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  font-size: max(1rem, 3vw);
-  gap: 3vh;
+  font-size: max(0.75rem, 3vw);
+  gap: 5vh;
 }
 
 /* Frame border */
