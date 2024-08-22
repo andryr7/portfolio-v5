@@ -23,8 +23,16 @@ export function ContactSection() {
           onMouseLeave={() => setHoveredContactLink(null)}
         >
           <div className={styles.captionContainer}>
-            open for business - feel free to contact me
+            <div className={styles.openIndicator} />
+            open to new opportunities
           </div>
+          <a
+            className={styles.contactLink}
+            onMouseEnter={() => setHoveredContactLink(2)}
+            onClick={handleDesktopEmailClick}
+          >
+            {emailWasCopied ? "email was copied" : "copy email"}
+          </a>
           <a
             className={styles.contactLink}
             onMouseEnter={() => setHoveredContactLink(0)}
@@ -42,13 +50,6 @@ export function ContactSection() {
             href="https://github.com/andryr7"
           >
             gitHub
-          </a>
-          <a
-            className={styles.contactLink}
-            onMouseEnter={() => setHoveredContactLink(2)}
-            onClick={handleDesktopEmailClick}
-          >
-            {emailWasCopied ? "e-mail was copied" : "e-mail"}
           </a>
         </div>
       </div>

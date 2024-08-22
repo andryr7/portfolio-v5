@@ -13,23 +13,23 @@ export function Contact() {
         <a
           target="_blank"
           rel="noreferrer noopener"
+          href="mailto:contact@andryratsimba.com"
+        >
+          email
+        </a>
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
           href="https://www.linkedin.com/in/andryratsimba/"
         >
-          {"-> linkedIn"}
+          linkedIn
         </a>
         <a
           target="_blank"
           rel="noreferrer noopener"
           href="https://github.com/andryr7"
         >
-          {"-> gitHub"}
-        </a>
-        <a
-          target="_blank"
-          rel="noreferrer noopener"
-          href="mailto:contact@andryratsimba.com"
-        >
-          {"-> e-mail"}
+          gitHub
         </a>
       </div>
     </div>

@@ -13,10 +13,10 @@
 }
 
 .cube {
-  width: 20vw;
-  height: 20vw;
+  width: 33vw;
+  height: 33vw;
   background-color: var(--color-background-one);
-  border-radius: var(--br-s);
+  border-radius: 3.5%;
 }
 
 .text {

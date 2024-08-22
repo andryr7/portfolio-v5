@@ -13,26 +13,15 @@ export function OverlayCube({ visible }: { visible: boolean }) {
   const cubeMaterialRef = useRef(null);
   const textMaterialRef = useRef(null);
 
-  const worksScrollProgress = usePortfolioStore(
-    (state) => state.worksScrollProgress
-  );
-
-  const aboutScrollProgress = usePortfolioStore(
-    (state) => state.aboutScrollProgress
-  );
-
-  //Cube text and text animation
-  const cubeText = useMemo(() => {
-    if (aboutScrollProgress < 0.25) return "who I am";
-    else if (aboutScrollProgress > 0.75) return "what I use";
-    else return "what I do";
-  }, [aboutScrollProgress]);
-  const [cubeTextResult] = useAnimatedText(cubeText);
-
   const hoveredContactLink = usePortfolioStore(
     (state) => state.hoveredContactLink
   );
-
+  const worksScrollProgress = usePortfolioStore(
+    (state) => state.worksScrollProgress
+  );
+  const aboutScrollProgress = usePortfolioStore(
+    (state) => state.aboutScrollProgress
+  );
   const contactScrollProgress = usePortfolioStore(
     (state) => state.contactScrollProgress
   );
@@ -40,6 +29,14 @@ export function OverlayCube({ visible }: { visible: boolean }) {
   const contactSceneIsActive = useMemo(() => {
     return contactScrollProgress >= 0.25;
   }, [contactScrollProgress]);
+
+  const cubeText = useMemo(() => {
+    if (aboutScrollProgress < 0.25) return "who I am";
+    if (aboutScrollProgress < 0.75) return "what I do";
+    return contactScrollProgress < 0.1 ? "what I use" : "what now";
+  }, [aboutScrollProgress, contactScrollProgress]);
+
+  const [cubeTextResult] = useAnimatedText(cubeText);
 
   const modelRotation = useMemo(() => {
     switch (hoveredContactLink) {
