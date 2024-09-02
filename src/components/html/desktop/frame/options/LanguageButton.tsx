@@ -9,24 +9,30 @@ export function LanguageButton() {
   const setLanguage = usePortfolioStore((state) => state.setLanguage);
   const navigatorLanguage = useNavigatorLanguage();
   const [storedLanguagePreference, setStoredLanguagePreference] =
-    useLocalStorage("languagePreference", navigatorLanguage);
+    useLocalStorage("languagePreference", "default");
 
-  //initial language handling
+  //Language initial setting and change handling
   useEffect(() => {
-    if (storedLanguagePreference === "fr") {
-      setStoredLanguagePreference("fr");
-      setLanguage("fr");
-      const htmlElement = document.querySelector("html");
+    const htmlElement = document.querySelector("html");
+
+    if (storedLanguagePreference !== "default") {
+      //If a language preference was chosen, use it
+      setLanguage(storedLanguagePreference);
       if (htmlElement !== null) {
-        htmlElement.lang = "fr";
+        htmlElement.lang = storedLanguagePreference;
       }
     } else {
-      setStoredLanguagePreference("en");
+      //If no language preference was set, get preference from navigator
+      if (navigatorLanguage === "fr") {
+        setLanguage("fr");
+        if (htmlElement !== null) {
+          htmlElement.lang = "fr";
+        }
+      }
     }
-  }, [setLanguage, storedLanguagePreference, setStoredLanguagePreference]);
+  }, [navigatorLanguage, setLanguage, storedLanguagePreference]);
 
   const handleClick = () => {
-    setLanguage(language === "en" ? "fr" : "en");
     setStoredLanguagePreference(language === "en" ? "fr" : "en");
   };
 

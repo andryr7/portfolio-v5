@@ -11,9 +11,9 @@ export function useNavigatorLanguage() {
     if (browserLanguage === "fr" || browserLanguage === "fr-FR") {
       setNavigatorLanguage("fr");
 
-      if (htmlElement !== null) {
-        htmlElement.lang = "fr";
-      }
+      // if (htmlElement !== null) {
+      //   htmlElement.lang = "fr";
+      // }
     }
   }, []);
 

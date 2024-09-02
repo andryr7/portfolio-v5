@@ -1,13 +1,10 @@
 import { Menu } from "./menu/Menu";
 import styles from "./Frame.module.css";
-import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { Link, useRoute } from "wouter";
 import { ThemeButton } from "./options/ThemeButton";
+import { LanguageButton } from "./options/LanguageButton";
 
 export function Frame() {
-  const worksScrollProgress = usePortfolioStore(
-    (state) => state.worksScrollProgress
-  );
   const [isHomepage] = useRoute("/");
 
   return (
@@ -16,7 +13,7 @@ export function Frame() {
         <div className={styles.interfaceContainer}>
           <div className={styles.optionsContainer}>
             <ThemeButton />
-            {/* <LanguageButton /> */}
+            <LanguageButton />
           </div>
           {isHomepage && <Menu />}
           {!isHomepage && (
@@ -25,12 +22,6 @@ export function Frame() {
             </Link>
           )}
         </div>
-        {isHomepage && (
-          <div
-            className={styles.indicator}
-            style={{ opacity: worksScrollProgress === 0 ? 1 : 0 }}
-          >{`<- scroll or select ->`}</div>
-        )}
       </div>
     </>
   );
