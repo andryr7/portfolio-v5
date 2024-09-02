@@ -21,11 +21,15 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  background: linear-gradient(to bottom, var(--color-background-two) 50%, var(--color-main) 50%) top;
+  background-size: 100% 205%;
+  transition: all 0.5s;
 }
 
 .footer-button:hover {
-  background-color: var(--color-main);
   color: var(--color-background-one);
+  background-position: bottom;
+  text-decoration: underline;
 }
 
 .footer-container {
