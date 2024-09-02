@@ -19,8 +19,8 @@
 .info-container p {
   line-height: 150%;
   font-family: var(--font-text);
-  width: 50%;
-  text-align: justify;
+  width: 40%;
+  padding-right: 10%;
 }
 
 .links-container {

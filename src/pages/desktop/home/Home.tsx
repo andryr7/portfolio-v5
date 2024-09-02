@@ -54,7 +54,7 @@ export function Home() {
         },
       });
 
-      //Works section scroll handling
+      //Works section scroll progress update
       gsap.to("#works", {
         scrollTrigger: {
           trigger: "#works",
@@ -67,7 +67,7 @@ export function Home() {
         },
       });
 
-      //Contact section scroll handling
+      //Contact section scroll progress update
       gsap.to("#contact", {
         scrollTrigger: {
           trigger: "#contact",
@@ -80,7 +80,7 @@ export function Home() {
         },
       });
 
-      //About section scroll handling
+      //About section scroll progress update
       gsap.to("#aboutCenter", {
         scrollTrigger: {
           trigger: "#aboutCenter",
@@ -103,6 +103,20 @@ export function Home() {
           // markers: true,
         },
       });
+
+      //About section title opacity animation
+      // gsap.to("#about-title", {
+      //   opacity: 1,
+      //   scrollTrigger: {
+      //     trigger: "#works",
+      //     endTrigger: "#contact",
+      //     start: "bottom top",
+      //     end: "top bottom",
+      //     pin: "#about-title",
+      //     markers: true,
+      //     scrub: true,
+      //   },
+      // });
     }
     // { scope: container }
   );
