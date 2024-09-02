@@ -8,25 +8,25 @@ export function Footer() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.linksContainer}>
+      <div className={styles.subContainer}>
         <Link to="/legals">legals{" ->"}</Link>
-        <a onClick={() => lenis?.scrollTo(0)}>{"<- "}back to the top</a>
+        <a onClick={() => lenis?.scrollTo(0)} style={{ cursor: "pointer" }}>
+          {"<- "}back to the top
+        </a>
       </div>
-      <div className={styles.marqueeContainer}>
-        <div className={styles.nameContainer}>
-          designed and
-          <br />
-          developed
-          <br />
-          at home
-        </div>
-        <div className={styles.copyrightContainer}>
+      <div className={styles.subContainer}>
+        <div style={{ marginTop: "auto" }}>
           ©{year}
           <br />
-          Andry Ratsimba
-          <br />
           all rights reserved
+          <br />
+          designed and developed by
         </div>
+        <span>
+          Andry
+          <br />
+          Ratsimba
+        </span>
       </div>
     </div>
   );
