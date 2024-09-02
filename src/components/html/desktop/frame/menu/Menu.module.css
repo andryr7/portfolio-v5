@@ -35,8 +35,8 @@
 }
 
 .opened-container .menu-item {
-  width: 12vh;
-  height: 12vh;
+  width: 15vh;
+  height: 15vh;
   pointer-events: all;
   color: var(--color-background-one);
 }
