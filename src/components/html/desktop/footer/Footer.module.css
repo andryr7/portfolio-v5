@@ -8,7 +8,7 @@
   flex-direction: column;
   padding-bottom: 20px;
   font-size: var(--font-size-s);
-  gap: 10vh;
+  gap: 7vh;
   overflow: hidden;
 }
 
@@ -35,4 +35,5 @@
   text-align: end;
   line-height: 90%;
   margin-bottom: -0.6%;
+  user-select: none;
 }

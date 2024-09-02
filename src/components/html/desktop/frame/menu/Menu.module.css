@@ -42,7 +42,7 @@
 }
 
 .opened-container .menu-item:hover {
-  background-color: var(--color-background-one);
+  background-color: var(--color-background-two);
   border: 2px solid var(--color-main);
   color: var(--color-main);
 }
