@@ -7,10 +7,10 @@ export const client = createClient({
   apiVersion: "2024-08-08", // use current date (YYYY-MM-DD) to target the latest API version
 });
 
-export async function getGeneralInfoData() {
-  const worksData = await client.fetch('*[_type == "generalInfo"][0]');
-  return worksData;
-}
+// export async function getGeneralInfoData() {
+//   const worksData = await client.fetch('*[_type == "generalInfo"][0]');
+//   return worksData;
+// }
 
 export async function getWorksData() {
   const worksData = await client.fetch(

@@ -3,7 +3,6 @@ import { Skill } from "@/types/skill";
 import { Tech } from "@/types/tech";
 import { Work } from "@/types/work";
 import { lightColors } from "./useTheme";
-import { GeneralInfo } from "@/types/generalInfo";
 
 type Colors = {
   main: string;
@@ -21,7 +20,7 @@ type State = {
   isDarkTheme: boolean;
   colors: Colors;
   // App data
-  generalInfoData: GeneralInfo;
+  // generalInfoData: GeneralInfo;
   worksData: Work[];
   skillsData: Skill[];
   techsData: Tech[];
@@ -50,7 +49,7 @@ type Actions = {
   setIsDarkTheme: (newState: boolean) => void;
   setColors: (newColors: Colors) => void;
   //App data setters
-  setGeneralInfoData: (generalInfoData: GeneralInfo) => void;
+  // setGeneralInfoData: (generalInfoData: GeneralInfo) => void;
   setWorksData: (worksData: Work[]) => void;
   setSkillsData: (skillsData: Skill[]) => void;
   setTechsData: (worksData: Tech[]) => void;
@@ -79,9 +78,9 @@ export const usePortfolioStore = create<State & Actions>()((set) => ({
   setIsDarkTheme: (newState) => set(() => ({ isDarkTheme: newState })),
   colors: lightColors,
   setColors: (newColors: Colors) => set(() => ({ colors: newColors })),
-  generalInfoData: { presentationText: "" },
-  setGeneralInfoData: (generalInfoData) =>
-    set(() => ({ generalInfoData: generalInfoData })),
+  // generalInfoData: { presentationText: "" },
+  // setGeneralInfoData: (generalInfoData) =>
+  //   set(() => ({ generalInfoData: generalInfoData })),
   worksData: [],
   setWorksData: (worksData) => set(() => ({ worksData: worksData })),
   skillsData: [],
