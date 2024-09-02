@@ -15,6 +15,7 @@ import { PhysicsScene } from "./physics/PhysicsScene";
 import { HeaderBackground } from "./HeaderBackground";
 
 export function HeaderScene() {
+  const lang = usePortfolioStore((state) => state.language);
   const setIsLoaded = usePortfolioStore((state) => state.setIsLoaded);
   const colors = usePortfolioStore((state) => state.colors);
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
@@ -126,7 +127,7 @@ export function HeaderScene() {
             position={[0, 2.75, 0]}
             fontSize={viewportWidth / 15}
           >
-            selected works
+            {lang === "en" ? `selected works` : "projets"}
           </Text>
         </group>
       </group>

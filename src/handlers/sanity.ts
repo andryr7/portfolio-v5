@@ -14,7 +14,7 @@ export const client = createClient({
 
 export async function getWorksData() {
   const worksData = await client.fetch(
-    '*[_type == "work"]{..., usedTechs[]->{_id, name, type, url}} | order(order asc)'
+    '*[_type == "work"]{..., usedTechs[]->{_id, name, enType, frType, url}} | order(order asc)'
   );
   return worksData;
 }

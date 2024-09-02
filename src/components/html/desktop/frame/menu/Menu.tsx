@@ -10,6 +10,7 @@ export function Menu() {
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress
   );
+  const lang = usePortfolioStore((state) => state.language);
 
   const handleClick = () => {
     open((c) => !c);
@@ -45,13 +46,13 @@ export function Menu() {
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "works")}
       >
-        {`works`}
+        {lang === "en" ? `works` : "projets"}
       </div>
       <div
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "aboutanchor")}
       >
-        {`about`}
+        {lang === "en" ? `about` : "à propos"}
       </div>
       <div
         style={{

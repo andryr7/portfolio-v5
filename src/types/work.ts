@@ -11,7 +11,8 @@ export interface WorkUsedTech {
   _id: string;
   name: string;
   url: string;
-  type: string;
+  enType: string;
+  frType: string;
 }
 
 export interface Work {
@@ -21,15 +22,19 @@ export interface Work {
     current: string;
   };
   title: string;
-  caption: string;
-  type: string;
+  enCaption: string;
+  frCaption: string;
+  enType: string;
+  frType: string;
   year: string;
   mainColor: string;
   backgroundColor: string;
   previewImagePath: string;
   images?: WorkImage[];
-  generalDescription: string;
-  technicalDescription: string;
+  enGeneralDescription: string;
+  frGeneralDescription: string;
+  enTechnicalDescription: string;
+  frTechnicalDescription: string;
   usedTechs: WorkUsedTech[];
   liveUrl?: string;
   githubUrl?: string;

@@ -8,9 +8,11 @@ interface SanityImage {
 
 export interface Skill {
   _id: string;
-  name: string;
+  enName: string;
+  frName: string;
   order: number;
-  description: string;
+  enDescription: string;
+  frDescription: string;
   image: SanityImage;
   skillItem: string[];
 }

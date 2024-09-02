@@ -6,8 +6,11 @@ import styles from "./GeneralSection.module.css";
 //Splide slider imports
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 export function GeneralSection({ work }: { work: Work }) {
+  const lang = usePortfolioStore((state) => state.language);
+
   return (
     <>
       <Splide
@@ -36,7 +39,11 @@ export function GeneralSection({ work }: { work: Work }) {
             <LinkButton url={work?.liveUrl} label={"live website"} />
           )}
         </div>
-        <p>{work?.generalDescription}</p>
+        <p>
+          {lang === "en"
+            ? work?.enGeneralDescription
+            : work?.frGeneralDescription}
+        </p>
       </div>
     </>
   );

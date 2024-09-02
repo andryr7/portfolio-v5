@@ -14,6 +14,8 @@ function SkillCard({
   selected: boolean;
   setSelectedSkill: Dispatch<SetStateAction<number>>;
 }) {
+  const lang = usePortfolioStore((state) => state.language);
+
   return (
     <div
       className={styles.skillContainer}
@@ -24,14 +26,14 @@ function SkillCard({
         className={styles.skillTitle}
         style={{ left: selected ? "-50%" : "50%" }}
       >
-        {skill.name}
+        {lang === "en" ? skill.enName : skill.frName}
       </div>
       <div
         className={styles.skillContentContainer}
         style={{ opacity: selected ? 1 : 0 }}
       >
         <h4>{skill.name}</h4>
-        <p>{skill.description}</p>
+        <p>{lang === "en" ? skill.enDescription : skill.frDescription}</p>
         <div className={styles.skillItemContainer}>
           {skill.skillItem.map((item) => (
             <span key={item} className={styles.skillItem}>
@@ -45,13 +47,16 @@ function SkillCard({
 }
 
 export function Skills() {
+  const lang = usePortfolioStore((state) => state.language);
   const [selectedSkill, setSelectedSkill] = useState(0);
   const skills = usePortfolioStore((state) => state.skillsData);
 
   if (skills.length > 0)
     return (
       <div className={styles.container}>
-        <h3 className={styles.title}>Skills</h3>
+        <h3 className={styles.title}>
+          {lang === "en" ? "Skills" : "Compétences"}
+        </h3>
         <div className={styles.skillsContainer}>
           {skills.map((skill, index) => (
             <SkillCard
@@ -64,7 +69,9 @@ export function Skills() {
           ))}
         </div>
         <span className={styles.tips}>
-          some of the things I can help you with
+          {lang === "en"
+            ? "some of the things I can help you with"
+            : "ce pour quoi je peux vous aider"}
         </span>
       </div>
     );

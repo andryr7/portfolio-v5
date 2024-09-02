@@ -1,9 +1,11 @@
 export interface Tech {
   _id: string;
   name: string;
-  type: string;
+  enType: string;
+  frType: string;
   url: string;
   showcased: boolean;
   imageUrl: string;
-  description: string;
+  enDescription: string;
+  frDescription: string;
 }

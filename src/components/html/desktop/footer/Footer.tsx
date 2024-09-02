@@ -1,26 +1,34 @@
 import { useLenis } from "lenis/react";
 import styles from "./Footer.module.css";
 import { Link } from "wouter";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 export function Footer() {
   const year = new Date().getFullYear();
   const lenis = useLenis();
+  const lang = usePortfolioStore((state) => state.language);
 
   return (
     <div className={styles.container}>
       <div className={styles.subContainer}>
-        <Link to="/legals">legals{" ->"}</Link>
+        <Link to="/legals">
+          {lang === "en" ? "legals" : "mentions légales"}
+          {" ->"}
+        </Link>
         <a onClick={() => lenis?.scrollTo(0)} style={{ cursor: "pointer" }}>
-          {"<- "}back to the top
+          {"<- "}
+          {lang === "en" ? "back to the top" : "retour en haut"}
         </a>
       </div>
       <div className={styles.subContainer}>
         <div style={{ marginTop: "auto" }}>
           ©{year}
           <br />
-          all rights reserved
+          {lang === "en" ? "all rights reserved" : "tous droits réservés"}
           <br />
-          designed and developed by
+          {lang === "en"
+            ? "designed and developed by"
+            : "conçu et développé par"}
         </div>
         <span>
           Andry

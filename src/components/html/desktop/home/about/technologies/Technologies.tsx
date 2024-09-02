@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { TechnologiesScene } from "@/components/canvas/desktop/technologies/TechnologiesScene";
 
 export function Technologies() {
+  const lang = usePortfolioStore((state) => state.language);
   const selectedTechCubeId = usePortfolioStore(
     (state) => state.selectedTechCubeId
   );
@@ -35,8 +36,20 @@ export function Technologies() {
           >
             <div className={styles.detailsContainer}>
               <h4>{selectedTech ? selectedTech.name : ""}</h4>
-              <span>{selectedTech ? selectedTech.type : ""}</span>
-              <p>{selectedTech ? selectedTech.description : ""}</p>
+              <span>
+                {selectedTech
+                  ? lang === "en"
+                    ? selectedTech.enType
+                    : selectedTech.frType
+                  : ""}
+              </span>
+              <p>
+                {selectedTech
+                  ? lang === "en"
+                    ? selectedTech.enDescription
+                    : selectedTech.frDescription
+                  : ""}
+              </p>
               {selectedTech && (
                 <a
                   rel="nofollow norefererrer"
@@ -56,11 +69,15 @@ export function Technologies() {
                   : "translateY(100%)",
               }}
             >
-              close
+              {lang === "en" ? "close" : "fermer"}
             </button>
           </div>
         </div>
-        <span className={styles.tips}>some of the tools I use</span>
+        <span className={styles.tips}>
+          {lang === "en"
+            ? "some of the tools I use"
+            : "certains des outils que j'utilise"}
+        </span>
       </div>
     );
 }

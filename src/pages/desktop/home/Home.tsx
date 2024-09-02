@@ -18,11 +18,13 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Home() {
   const {
+    lang,
     setWorksScrollProgress,
     setAboutScrollProgress,
     setContactScrollProgress,
   } = usePortfolioStore(
     useShallow((state) => ({
+      lang: state.language,
       setWorksScrollProgress: state.setWorksScrollProgress,
       setAboutScrollProgress: state.setAboutScrollProgress,
       setContactScrollProgress: state.setContactScrollProgress,
@@ -156,7 +158,7 @@ export function Home() {
             </article>
           </section>
           <div className={styles.aboutTitle} id="about-title">
-            about
+            {lang === "en" ? "about" : "à propos"}
           </div>
           <section className={styles.sectionContainer} id="contact">
             <ContactSection />

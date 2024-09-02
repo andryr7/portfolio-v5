@@ -3,6 +3,7 @@ import styles from "./ContactSection.module.css";
 import { useCallback, useState } from "react";
 
 export function ContactSection() {
+  const lang = usePortfolioStore((state) => state.language);
   const [emailWasCopied, setEmailWasCopied] = useState<boolean>(false);
   const setHoveredContactLink = usePortfolioStore(
     (state) => state.setHoveredContactLink
@@ -24,7 +25,9 @@ export function ContactSection() {
         >
           <div className={styles.captionContainer}>
             <div className={styles.openIndicator} />
-            open to new opportunities
+            {lang === "en"
+              ? "open to new opportunities"
+              : "ouvert aux opportunités"}
           </div>
           <a
             className={styles.contactLink}

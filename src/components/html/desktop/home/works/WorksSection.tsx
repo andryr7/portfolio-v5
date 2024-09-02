@@ -6,6 +6,7 @@ import { useRef } from "react";
 
 export function WorksSection() {
   const lenis = useLenis();
+  const lang = usePortfolioStore((state) => state.language);
   const worksData = usePortfolioStore((state) => state.worksData);
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
   const setHoveredWorkIndex = usePortfolioStore(
@@ -57,13 +58,16 @@ export function WorksSection() {
               }
             >
               <h3>{work.title}</h3>
-              <span>{work.caption}</span>
+              <span>{lang === "en" ? work?.enCaption : work?.frCaption}</span>
+              {lang === "en" ? work?.enCaption : work?.frCaption}
             </Link>
           ))}
         </ul>
       </div>
       <div className={styles.contactLinkContainer}>
-        <div onClick={handleContactClick}>add yours</div>
+        <div onClick={handleContactClick}>
+          {lang === "en" ? "add yours" : "ajoutez le votre"}
+        </div>
       </div>
     </>
   );
