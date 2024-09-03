@@ -5,6 +5,7 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useEffect } from "react";
 
 export function WorkFooter({ work }: { work: Work }) {
+  const lang = usePortfolioStore((state) => state.language);
   const worksData = usePortfolioStore((state) => state.worksData);
 
   const pos = worksData.map((w) => w._id).indexOf(work._id);
@@ -27,13 +28,13 @@ export function WorkFooter({ work }: { work: Work }) {
           className={styles.footerButton}
           // onClick={() => globalLenisInstance?.scrollTo("#contact")}
         >
-          back to homepage
+          {lang === "en" ? "back to homepage" : "retour à l'accueil"}:
         </Link>
         <Link
           href={`/work/${nextProject.slug.current}`}
           className={styles.footerButton}
         >
-          next project:
+          {lang === "en" ? "next project" : "project suivant"}:
           <br />
           {nextProject.title}
         </Link>
