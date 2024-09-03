@@ -32,12 +32,12 @@ function SkillCard({
         className={styles.skillContentContainer}
         style={{ opacity: selected ? 1 : 0 }}
       >
-        <h4>{skill.name}</h4>
+        <h4>{lang === "en" ? skill.enName : skill.frName}</h4>
         <p>{lang === "en" ? skill.enDescription : skill.frDescription}</p>
         <div className={styles.skillItemContainer}>
           {skill.skillItem.map((item) => (
-            <span key={item} className={styles.skillItem}>
-              {item}
+            <span key={item._key} className={styles.skillItem}>
+              {lang === "en" ? item.enName : item.frName}
             </span>
           ))}
         </div>

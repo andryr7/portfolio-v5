@@ -12,14 +12,21 @@ export function Menu() {
   );
   const lang = usePortfolioStore((state) => state.language);
 
-  const handleClick = () => {
-    open((c) => !c);
-    setManualMode(true);
+  const handleOpenClick = () => {
+    if (!opened) {
+      open(true);
+      setManualMode(true);
+    }
+  };
+
+  const handleCloseClick = () => {
+    open(false);
   };
 
   const handleLinkClick = (e: React.MouseEvent, target: string) => {
     e.preventDefault();
     lenis?.scrollTo("#" + target);
+    open(false);
   };
 
   //Closing the menu on first scroll
@@ -40,7 +47,7 @@ export function Menu() {
   return (
     <div
       className={`${styles.container} ${opened ? styles.openedContainer : ""}`}
-      onClick={handleClick}
+      onClick={handleOpenClick}
     >
       <div
         className={styles.menuItem}
@@ -60,6 +67,7 @@ export function Menu() {
           opacity: manualMode ? 1 : 0,
         }}
         className={styles.closeButton}
+        onClick={handleCloseClick}
       >{`X`}</div>
       <div
         className={styles.menuItem}

@@ -6,6 +6,12 @@ interface SanityImage {
   _type: string;
 }
 
+interface SkillItem {
+  _key: string;
+  enName: string;
+  frName: string;
+}
+
 export interface Skill {
   _id: string;
   enName: string;
@@ -14,5 +20,5 @@ export interface Skill {
   enDescription: string;
   frDescription: string;
   image: SanityImage;
-  skillItem: string[];
+  skillItem: SkillItem[];
 }

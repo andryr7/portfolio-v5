@@ -59,7 +59,6 @@ export function WorksSection() {
             >
               <h3>{work.title}</h3>
               <span>{lang === "en" ? work?.enCaption : work?.frCaption}</span>
-              {lang === "en" ? work?.enCaption : work?.frCaption}
             </Link>
           ))}
         </ul>
