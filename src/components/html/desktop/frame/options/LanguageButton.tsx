@@ -38,7 +38,7 @@ export function LanguageButton() {
 
   return (
     <div className={styles.languageButton} onClick={handleClick}>
-      {language}
+      {language === "en" ? "fr" : "en"}
     </div>
   );
 }
