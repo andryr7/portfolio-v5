@@ -4,10 +4,13 @@ import { Link } from "wouter";
 
 export function WorksSection() {
   const worksData = usePortfolioStore((state) => state.worksData);
+  const lang = usePortfolioStore((state) => state.language);
 
   return (
     <div className={styles.container} id="works">
-      <span className={styles.sectionTitle}>selected works</span>
+      <span className={styles.sectionTitle}>
+        {lang === "en" ? "selected works" : "projets"}
+      </span>
       <div className={styles.workList}>
         {worksData.map((work) => (
           <Link
@@ -21,7 +24,7 @@ export function WorksSection() {
               loading="eager"
               alt={`${work.title} - image`}
             />
-            <span>{work.caption}</span>
+            <span>{lang === "en" ? work.enCaption : work.frCaption}</span>
             <h3>{"-> " + work.title}</h3>
           </Link>
         ))}

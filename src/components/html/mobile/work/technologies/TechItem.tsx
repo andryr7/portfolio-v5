@@ -1,7 +1,10 @@
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./TechItem.module.css";
 import { WorkUsedTech } from "@/types/work";
 
 export function TechItem({ item }: { item: WorkUsedTech }) {
+  const lang = usePortfolioStore((state) => state.language);
+
   return (
     <a
       className={styles.container}
@@ -9,7 +12,7 @@ export function TechItem({ item }: { item: WorkUsedTech }) {
       target="_blank"
       rel="noreferrer noopener"
     >
-      <div>{item.type}</div>
+      <div>{lang === "en" ? item.enType : item.frType}</div>
       <div className={styles.itemLink}>
         <h4>{item.name}</h4>
         <span>{"->"}</span>

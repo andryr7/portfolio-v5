@@ -12,6 +12,7 @@ export function Technologies() {
     (state) => state.setSelectedTechCubeId
   );
   const techs = usePortfolioStore((state) => state.techsData);
+  const lang = usePortfolioStore((state) => state.language);
 
   const selectedTech = useMemo(() => {
     return techs.find((tech) => tech._id === selectedTechCubeId);
@@ -40,8 +41,20 @@ export function Technologies() {
         }}
       >
         <h4>{selectedTech ? selectedTech.name : ""}</h4>
-        <span>{selectedTech ? selectedTech.type : ""}</span>
-        <p>{selectedTech ? selectedTech.description : ""}</p>
+        <span>
+          {selectedTech
+            ? lang === "en"
+              ? selectedTech.enType
+              : selectedTech.frType
+            : ""}
+        </span>
+        <p>
+          {selectedTech
+            ? lang === "en"
+              ? selectedTech.enDescription
+              : selectedTech.frDescription
+            : ""}
+        </p>
         {selectedTech && (
           <a
             rel="nofollow norefererrer"

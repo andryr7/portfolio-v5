@@ -1,17 +1,20 @@
 import { Work } from "@/types/work";
 import styles from "./WorkHeader.module.css";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 export function WorkHeader({ work }: { work: Work }) {
+  const lang = usePortfolioStore((state) => state.language);
+
   return (
     <header className={styles.header}>
       <div className={styles.infoBlock}>
-        <span>{work?.caption}</span>
+        <span>{lang === "en" ? work?.enCaption : work?.frCaption}</span>
         <span
           style={{
             textAlign: "end",
           }}
         >
-          {work?.type}
+          {lang === "en" ? work?.enType : work?.frType}
         </span>
       </div>
       <div className={styles.titleBlock}>

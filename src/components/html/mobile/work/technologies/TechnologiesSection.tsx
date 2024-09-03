@@ -6,8 +6,11 @@ import { LinkButton } from "../LinkButton";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { TechItem } from "./TechItem";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 export function TechnologiesSection({ work }: { work: Work }) {
+  const lang = usePortfolioStore((state) => state.language);
+
   return (
     <>
       <h2 className={styles.sectionTitle}>Technologies</h2>
@@ -43,7 +46,11 @@ export function TechnologiesSection({ work }: { work: Work }) {
         </Splide>
       </div>
       <div className={styles.infoContainer}>
-        <p>{work?.technicalDescription}</p>
+        <p>
+          {lang === "en"
+            ? work?.enTechnicalDescription
+            : work?.frTechnicalDescription}
+        </p>
       </div>
       {work?.githubUrl && <LinkButton url={work?.githubUrl} label={"github"} />}
     </>
