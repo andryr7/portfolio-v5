@@ -11,11 +11,11 @@ export function Footer() {
   return (
     <div className={styles.container}>
       <div className={styles.subContainer}>
-        <Link to="/legals">
+        <Link to="/legals" className={styles.footerLink}>
           {lang === "en" ? "legals" : "mentions légales"}
           {" ->"}
         </Link>
-        <a onClick={() => lenis?.scrollTo(0)} style={{ cursor: "pointer" }}>
+        <a onClick={() => lenis?.scrollTo(0)} className={styles.footerLink}>
           {"<- "}
           {lang === "en" ? "back to the top" : "retour en haut"}
         </a>

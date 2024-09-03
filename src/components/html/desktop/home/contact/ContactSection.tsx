@@ -34,7 +34,11 @@ export function ContactSection() {
             onMouseEnter={() => setHoveredContactLink(2)}
             onClick={handleDesktopEmailClick}
           >
-            {emailWasCopied ? "email was copied" : "email"}
+            {emailWasCopied
+              ? lang === "en"
+                ? "email was copied"
+                : "email copié"
+              : "email"}
           </a>
           <a
             className={styles.contactLink}

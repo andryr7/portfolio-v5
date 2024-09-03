@@ -9,6 +9,7 @@ export function Loader() {
   const cubeRef = useRef(null);
   const tl = useRef<any>();
   const isLoaded = usePortfolioStore((state) => state.isLoaded);
+  const lang = usePortfolioStore((state) => state.language);
 
   const { contextSafe } = useGSAP(() => {
     tl.current = gsap.timeline().to(cubeRef.current, {
@@ -35,7 +36,9 @@ export function Loader() {
   return (
     <div className={styles.container} ref={containerRef}>
       <div className={styles.cube} ref={cubeRef} />
-      <div className={styles.text}>loading</div>
+      <div className={styles.text}>
+        {lang === "en" ? "loading" : "chargement"}
+      </div>
     </div>
   );
 }

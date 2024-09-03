@@ -24,14 +24,16 @@
   justify-content: space-between;
 }
 
-.back-top-link {
-  background-color: blue;
-  display: flex;
-  justify-content: end;
+.footer-link {
+  cursor: pointer;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
 }
 
 .container span {
-  font-size: 10vw;
+  font-size: min(10vw, 250px);
   text-align: end;
   line-height: 90%;
   margin-bottom: -0.6%;
