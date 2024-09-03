@@ -6,14 +6,9 @@ export function useNavigatorLanguage() {
   //initial language handling
   useEffect(() => {
     const browserLanguage = navigator.language;
-    const htmlElement = document.querySelector("html");
 
     if (browserLanguage === "fr" || browserLanguage === "fr-FR") {
       setNavigatorLanguage("fr");
-
-      // if (htmlElement !== null) {
-      //   htmlElement.lang = "fr";
-      // }
     }
   }, []);
 

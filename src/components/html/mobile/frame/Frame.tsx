@@ -2,10 +2,12 @@ import styles from "./Frame.module.css";
 import { useState } from "react";
 import { Menu, MenuButton } from "./menu/Menu";
 import { Link, useRoute } from "wouter";
+import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 export function Frame() {
   const [menuIsOpened, setMenuIsOpened] = useState(false);
   const [isHomepage] = useRoute("/");
+  const lang = usePortfolioStore((state) => state.language);
 
   // useEffect(() => {
   //   if (menuIsOpened) {
@@ -31,7 +33,8 @@ export function Frame() {
         )}
         {!isHomepage && (
           <Link href="/" className={styles.homeLink}>
-            {"-> "}back to homepage
+            {"-> "}
+            {lang === "en" ? "back to homepage" : "retour à l'accueil"}
           </Link>
         )}
       </div>
