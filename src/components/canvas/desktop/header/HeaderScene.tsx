@@ -13,9 +13,9 @@ import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { PhysicsScene } from "./physics/PhysicsScene";
 import { HeaderBackground } from "./HeaderBackground";
+import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function HeaderScene() {
-  const lang = usePortfolioStore((state) => state.language);
   const setIsLoaded = usePortfolioStore((state) => state.setIsLoaded);
   const colors = usePortfolioStore((state) => state.colors);
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
@@ -24,6 +24,7 @@ export function HeaderScene() {
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress
   );
+  const sectionTitleText = useTranslatedText("selected works", "projets");
 
   const physicsGravity = useMemo((): [number, number, number] => {
     return worksScrollProgress >= 0.66 ? [0, -9.81, 0] : [0, 0, 0];
@@ -127,7 +128,7 @@ export function HeaderScene() {
             position={[0, 2.75, 0]}
             fontSize={viewportWidth / 15}
           >
-            {lang === "en" ? `selected works` : "projets"}
+            {sectionTitleText}
           </Text>
         </group>
       </group>

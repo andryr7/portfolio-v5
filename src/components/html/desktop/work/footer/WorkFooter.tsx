@@ -5,6 +5,7 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useLenis } from "lenis/react";
 import { Footer } from "../../footer/Footer";
 import Lenis from "lenis";
+import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function WorkFooter({
   work,
@@ -15,7 +16,14 @@ export function WorkFooter({
 }) {
   const lenis = useLenis();
   const worksData = usePortfolioStore((state) => state.worksData);
-  const lang = usePortfolioStore((state) => state.language);
+  const returnText = useTranslatedText(
+    "back to works list",
+    "retour vers les projets"
+  );
+  const nextProjectText = useTranslatedText(
+    "next project : ",
+    "projet suivant : "
+  );
 
   const pos = worksData.map((w) => w._id).indexOf(work._id);
   const nextProject =
@@ -35,7 +43,7 @@ export function WorkFooter({
             style={{ borderLeft: "none" }}
             onClick={() => globalLenisInstance?.scrollTo("#works")}
           >
-            {lang === "en" ? "back to works list" : "retour vers les projets"}
+            {returnText}
           </Link>
           <Link
             href="/"
@@ -49,7 +57,7 @@ export function WorkFooter({
             className={styles.footerButton}
             onClick={() => lenis?.scrollTo(0)}
           >
-            {lang === "en" ? "next project : " : "projet suivant : "}
+            {nextProjectText}
             {nextProject.title}
           </Link>
         </div>

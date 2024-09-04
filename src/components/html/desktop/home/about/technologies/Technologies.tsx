@@ -3,6 +3,7 @@ import styles from "./Technologies.module.css";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useMemo } from "react";
 import { TechnologiesScene } from "@/components/canvas/desktop/technologies/TechnologiesScene";
+import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function Technologies() {
   const lang = usePortfolioStore((state) => state.language);
@@ -13,6 +14,10 @@ export function Technologies() {
     (state) => state.setSelectedTechCubeId
   );
   const techs = usePortfolioStore((state) => state.techsData);
+  const tipsText = useTranslatedText(
+    "some of the tools I use",
+    "certains des outils que j'utilise"
+  );
 
   const selectedTech = useMemo(() => {
     return techs.find((tech) => tech._id === selectedTechCubeId);
@@ -73,11 +78,7 @@ export function Technologies() {
             </button>
           </div>
         </div>
-        <span className={styles.tips}>
-          {lang === "en"
-            ? "some of the tools I use"
-            : "certains des outils que j'utilise"}
-        </span>
+        <span className={styles.tips}>{tipsText}</span>
       </div>
     );
 }

@@ -1,34 +1,41 @@
 import { useLenis } from "lenis/react";
 import styles from "./Footer.module.css";
 import { Link } from "wouter";
-import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function Footer() {
   const year = new Date().getFullYear();
   const lenis = useLenis();
-  const lang = usePortfolioStore((state) => state.language);
+  const legalsLinkText = useTranslatedText("legals", "mentions légales");
+  const returnLinkText = useTranslatedText("back to the top", "retour en haut");
+  const copyrightLinkText = useTranslatedText(
+    "all rights reserved",
+    "tous droits réservés"
+  );
+  const creditsText = useTranslatedText(
+    "designed and developed by",
+    "conçu et développé par"
+  );
 
   return (
     <div className={styles.container}>
       <div className={styles.subContainer}>
         <Link to="/legals" className={styles.footerLink}>
-          {lang === "en" ? "legals" : "mentions légales"}
+          {legalsLinkText}
           {" ->"}
         </Link>
         <a onClick={() => lenis?.scrollTo(0)} className={styles.footerLink}>
           {"<- "}
-          {lang === "en" ? "back to the top" : "retour en haut"}
+          {returnLinkText}
         </a>
       </div>
       <div className={styles.subContainer}>
         <div style={{ marginTop: "auto" }}>
           ©{year}
           <br />
-          {lang === "en" ? "all rights reserved" : "tous droits réservés"}
+          {copyrightLinkText}
           <br />
-          {lang === "en"
-            ? "designed and developed by"
-            : "conçu et développé par"}
+          {creditsText}
         </div>
         <span>
           Andry

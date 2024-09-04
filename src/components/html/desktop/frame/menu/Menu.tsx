@@ -2,6 +2,7 @@ import styles from "./Menu.module.css";
 import React, { useEffect, useState } from "react";
 import { useLenis } from "lenis/react";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function Menu() {
   const [opened, open] = useState<boolean>(true);
@@ -10,7 +11,8 @@ export function Menu() {
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress
   );
-  const lang = usePortfolioStore((state) => state.language);
+  const workLinkText = useTranslatedText("works", "projets");
+  const aboutLinkText = useTranslatedText("about", "à propos");
 
   const handleOpenClick = () => {
     if (!opened) {
@@ -53,13 +55,13 @@ export function Menu() {
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "works")}
       >
-        {lang === "en" ? `works` : "projets"}
+        {workLinkText}
       </div>
       <div
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "aboutanchor")}
       >
-        {lang === "en" ? `about` : "à propos"}
+        {aboutLinkText}
       </div>
       <div
         style={{

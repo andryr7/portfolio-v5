@@ -3,11 +3,14 @@ import styles from "./Frame.module.css";
 import { Link, useRoute } from "wouter";
 import { ThemeButton } from "./options/ThemeButton";
 import { LanguageButton } from "./options/LanguageButton";
-import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function Frame() {
   const [isHomepage] = useRoute("/");
-  const lang = usePortfolioStore((state) => state.language);
+  const returnText = useTranslatedText(
+    "back to homepage",
+    "retour à l'accueil"
+  );
 
   return (
     <>
@@ -20,7 +23,7 @@ export function Frame() {
           {isHomepage && <Menu />}
           {!isHomepage && (
             <Link href="/" className={styles.homeLink}>
-              {lang === "en" ? "back to homepage" : "retour à l'accueil"}
+              {returnText}
             </Link>
           )}
         </div>

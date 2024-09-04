@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import styles from "./Skills.module.css";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { Skill } from "@/types/skill";
+import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 function SkillCard({
   index,
@@ -51,16 +52,18 @@ function SkillCard({
 }
 
 export function Skills() {
-  const lang = usePortfolioStore((state) => state.language);
   const [selectedSkill, setSelectedSkill] = useState(0);
   const skills = usePortfolioStore((state) => state.skillsData);
+  const sectionTitleText = useTranslatedText("Skills", "Compétences");
+  const tipsText = useTranslatedText(
+    "some of the things I can help you with",
+    "ce pour quoi je peux vous aider"
+  );
 
   if (skills.length > 0)
     return (
       <div className={styles.container}>
-        <h3 className={styles.title}>
-          {lang === "en" ? "Skills" : "Compétences"}
-        </h3>
+        <h3 className={styles.title}>{sectionTitleText}</h3>
         <div className={styles.skillsContainer}>
           {skills.map((skill, index) => (
             <SkillCard
@@ -72,11 +75,7 @@ export function Skills() {
             />
           ))}
         </div>
-        <span className={styles.tips}>
-          {lang === "en"
-            ? "some of the things I can help you with"
-            : "ce pour quoi je peux vous aider"}
-        </span>
+        <span className={styles.tips}>{tipsText}</span>
       </div>
     );
 }

@@ -3,10 +3,44 @@ import styles from "./WorksSection.module.css";
 import { Link } from "wouter";
 import { useLenis } from "lenis/react";
 import { useRef } from "react";
+import { useTranslatedText } from "@/handlers/useTranslatedText";
+import { Work } from "@/types/work";
+
+function WorkLine({
+  work,
+  index,
+  hoveredWorkIndex,
+  setHoveredWorkIndex,
+}: {
+  work: Work;
+  index: number;
+  hoveredWorkIndex: number | null;
+  setHoveredWorkIndex: any;
+}) {
+  const captionText = useTranslatedText(work?.enCaption, work?.frCaption);
+
+  return (
+    <Link
+      href={`/work/${work.slug.current}`}
+      className={styles.workLine}
+      key={index}
+      onMouseEnter={() => setHoveredWorkIndex(index)}
+      style={
+        hoveredWorkIndex !== null
+          ? hoveredWorkIndex !== index
+            ? { opacity: 0.25, borderColor: "#0e0e0e11" }
+            : { borderColor: "#0e0e0e11" }
+          : {}
+      }
+    >
+      <h3>{work.title}</h3>
+      <span>{captionText}</span>
+    </Link>
+  );
+}
 
 export function WorksSection() {
   const lenis = useLenis();
-  const lang = usePortfolioStore((state) => state.language);
   const worksData = usePortfolioStore((state) => state.worksData);
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
   const setHoveredWorkIndex = usePortfolioStore(
@@ -17,6 +51,7 @@ export function WorksSection() {
   );
   const scrollProgressRef = useRef(worksScrollProgress);
   scrollProgressRef.current = worksScrollProgress;
+  const captionText = useTranslatedText("add yours", "ajoutez le votre");
 
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -44,29 +79,18 @@ export function WorksSection() {
           style={hoveredWorkIndex !== null ? { borderColor: "#0e0e0e11" } : {}}
         >
           {worksData.map((work, index) => (
-            <Link
-              href={`/work/${work.slug.current}`}
-              className={styles.workLine}
+            <WorkLine
               key={index}
-              onMouseEnter={() => setHoveredWorkIndex(index)}
-              style={
-                hoveredWorkIndex !== null
-                  ? hoveredWorkIndex !== index
-                    ? { opacity: 0.25, borderColor: "#0e0e0e11" }
-                    : { borderColor: "#0e0e0e11" }
-                  : {}
-              }
-            >
-              <h3>{work.title}</h3>
-              <span>{lang === "en" ? work?.enCaption : work?.frCaption}</span>
-            </Link>
+              work={work}
+              index={index}
+              hoveredWorkIndex={hoveredWorkIndex}
+              setHoveredWorkIndex={setHoveredWorkIndex}
+            />
           ))}
         </ul>
       </div>
       <div className={styles.contactLinkContainer}>
-        <div onClick={handleContactClick}>
-          {lang === "en" ? "add yours" : "ajoutez le votre"}
-        </div>
+        <div onClick={handleContactClick}>{captionText}</div>
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./ContactSection.module.css";
 import { useCallback, useState } from "react";
+import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function ContactSection() {
   const lang = usePortfolioStore((state) => state.language);
@@ -8,6 +9,11 @@ export function ContactSection() {
   const setHoveredContactLink = usePortfolioStore(
     (state) => state.setHoveredContactLink
   );
+  const captionText = useTranslatedText(
+    "open to new opportunities",
+    "ouvert aux opportunités"
+  );
+  const emailLinkText = useTranslatedText("email was copied", "email copié");
 
   const handleDesktopEmailClick = useCallback(() => {
     navigator.clipboard.writeText("contact@andryratsimba.com");
@@ -25,20 +31,14 @@ export function ContactSection() {
         >
           <div className={styles.captionContainer}>
             <div className={styles.openIndicator} />
-            {lang === "en"
-              ? "open to new opportunities"
-              : "ouvert aux opportunités"}
+            {captionText}
           </div>
           <a
             className={styles.contactLink}
             onMouseEnter={() => setHoveredContactLink(2)}
             onClick={handleDesktopEmailClick}
           >
-            {emailWasCopied
-              ? lang === "en"
-                ? "email was copied"
-                : "email copié"
-              : "email"}
+            {emailWasCopied ? emailLinkText : "email"}
           </a>
           <a
             className={styles.contactLink}

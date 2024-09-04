@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 const letters = "abcdefghijklmnopqrstuvwxyz ";
+const timeBetweenIterations = 35;
 
 export function useAnimatedText(targetText: string) {
   const [text, setText] = useState(targetText);
@@ -26,7 +27,7 @@ export function useAnimatedText(targetText: string) {
         .join("");
       setText(randomizedWord);
       iteration += 1;
-    }, 35);
+    }, timeBetweenIterations);
   }, [targetText]);
 
   //Triggering text animation

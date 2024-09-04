@@ -13,23 +13,23 @@ import { Header } from "@/components/html/desktop/home/header/Header";
 import { Footer } from "@/components/html/desktop/footer/Footer";
 import { HeaderScene } from "@/components/canvas/desktop/header/HeaderScene";
 import { Presentation } from "@/components/html/desktop/home/about/presentation/Presentation";
+import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function Home() {
   const {
-    lang,
     setWorksScrollProgress,
     setAboutScrollProgress,
     setContactScrollProgress,
   } = usePortfolioStore(
     useShallow((state) => ({
-      lang: state.language,
       setWorksScrollProgress: state.setWorksScrollProgress,
       setAboutScrollProgress: state.setAboutScrollProgress,
       setContactScrollProgress: state.setContactScrollProgress,
     }))
   );
+  const aboutTitleText = useTranslatedText("about", "à propos");
 
   useGSAP(
     () => {
@@ -158,7 +158,8 @@ export function Home() {
             </article>
           </section>
           <div className={styles.aboutTitle} id="about-title">
-            {lang === "en" ? "about" : "à propos"}
+            {aboutTitleText}
+            <span>a</span>
           </div>
           <section className={styles.sectionContainer} id="contact">
             <ContactSection />
