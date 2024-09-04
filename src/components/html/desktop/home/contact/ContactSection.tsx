@@ -4,7 +4,6 @@ import { useCallback, useState } from "react";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function ContactSection() {
-  const lang = usePortfolioStore((state) => state.language);
   const [emailWasCopied, setEmailWasCopied] = useState<boolean>(false);
   const setHoveredContactLink = usePortfolioStore(
     (state) => state.setHoveredContactLink
