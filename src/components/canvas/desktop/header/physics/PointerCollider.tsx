@@ -3,13 +3,15 @@ import { useFrame } from "@react-three/fiber";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useRef } from "react";
 import * as THREE from "three";
+import { useRoute } from "wouter";
 
 export function PointerCollider({ vec = new THREE.Vector3() }) {
   const ref = useRef<any>(null);
   const mousePosition = useMousePosition();
+  const [isHomepage] = useRoute("/");
 
   useFrame((state) => {
-    if (ref.current !== null) {
+    if (ref.current !== null && isHomepage) {
       ref.current.setNextKinematicTranslation(
         vec.set(
           mousePosition.x * state.viewport.getCurrentViewport().width,

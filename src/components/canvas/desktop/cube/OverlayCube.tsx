@@ -12,6 +12,7 @@ export function OverlayCube({ visible }: { visible: boolean }) {
   const overlayCubeRef = useRef<Group | null>(null);
   const cubeMaterialRef = useRef(null);
   const textMaterialRef = useRef(null);
+  const lang = usePortfolioStore((state) => state.language);
 
   const hoveredContactLink = usePortfolioStore(
     (state) => state.hoveredContactLink
@@ -31,10 +32,17 @@ export function OverlayCube({ visible }: { visible: boolean }) {
   }, [contactScrollProgress]);
 
   const cubeText = useMemo(() => {
-    if (aboutScrollProgress < 0.25) return "who I am";
-    if (aboutScrollProgress < 0.75) return "what I do";
-    return contactScrollProgress < 0.1 ? "what I use" : "what now";
-  }, [aboutScrollProgress, contactScrollProgress]);
+    if (aboutScrollProgress < 0.25) return lang === "en" ? "who I am" : "qui ?";
+    if (aboutScrollProgress < 0.75)
+      return lang === "en" ? "what I do" : "quoi ?";
+    return contactScrollProgress < 0.05
+      ? lang === "en"
+        ? "what I use"
+        : "comment ?"
+      : lang === "en"
+      ? "what now ?"
+      : "et maintenant ?";
+  }, [lang, aboutScrollProgress, contactScrollProgress]);
 
   const [cubeTextResult] = useAnimatedText(cubeText);
 

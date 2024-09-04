@@ -35,7 +35,6 @@
 .container span {
   font-size: min(10vw, 250px);
   text-align: end;
-  line-height: 90%;
   margin-bottom: -0.6%;
   user-select: none;
 }

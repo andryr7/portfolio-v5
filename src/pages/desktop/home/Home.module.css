@@ -48,6 +48,7 @@
   transform: translateY(-100%);
   transition: opacity var(--transition-normal);
   pointer-events: none;
+  white-space: nowrap;
 }
 
 @media (min-width: 768px) {
