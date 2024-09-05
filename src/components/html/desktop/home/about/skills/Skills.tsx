@@ -8,10 +8,6 @@ import { SkillCard } from "./SkillCard";
 export function Skills() {
   const skills = usePortfolioStore((state) => state.skillsData);
   const sectionTitleText = useTranslatedText("Skills", "Compétences");
-  // const tipsText = useTranslatedText(
-  //   "some of the things I can help you with",
-  //   "ce pour quoi je peux vous aider"
-  // );
 
   const skillsScrollProgress = usePortfolioStore(
     (state) => state.skillsScrollProgress
