@@ -21,11 +21,13 @@ export function Home() {
   const {
     setWorksScrollProgress,
     setAboutScrollProgress,
+    setSkillsScrollProgress,
     setContactScrollProgress,
   } = usePortfolioStore(
     useShallow((state) => ({
       setWorksScrollProgress: state.setWorksScrollProgress,
       setAboutScrollProgress: state.setAboutScrollProgress,
+      setSkillsScrollProgress: state.setSkillsScrollProgress,
       setContactScrollProgress: state.setContactScrollProgress,
     }))
   );
@@ -83,9 +85,9 @@ export function Home() {
       });
 
       //About section scroll progress update
-      gsap.to("#aboutCenter", {
+      gsap.to("#about-skills", {
         scrollTrigger: {
-          trigger: "#aboutCenter",
+          trigger: "#about-skills",
           start: "top bottom",
           end: "bottom top",
           onUpdate: (self) => {
@@ -106,19 +108,19 @@ export function Home() {
         },
       });
 
-      //About section title opacity animation
-      // gsap.to("#about-title", {
-      //   opacity: 1,
-      //   scrollTrigger: {
-      //     trigger: "#works",
-      //     endTrigger: "#contact",
-      //     start: "bottom top",
-      //     end: "top bottom",
-      //     pin: "#about-title",
-      //     markers: true,
-      //     scrub: true,
-      //   },
-      // });
+      //About underlying page pin animation
+      gsap.to("#skills-pinned", {
+        scrollTrigger: {
+          trigger: "#about-skills",
+          start: "top top",
+          end: "bottom bottom",
+          pin: "#skills-pinned",
+          onUpdate: (self) => {
+            setSkillsScrollProgress(self.progress);
+          },
+          // markers: true,
+        },
+      });
     }
     // { scope: container }
   );
@@ -150,7 +152,10 @@ export function Home() {
             <article className={styles.sectionContainer} id="about">
               <Presentation />
             </article>
-            <article className={styles.sectionContainer} id="aboutCenter">
+            <article
+              className={styles.skillsSectionContainer}
+              id="about-skills"
+            >
               <Skills />
             </article>
             <article className={styles.sectionContainer}>

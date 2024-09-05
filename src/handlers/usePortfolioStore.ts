@@ -34,6 +34,7 @@ type State = {
   //Scroll animations related values
   worksScrollProgress: number;
   aboutScrollProgress: number;
+  skillsScrollProgress: number;
   contactScrollProgress: number;
   hoveredContactLink: number | null;
   draggedTechCubeId: string | null;
@@ -60,6 +61,7 @@ type Actions = {
   //Scroll animations related setters
   setWorksScrollProgress: (newScrollProgress: number) => void;
   setAboutScrollProgress: (newScrollProgress: number) => void;
+  setSkillsScrollProgress: (newScrollProgress: number) => void;
   setContactScrollProgress: (newScrollProgress: number) => void;
   //Contact link hovering setter
   setHoveredContactLink: (newHoveredContactLink: number | null) => void;
@@ -99,6 +101,9 @@ export const usePortfolioStore = create<State & Actions>()((set) => ({
   aboutScrollProgress: 0,
   setAboutScrollProgress: (newScrollProgress) =>
     set(() => ({ aboutScrollProgress: newScrollProgress })),
+  skillsScrollProgress: 0,
+  setSkillsScrollProgress: (newScrollProgress) =>
+    set(() => ({ skillsScrollProgress: newScrollProgress })),
   contactScrollProgress: 0,
   setContactScrollProgress: (newScrollProgress) =>
     set(() => ({ contactScrollProgress: newScrollProgress })),

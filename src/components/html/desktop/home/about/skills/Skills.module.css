@@ -1,10 +1,18 @@
-.container {
+.page-container {
+  width: 100%;
+  height: 100vh;
   position: relative;
-  width: 80%;
-  max-width: 1920px;
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-container {
+  position: relative;
+  height: 50%;
+  width: 80%;
+  min-height: 480px;
+  max-width: 1920px;
 }
 
 .title {
@@ -14,68 +22,65 @@
   transform: translateY(-150%);
 }
 
-.skills-container {
+.main-container {
   width: 100%;
   height: 100%;
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
-.skill-container {
-  position: relative;
-  border-radius: var(--br-s);
+.view-container {
+  background-color: red;
+  height: 100%;
+  aspect-ratio: 1;
+  max-width: 50%;
+}
+
+.cards-container {
   background-color: var(--color-background-two);
-  transition: width var(--transition-normal);
-  cursor: pointer;
+  width: 100%;
+  position: relative;
   overflow: hidden;
 }
 
-.skill-title {
+.card-container {
+  background-color: #008000;
   position: absolute;
-  left: 50%;
-  width: 40vh;
-  transform: rotate(270deg) translateX(-100%) translateY(-50%);
-  text-align: center;
-  transform-origin: left top;
-  font-size: var(--font-size-s);
-  transition: opacity var(--transition-normal), left var(--transition-normal);
-}
-
-.skill-content-container {
-  box-sizing: border-box;
-  width: calc(min(60vw, 1920 * 0.6) - 3rem);
-  height: 100%;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.skill-content-container h4 {
-  font-size: var(--font-size-s);
-}
-
-.skill-content-container p {
-  font-family: var(--font-text);
-  text-align: justify;
-  line-height: 150%;
-}
-
-.skill-item-container {
-  display: flex;
   width: 100%;
-  gap: 1rem;
-  justify-content: flex-end;
-  flex-wrap: wrap;
+  height: calc(100% - 4rem);
+  bottom: 0;
+  transition: all var(--transition-normal);
 }
 
-.skill-item {
-  padding: 1rem;
-  border: 1px solid var(--color-main);
-  border-radius: var(--br-s);
+.card-container:first-of-type {
+  background-color: #FF0000;
+  height: 100%;
+} 
+
+.card-container:last-of-type {
+  background-color: #0000FF;
+  height: calc(100% - 8rem);
 }
 
-.tips {
+.scroll-indicator {
+  width: 1rem;
+  height: 100%;
+  background-color: var(--color-background-two);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-progress-bar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-main);
+}
+
+
+
+
+/* .tips {
   padding: 0.5rem;
   align-self: flex-end;
-}
+} */
