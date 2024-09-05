@@ -6,7 +6,7 @@ interface SanityImage {
   _type: string;
 }
 
-interface SkillItem {
+export interface SkillItem {
   _key: string;
   enName: string;
   frName: string;
