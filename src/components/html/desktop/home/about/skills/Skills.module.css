@@ -30,7 +30,7 @@
 }
 
 .view-container {
-  background-color: red;
+  background-color: var(--color-background-two);
   height: 100%;
   aspect-ratio: 1;
   max-width: 50%;
