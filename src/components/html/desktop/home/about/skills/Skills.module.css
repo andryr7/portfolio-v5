@@ -80,10 +80,8 @@
   background-color: var(--color-background-one);
 }
 
-
-
-
-/* .tips {
+.tips {
   padding: 0.5rem;
-  align-self: flex-end;
-} */
+  justify-self: end;
+  background-color: red;
+}
