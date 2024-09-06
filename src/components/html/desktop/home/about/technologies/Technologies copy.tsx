@@ -31,14 +31,14 @@ export function Technologies() {
         <div className={styles.viewContainer}>
           <View
             className={styles.view}
-            style={{ width: selectedTechCubeId === null ? "100%" : "67%" }}
+            style={{ width: selectedTechCubeId === null ? "100%" : "75%" }}
           >
             <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={10} />
             <TechnologiesScene />
           </View>
           <div
             className={styles.techDetailsWrapper}
-            style={{ right: selectedTechCubeId === null ? "-33%" : "0%" }}
+            style={{ right: selectedTechCubeId === null ? "-25%" : "0%" }}
           >
             <div className={styles.detailsContainer}>
               <h4>{selectedTech ? selectedTech.name : ""}</h4>

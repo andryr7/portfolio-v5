@@ -33,7 +33,7 @@
   position:absolute;
   right: 0;
   height: 100%;
-  width: 33%;
+  width: 25%;
   box-sizing: border-box;
   background-color: var(--color-background-two);
   border-left: 7px solid var(--color-background-one);
@@ -74,7 +74,6 @@
   font-family: var(--font-text);
   text-align: justify;
   line-height: 125%;
-  font-size: clamp(0.75rem, 1vw, 1.25rem);
 }
 
 .details-container a {

@@ -50,7 +50,7 @@
 .card-container {
   position: absolute;
   width: 100%;
-  height: calc(100% - 4rem);
+  height: calc(100% - 5vh);
   bottom: 0;
   transition: transform var(--transition-normal);
   background-color: var(--color-background-two);
@@ -62,7 +62,7 @@
 } 
 
 .card-container:last-of-type {
-  height: calc(100% - 8rem);
+  height: calc(100% - 10vh);
 }
 
 .scroll-indicator {
