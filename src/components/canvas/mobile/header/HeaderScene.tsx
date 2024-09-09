@@ -42,7 +42,11 @@ export function HeaderScene() {
       />
 
       {/* Cube */}
-      <mesh position={[0, 0, 1]} ref={cubeRef} scale={viewportWidth / 2}>
+      <mesh
+        position={[0, 0, 1]}
+        ref={cubeRef}
+        scale={Math.min(viewportHeight / 1.75, viewportWidth / 1.75)}
+      >
         <RoundedBox>
           <MeshTransmissionMaterial
             transmission={1}

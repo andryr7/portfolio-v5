@@ -6,8 +6,6 @@
   align-items: center;
   padding: 1rem;
   box-sizing: border-box;
-  font-size: min(11.25vw, 10vh);
-  line-height: 115%;
   position: relative;
 }
 
@@ -22,9 +20,13 @@
 .title-container {
   pointer-events: none;
   z-index: 20;
-  font-size: 13.5vw;
+  font-size: min(13.5vw, 10vh);
+  line-height: 120%;
   color: #e9e9e9;
   mix-blend-mode: difference;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title-container h2 {
@@ -33,7 +35,7 @@
 
 .tips {
   position: absolute;
-  bottom: 0;
+  bottom: 1svh;
   z-index: 20;
   font-size: 3.5vw;
 }
