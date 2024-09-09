@@ -37,7 +37,7 @@ export default function MobileApp() {
           zIndex: 10,
         }}
       >
-        {/* {envMode === "development" && <StatsGl />} */}
+        {envMode === "development" && <StatsGl />}
         <ViewportSizeHandler />
         <View.Port />
       </Canvas>

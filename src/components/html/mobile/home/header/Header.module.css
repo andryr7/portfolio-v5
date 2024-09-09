@@ -39,3 +39,42 @@
   z-index: 20;
   font-size: 3.5vw;
 }
+
+.top-container {
+  z-index: 20;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.bottom-container {
+  z-index: 20;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+@media (min-width: 768px) {
+  .bottom-container {
+    bottom: 40px;
+  }
+}
+
+.arrow-button {
+  cursor: pointer;
+  font-size: 4rem;
+  overflow: hidden;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(90deg);
+}
