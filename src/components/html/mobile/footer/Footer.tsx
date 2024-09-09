@@ -17,7 +17,7 @@ export function Footer() {
           <br />
           {lang === "en" ? "developed" : "développé"}
           <br />
-          {lang === "en" ? "at home" : "maison"}
+          {lang === "en" ? "at home" : "par mes soins"}
         </span>
       </div>
       <div className={styles.itemContainer}>

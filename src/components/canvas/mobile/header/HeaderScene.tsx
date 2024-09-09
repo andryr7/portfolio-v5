@@ -4,37 +4,17 @@ import {
   MeshTransmissionMaterial,
   OrthographicCamera,
   RoundedBox,
-  Text,
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
-import spacemono from "@/assets/fonts/space-mono.ttf";
-import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
+import { useRef } from "react";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { HeaderBackground } from "./HeaderBackground";
 import { Mesh } from "three";
 
 export function HeaderScene() {
   const cubeRef = useRef<Mesh | null>(null);
-  const colors = usePortfolioStore((state) => state.colors);
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
     (state) => state.viewportSize
-  );
-  const worksScrollProgress = usePortfolioStore(
-    (state) => state.worksScrollProgress
-  );
-
-  const heroVisibility = useMemo((): boolean => {
-    return worksScrollProgress < 0.5;
-  }, [worksScrollProgress]);
-
-  const worksBackgroundPosition = useMemo(
-    (): [number, number, number] => [
-      0,
-      -viewportHeight + worksScrollProgress * viewportHeight * 2,
-      0.25,
-    ],
-    [viewportHeight, worksScrollProgress]
   );
 
   useFrame((state, delta) => {
@@ -45,9 +25,9 @@ export function HeaderScene() {
     state.camera.updateProjectionMatrix();
 
     if (cubeRef.current !== null) {
-      cubeRef.current.rotation.x += delta * 0.2;
-      cubeRef.current.rotation.y += delta * 0.2;
-      cubeRef.current.rotation.z += delta * 0.2;
+      cubeRef.current.rotation.x += delta * 0.1;
+      cubeRef.current.rotation.y += delta * 0.1;
+      cubeRef.current.rotation.z += delta * 0.1;
     }
   });
 
@@ -61,68 +41,20 @@ export function HeaderScene() {
         position={[0, 0, 10]}
       />
 
-      {/* Texts */}
-      <group
-        position={[
-          -viewportWidth / 2 + viewportWidth / 30,
-          (-viewportHeight / 2 + viewportWidth / 30) * 0.9,
-          0,
-        ]}
-        scale={Math.min(viewportWidth / 8.5, viewportHeight / 6)}
-        visible={heroVisibility}
-      >
-        <Text
-          font={spacemono}
-          anchorX="left"
-          anchorY="bottom"
-          position={[0, 2, 0]}
-          lineHeight={1}
-          color={colors.main}
-        >
-          Andry{"\n"}Ratsimba
-        </Text>
-        <Text
-          font={spacemonoitalic}
-          anchorX="left"
-          anchorY="bottom"
-          position={[0, 0, 0]}
-          lineHeight={1}
-          fillOpacity={0}
-          strokeWidth={0.01}
-          strokeColor={colors.main}
-        >
-          independent{"\n"}web developer
-        </Text>
-      </group>
-
-      <mesh position={[0, 0, 1]} ref={cubeRef} scale={1.5}>
+      {/* Cube */}
+      <mesh position={[0, 0, 1]} ref={cubeRef} scale={viewportWidth / 2}>
         <RoundedBox>
-          <MeshTransmissionMaterial thickness={1} />
+          <MeshTransmissionMaterial
+            transmission={1}
+            thickness={1}
+            chromaticAberration={0.5}
+            resolution={77}
+            samples={1}
+          />
         </RoundedBox>
       </mesh>
 
       <HeaderBackground />
-
-      {/* Works background */}
-      <group position={worksBackgroundPosition}>
-        {/* Background */}
-        <mesh scale={[viewportWidth, viewportHeight, 1]}>
-          {/* <planeGeometry args={[1, 1, 1, 1]} /> */}
-          <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial color="#747474" toneMapped={false} />
-        </mesh>
-        {/* Texts */}
-        <group>
-          <Text
-            font={spacemono}
-            color="#d9d9d9"
-            position={[0, 2.75, 0]}
-            fontSize={viewportWidth / 15}
-          >
-            selected works
-          </Text>
-        </group>
-      </group>
 
       {/* Environment lighting */}
       {/* <Environment preset="studio" /> */}

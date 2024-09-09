@@ -45,6 +45,7 @@ export const MobileBackgroundMaterial = shaderMaterial(
     uniform vec3 lightcolor;
     uniform float uTime;
     const float NOISE_SCALE = 5.;
+    const float DISTORTION_AMOUNT = 0.035;
 
     //Hash function
     float hashV(vec2 p) {

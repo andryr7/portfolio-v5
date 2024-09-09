@@ -1,8 +1,9 @@
 .container {
-  height: 90dvh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
   box-sizing: border-box;
   font-size: min(11.25vw, 10vh);
@@ -19,6 +20,20 @@
 }
 
 .title-container {
-  opacity: 0;
   pointer-events: none;
+  z-index: 20;
+  font-size: 13.5vw;
+  color: #e9e9e9;
+  mix-blend-mode: difference;
+}
+
+.title-container h2 {
+  font-style: italic;
+}
+
+.tips {
+  position: absolute;
+  bottom: 0;
+  z-index: 20;
+  font-size: 3.5vw;
 }

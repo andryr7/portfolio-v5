@@ -11,12 +11,18 @@
   padding: 1rem;
   box-sizing: border-box;
   pointer-events: all;
+  transition: opacity var(--transition-normal);
 }
 
 .menu-top-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.options-container {
+  display: flex;
+  gap: 1rem;
 }
 
 .menu-center-container {

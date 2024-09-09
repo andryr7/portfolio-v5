@@ -1,8 +1,8 @@
 import { Link } from "wouter";
 import { ThemeButton } from "../themebutton/ThemeButton";
 import styles from "./Menu.module.css";
-import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { LanguageButton } from "@/components/html/desktop/frame/options/LanguageButton";
+import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function MenuButton({
   menuIsOpened,
@@ -35,29 +35,36 @@ export function Menu({
       .querySelector(target)
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  const lang = usePortfolioStore((state) => state.language);
+
+  const worksLinkText = useTranslatedText("works", "projets");
+  const aboutLinkText = useTranslatedText("about", "à propos");
+  const contactLinkText = useTranslatedText("contact", "contact");
+  const legalsLinkText = useTranslatedText("legals", "mentions légales");
 
   return (
-    <div className={styles.menuContainer}>
+    <div
+      className={styles.menuContainer}
+      style={{ opacity: menuIsOpened ? 1 : 0 }}
+    >
       <div className={styles.menuTopContainer}>
-        <ThemeButton />
-        <LanguageButton />
+        <div className={styles.optionsContainer}>
+          <ThemeButton />
+          <LanguageButton />
+        </div>
         <MenuButton
           menuIsOpened={menuIsOpened}
           setMenuIsOpened={setMenuIsOpened}
         />
       </div>
       <div className={styles.menuCenterContainer}>
-        <a onClick={() => handleSectionLinkClick("#works")}>
-          {lang === "en" ? "works" : "projets"}
+        <a onClick={() => handleSectionLinkClick("#works")}>{worksLinkText}</a>
+        <a onClick={() => handleSectionLinkClick("#about")}>{aboutLinkText}</a>
+        <a onClick={() => handleSectionLinkClick("#contact")}>
+          {contactLinkText}
         </a>
-        <a onClick={() => handleSectionLinkClick("#about")}>
-          {lang === "en" ? "about" : "à propos"}
-        </a>
-        <a onClick={() => handleSectionLinkClick("#contact")}>contact</a>
       </div>
       <Link href="/legals" onClick={() => setMenuIsOpened(false)}>
-        legals
+        {legalsLinkText}
       </Link>
     </div>
   );
