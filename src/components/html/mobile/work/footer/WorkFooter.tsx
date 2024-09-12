@@ -28,7 +28,7 @@ export function WorkFooter({ work }: { work: Work }) {
           className={styles.footerButton}
           // onClick={() => globalLenisInstance?.scrollTo("#contact")}
         >
-          {lang === "en" ? "back to homepage" : "retour à l'accueil"}:
+          {lang === "en" ? "back to homepage" : "retour à l'accueil"}
         </Link>
         <Link
           href={`/work/${nextProject.slug.current}`}

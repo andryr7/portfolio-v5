@@ -51,8 +51,10 @@ export function TechnologiesSection({ work }: { work: Work }) {
             ? work?.enTechnicalDescription
             : work?.frTechnicalDescription}
         </p>
+        {work?.githubUrl && (
+          <LinkButton url={work?.githubUrl} label={"github"} />
+        )}
       </div>
-      {work?.githubUrl && <LinkButton url={work?.githubUrl} label={"github"} />}
     </>
   );
 }

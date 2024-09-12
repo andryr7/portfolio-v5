@@ -20,7 +20,7 @@ export function Loader() {
   });
 
   const loadingEndAnimation = contextSafe(() => {
-    gsap.delayedCall(2, () => {
+    gsap.delayedCall(1, () => {
       tl.current.pause();
       gsap.to(containerRef.current, { opacity: 0 });
       gsap.to(cubeRef.current, { scale: 10 });

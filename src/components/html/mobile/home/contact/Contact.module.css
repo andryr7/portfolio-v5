@@ -41,7 +41,7 @@
   text-align: center;
   box-sizing: border-box;
   background-color: var(--color-background-two);
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 
 .link-container a:last-of-type {

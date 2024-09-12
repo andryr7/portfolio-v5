@@ -15,21 +15,21 @@ export function Contact() {
           rel="noreferrer noopener"
           href="mailto:contact@andryratsimba.com"
         >
-          email
+          {"-> email"}
         </a>
         <a
           target="_blank"
           rel="noreferrer noopener"
           href="https://www.linkedin.com/in/andryratsimba/"
         >
-          linkedIn
+          {"-> linkedIn"}
         </a>
         <a
           target="_blank"
           rel="noreferrer noopener"
           href="https://github.com/andryr7"
         >
-          gitHub
+          {"-> gitHub"}
         </a>
       </div>
     </div>

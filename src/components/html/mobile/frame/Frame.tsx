@@ -21,8 +21,8 @@ export function Frame() {
         )}
         {!isHomepage && (
           <Link href="/" className={styles.homeLink}>
-            {"-> "}
-            {lang === "en" ? "back to homepage" : "retour à l'accueil"}
+            {"<- "}
+            {lang === "en" ? "go back" : "retour"}
           </Link>
         )}
       </div>
