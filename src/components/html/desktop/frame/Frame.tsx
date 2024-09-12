@@ -7,10 +7,7 @@ import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function Frame() {
   const [isHomepage] = useRoute("/");
-  const returnText = useTranslatedText(
-    "back to homepage",
-    "retour à l'accueil"
-  );
+  const returnText = useTranslatedText("back to homepage", "retour");
 
   return (
     <>

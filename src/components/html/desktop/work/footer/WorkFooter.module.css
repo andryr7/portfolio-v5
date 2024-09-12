@@ -23,7 +23,7 @@
   cursor: pointer;
   background: linear-gradient(to bottom, var(--color-background-two) 50%, var(--color-main) 50%) top;
   background-size: 100% 205%;
-  transition: all 0.5s;
+  transition: all var(--transition-quick);
 }
 
 .footer-button:hover {

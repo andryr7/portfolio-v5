@@ -39,11 +39,13 @@
   height: max(7vw, 14vh);
   pointer-events: all;
   color: var(--color-background-one);
+  border: 2px solid var(--color-main);
 }
 
 .opened-container .menu-item:hover {
   background-color: var(--color-background-two);
   color: var(--color-main);
+  text-decoration: underline;
 }
 
 /* .opened-container .menu-item:last-of-type {

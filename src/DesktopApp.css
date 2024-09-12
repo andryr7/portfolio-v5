@@ -31,7 +31,8 @@ body {
   --font-size-xs: 1rem;
 
   /* Animation */
-  --transition-normal: 0.5s;
+  --transition-normal: 0.5s ease;
+  --transition-quick: 0.25s ease;
 
   /* Border radiuses */
   --br-l: 30px;

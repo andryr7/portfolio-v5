@@ -31,7 +31,7 @@ export function Legals() {
           </p>
           <br />
           <Link href="/">
-            {lang === "en" ? "-> back to homepage" : "-> retour à l'accueil"}
+            {lang === "en" ? "-> back to homepage" : "-> retour"}
           </Link>
         </div>
       </ReactLenis>

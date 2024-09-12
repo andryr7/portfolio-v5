@@ -48,7 +48,6 @@
 .skill-container p {
   line-height: 150%;
   font-family: var(--font-text);
-  text-align: justify;
   font-size: 0.75rem;
   margin-bottom: 1rem;
 }

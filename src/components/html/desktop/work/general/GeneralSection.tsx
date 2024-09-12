@@ -36,7 +36,10 @@ export function GeneralSection({ work }: { work: Work }) {
       <div className={styles.infoContainer}>
         <div className={styles.linksContainer}>
           {work?.liveUrl && (
-            <LinkButton url={work?.liveUrl} label={"live website"} />
+            <LinkButton
+              url={work?.liveUrl}
+              label={lang === "en" ? "live website" : "visiter"}
+            />
           )}
         </div>
         <p>

@@ -55,7 +55,7 @@
   content: '->';
   position: absolute;
   left: 0rem;
-  transition: var(--transition-normal);
+  transition: var(--transition-quick);
 }
 
 .home-link:hover::before {

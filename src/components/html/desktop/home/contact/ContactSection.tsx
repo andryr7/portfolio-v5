@@ -2,6 +2,7 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./ContactSection.module.css";
 import { useCallback, useState } from "react";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
+import useTime from "@/handlers/useTime";
 
 export function ContactSection() {
   const [emailWasCopied, setEmailWasCopied] = useState<boolean>(false);
@@ -13,6 +14,7 @@ export function ContactSection() {
     "ouvert aux opportunités"
   );
   const emailLinkText = useTranslatedText("email was copied", "email copié");
+  const time = useTime();
 
   const handleDesktopEmailClick = useCallback(() => {
     navigator.clipboard.writeText("contact@andryratsimba.com");
@@ -59,6 +61,8 @@ export function ContactSection() {
           </a>
         </div>
       </div>
+      <span className={styles.location}>Toulouse, France</span>
+      <span className={styles.time}>{time.toLocaleTimeString()}</span>
     </div>
   );
 }
