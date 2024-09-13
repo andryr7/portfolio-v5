@@ -29,7 +29,24 @@
 .footer-button:hover {
   color: var(--color-background-one);
   background-position: bottom;
-  text-decoration: underline;
+}
+
+.footer-button span {
+  position: relative;
+}
+
+.footer-button span::before {
+  content: '-> ';
+  position: absolute;
+  top: 0;
+  left: -2rem;
+  opacity: 0;
+  transition: all var(--transition-quick);
+}
+
+.footer-button:hover span::before {
+  opacity: 1;
+  left: -1rem;
 }
 
 .footer-container {

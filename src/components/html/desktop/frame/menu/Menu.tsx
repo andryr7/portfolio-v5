@@ -55,13 +55,13 @@ export function Menu() {
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "works")}
       >
-        {workLinkText}
+        <span>{workLinkText}</span>
       </div>
       <div
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "aboutanchor")}
       >
-        {aboutLinkText}
+        <span>{aboutLinkText}</span>
       </div>
       <div
         style={{
@@ -75,7 +75,7 @@ export function Menu() {
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "contact")}
       >
-        {`contact`}
+        <span>contact</span>
       </div>
     </div>
   );

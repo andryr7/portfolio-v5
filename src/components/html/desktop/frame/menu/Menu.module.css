@@ -45,8 +45,26 @@
 .opened-container .menu-item:hover {
   background-color: var(--color-background-two);
   color: var(--color-main);
-  text-decoration: underline;
 }
+
+.menu-item span {
+  position: relative;
+}
+
+.menu-item span::before {
+  content: '-> ';
+  position: absolute;
+  top: 0;
+  left: -2rem;
+  opacity: 0;
+  transition: all var(--transition-quick);
+}
+
+.menu-item:hover span::before {
+  opacity: 1;
+  left: -1rem;
+}
+
 
 /* .opened-container .menu-item:last-of-type {
   background-color: var(--color-accent);

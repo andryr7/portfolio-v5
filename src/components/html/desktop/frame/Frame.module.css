@@ -47,19 +47,27 @@
 
 .home-link {
   pointer-events: all;
+  position: relative;
+  height: fit-content;
   padding: 20px;
+}
+
+.home-link span {
   position: relative;
 }
 
-.home-link::before {
-  content: '->';
+.home-link span::before {
+  content: '-> ';
   position: absolute;
-  left: 0rem;
-  transition: var(--transition-quick);
+  top: 0.25rem;
+  left: -2rem;
+  opacity: 0;
+  transition: all var(--transition-quick);
 }
 
-.home-link:hover::before {
-  left: 0.5rem;
+.home-link:hover span::before {
+  opacity: 1;
+  left: -1rem;
 }
 
 .indicator {

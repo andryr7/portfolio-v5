@@ -64,17 +64,34 @@
 .contact-link:hover {
   color: var(--color-background-one);
   background-position: bottom;
-  text-decoration: underline;
+}
+
+.contact-link span {
+  position: relative;
+}
+
+.contact-link span::before {
+  content: '-> ';
+  position: absolute;
+  top: 0;
+  left: -2rem;
+  opacity: 0;
+  transition: all var(--transition-quick);
+}
+
+.contact-link:hover span::before {
+  opacity: 1;
+  left: -1rem;
 }
 
 .location {
   position: absolute;
-  top: 33%;
+  top: 40%;
   left: 1rem;
 }
 
 .time {
   position: absolute;
-  top: 33%;
+  top: 40%;
   right: 1rem;
 }

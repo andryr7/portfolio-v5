@@ -3,6 +3,7 @@ import styles from "./ContactSection.module.css";
 import { useCallback, useState } from "react";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
 import useTime from "@/handlers/useTime";
+import { LinkText } from "../../shared/LinkText";
 
 export function ContactSection() {
   const [emailWasCopied, setEmailWasCopied] = useState<boolean>(false);
@@ -39,7 +40,7 @@ export function ContactSection() {
             onMouseEnter={() => setHoveredContactLink(2)}
             onClick={handleDesktopEmailClick}
           >
-            {emailWasCopied ? emailLinkText : "email"}
+            <span>{emailWasCopied ? emailLinkText : "email"}</span>
           </a>
           <a
             className={styles.contactLink}
@@ -48,7 +49,7 @@ export function ContactSection() {
             rel="noreferrer noopener"
             href="https://www.linkedin.com/in/andryratsimba/"
           >
-            linkedIn
+            <span>linkedIn</span>
           </a>
           <a
             className={styles.contactLink}
@@ -57,7 +58,7 @@ export function ContactSection() {
             rel="noreferrer noopener"
             href="https://github.com/andryr7"
           >
-            gitHub
+            <span>gitHub</span>
           </a>
         </div>
       </div>

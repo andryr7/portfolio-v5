@@ -7,7 +7,10 @@ import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function Frame() {
   const [isHomepage] = useRoute("/");
-  const returnText = useTranslatedText("back to homepage", "retour");
+  const returnText = useTranslatedText(
+    "back to homepage",
+    "retour à l'accueil"
+  );
 
   return (
     <>
@@ -20,7 +23,7 @@ export function Frame() {
           {isHomepage && <Menu />}
           {!isHomepage && (
             <Link href="/" className={styles.homeLink}>
-              {returnText}
+              <span>{returnText}</span>
             </Link>
           )}
         </div>

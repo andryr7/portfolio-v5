@@ -18,7 +18,7 @@ export function WorkFooter({
   const worksData = usePortfolioStore((state) => state.worksData);
   const returnText = useTranslatedText(
     "back to works list",
-    "retour vers les projets"
+    "retour aux projets"
   );
   const nextProjectText = useTranslatedText(
     "next project : ",
@@ -43,22 +43,24 @@ export function WorkFooter({
             style={{ borderLeft: "none" }}
             onClick={() => globalLenisInstance?.scrollTo("#works")}
           >
-            {returnText}
+            <span>{returnText}</span>
           </Link>
           <Link
             href="/"
             className={styles.footerButton}
             onClick={() => globalLenisInstance?.scrollTo("#contact")}
           >
-            contact
+            <span>contact</span>
           </Link>
           <Link
             href={`/work/${nextProject.slug.current}`}
             className={styles.footerButton}
             onClick={() => lenis?.scrollTo(0)}
           >
-            {nextProjectText}
-            {nextProject.title}
+            <span>
+              {nextProjectText}
+              {nextProject.title}
+            </span>
           </Link>
         </div>
       </div>
