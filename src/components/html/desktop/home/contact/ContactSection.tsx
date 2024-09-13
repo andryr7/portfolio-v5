@@ -3,7 +3,6 @@ import styles from "./ContactSection.module.css";
 import { useCallback, useState } from "react";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
 import useTime from "@/handlers/useTime";
-import { LinkText } from "../../shared/LinkText";
 
 export function ContactSection() {
   const [emailWasCopied, setEmailWasCopied] = useState<boolean>(false);
