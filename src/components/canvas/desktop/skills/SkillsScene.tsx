@@ -2,19 +2,20 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import {
   Bounds,
   Box,
+  Cone,
   MeshTransmissionMaterial,
-  Plane,
   Sphere,
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import { easing } from "maath";
 import { useRef } from "react";
 import { Group } from "three";
 
 export function SkillsScene() {
   const groupRef = useRef<Group | null>(null);
-  const boxMaterialRef = useRef(null);
-  const sphereMaterialRef = useRef(null);
-  const shapeMaterialRef = useRef(null);
+  const frontendMaterialRef = useRef(null);
+  const backendMaterialRef = useRef(null);
+  const devopsMaterialRef = useRef(null);
   const colors = usePortfolioStore((state) => state.colors);
   const skillsScrollProgress = usePortfolioStore(
     (state) => state.skillsScrollProgress
@@ -22,65 +23,84 @@ export function SkillsScene() {
 
   useFrame((_, delta) => {
     if (groupRef.current !== null) {
-      groupRef.current.rotation.x += delta * 0.1;
+      // groupRef.current.rotation.x += delta * 0.1;
       groupRef.current.rotation.y += delta * 0.1;
-      groupRef.current.rotation.z += delta * 0.1;
+      // sphereRef.current.rotation.z += delta * 0.1;
+    }
+
+    if (frontendMaterialRef.current !== null) {
+      easing.damp(
+        frontendMaterialRef.current,
+        "opacity",
+        skillsScrollProgress < 0.33 ? 1 : 0,
+        0.25,
+        delta
+      );
+    }
+
+    if (backendMaterialRef.current !== null) {
+      easing.damp(
+        backendMaterialRef.current,
+        "opacity",
+        skillsScrollProgress > 0.33 ? 1 : 0,
+        0.25,
+        delta
+      );
+    }
+
+    if (devopsMaterialRef.current !== null) {
+      easing.damp(
+        devopsMaterialRef.current,
+        "opacity",
+        skillsScrollProgress > 0.66 ? 1 : 0,
+        0.25,
+        delta
+      );
     }
   });
 
   return (
     <>
-      {/* <OrbitControls /> */}
-      <group ref={groupRef}>
+      <group ref={groupRef} rotation={[Math.PI / 8, 0, 0]}>
+        <group>
+          <mesh>
+            <Sphere>
+              <MeshTransmissionMaterial
+                ref={frontendMaterialRef}
+                chromaticAberration={1}
+                thickness={1}
+                transmission={1}
+                transparent
+              />
+            </Sphere>
+          </mesh>
+          <mesh scale={1.15}>
+            <Box>
+              <meshBasicMaterial color={colors.main} transparent wireframe />
+            </Box>
+          </mesh>
+        </group>
         <mesh>
           <Sphere>
-            <MeshTransmissionMaterial
-              chromaticAberration={1}
-              thickness={0.1}
-              transmission={1}
-              ref={sphereMaterialRef}
+            <meshBasicMaterial
+              ref={backendMaterialRef}
+              color={colors.main}
+              transparent
+              wireframe
+              opacity={0}
             />
           </Sphere>
         </mesh>
         <mesh>
-          <Box args={[1.15, 1.15, 1.15]}>
+          <Cone args={[1, 2, 32]}>
             <meshBasicMaterial
-              wireframe
+              ref={devopsMaterialRef}
               color={colors.main}
-              ref={boxMaterialRef}
-              visible={skillsScrollProgress > 0.33}
+              transparent
+              wireframe
             />
-          </Box>
+          </Cone>
         </mesh>
-        <group ref={shapeMaterialRef}>
-          <mesh>
-            <Plane args={[2, 2]}>
-              <meshBasicMaterial
-                wireframe
-                color={colors.main}
-                visible={skillsScrollProgress > 0.66}
-              />
-            </Plane>
-          </mesh>
-          <mesh rotation={[0, Math.PI / 2, 0]}>
-            <Plane args={[2, 2]}>
-              <meshBasicMaterial
-                wireframe
-                color={colors.main}
-                visible={skillsScrollProgress > 0.66}
-              />
-            </Plane>
-          </mesh>
-          <mesh rotation={[Math.PI / 2, 0, 0]}>
-            <Plane args={[2, 2]}>
-              <meshBasicMaterial
-                wireframe
-                color={colors.main}
-                visible={skillsScrollProgress > 0.66}
-              />
-            </Plane>
-          </mesh>
-        </group>
       </group>
 
       {/* Scene bounds */}
