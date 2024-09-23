@@ -58,22 +58,24 @@ export function WorksSection() {
     lenis?.scrollTo("#contact");
   };
 
+  console.log(worksScrollProgress);
+
   //Works section scroll snap
-  useLenis((instance) => {
-    if (instance.__isScrolling === false) {
-      if (
-        scrollProgressRef.current > 0.33 &&
-        scrollProgressRef.current < 0.66
-      ) {
-        lenis?.scrollTo("#works");
-      }
-    }
-  });
+  // useLenis((instance) => {
+  //   if (instance.__isScrolling === false) {
+  //     if (
+  //       scrollProgressRef.current > 0.33 &&
+  //       scrollProgressRef.current < 0.66
+  //     ) {
+  //       lenis?.scrollTo("#works");
+  //     }
+  //   }
+  // });
 
   return (
     <>
       <div className={styles.container}>
-        <ul
+        {/* <ul
           className={styles.worksContainer}
           onMouseLeave={() => setHoveredWorkIndex(null)}
           style={hoveredWorkIndex !== null ? { borderColor: "#0e0e0e11" } : {}}
@@ -87,10 +89,7 @@ export function WorksSection() {
               setHoveredWorkIndex={setHoveredWorkIndex}
             />
           ))}
-        </ul>
-      </div>
-      <div className={styles.contactLinkContainer}>
-        <div onClick={handleContactClick}>{captionText}</div>
+        </ul> */}
       </div>
     </>
   );

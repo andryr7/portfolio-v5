@@ -27,21 +27,27 @@ export function HeaderScene() {
   const sectionTitleText = useTranslatedText("selected works", "projets");
 
   const physicsGravity = useMemo((): [number, number, number] => {
-    return worksScrollProgress >= 0.66 ? [0, -9.81, 0] : [0, 0, 0];
+    return worksScrollProgress >= 0.8 ? [0, -9.81, 0] : [0, 0, 0];
   }, [worksScrollProgress]);
 
   const heroVisibility = useMemo((): boolean => {
     return worksScrollProgress < 0.5;
   }, [worksScrollProgress]);
 
-  const worksBackgroundPosition = useMemo(
-    (): [number, number, number] => [
-      0,
-      -viewportHeight + worksScrollProgress * viewportHeight * 2,
-      0.25,
-    ],
-    [viewportHeight, worksScrollProgress]
-  );
+  const worksBackgroundPosition = useMemo((): [number, number, number] => {
+    const multiplier = viewportHeight * 5;
+    const zPosition = 0.25;
+
+    if (worksScrollProgress <= 0.2) {
+      return [0, -viewportHeight + worksScrollProgress * multiplier, zPosition];
+    }
+
+    if (worksScrollProgress >= 0.8) {
+      return [0, (worksScrollProgress - 0.8) * multiplier, zPosition];
+    }
+
+    return [0, 0, zPosition];
+  }, [viewportHeight, worksScrollProgress]);
 
   useFrame((state) => {
     state.camera.zoom = Math.min(

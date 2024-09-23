@@ -33,7 +33,7 @@ export function InteractiveCube({
   );
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
   const worksSceneIsActive = useMemo(() => {
-    return worksScrollProgress >= 0.33 && worksScrollProgress <= 0.66;
+    return worksScrollProgress >= 0.2 && worksScrollProgress <= 0.8;
   }, [worksScrollProgress]);
 
   const contactSceneIsActive = useMemo(() => {
@@ -43,18 +43,17 @@ export function InteractiveCube({
   const sceneIsActive = worksSceneIsActive || contactSceneIsActive;
 
   const sceneTargetPosition = useMemo<[number, number, number]>(() => {
-    const yWorks = -viewportHeight + worksScrollProgress * viewportHeight * 2;
-    const yContact =
-      -0.9 * viewportHeight +
-      Math.min(contactScrollProgress, 0.5) * viewportHeight * 2;
-
-    return [0, worksSceneIsActive ? yWorks : yContact, 2.5];
-  }, [
-    viewportHeight,
-    worksScrollProgress,
-    contactScrollProgress,
-    worksSceneIsActive,
-  ]);
+    if (worksSceneIsActive) {
+      return [0, 0, 2.5];
+    } else {
+      return [
+        0,
+        -0.9 * viewportHeight +
+          Math.min(contactScrollProgress, 0.5) * viewportHeight * 2,
+        2.5,
+      ];
+    }
+  }, [viewportHeight, contactScrollProgress, worksSceneIsActive]);
 
   const sceneTargetRotation = useMemo<[number, number, number]>(() => {
     switch (hoveredWorkIndex) {
@@ -72,7 +71,7 @@ export function InteractiveCube({
   }, [hoveredWorkIndex]);
 
   const enabledCubeRotations = useMemo((): [boolean, boolean, boolean] => {
-    return worksScrollProgress > 0.5
+    return worksScrollProgress >= 0.8
       ? [false, false, true]
       : [true, true, true];
   }, [worksScrollProgress]);
@@ -162,7 +161,7 @@ export function InteractiveCube({
           visible={
             !worksSceneIsActive &&
             !contactSceneIsActive &&
-            worksScrollProgress > 0.5
+            worksScrollProgress >= 0.8
           }
         />
 

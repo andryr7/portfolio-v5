@@ -142,7 +142,7 @@ export function Home() {
           >
             <Header />
           </header>
-          <section className={styles.heroSectionContainer} id="works">
+          <section className={styles.worksSectionContainer} id="works">
             <WorksSection />
           </section>
         </div>
