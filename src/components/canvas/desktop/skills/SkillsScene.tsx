@@ -92,14 +92,14 @@ export function SkillsScene() {
           </Sphere>
         </mesh>
         <mesh>
-          <Cone args={[1, 2, 32]}>
+          <Box args={[2, 2, 2]}>
             <meshBasicMaterial
               ref={devopsMaterialRef}
               color={colors.main}
               transparent
               wireframe
             />
-          </Cone>
+          </Box>
         </mesh>
       </group>
 
