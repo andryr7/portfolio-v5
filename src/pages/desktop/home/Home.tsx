@@ -78,7 +78,7 @@ export function Home() {
           start: "top top",
           end: "bottom bottom",
           pin: "#works-container",
-          markers: true,
+          // markers: true,
         },
       });
 

@@ -9,7 +9,7 @@ export function WorksSection() {
   return (
     <div className={styles.container} id="works">
       <span className={styles.sectionTitle}>
-        {lang === "en" ? "selected works" : "projets"}
+        {lang === "en" ? "works" : "projets"}
       </span>
       <div className={styles.workList}>
         {worksData.map((work) => (

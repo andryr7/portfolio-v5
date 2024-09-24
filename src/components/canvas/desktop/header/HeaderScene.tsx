@@ -13,7 +13,7 @@ import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { PhysicsScene } from "./physics/PhysicsScene";
 import { HeaderBackground } from "./HeaderBackground";
-import { useTranslatedText } from "@/handlers/useTranslatedText";
+// import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function HeaderScene() {
   const setIsLoaded = usePortfolioStore((state) => state.setIsLoaded);
@@ -24,7 +24,7 @@ export function HeaderScene() {
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress
   );
-  const sectionTitleText = useTranslatedText("selected works", "projets");
+  // const sectionTitleText = useTranslatedText("works", "projets");
 
   const physicsGravity = useMemo((): [number, number, number] => {
     return worksScrollProgress >= 0.8 ? [0, -9.81, 0] : [0, 0, 0];
@@ -127,7 +127,7 @@ export function HeaderScene() {
           <meshBasicMaterial color={colors.backgroundTwo} toneMapped={false} />
         </mesh>
         {/* Texts */}
-        <group>
+        {/* <group>
           <Text
             font={spacemono}
             color={colors.main}
@@ -136,7 +136,7 @@ export function HeaderScene() {
           >
             {sectionTitleText}
           </Text>
-        </group>
+        </group> */}
       </group>
 
       {/* Environment lighting */}

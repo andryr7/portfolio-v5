@@ -1,46 +1,10 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./WorksSection.module.css";
-import { Link } from "wouter";
-import { useLenis } from "lenis/react";
-import { useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
-import { Work } from "@/types/work";
-
-function WorkLine({
-  work,
-  index,
-  hoveredWorkIndex,
-  setHoveredWorkIndex,
-}: {
-  work: Work;
-  index: number;
-  hoveredWorkIndex: number | null;
-  setHoveredWorkIndex: any;
-}) {
-  const captionText = useTranslatedText(work?.enCaption, work?.frCaption);
-
-  return (
-    <Link
-      href={`/work/${work.slug.current}`}
-      className={styles.workLine}
-      key={index}
-      onMouseEnter={() => setHoveredWorkIndex(index)}
-      style={
-        hoveredWorkIndex !== null
-          ? hoveredWorkIndex !== index
-            ? { opacity: 0.25, borderColor: "#0e0e0e11" }
-            : { borderColor: "#0e0e0e11" }
-          : {}
-      }
-    >
-      <h3>{work.title}</h3>
-      <span>{captionText}</span>
-    </Link>
-  );
-}
+import { useAnimatedText } from "@/handlers/useAnimatedText";
 
 export function WorksSection({ id }: { id: string }) {
-  const lenis = useLenis();
   const worksData = usePortfolioStore((state) => state.worksData);
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
   const setHoveredWorkIndex = usePortfolioStore(
@@ -51,14 +15,17 @@ export function WorksSection({ id }: { id: string }) {
   );
   const scrollProgressRef = useRef(worksScrollProgress);
   scrollProgressRef.current = worksScrollProgress;
-  const captionText = useTranslatedText("add yours", "ajoutez le votre");
-
-  const handleContactClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    lenis?.scrollTo("#contact");
-  };
-
-  console.log(worksScrollProgress);
+  const captionText = useTranslatedText("works", "projets");
+  const selectedWork = useMemo(() => {
+    return hoveredWorkIndex === null
+      ? worksData[0]
+      : worksData[hoveredWorkIndex];
+  }, [hoveredWorkIndex, worksData]);
+  const [workTitle] = useAnimatedText(selectedWork.title);
+  const workDescription = useTranslatedText(
+    selectedWork.enCaption,
+    selectedWork.frCaption
+  );
 
   //Works section scroll snap
   // useLenis((instance) => {
@@ -72,24 +39,58 @@ export function WorksSection({ id }: { id: string }) {
   //   }
   // });
 
+  useEffect(() => {
+    if (worksScrollProgress < 0.35) {
+      setHoveredWorkIndex(0);
+      return;
+    } else if (worksScrollProgress < 0.5) {
+      setHoveredWorkIndex(1);
+      return;
+    } else if (worksScrollProgress < 0.65) {
+      setHoveredWorkIndex(2);
+      return;
+    } else {
+      setHoveredWorkIndex(3);
+      return;
+    }
+  }, [worksScrollProgress, setHoveredWorkIndex]);
+
+  const numberShift = useMemo(() => {
+    const normalizedProgress = (worksScrollProgress - 0.3) / 0.4;
+    const clampedProgress = Math.max(0, Math.min(1, normalizedProgress));
+    return clampedProgress * 300;
+  }, [worksScrollProgress]);
+
+  //TODO add scroll snap
+
   return (
     <>
       <div className={styles.container} id={id}>
-        {/* <ul
-          className={styles.worksContainer}
-          onMouseLeave={() => setHoveredWorkIndex(null)}
-          style={hoveredWorkIndex !== null ? { borderColor: "#0e0e0e11" } : {}}
-        >
-          {worksData.map((work, index) => (
-            <WorkLine
-              key={index}
-              work={work}
-              index={index}
-              hoveredWorkIndex={hoveredWorkIndex}
-              setHoveredWorkIndex={setHoveredWorkIndex}
-            />
-          ))}
-        </ul> */}
+        <span className={styles.sectionTitle}>{captionText}</span>
+        <div className={styles.workInfoContainer}>
+          <span>{workDescription}</span>
+          <span className={styles.workNumberContainer}>
+            00
+            <div
+              style={{
+                position: "relative",
+              }}
+            >
+              &nbsp;
+              <div
+                className={styles.workNumber}
+                style={{ top: `-${numberShift}%` }}
+              >
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+              </div>
+            </div>
+            /004
+          </span>
+        </div>
+        <span className={styles.workTitle}>{workTitle}</span>
       </div>
     </>
   );
