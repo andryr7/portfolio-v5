@@ -71,6 +71,17 @@ export function Home() {
         },
       });
 
+      //Work section container pin
+      gsap.to("#works-container", {
+        scrollTrigger: {
+          trigger: "#works",
+          start: "top top",
+          end: "bottom bottom",
+          pin: "#works-container",
+          markers: true,
+        },
+      });
+
       //Contact section scroll progress update
       gsap.to("#contact", {
         scrollTrigger: {
@@ -143,7 +154,7 @@ export function Home() {
             <Header />
           </header>
           <section className={styles.worksSectionContainer} id="works">
-            <WorksSection />
+            <WorksSection id="works-container" />
           </section>
         </div>
         <a id={"aboutanchor"} className={styles.aboutAnchor} />

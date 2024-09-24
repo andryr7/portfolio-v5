@@ -39,7 +39,7 @@ function WorkLine({
   );
 }
 
-export function WorksSection() {
+export function WorksSection({ id }: { id: string }) {
   const lenis = useLenis();
   const worksData = usePortfolioStore((state) => state.worksData);
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
@@ -74,7 +74,7 @@ export function WorksSection() {
 
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.container} id={id}>
         {/* <ul
           className={styles.worksContainer}
           onMouseLeave={() => setHoveredWorkIndex(null)}
