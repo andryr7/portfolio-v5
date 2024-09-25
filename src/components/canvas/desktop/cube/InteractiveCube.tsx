@@ -32,31 +32,39 @@ export function InteractiveCube({
     (state) => state.contactScrollProgress
   );
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
-
   const worksSceneIsActive = useMemo(() => {
-    return worksScrollProgress >= 0.2 && worksScrollProgress <= 0.8;
+    return worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
   }, [worksScrollProgress]);
-
   const contactSceneIsActive = useMemo(() => {
     return contactScrollProgress >= 0.25;
   }, [contactScrollProgress]);
-
   const sceneIsActive = worksSceneIsActive || contactSceneIsActive;
 
   const sceneTargetPosition = useMemo<[number, number, number]>(() => {
     if (worksSceneIsActive) {
-      //If it's the work scene that is active
+      //If work scroll is between 0.1 and 0.2, calculate an intermediary position
+      if (worksScrollProgress < 0.2)
+        return [0, (worksScrollProgress - 0.2) * 5 * viewportHeight, 2.5];
+      //If work scroll is between 0.8 and 0.9, calculate an intermediary position
+      if (worksScrollProgress > 0.8)
+        return [0, (worksScrollProgress - 0.8) * 5 * viewportHeight, 2.5];
+      //Else, return a center position
       return [0, 0, 2.5];
-    } else {
-      //If it's the contact scene
-      return [
-        0,
-        -0.9 * viewportHeight +
-          Math.min(contactScrollProgress, 0.5) * viewportHeight * 2,
-        2.5,
-      ];
     }
-  }, [viewportHeight, contactScrollProgress, worksSceneIsActive]);
+
+    //If it's the contact scene
+    return [
+      0,
+      -0.9 * viewportHeight +
+        Math.min(contactScrollProgress, 0.5) * viewportHeight * 2,
+      2.5,
+    ];
+  }, [
+    viewportHeight,
+    worksSceneIsActive,
+    worksScrollProgress,
+    contactScrollProgress,
+  ]);
 
   const sceneTargetRotation = useMemo<[number, number, number]>(() => {
     switch (hoveredWorkIndex) {
@@ -74,7 +82,7 @@ export function InteractiveCube({
   }, [hoveredWorkIndex]);
 
   const enabledCubeRotations = useMemo((): [boolean, boolean, boolean] => {
-    return worksScrollProgress >= 0.8
+    return worksScrollProgress > 0.9
       ? [false, false, true]
       : [true, true, true];
   }, [worksScrollProgress]);
@@ -164,7 +172,7 @@ export function InteractiveCube({
           visible={
             !worksSceneIsActive &&
             !contactSceneIsActive &&
-            worksScrollProgress >= 0.8
+            worksScrollProgress > 0.9
           }
         />
 

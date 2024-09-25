@@ -13,7 +13,7 @@ export function TransparentCube() {
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
 
   const worksSceneIsActive = useMemo(() => {
-    return worksScrollProgress >= 0.2 && worksScrollProgress <= 0.8;
+    return worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
   }, [worksScrollProgress]);
 
   useEffect(() => {

@@ -27,7 +27,7 @@ export function HeaderScene() {
   // const sectionTitleText = useTranslatedText("works", "projets");
 
   const physicsGravity = useMemo((): [number, number, number] => {
-    return worksScrollProgress >= 0.8 ? [0, -9.81, 0] : [0, 0, 0];
+    return worksScrollProgress > 0.9 ? [0, -9.81, 0] : [0, 0, 0];
   }, [worksScrollProgress]);
 
   const heroVisibility = useMemo((): boolean => {
