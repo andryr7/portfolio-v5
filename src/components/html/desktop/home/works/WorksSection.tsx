@@ -1,6 +1,6 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./WorksSection.module.css";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
 import { useAnimatedText } from "@/handlers/useAnimatedText";
 import { useLenis } from "lenis/react";

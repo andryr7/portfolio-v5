@@ -105,6 +105,35 @@ export function InteractiveCube({
       cubePhysicsApi.current.setNextKinematicRotation(currentRotation);
     }
 
+    //TODO Work section transition animation
+    // if (
+    //   cubePhysicsApi.current !== null &&
+    //   !sceneIsActive &&
+    //   worksScrollProgress > 0.5
+    // ) {
+    //   //Calculating the necessary rotation
+    //   const {
+    //     x = 0,
+    //     y = 0,
+    //     z = 0,
+    //     w = 1,
+    //   } = cubePhysicsApi.current?.rotation() || {};
+    //   currentRotation.set(x, y, z, w);
+
+    //   //Smoothing the rotation
+    //   const slerpFactor = 0.5; // Adjust this value for the speed of rotation
+    //   const smoothRotationTarget = currentRotation.slerp(
+    //     targetRotation,
+    //     slerpFactor
+    //   );
+
+    //   //Converting the rotation to rapier format
+    //   const rapierRotationTarget = quat(smoothRotationTarget);
+
+    //   //Applying the rotation
+    //   cubePhysicsApi.current?.applyTorqueImpulse(rapierRotationTarget, true);
+    // }
+
     //Scale animations
     if (cubeRef.current !== null) {
       const targetScale = sceneIsActive ? 5 : 2;
@@ -130,19 +159,27 @@ export function InteractiveCube({
     };
   }, []);
 
-  //Setting cube position and applying impulse on work and contact section exit
+  //Each time user leaves works scene or contact scene, apply an impulse to move the cube
   useEffect(() => {
     if (!worksSceneIsActive && !contactSceneIsActive) {
       cubePhysicsApi.current?.applyImpulse(new THREE.Vector3(25, 25, 0), true);
     }
+  }, [worksSceneIsActive, contactSceneIsActive]);
 
-    if (!worksSceneIsActive && !contactSceneIsActive) {
+  //Each time user leaves works scene, rotate the cube to show the text
+  useEffect(() => {
+    if (
+      !worksSceneIsActive &&
+      worksScrollProgress > 0.5 &&
+      cubePhysicsApi.current !== null
+    ) {
       cubePhysicsApi.current?.setRotation(
-        new THREE.Quaternion(0, 0, 0, 1),
+        new THREE.Quaternion(0, 0, 0, Math.PI / 5),
         true
       );
     }
-  }, [worksSceneIsActive, contactSceneIsActive]);
+  }, [worksSceneIsActive]); // eslint-disable-line react-hooks/exhaustive-deps
+  //* worksScrollProgress is not included in the dependency array because the effect must not trigger at every scroll
 
   return (
     <RigidBody
