@@ -1,9 +1,10 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./WorksSection.module.css";
-import { useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
 import { useAnimatedText } from "@/handlers/useAnimatedText";
 import { useLenis } from "lenis/react";
+import { useLocation } from "wouter";
 
 export function WorksSection({ id }: { id: string }) {
   const worksData = usePortfolioStore((state) => state.worksData);
@@ -30,6 +31,7 @@ export function WorksSection({ id }: { id: string }) {
     selectedWork.enCaption,
     selectedWork.frCaption
   );
+  const [_, setLocation] = useLocation();
 
   // Works scroll snap
   useLenis((instance) => {
@@ -71,9 +73,11 @@ export function WorksSection({ id }: { id: string }) {
     return clampedProgress * 300;
   }, [worksScrollProgress]);
 
+  const handleClick = () => setLocation(`/work/${selectedWork.slug.current}`);
+
   return (
     <>
-      <div className={styles.container} id={id}>
+      <div className={styles.container} id={id} onClick={handleClick}>
         <span className={styles.sectionTitle}>{captionText}</span>
         <div className={styles.workInfoContainer}>
           <span className={styles.workDescription}>{workDescription}</span>
