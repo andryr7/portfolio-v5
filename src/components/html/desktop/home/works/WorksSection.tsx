@@ -76,7 +76,7 @@ export function WorksSection({ id }: { id: string }) {
       <div className={styles.container} id={id}>
         <span className={styles.sectionTitle}>{captionText}</span>
         <div className={styles.workInfoContainer}>
-          <span>{workDescription}</span>
+          <span className={styles.workDescription}>{workDescription}</span>
           <span className={styles.workNumberContainer}>
             00
             <div
