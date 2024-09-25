@@ -3,6 +3,7 @@ import styles from "./WorksSection.module.css";
 import { useEffect, useMemo, useRef } from "react";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
 import { useAnimatedText } from "@/handlers/useAnimatedText";
+import { useLenis } from "lenis/react";
 
 export function WorksSection({ id }: { id: string }) {
   const worksData = usePortfolioStore((state) => state.worksData);
@@ -15,7 +16,10 @@ export function WorksSection({ id }: { id: string }) {
   );
   const scrollProgressRef = useRef(worksScrollProgress);
   scrollProgressRef.current = worksScrollProgress;
-  const captionText = useTranslatedText("works", "projets");
+  const captionText = useTranslatedText(
+    "selected works",
+    "projets sélectionnés"
+  );
   const selectedWork = useMemo(() => {
     return hoveredWorkIndex === null
       ? worksData[0]
@@ -27,26 +31,32 @@ export function WorksSection({ id }: { id: string }) {
     selectedWork.frCaption
   );
 
-  //Works section scroll snap
-  // useLenis((instance) => {
-  //   if (instance.__isScrolling === false) {
-  //     if (
-  //       scrollProgressRef.current > 0.33 &&
-  //       scrollProgressRef.current < 0.66
-  //     ) {
-  //       lenis?.scrollTo("#works");
-  //     }
-  //   }
-  // });
+  // Works scroll snap
+  useLenis((instance) => {
+    if (instance.__isScrolling) return;
+    if (scrollProgressRef.current >= 0.1 && scrollProgressRef.current < 0.3) {
+      instance.scrollTo("#firstWorkAnchor");
+    }
+    if (scrollProgressRef.current >= 0.3 && scrollProgressRef.current < 0.5) {
+      instance.scrollTo("#secondWorkAnchor");
+    }
+    if (scrollProgressRef.current >= 0.5 && scrollProgressRef.current < 0.7) {
+      instance.scrollTo("#thirdWorkAnchor");
+    }
+    if (scrollProgressRef.current >= 0.7 && scrollProgressRef.current <= 0.9) {
+      instance.scrollTo("#fourthWorkAnchor");
+    }
+  });
 
+  //Works cube sync
   useEffect(() => {
-    if (worksScrollProgress < 0.35) {
+    if (worksScrollProgress < 0.3) {
       setHoveredWorkIndex(0);
       return;
     } else if (worksScrollProgress < 0.5) {
       setHoveredWorkIndex(1);
       return;
-    } else if (worksScrollProgress < 0.65) {
+    } else if (worksScrollProgress < 0.7) {
       setHoveredWorkIndex(2);
       return;
     } else {
@@ -56,12 +66,10 @@ export function WorksSection({ id }: { id: string }) {
   }, [worksScrollProgress, setHoveredWorkIndex]);
 
   const numberShift = useMemo(() => {
-    const normalizedProgress = (worksScrollProgress - 0.3) / 0.4;
+    const normalizedProgress = (worksScrollProgress - 0.2) / 0.6;
     const clampedProgress = Math.max(0, Math.min(1, normalizedProgress));
     return clampedProgress * 300;
   }, [worksScrollProgress]);
-
-  //TODO add scroll snap
 
   return (
     <>

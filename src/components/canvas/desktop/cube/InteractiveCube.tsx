@@ -32,6 +32,7 @@ export function InteractiveCube({
     (state) => state.contactScrollProgress
   );
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
+
   const worksSceneIsActive = useMemo(() => {
     return worksScrollProgress >= 0.2 && worksScrollProgress <= 0.8;
   }, [worksScrollProgress]);
@@ -44,8 +45,10 @@ export function InteractiveCube({
 
   const sceneTargetPosition = useMemo<[number, number, number]>(() => {
     if (worksSceneIsActive) {
+      //If it's the work scene that is active
       return [0, 0, 2.5];
     } else {
+      //If it's the contact scene
       return [
         0,
         -0.9 * viewportHeight +

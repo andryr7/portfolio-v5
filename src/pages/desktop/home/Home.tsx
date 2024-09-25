@@ -14,6 +14,7 @@ import { Footer } from "@/components/html/desktop/footer/Footer";
 import { HeaderScene } from "@/components/canvas/desktop/header/HeaderScene";
 import { Presentation } from "@/components/html/desktop/home/about/presentation/Presentation";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
+import { WorkAnchors } from "@/components/html/desktop/home/works/WorkAnchors";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -154,6 +155,7 @@ export function Home() {
             <Header />
           </header>
           <section className={styles.worksSectionContainer} id="works">
+            <WorkAnchors />
             <WorksSection id="works-container" />
           </section>
         </div>

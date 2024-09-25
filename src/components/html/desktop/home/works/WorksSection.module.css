@@ -23,6 +23,7 @@
   position: absolute;
   top: 10%;
   font-size: min(7vh, 7vw);
+  opacity: 0.5;
 }
 
 .work-info-container {
