@@ -2,7 +2,6 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import {
   Bounds,
   Box,
-  Cone,
   MeshTransmissionMaterial,
   Sphere,
 } from "@react-three/drei";

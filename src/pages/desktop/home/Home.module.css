@@ -18,16 +18,23 @@
   box-sizing: border-box;
 }
 
+.works-section-container {
+  height: 400vh;
+  width: 100vw;
+  box-sizing: border-box;
+  position: relative;
+}
+
 .about-anchor {
   position: absolute;
-  top: 200vh;
+  top: 500vh;
 }
 
 .main-container {
   position: relative;
   top: 0;
   box-sizing: border-box;
-  margin-top: 100vh;
+  margin-top: 400vh;
   font-family: var(--font-title);
   background-color: var(--color-background-one);
 }

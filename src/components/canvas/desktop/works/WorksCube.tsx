@@ -19,7 +19,7 @@ export function WorksCube() {
     );
 
   const worksSceneIsActive = useMemo(() => {
-    return worksScrollProgress >= 0.33 && worksScrollProgress <= 0.66;
+    return worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
   }, [worksScrollProgress]);
 
   useFrame((_, delta) => {

@@ -13,7 +13,7 @@ import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { PhysicsScene } from "./physics/PhysicsScene";
 import { HeaderBackground } from "./HeaderBackground";
-import { useTranslatedText } from "@/handlers/useTranslatedText";
+// import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function HeaderScene() {
   const setIsLoaded = usePortfolioStore((state) => state.setIsLoaded);
@@ -24,24 +24,30 @@ export function HeaderScene() {
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress
   );
-  const sectionTitleText = useTranslatedText("selected works", "projets");
+  // const sectionTitleText = useTranslatedText("works", "projets");
 
   const physicsGravity = useMemo((): [number, number, number] => {
-    return worksScrollProgress >= 0.66 ? [0, -9.81, 0] : [0, 0, 0];
+    return worksScrollProgress > 0.9 ? [0, -9.81, 0] : [0, 0, 0];
   }, [worksScrollProgress]);
 
   const heroVisibility = useMemo((): boolean => {
     return worksScrollProgress < 0.5;
   }, [worksScrollProgress]);
 
-  const worksBackgroundPosition = useMemo(
-    (): [number, number, number] => [
-      0,
-      -viewportHeight + worksScrollProgress * viewportHeight * 2,
-      0.25,
-    ],
-    [viewportHeight, worksScrollProgress]
-  );
+  const worksBackgroundPosition = useMemo((): [number, number, number] => {
+    const multiplier = viewportHeight * 5;
+    const zPosition = 0.25;
+
+    if (worksScrollProgress <= 0.2) {
+      return [0, -viewportHeight + worksScrollProgress * multiplier, zPosition];
+    }
+
+    if (worksScrollProgress >= 0.8) {
+      return [0, (worksScrollProgress - 0.8) * multiplier, zPosition];
+    }
+
+    return [0, 0, zPosition];
+  }, [viewportHeight, worksScrollProgress]);
 
   useFrame((state) => {
     state.camera.zoom = Math.min(
@@ -121,7 +127,7 @@ export function HeaderScene() {
           <meshBasicMaterial color={colors.backgroundTwo} toneMapped={false} />
         </mesh>
         {/* Texts */}
-        <group>
+        {/* <group>
           <Text
             font={spacemono}
             color={colors.main}
@@ -130,7 +136,7 @@ export function HeaderScene() {
           >
             {sectionTitleText}
           </Text>
-        </group>
+        </group> */}
       </group>
 
       {/* Environment lighting */}

@@ -14,6 +14,7 @@ import { Footer } from "@/components/html/desktop/footer/Footer";
 import { HeaderScene } from "@/components/canvas/desktop/header/HeaderScene";
 import { Presentation } from "@/components/html/desktop/home/about/presentation/Presentation";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
+import { WorkAnchors } from "@/components/html/desktop/home/works/WorkAnchors";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -67,6 +68,17 @@ export function Home() {
           onUpdate: (self) => {
             setWorksScrollProgress(self.progress);
           },
+          // markers: true,
+        },
+      });
+
+      //Work section container pin
+      gsap.to("#works-container", {
+        scrollTrigger: {
+          trigger: "#works",
+          start: "top top",
+          end: "bottom bottom",
+          pin: "#works-container",
           // markers: true,
         },
       });
@@ -142,8 +154,9 @@ export function Home() {
           >
             <Header />
           </header>
-          <section className={styles.heroSectionContainer} id="works">
-            <WorksSection />
+          <section className={styles.worksSectionContainer} id="works">
+            <WorkAnchors />
+            <WorksSection id="works-container" />
           </section>
         </div>
         <a id={"aboutanchor"} className={styles.aboutAnchor} />
