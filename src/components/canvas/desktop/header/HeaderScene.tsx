@@ -43,6 +43,10 @@ export function HeaderScene() {
     return worksScrollProgress < 0.5;
   }, [worksScrollProgress]);
 
+  const worksSceneIsActive = useMemo(() => {
+    return worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
+  }, [worksScrollProgress]);
+
   const worksBackgroundPosition = useMemo((): [number, number, number] => {
     const multiplier = viewportHeight * 5;
     const zPosition = 0.25;
@@ -68,7 +72,7 @@ export function HeaderScene() {
     if (worksBackgroundPanel.current !== null) {
       easing.dampC(
         worksBackgroundPanel.current.material.color,
-        workBackgroundColor,
+        worksSceneIsActive ? workBackgroundColor : colors.backgroundTwo,
         0.25,
         delta
       );
