@@ -48,17 +48,6 @@ export function Home() {
         },
       });
 
-      //About underlying page pin animation
-      gsap.to("#about", {
-        scrollTrigger: {
-          trigger: "#about",
-          start: "top top",
-          end: "bottom top",
-          pin: "#about",
-          // markers: true,
-        },
-      });
-
       //Works section scroll progress update
       gsap.to("#works", {
         scrollTrigger: {
@@ -76,9 +65,47 @@ export function Home() {
       gsap.to("#works-container", {
         scrollTrigger: {
           trigger: "#works",
+          //Slight offset to fix position jumps
+          start: "top 1px",
+          end: "bottom bottom-=1px",
+          pin: "#works-container",
+          // markers: true,
+        },
+      });
+
+      //About underlying page pin animation
+      gsap.to("#about", {
+        scrollTrigger: {
+          trigger: "#about",
+          start: "top top",
+          end: "bottom top",
+          pin: "#about",
+          // markers: true,
+        },
+      });
+
+      //About section scroll progress update
+      gsap.to("#about-skills", {
+        scrollTrigger: {
+          trigger: "#about-skills",
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate: (self) => {
+            setAboutScrollProgress(self.progress);
+          },
+        },
+      });
+
+      //Skill section scroll progress update
+      gsap.to("#skills-pinned", {
+        scrollTrigger: {
+          trigger: "#about-skills",
           start: "top top",
           end: "bottom bottom",
-          pin: "#works-container",
+          pin: "#skills-pinned",
+          onUpdate: (self) => {
+            setSkillsScrollProgress(self.progress);
+          },
           // markers: true,
         },
       });
@@ -96,18 +123,6 @@ export function Home() {
         },
       });
 
-      //About section scroll progress update
-      gsap.to("#about-skills", {
-        scrollTrigger: {
-          trigger: "#about-skills",
-          start: "top bottom",
-          end: "bottom top",
-          onUpdate: (self) => {
-            setAboutScrollProgress(self.progress);
-          },
-        },
-      });
-
       //About section title
       gsap.to("#about-title", {
         scrollTrigger: {
@@ -116,20 +131,6 @@ export function Home() {
           start: "top top",
           end: "top bottom",
           pin: "#about-title",
-          // markers: true,
-        },
-      });
-
-      //About underlying page pin animation
-      gsap.to("#skills-pinned", {
-        scrollTrigger: {
-          trigger: "#about-skills",
-          start: "top top",
-          end: "bottom bottom",
-          pin: "#skills-pinned",
-          onUpdate: (self) => {
-            setSkillsScrollProgress(self.progress);
-          },
           // markers: true,
         },
       });
