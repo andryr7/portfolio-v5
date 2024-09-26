@@ -27,8 +27,8 @@ export interface Work {
   enType: string;
   frType: string;
   year: string;
-  mainColor: string;
-  backgroundColor: string;
+  lightColor: string;
+  darkColor: string;
   previewImagePath: string;
   images?: WorkImage[];
   enGeneralDescription: string;

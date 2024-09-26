@@ -7,15 +7,16 @@ import {
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
-import { Suspense, useEffect, useMemo } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import spacemono from "@/assets/fonts/space-mono.ttf";
 import spacemonoitalic from "@/assets/fonts/space-mono-italic.ttf";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { PhysicsScene } from "./physics/PhysicsScene";
 import { HeaderBackground } from "./HeaderBackground";
-// import { useTranslatedText } from "@/handlers/useTranslatedText";
+import { easing } from "maath";
 
 export function HeaderScene() {
+  const worksBackgroundPanel = useRef<any>(null);
   const setIsLoaded = usePortfolioStore((state) => state.setIsLoaded);
   const colors = usePortfolioStore((state) => state.colors);
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
@@ -24,7 +25,15 @@ export function HeaderScene() {
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress
   );
-  // const sectionTitleText = useTranslatedText("works", "projets");
+  const worksData = usePortfolioStore((state) => state.worksData);
+  const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
+  const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
+  const workBackgroundColor = useMemo(() => {
+    if (hoveredWorkIndex === null) return colors.backgroundOne;
+    return isDarkTheme
+      ? worksData[hoveredWorkIndex].darkColor
+      : worksData[hoveredWorkIndex].lightColor;
+  }, [colors, isDarkTheme, hoveredWorkIndex, worksData]);
 
   const physicsGravity = useMemo((): [number, number, number] => {
     return worksScrollProgress > 0.9 ? [0, -9.81, 0] : [0, 0, 0];
@@ -49,12 +58,21 @@ export function HeaderScene() {
     return [0, 0, zPosition];
   }, [viewportHeight, worksScrollProgress]);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     state.camera.zoom = Math.min(
       window.innerWidth / viewportWidth,
       window.innerHeight / viewportHeight
     );
     state.camera.updateProjectionMatrix();
+
+    if (worksBackgroundPanel.current !== null) {
+      easing.dampC(
+        worksBackgroundPanel.current.material.color,
+        workBackgroundColor,
+        0.25,
+        delta
+      );
+    }
   });
 
   //Loading handling
@@ -121,26 +139,17 @@ export function HeaderScene() {
       {/* Works background */}
       <group position={worksBackgroundPosition}>
         {/* Background */}
-        <mesh scale={[viewportWidth, viewportHeight, 1]}>
+        <mesh
+          scale={[viewportWidth, viewportHeight, 1]}
+          ref={worksBackgroundPanel}
+        >
           {/* <planeGeometry args={[1, 1, 1, 1]} /> */}
           <planeGeometry args={[1, 1]} />
           <meshBasicMaterial color={colors.backgroundTwo} toneMapped={false} />
         </mesh>
-        {/* Texts */}
-        {/* <group>
-          <Text
-            font={spacemono}
-            color={colors.main}
-            position={[0, 2.75, 0]}
-            fontSize={viewportWidth / 15}
-          >
-            {sectionTitleText}
-          </Text>
-        </group> */}
       </group>
 
       {/* Environment lighting */}
-      {/* <Environment preset="studio" /> */}
       <Environment resolution={256}>
         <group rotation={[-Math.PI / 3, 0, 1]}>
           <Lightformer

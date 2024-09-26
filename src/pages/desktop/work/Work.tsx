@@ -14,6 +14,7 @@ export function Work({ workSlug }: { workSlug: string }) {
   const currentWork = usePortfolioStore((state) => state.worksData).find(
     (work) => work.slug.current === workSlug
   );
+  const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
 
   useGSAP(() => {
     gsap.to(".work-page-container", { opacity: 1 });
@@ -25,7 +26,14 @@ export function Work({ workSlug }: { workSlug: string }) {
         {!currentWork && <Redirect to="/404" />}
         {currentWork && (
           <>
-            <div className={styles.container}>
+            <div
+              className={styles.container}
+              style={{
+                backgroundColor: isDarkTheme
+                  ? currentWork.darkColor
+                  : currentWork.lightColor,
+              }}
+            >
               <WorkHeader work={currentWork} />
               <main className={styles.mainContainer}>
                 <section className={styles.section}>

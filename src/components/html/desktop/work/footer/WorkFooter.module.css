@@ -1,5 +1,4 @@
 .footer-links-container {
-  background-color: var(--color-background-two);
   height: 20vh;
   border-top: 2px solid var(--color-main);
   display: grid;
