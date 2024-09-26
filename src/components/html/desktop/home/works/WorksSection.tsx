@@ -31,7 +31,42 @@ export function WorksSection({ id }: { id: string }) {
     selectedWork.enCaption,
     selectedWork.frCaption
   );
-  const [_, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
+  const lenis = useLenis();
+
+  const handlePreviousWorkClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    switch (hoveredWorkIndex) {
+      case 1:
+        lenis?.scrollTo("#firstWorkAnchor");
+        break;
+      case 2:
+        lenis?.scrollTo("#secondWorkAnchor");
+        break;
+      case 3:
+        lenis?.scrollTo("#thirdWorkAnchor");
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleNextWorkClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    switch (hoveredWorkIndex) {
+      case 0:
+        lenis?.scrollTo("#secondWorkAnchor");
+        break;
+      case 1:
+        lenis?.scrollTo("#thirdWorkAnchor");
+        break;
+      case 2:
+        lenis?.scrollTo("#fourthWorkAnchor");
+        break;
+      default:
+        break;
+    }
+  };
 
   // Works scroll snap
   useLenis((instance) => {
@@ -82,10 +117,25 @@ export function WorksSection({ id }: { id: string }) {
         <div className={styles.workInfoContainer}>
           <span className={styles.workDescription}>{workDescription}</span>
           <span className={styles.workNumberContainer}>
+            <div className={styles.workArrowContainer}>
+              <div
+                onClick={handlePreviousWorkClick}
+                style={{ opacity: hoveredWorkIndex === 0 ? 0.5 : 1 }}
+              >
+                {"<-"}
+              </div>
+              <div
+                onClick={handleNextWorkClick}
+                style={{ opacity: hoveredWorkIndex === 3 ? 0.5 : 1 }}
+              >
+                {"->"}
+              </div>
+            </div>
             00
             <div
               style={{
                 position: "relative",
+                overflow: "hidden",
               }}
             >
               &nbsp;
