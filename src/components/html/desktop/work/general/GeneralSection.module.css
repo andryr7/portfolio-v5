@@ -2,6 +2,7 @@
 
 .work-image-container {
   aspect-ratio: 16 / 9;
+  cursor: grab;
 }
 
 .work-image {

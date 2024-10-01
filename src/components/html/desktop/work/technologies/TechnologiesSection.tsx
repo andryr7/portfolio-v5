@@ -21,6 +21,7 @@ export function TechnologiesSection({ work }: { work: Work }) {
             lazyLoad: false,
             gap: "1rem",
             perPage: 5,
+            arrows: false,
             breakpoints: {
               1920: {
                 perPage: 4,

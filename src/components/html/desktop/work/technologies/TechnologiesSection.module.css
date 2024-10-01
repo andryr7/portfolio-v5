@@ -1,3 +1,11 @@
+.section-title {
+  font-size: var(--font-size-m);
+}
+
+.tech-container {
+  cursor: grab;
+}
+
 .info-container {
   display: flex;
   justify-content: space-between;
@@ -29,8 +37,4 @@
   .links-container {
     align-self: flex-end;
   }
-}
-
-.section-title {
-  font-size: var(--font-size-m);
 }
