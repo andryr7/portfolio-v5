@@ -12,6 +12,7 @@ import { OverlayCube } from "./OverlayCube";
 import { TransparentCube } from "./TransparentCube";
 import { WorksCube } from "../works/WorksCube";
 import { Tesseract } from "../contact/Tesseract";
+import { useMousePosition } from "@/handlers/useMousePosition";
 
 export function InteractiveCube({
   currentPosition = new THREE.Vector3(),
@@ -39,6 +40,7 @@ export function InteractiveCube({
     return contactScrollProgress >= 0.25;
   }, [contactScrollProgress]);
   const sceneIsActive = worksSceneIsActive || contactSceneIsActive;
+  const pointer = useMousePosition();
 
   const sceneTargetPosition = useMemo<[number, number, number]>(() => {
     if (worksSceneIsActive) {
@@ -66,21 +68,6 @@ export function InteractiveCube({
     contactScrollProgress,
   ]);
 
-  const sceneTargetRotation = useMemo<[number, number, number]>(() => {
-    switch (hoveredWorkIndex) {
-      case 0:
-        return [-Math.PI / 2, 0, 0];
-      case 1:
-        return [-Math.PI / 2, 0, -Math.PI / 2];
-      case 2:
-        return [-Math.PI / 2, 0, (-2 * Math.PI) / 2];
-      case 3:
-        return [-Math.PI / 2, 0, (-3 * Math.PI) / 2];
-      default:
-        return [0, 0, 0];
-    }
-  }, [hoveredWorkIndex]);
-
   const enabledCubeRotations = useMemo((): [boolean, boolean, boolean] => {
     return worksScrollProgress > 0.9
       ? [false, false, true]
@@ -98,9 +85,18 @@ export function InteractiveCube({
 
       //Calculating and applying rotation
       currentRotation.copy(cubePhysicsApi.current.rotation());
-      worksSceneIsActive
-        ? targetRotation.setFromEuler(angle.set(...sceneTargetRotation))
-        : targetRotation.setFromEuler(angle.set(0, 0, 0));
+      targetRotation.setFromEuler(
+        worksSceneIsActive
+          ? //If the work scene is active
+            //With pointer effect
+            angle.set(
+              -Math.PI / 2 + pointer.y / 5,
+              0,
+              hoveredWorkIndex! * (-Math.PI / 2) + pointer.x / 5
+            )
+          : //If the contact scene is active
+            angle.set(0, 0, 0)
+      );
       currentRotation.slerp(targetRotation, 0.1);
       cubePhysicsApi.current.setNextKinematicRotation(currentRotation);
     }
