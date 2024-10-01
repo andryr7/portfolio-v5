@@ -15,6 +15,7 @@ import { HeaderScene } from "@/components/canvas/desktop/header/HeaderScene";
 import { Presentation } from "@/components/html/desktop/home/about/presentation/Presentation";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
 import { WorkAnchors } from "@/components/html/desktop/home/works/WorkAnchors";
+import { SkillAnchors } from "@/components/html/desktop/home/about/skills/SkillAnchors";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -170,6 +171,7 @@ export function Home() {
               className={styles.skillsSectionContainer}
               id="about-skills"
             >
+              <SkillAnchors />
               <Skills />
             </article>
             <article className={styles.sectionContainer}>

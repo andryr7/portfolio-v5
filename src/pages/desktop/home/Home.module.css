@@ -82,7 +82,7 @@
 
 .skills-section-container {
   /* Adjust this for skills scroll length */
-  height: 350vh;
+  height: 300vh;
   width: 100%;
   display: flex;
   flex-direction: column;

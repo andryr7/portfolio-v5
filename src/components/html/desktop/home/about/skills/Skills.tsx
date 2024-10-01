@@ -28,6 +28,7 @@ export function Skills() {
                 <SkillCard
                   skill={skills[0]}
                   active={skillsScrollProgress <= 0.33}
+                  targetAnchorId="#firstSkillAnchor"
                 />
               </div>
               <div
@@ -44,6 +45,7 @@ export function Skills() {
                   active={
                     skillsScrollProgress > 0.33 && skillsScrollProgress < 0.66
                   }
+                  targetAnchorId="#secondSkillAnchor"
                 />
               </div>
               <div
@@ -58,6 +60,7 @@ export function Skills() {
                 <SkillCard
                   skill={skills[2]}
                   active={skillsScrollProgress >= 0.66}
+                  targetAnchorId="#thirdSkillAnchor"
                 />
               </div>
             </div>
