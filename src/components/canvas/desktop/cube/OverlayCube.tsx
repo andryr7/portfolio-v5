@@ -32,8 +32,8 @@ export function OverlayCube({ visible }: { visible: boolean }) {
   }, [contactScrollProgress]);
 
   const cubeText = useMemo(() => {
-    if (aboutScrollProgress < 0.25) return lang === "en" ? "who I am" : "qui ?";
-    if (aboutScrollProgress < 0.75)
+    if (aboutScrollProgress < 0.1) return lang === "en" ? "who I am" : "qui ?";
+    if (aboutScrollProgress < 0.85)
       return lang === "en" ? "what I do" : "quoi ?";
     return contactScrollProgress < 0.05
       ? lang === "en"
