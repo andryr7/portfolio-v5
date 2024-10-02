@@ -3,6 +3,7 @@ import {
   Bounds,
   Box,
   MeshTransmissionMaterial,
+  Plane,
   Sphere,
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
@@ -14,7 +15,9 @@ export function SkillsScene() {
   const groupRef = useRef<Group | null>(null);
   const frontendMaterialRef = useRef(null);
   const backendMaterialRef = useRef(null);
-  const devopsMaterialRef = useRef(null);
+  const devopsFirstMaterialRef = useRef(null);
+  const devopsSecondMaterialRef = useRef(null);
+  const devopsThirdMaterialRef = useRef(null);
   const colors = usePortfolioStore((state) => state.colors);
   const skillsScrollProgress = usePortfolioStore(
     (state) => state.skillsScrollProgress
@@ -47,9 +50,39 @@ export function SkillsScene() {
       );
     }
 
-    if (devopsMaterialRef.current !== null) {
+    // if (devopsMaterialRef.current !== null) {
+    //   easing.damp(
+    //     devopsMaterialRef.current,
+    //     "opacity",
+    //     skillsScrollProgress > 0.66 ? 1 : 0,
+    //     0.25,
+    //     delta
+    //   );
+    // }
+
+    if (devopsFirstMaterialRef.current !== null) {
       easing.damp(
-        devopsMaterialRef.current,
+        devopsFirstMaterialRef.current,
+        "opacity",
+        skillsScrollProgress > 0.66 ? 1 : 0,
+        0.25,
+        delta
+      );
+    }
+
+    if (devopsSecondMaterialRef.current !== null) {
+      easing.damp(
+        devopsSecondMaterialRef.current,
+        "opacity",
+        skillsScrollProgress > 0.66 ? 1 : 0,
+        0.25,
+        delta
+      );
+    }
+
+    if (devopsThirdMaterialRef.current !== null) {
+      easing.damp(
+        devopsThirdMaterialRef.current,
         "opacity",
         skillsScrollProgress > 0.66 ? 1 : 0,
         0.25,
@@ -90,16 +123,38 @@ export function SkillsScene() {
             />
           </Sphere>
         </mesh>
-        <mesh>
-          <Box args={[2, 2, 2]}>
-            <meshBasicMaterial
-              ref={devopsMaterialRef}
-              color={colors.main}
-              transparent
-              wireframe
-            />
-          </Box>
-        </mesh>
+        <group>
+          <mesh>
+            <Plane args={[2, 2, 1]}>
+              <meshBasicMaterial
+                color={colors.main}
+                transparent
+                wireframe
+                ref={devopsFirstMaterialRef}
+              />
+            </Plane>
+          </mesh>
+          <mesh rotation={[Math.PI / 2, 0, 0]}>
+            <Plane args={[2, 2, 1]}>
+              <meshBasicMaterial
+                color={colors.main}
+                transparent
+                wireframe
+                ref={devopsSecondMaterialRef}
+              />
+            </Plane>
+          </mesh>
+          <mesh rotation={[0, Math.PI / 2, 0]}>
+            <Plane args={[2, 2, 1]}>
+              <meshBasicMaterial
+                color={colors.main}
+                transparent
+                wireframe
+                ref={devopsThirdMaterialRef}
+              />
+            </Plane>
+          </mesh>
+        </group>
       </group>
 
       {/* Scene bounds */}
