@@ -14,10 +14,10 @@ export function Technologies() {
     (state) => state.setSelectedTechCubeId
   );
   const techs = usePortfolioStore((state) => state.techsData);
-  const tipsText = useTranslatedText(
-    "some of the tools I use",
-    "certains des outils que j'utilise"
-  );
+  const tipsText =
+    lang === "en"
+      ? "some of the tools I use - click or drag"
+      : "certains des outils que j'utilise - cliquez ou déplacez";
   const infoButtonText = useTranslatedText("more info", "plus d'infos");
 
   const selectedTech = useMemo(() => {
