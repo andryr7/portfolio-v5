@@ -5,7 +5,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { useNavigatorLanguage } from "@/handlers/useNavigatorLanguage";
 
 export function LanguageButton() {
-  const language = usePortfolioStore((state) => state.language);
+  const lang = usePortfolioStore((state) => state.language);
   const setLanguage = usePortfolioStore((state) => state.setLanguage);
   const navigatorLanguage = useNavigatorLanguage();
   const [storedLanguagePreference, setStoredLanguagePreference] =
@@ -33,12 +33,13 @@ export function LanguageButton() {
   }, [navigatorLanguage, setLanguage, storedLanguagePreference]);
 
   const handleClick = () => {
-    setStoredLanguagePreference(language === "en" ? "fr" : "en");
+    setStoredLanguagePreference(lang === "en" ? "fr" : "en");
   };
 
   return (
-    <div className={styles.languageButton} onClick={handleClick}>
-      {language === "en" ? "fr" : "en"}
+    <div className={styles.container} onClick={handleClick}>
+      <div className={styles.languageButton}>{lang === "en" ? "en" : "fr"}</div>
+      <div className={styles.languageButton}>{lang === "en" ? "fr" : "en"}</div>
     </div>
   );
 }

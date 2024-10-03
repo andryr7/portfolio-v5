@@ -22,5 +22,10 @@ export function ThemeButton() {
     storedThemePreference === "dark" && setIsDarkTheme(true);
   }, [setIsDarkTheme, storedThemePreference]);
 
-  return <div className={styles.darkModeButton} onClick={handleClick} />;
+  return (
+    <div className={styles.container} onClick={handleClick}>
+      <div className={styles.themeButton} />
+      <div className={styles.themeButton} />
+    </div>
+  );
 }
