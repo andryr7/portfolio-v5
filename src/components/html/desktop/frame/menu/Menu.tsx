@@ -22,7 +22,11 @@ export function Menu() {
   };
 
   const handleCloseClick = () => {
-    open(false);
+    if (worksScrollProgress !== 0) {
+      open(false);
+    } else {
+      setManualMode(false);
+    }
   };
 
   const handleLinkClick = (e: React.MouseEvent, target: string) => {
