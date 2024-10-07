@@ -20,5 +20,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  flex-direction: column;
+}
+
+.glyph-container {
+  display: grid;
+  grid-template-columns: repeat(11, min(7vw, 7vh)); /* 11 columns of equal width */
+  grid-template-rows: repeat(5, min(7vw, 7vh));
+}
+
+.container span {
+  font-size: 7vw;
+  position: absolute;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  color: white;
 }

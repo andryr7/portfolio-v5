@@ -1,0 +1,48 @@
+.page-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 25;
+  overflow-y: auto;
+  background-color: var(--color-background-one);
+  scrollbar-width: none;
+  scrollbar-gutter: stable;
+  -ms-overflow-style: none;
+  opacity: 0;
+}
+
+.container {
+  background-color: var(--color-background-one);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.glyph-container {
+  display: grid;
+  grid-template-columns: repeat(11, min(7vw, 7vh)); /* 11 columns of equal width */
+  grid-template-rows: repeat(5, min(7vw, 7vh));
+}
+
+.active-square {
+  transition: all 0s;
+  transition-delay: 5s;
+}
+
+.active-square:hover {
+  transition: all 0s;
+  background-color: var(--color-main);
+}
+
+.container span {
+  font-size: 7vw;
+  position: absolute;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  color: white;
+}

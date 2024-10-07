@@ -1,9 +1,9 @@
 import { Route, Switch } from "wouter";
-import { Error } from "@/pages/error/Error";
 import { Home } from "@/pages/mobile/home/Home";
 import { Work } from "@/pages/mobile/work/Work";
 import { Footer } from "./footer/Footer";
 import { Legals } from "@/pages/mobile/legals/Legals";
+import { Error } from "@/pages/mobile/error/Error";
 
 export function MobileRouter() {
   return (
