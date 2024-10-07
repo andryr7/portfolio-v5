@@ -5,7 +5,7 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
 
 export function Menu() {
-  const [opened, open] = useState<boolean>(true);
+  const [opened, open] = useState<boolean>(false);
   const [manualMode, setManualMode] = useState<boolean>(false);
   const lenis = useLenis();
   const worksScrollProgress = usePortfolioStore(

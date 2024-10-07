@@ -2,11 +2,8 @@ import { useGSAP } from "@gsap/react";
 import styles from "./Legals.module.css";
 import ReactLenis from "lenis/react";
 import gsap from "gsap";
-import { Link } from "wouter";
-import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 export function Legals() {
-  const lang = usePortfolioStore((state) => state.language);
   useGSAP(() => {
     gsap.to(".page-container", { opacity: 1 });
   });
@@ -30,9 +27,6 @@ export function Legals() {
             measures.
           </p>
           <br />
-          <Link href="/">
-            {lang === "en" ? "-> back to homepage" : "-> retour"}
-          </Link>
         </div>
       </ReactLenis>
     </>
