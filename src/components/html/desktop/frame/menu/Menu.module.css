@@ -48,7 +48,7 @@
   height: max(7vw, 14vh);
   pointer-events: all;
   color: var(--color-background-one);
-  border: 2px solid var(--color-main);
+  /* border: 2px solid var(--color-main); */
 }
 
 .opened-container .menu-item:hover {
