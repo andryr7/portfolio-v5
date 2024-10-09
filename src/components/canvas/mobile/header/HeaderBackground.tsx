@@ -12,14 +12,15 @@ export function HeaderBackground() {
   );
   const colors = usePortfolioStore((state) => state.colors);
   const materialRef = useRef<any>(null);
+  const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
 
   const shaderDarkColor = useMemo(() => {
     return new THREE.Color(colors.backgroundOne);
   }, [colors]);
 
   const shaderLightColor = useMemo(() => {
-    return new THREE.Color(colors.accent);
-  }, [colors]);
+    return new THREE.Color(isDarkTheme ? "grey" : "#C9C9C9");
+  }, [isDarkTheme]);
 
   useFrame((_, delta) => {
     materialRef.current.uTime += delta * 0.05;

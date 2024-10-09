@@ -14,7 +14,7 @@ body {
   /* Vars */
   /* Colors */
   --color-main: #0e0e0e;
-  --color-accent: blue;
+  --color-accent: #FF6A00;
   --color-background-one: #e9e9e9;
   --color-background-two: #d9d9d9;
 
@@ -52,7 +52,7 @@ body {
 body.dark {
   /* Colors */
   --color-main: #d9d9d9;
-  --color-accent: red;
+  --color-accent: #FF6A00;
   --color-background-one: #0e0e0e;
   --color-background-two: #2C2C2C;
 }
