@@ -59,7 +59,7 @@
 
 .tech-details-wrapper button:hover {
   background-color: var(--color-main);
-  color: var(--color-background-one);
+  color: var(--color-accent);
 }
 
 .details-container h4 {
@@ -81,7 +81,7 @@
 }
 
 .details-container a:hover {
-  color: var(--color-background-one);
+  color: var(--color-accent);
 }
 
 .tips {

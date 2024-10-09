@@ -9,7 +9,7 @@
 
 .container:hover {
   background-color: var(--color-main);
-  color: var(--color-background-one);
+  color: var(--color-accent);
 }
 
 .item-link {
@@ -17,3 +17,7 @@
   justify-content: space-between;
   font-size: var(--font-size-s);
 }
+
+/* .container:hover .item-link span {
+  color: var(--color-accent);
+} */

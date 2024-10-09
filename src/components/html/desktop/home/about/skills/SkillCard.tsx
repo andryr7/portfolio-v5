@@ -37,7 +37,6 @@ export function SkillCard({
         <h3
           style={{
             opacity: active ? 1 : 0.5,
-            cursor: "pointer",
           }}
           onClick={() => {
             handleClick(targetAnchorId);

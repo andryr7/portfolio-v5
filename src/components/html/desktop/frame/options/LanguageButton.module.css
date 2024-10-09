@@ -10,6 +10,15 @@
   border: 2px solid var(--color-main);
 }
 
+.container:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* .container:hover .language-button {
+  color: var(--color-accent);
+} */
+
 .language-button {
   position: absolute;
   width: 100%;

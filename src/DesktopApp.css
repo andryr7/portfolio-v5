@@ -44,8 +44,8 @@ body {
 
 /* Text selection */
 ::selection {
-  color: red;
-  background: blue
+  color: var(--color-main);
+  background: var(--color-accent);
 }
 
 /* Dark mode colors */

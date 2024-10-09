@@ -18,6 +18,11 @@
 .title-container h3 {
   transition: opacity var(--transition-normal);
   font-family: var(--font-title);
+  cursor: pointer;
+}
+
+.title-container h3:hover {
+  color: var(--color-accent);
 }
 
 .content-container {

@@ -26,10 +26,12 @@
 
 .footer-link {
   cursor: pointer;
+  transition: all var(--transition-quick);
 }
 
 .footer-link:hover {
   text-decoration: underline;
+  color: var(--color-accent)
 }
 
 .container span {

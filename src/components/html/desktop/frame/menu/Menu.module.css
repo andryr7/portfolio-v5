@@ -48,12 +48,12 @@
   height: max(7vw, 14vh);
   pointer-events: all;
   color: var(--color-background-one);
-  /* border: 2px solid var(--color-main); */
 }
 
 .opened-container .menu-item:hover {
-  background-color: var(--color-background-two);
-  color: var(--color-main);
+  background-color: var(--color-background-one);
+  color: var(--color-accent);
+  border: 2px solid var(--color-main);
 }
 
 .menu-item span {
@@ -108,5 +108,6 @@
 
 .opened-container .close-button:hover {
   background-color: var(--color-background-two);
-  color: var(--color-main);
+  color: var(--color-accent);
+  border: 2px solid var(--color-main);
 }

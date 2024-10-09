@@ -10,6 +10,10 @@
   border: 2px solid var(--color-main);
 }
 
+.container:hover {
+  border-color: var(--color-accent);
+}
+
 .theme-button {
   position: absolute;
   width: 100%;

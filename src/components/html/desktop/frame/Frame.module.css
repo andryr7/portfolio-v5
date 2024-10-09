@@ -52,6 +52,10 @@
   padding: 20px;
 }
 
+.home-link:hover {
+  color: var(--color-accent)
+}
+
 .home-link span {
   position: relative;
 }

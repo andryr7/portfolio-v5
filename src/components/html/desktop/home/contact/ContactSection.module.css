@@ -62,7 +62,7 @@
 }
 
 .contact-link:hover {
-  color: var(--color-background-one);
+  color: var(--color-accent);
   background-position: bottom;
 }
 
