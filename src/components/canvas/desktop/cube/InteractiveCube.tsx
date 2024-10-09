@@ -12,7 +12,6 @@ import { OverlayCube } from "./OverlayCube";
 import { TransparentCube } from "./TransparentCube";
 import { WorksCube } from "../works/WorksCube";
 import { Tesseract } from "../contact/Tesseract";
-import { useMousePosition } from "@/handlers/useMousePosition";
 
 export function InteractiveCube({
   currentPosition = new THREE.Vector3(),
@@ -40,7 +39,6 @@ export function InteractiveCube({
     return contactScrollProgress >= 0.25;
   }, [contactScrollProgress]);
   const sceneIsActive = worksSceneIsActive || contactSceneIsActive;
-  const pointer = useMousePosition();
 
   const sceneTargetPosition = useMemo<[number, number, number]>(() => {
     if (worksSceneIsActive) {
@@ -89,11 +87,7 @@ export function InteractiveCube({
         worksSceneIsActive
           ? //If the work scene is active
             //With pointer effect
-            angle.set(
-              -Math.PI / 2 + pointer.y / 5,
-              0,
-              hoveredWorkIndex! * (-Math.PI / 2) + pointer.x / 5
-            )
+            angle.set(-Math.PI / 2, 0, hoveredWorkIndex! * (-Math.PI / 2))
           : //If the contact scene is active
             angle.set(0, 0, 0)
       );

@@ -10,7 +10,6 @@
   color: var(--color-main);
   pointer-events: auto;
   box-sizing: border-box;
-  cursor: pointer;
   user-select: none;
 }
 
@@ -55,6 +54,11 @@
 
 .work-arrow-container div {
   transition: opacity var(--transition-normal);
+  cursor: pointer;
+}
+
+.work-arrow-container div:hover {
+  color: var(--color-accent);
 }
 
 .work-number {
@@ -68,4 +72,8 @@
   position: absolute;
   bottom: 10%;
   font-size: min(10vh, 10vw);
+}
+
+.work-title:hover {
+  color: var(--color-accent);
 }

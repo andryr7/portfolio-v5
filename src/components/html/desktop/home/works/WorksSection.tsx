@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
 import { useAnimatedText } from "@/handlers/useAnimatedText";
 import { useLenis } from "lenis/react";
-import { useLocation } from "wouter";
+import { Link } from "wouter";
 
 export function WorksSection({ id }: { id: string }) {
   const worksData = usePortfolioStore((state) => state.worksData);
@@ -31,7 +31,6 @@ export function WorksSection({ id }: { id: string }) {
     selectedWork.enCaption,
     selectedWork.frCaption
   );
-  const [, setLocation] = useLocation();
   const lenis = useLenis();
 
   const handlePreviousWorkClick = (e: React.MouseEvent) => {
@@ -108,11 +107,9 @@ export function WorksSection({ id }: { id: string }) {
     return clampedProgress * 300;
   }, [worksScrollProgress]);
 
-  const handleClick = () => setLocation(`/work/${selectedWork.slug.current}`);
-
   return (
     <>
-      <div className={styles.container} id={id} onClick={handleClick}>
+      <div className={styles.container} id={id}>
         <span className={styles.sectionTitle}>{captionText}</span>
         <div className={styles.workInfoContainer}>
           <span className={styles.workDescription}>{workDescription}</span>
@@ -152,7 +149,12 @@ export function WorksSection({ id }: { id: string }) {
             /004
           </span>
         </div>
-        <span className={styles.workTitle}>{workTitle}</span>
+        <Link
+          to={`/work/${selectedWork.slug.current}`}
+          className={styles.workTitle}
+        >
+          {workTitle}
+        </Link>
       </div>
     </>
   );
