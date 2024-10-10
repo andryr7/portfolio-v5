@@ -24,7 +24,15 @@
   position: absolute;
   top: 10%;
   font-size: min(5vh, 5vw);
-  opacity: 0.5;
+  color: var(--color-background-one);
+  line-height: 150%;
+}
+
+.section-scroll-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--color-main);
 }
 
 .work-info-container {
@@ -53,7 +61,7 @@
 }
 
 .work-arrow-container div {
-  transition: opacity var(--transition-normal);
+  transition: opacity var(--transition-normal), color var(--transition-quick);
   cursor: pointer;
 }
 
@@ -72,6 +80,7 @@
   position: absolute;
   bottom: 10%;
   font-size: min(10vh, 10vw);
+  transition: all var(--transition-quick);
 }
 
 .work-title:hover {

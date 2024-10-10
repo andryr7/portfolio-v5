@@ -7,6 +7,7 @@ import { useLenis } from "lenis/react";
 import { Link } from "wouter";
 
 export function WorksSection({ id }: { id: string }) {
+  const lenis = useLenis();
   const worksData = usePortfolioStore((state) => state.worksData);
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
   const setHoveredWorkIndex = usePortfolioStore(
@@ -31,7 +32,12 @@ export function WorksSection({ id }: { id: string }) {
     selectedWork.enCaption,
     selectedWork.frCaption
   );
-  const lenis = useLenis();
+  const scrollProgressIndicatorValue = useMemo(() => {
+    return (
+      100 -
+      ((Math.max(0.2, Math.min(0.8, worksScrollProgress)) - 0.2) / 0.6) * 100
+    );
+  }, [worksScrollProgress]);
 
   const handlePreviousWorkClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -107,10 +113,22 @@ export function WorksSection({ id }: { id: string }) {
     return clampedProgress * 300;
   }, [worksScrollProgress]);
 
+  console.log(scrollProgressIndicatorValue);
+
   return (
     <>
       <div className={styles.container} id={id}>
-        <span className={styles.sectionTitle}>{captionText}</span>
+        <span className={styles.sectionTitle}>
+          {captionText}
+          <span
+            className={styles.sectionScrollIndicator}
+            style={{
+              clipPath: `inset(0 ${scrollProgressIndicatorValue}% 0 0)`,
+            }}
+          >
+            {captionText}
+          </span>
+        </span>
         <div className={styles.workInfoContainer}>
           <span className={styles.workDescription}>{workDescription}</span>
           <span className={styles.workNumberContainer}>
