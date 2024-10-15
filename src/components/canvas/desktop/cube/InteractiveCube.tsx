@@ -32,13 +32,12 @@ export function InteractiveCube({
     (state) => state.contactScrollProgress
   );
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
-  const worksSceneIsActive = useMemo(() => {
-    return worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
-  }, [worksScrollProgress]);
-  const contactSceneIsActive = useMemo(() => {
-    return contactScrollProgress >= 0.25;
-  }, [contactScrollProgress]);
+  const worksSceneIsActive =
+    worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
+  const contactSceneIsActive = contactScrollProgress >= 0.25;
   const sceneIsActive = worksSceneIsActive || contactSceneIsActive;
+  const enabledCubeRotations: [boolean, boolean, boolean] =
+    worksScrollProgress > 0.9 ? [false, false, true] : [true, true, true];
 
   const sceneTargetPosition = useMemo<[number, number, number]>(() => {
     if (worksSceneIsActive) {
@@ -65,12 +64,6 @@ export function InteractiveCube({
     worksScrollProgress,
     contactScrollProgress,
   ]);
-
-  const enabledCubeRotations = useMemo((): [boolean, boolean, boolean] => {
-    return worksScrollProgress > 0.9
-      ? [false, false, true]
-      : [true, true, true];
-  }, [worksScrollProgress]);
 
   useFrame((_, delta) => {
     //Position and rotation animations

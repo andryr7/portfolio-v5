@@ -32,12 +32,9 @@ export function WorksSection({ id }: { id: string }) {
     selectedWork.enCaption,
     selectedWork.frCaption
   );
-  const scrollProgressIndicatorValue = useMemo(() => {
-    return (
-      100 -
-      ((Math.max(0.2, Math.min(0.8, worksScrollProgress)) - 0.2) / 0.6) * 100
-    );
-  }, [worksScrollProgress]);
+  const scrollProgressIndicatorValue =
+    100 -
+    ((Math.max(0.2, Math.min(0.8, worksScrollProgress)) - 0.2) / 0.6) * 100;
 
   const handlePreviousWorkClick = (e: React.MouseEvent) => {
     e.stopPropagation();

@@ -2,7 +2,7 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { MeshTransmissionMaterial, RoundedBox } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export function TransparentCube() {
   const materialRef = useRef<any>(null);
@@ -11,10 +11,8 @@ export function TransparentCube() {
     (state) => state.worksScrollProgress
   );
   const hoveredWorkIndex = usePortfolioStore((state) => state.hoveredWorkIndex);
-
-  const worksSceneIsActive = useMemo(() => {
-    return worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
-  }, [worksScrollProgress]);
+  const worksSceneIsActive =
+    worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
 
   useEffect(() => {
     if (hoveredWorkIndex !== null && materialRef.current !== null) {

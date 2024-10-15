@@ -34,18 +34,11 @@ export function HeaderScene() {
       ? worksData[hoveredWorkIndex].darkColor
       : worksData[hoveredWorkIndex].lightColor;
   }, [colors, isDarkTheme, hoveredWorkIndex, worksData]);
-
-  const physicsGravity = useMemo((): [number, number, number] => {
-    return worksScrollProgress > 0.9 ? [0, -9.81, 0] : [0, 0, 0];
-  }, [worksScrollProgress]);
-
-  const heroVisibility = useMemo((): boolean => {
-    return worksScrollProgress < 0.5;
-  }, [worksScrollProgress]);
-
-  const worksSceneIsActive = useMemo(() => {
-    return worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
-  }, [worksScrollProgress]);
+  const physicsGravity: [number, number, number] =
+    worksScrollProgress > 0.9 ? [0, -9.81, 0] : [0, 0, 0];
+  const heroVisibility = worksScrollProgress < 0.5;
+  const worksSceneIsActive =
+    worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
 
   const worksBackgroundPosition = useMemo((): [number, number, number] => {
     const multiplier = viewportHeight * 5;

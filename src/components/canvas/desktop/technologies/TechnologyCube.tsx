@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Tech } from "@/types/tech";
 import * as THREE from "three";
 import { ThreeEvent, useFrame } from "@react-three/fiber";
@@ -40,14 +40,9 @@ export function TechnologyCube({
         state.setSelectedTechCubeId,
       ])
     );
-  const isDragged = useMemo(
-    () => draggedCubeId === tech._id,
-    [draggedCubeId, tech]
-  );
-  const isSelected = useMemo(
-    () => selectedTechId === tech._id,
-    [selectedTechId, tech]
-  );
+  const isDragged = draggedCubeId === tech._id;
+  const isSelected = selectedTechId === tech._id;
+
   //Hover handling
   const [hovered, hover] = useState<boolean>(false);
   useCursor(hovered || draggedCubeId !== null, "pointer");

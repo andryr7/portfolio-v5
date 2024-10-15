@@ -26,10 +26,7 @@ export function OverlayCube({ visible }: { visible: boolean }) {
   const contactScrollProgress = usePortfolioStore(
     (state) => state.contactScrollProgress
   );
-
-  const contactSceneIsActive = useMemo(() => {
-    return contactScrollProgress >= 0.25;
-  }, [contactScrollProgress]);
+  const contactSceneIsActive = contactScrollProgress >= 0.25;
 
   const cubeText = useMemo(() => {
     if (aboutScrollProgress < 0.1) return lang === "en" ? "who I am" : "qui ?";

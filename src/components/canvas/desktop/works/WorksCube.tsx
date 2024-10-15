@@ -1,7 +1,7 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { Box } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
 import { easing } from "maath";
 import { useShallow } from "zustand/react/shallow";
 import { ProjectCubeFace } from "./ProjectCubeFace";
@@ -18,9 +18,8 @@ export function WorksCube() {
       }))
     );
 
-  const worksSceneIsActive = useMemo(() => {
-    return worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
-  }, [worksScrollProgress]);
+  const worksSceneIsActive =
+    worksScrollProgress >= 0.1 && worksScrollProgress <= 0.9;
 
   useFrame((_, delta) => {
     if (topFaceRef.current !== null) {
