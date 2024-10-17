@@ -8,7 +8,7 @@ export function Loader({ isLoading }: { isLoading: boolean }) {
   const lang = usePortfolioStore((state) => state.language);
   const containerRef = useRef(null);
   const cubeRef = useRef(null);
-  const tl = useRef<any>();
+  const tl = useRef<GSAPTimeline>();
 
   const { contextSafe } = useGSAP(() => {
     tl.current = gsap.timeline().to(cubeRef.current, {
@@ -20,7 +20,7 @@ export function Loader({ isLoading }: { isLoading: boolean }) {
 
   const loadingEndAnimation = contextSafe(() => {
     gsap.delayedCall(1, () => {
-      tl.current.pause();
+      tl.current!.pause();
       gsap.to(containerRef.current, { opacity: 0 });
       gsap.to(cubeRef.current, { scale: 10 });
     });

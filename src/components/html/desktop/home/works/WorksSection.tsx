@@ -20,7 +20,7 @@ export function WorksSection({ id }: { id: string }) {
   scrollProgressRef.current = worksScrollProgress;
   const captionText = useTranslatedText(
     "selected works",
-    "sélection de projets"
+    "projets sélectionnés"
   );
   const selectedWork = useMemo(() => {
     return hoveredWorkIndex === null

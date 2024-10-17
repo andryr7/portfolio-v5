@@ -15,9 +15,9 @@
   color: var(--color-accent);
 }
 
-/* .container:hover .language-button {
+.container:hover .language-button {
   color: var(--color-accent);
-} */
+}
 
 .language-button {
   position: absolute;
