@@ -3,14 +3,14 @@
   cursor: pointer;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
+  gap: 0.5rem;
   pointer-events: all;
   font-size: 0rem;
 }
 
 .opened-container {
   pointer-events: none;
-  gap: 12px;
+  gap: 0.75rem;
   font-size: 1rem;
 }
 
