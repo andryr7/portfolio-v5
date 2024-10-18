@@ -3,8 +3,6 @@ import styles from "./TechnologiesSection.module.css";
 import { LinkButton } from "../LinkButton";
 
 //Splide slider imports
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
 import { TechItem } from "./TechItem";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
@@ -15,36 +13,9 @@ export function TechnologiesSection({ work }: { work: Work }) {
     <>
       <h2 className={styles.sectionTitle}>Technologies</h2>
       <div className={styles.techContainer}>
-        <Splide
-          options={{
-            rewind: true,
-            lazyLoad: false,
-            gap: "1rem",
-            perPage: 5,
-            arrows: false,
-            breakpoints: {
-              1920: {
-                perPage: 4,
-              },
-              1440: {
-                perPage: 3,
-              },
-              1024: {
-                perPage: 2,
-              },
-              500: {
-                perPage: 1,
-              },
-            },
-          }}
-          aria-label={`${work?.title} technologies slider`}
-        >
-          {work?.usedTechs?.map((tech) => (
-            <SplideSlide key={tech._id}>
-              <TechItem item={tech} />
-            </SplideSlide>
-          ))}
-        </Splide>
+        {work?.usedTechs?.map((tech) => (
+          <TechItem key={tech._id} item={tech} />
+        ))}
       </div>
       <div className={styles.infoContainer}>
         <div className={styles.linksContainer}>

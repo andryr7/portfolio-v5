@@ -25,15 +25,14 @@ export function Work({ workSlug }: { workSlug: string }) {
       <ReactLenis className={styles.pageContainer + " work-page-container"}>
         {!currentWork && <Redirect to="/404" />}
         {currentWork && (
-          <>
-            <div
-              className={styles.container}
-              style={{
-                backgroundColor: isDarkTheme
-                  ? currentWork.darkColor
-                  : currentWork.lightColor,
-              }}
-            >
+          <div
+            style={{
+              backgroundColor: isDarkTheme
+                ? currentWork.darkColor
+                : currentWork.lightColor,
+            }}
+          >
+            <div className={styles.container}>
               <WorkHeader work={currentWork} />
               <main className={styles.mainContainer}>
                 <section className={styles.section}>
@@ -48,7 +47,7 @@ export function Work({ workSlug }: { workSlug: string }) {
               work={currentWork}
               globalLenisInstance={globalLenisInstance}
             />
-          </>
+          </div>
         )}
       </ReactLenis>
     </>
