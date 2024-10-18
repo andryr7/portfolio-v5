@@ -44,7 +44,8 @@
 
 .skill-item-container {
   padding: 0.5rem;
-  border: 1px solid var(--color-main);
-  border-radius: var(--br-s);
+  border-radius: var(--br-xs);
   font-size: clamp(0.75rem, 1vw, 1.25rem);
+  background-color: var(--color-main);
+  color: var(--color-background-one);
 }
