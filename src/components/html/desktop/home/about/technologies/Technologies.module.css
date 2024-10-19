@@ -58,8 +58,8 @@
 }
 
 .tech-details-wrapper button:hover {
-  background-color: var(--color-main);
-  color: var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-main);
 }
 
 .details-container h4 {

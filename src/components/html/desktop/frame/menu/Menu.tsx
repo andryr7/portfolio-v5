@@ -78,7 +78,6 @@ export function Menu() {
       <div
         className={styles.menuItem}
         onClick={(e) => handleLinkClick(e, "contact")}
-        style={{ color: "var(--color-accent)" }}
       >
         <span>contact</span>
       </div>

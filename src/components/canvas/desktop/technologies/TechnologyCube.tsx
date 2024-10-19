@@ -165,8 +165,8 @@ export function TechnologyCube({
         <Box>
           <meshStandardMaterial map={texture} metalness={0} roughness={0} />
           <Outlines
-            thickness={0.02}
-            color={colors.main}
+            thickness={0.035}
+            color={colors.accent}
             transparent
             opacity={hovered ? 1 : 0}
           />

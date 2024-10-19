@@ -7,16 +7,10 @@
   box-sizing: border-box;
   border-radius: var(--br-xs);
   overflow: hidden;
-  border: 2px solid var(--color-main);
-}
-
-.container:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
 }
 
 .container:hover .language-button {
-  color: var(--color-accent);
+  background-color: var(--color-accent);
 }
 
 .language-button {
@@ -33,7 +27,6 @@
 
 .language-button:last-of-type {
   background-color: var(--color-background-one);
-  color: var(--color-main);
   clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%, 100% 100%, 100% 0%);
 }
 

@@ -51,9 +51,8 @@
 }
 
 .opened-container .menu-item:hover {
-  background-color: var(--color-background-one);
-  color: var(--color-accent);
-  border: 2px solid var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-background-one);
 }
 
 .menu-item span {
@@ -107,7 +106,5 @@
 }
 
 .opened-container .close-button:hover {
-  background-color: var(--color-background-two);
-  color: var(--color-accent);
-  border: 2px solid var(--color-accent);
+  background-color: var(--color-accent);
 }
