@@ -1,10 +1,10 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./WorksSection.module.css";
-import { useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
 import { useAnimatedText } from "@/handlers/useAnimatedText";
 import { useLenis } from "lenis/react";
-import { Link } from "wouter";
+import { useLocation } from "wouter";
 
 export function WorksSection({ id }: { id: string }) {
   const lenis = useLenis();
@@ -32,43 +32,54 @@ export function WorksSection({ id }: { id: string }) {
     selectedWork.enCaption,
     selectedWork.frCaption
   );
+  const [, setLocation] = useLocation();
   const scrollProgressIndicatorValue =
     100 -
     ((Math.max(0.2, Math.min(0.8, worksScrollProgress)) - 0.2) / 0.6) * 100;
 
-  const handlePreviousWorkClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    switch (hoveredWorkIndex) {
-      case 1:
-        lenis?.scrollTo("#firstWorkAnchor");
-        break;
-      case 2:
-        lenis?.scrollTo("#secondWorkAnchor");
-        break;
-      case 3:
-        lenis?.scrollTo("#thirdWorkAnchor");
-        break;
-      default:
-        break;
-    }
-  };
+  const handleWorkClick = useCallback(() => {
+    setLocation(`/work/${selectedWork.slug.current}`);
+  }, [selectedWork.slug, setLocation]);
 
-  const handleNextWorkClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    switch (hoveredWorkIndex) {
-      case 0:
-        lenis?.scrollTo("#secondWorkAnchor");
-        break;
-      case 1:
-        lenis?.scrollTo("#thirdWorkAnchor");
-        break;
-      case 2:
-        lenis?.scrollTo("#fourthWorkAnchor");
-        break;
-      default:
-        break;
-    }
-  };
+  const handlePreviousWorkClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      switch (hoveredWorkIndex) {
+        case 1:
+          lenis?.scrollTo("#firstWorkAnchor");
+          break;
+        case 2:
+          lenis?.scrollTo("#secondWorkAnchor");
+          break;
+        case 3:
+          lenis?.scrollTo("#thirdWorkAnchor");
+          break;
+        default:
+          break;
+      }
+    },
+    [hoveredWorkIndex, lenis]
+  );
+
+  const handleNextWorkClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      switch (hoveredWorkIndex) {
+        case 0:
+          lenis?.scrollTo("#secondWorkAnchor");
+          break;
+        case 1:
+          lenis?.scrollTo("#thirdWorkAnchor");
+          break;
+        case 2:
+          lenis?.scrollTo("#fourthWorkAnchor");
+          break;
+        default:
+          break;
+      }
+    },
+    [hoveredWorkIndex, lenis]
+  );
 
   // Works scroll snap
   useLenis((instance) => {
@@ -112,7 +123,7 @@ export function WorksSection({ id }: { id: string }) {
 
   return (
     <>
-      <div className={styles.container} id={id}>
+      <div className={styles.container} id={id} onClick={handleWorkClick}>
         <span className={styles.sectionTitle}>
           {captionText}
           <span
@@ -126,7 +137,10 @@ export function WorksSection({ id }: { id: string }) {
         </span>
         <div className={styles.workInfoContainer}>
           <span className={styles.workDescription}>{workDescription}</span>
-          <span className={styles.workNumberContainer}>
+          <span
+            className={styles.workNumberContainer}
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className={styles.workArrowContainer}>
               <div
                 onClick={handlePreviousWorkClick}
@@ -162,12 +176,7 @@ export function WorksSection({ id }: { id: string }) {
             /004
           </span>
         </div>
-        <Link
-          to={`/work/${selectedWork.slug.current}`}
-          className={styles.workTitle}
-        >
-          {workTitle}
-        </Link>
+        <h3 className={styles.workTitle}>{workTitle}</h3>
       </div>
     </>
   );

@@ -11,6 +11,7 @@
   pointer-events: auto;
   box-sizing: border-box;
   user-select: none;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
@@ -47,6 +48,7 @@
 .work-number-container {
   display: flex;
   position: relative;
+  cursor: default;
 }
 
 .work-arrow-container {
@@ -83,6 +85,6 @@
   transition: all var(--transition-quick);
 }
 
-.work-title:hover {
+/* .work-title:hover {
   color: var(--color-accent);
-}
+} */
