@@ -52,7 +52,9 @@ export function Menu() {
 
   return (
     <div
-      className={`${styles.container} ${opened ? styles.openedContainer : ""}`}
+      className={`${styles.container} ${
+        opened ? styles.openedContainer : styles.closedContainer
+      }`}
       onClick={handleOpenClick}
     >
       <div
