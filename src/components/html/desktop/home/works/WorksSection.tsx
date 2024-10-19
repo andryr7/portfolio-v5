@@ -110,8 +110,6 @@ export function WorksSection({ id }: { id: string }) {
     return clampedProgress * 300;
   }, [worksScrollProgress]);
 
-  console.log(scrollProgressIndicatorValue);
-
   return (
     <>
       <div className={styles.container} id={id}>
