@@ -18,18 +18,9 @@
   width: 100%;
   height: 100%;
   background-color: var(--color-main);
-  transition: all var(--transition-quick);
+  transition: transform var(--transition-normal);
   color: var(--color-background-one);
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.language-button:last-of-type {
-  background-color: var(--color-background-one);
-  clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%, 100% 100%, 100% 0%);
-}
-
-.container:hover .language-button:last-of-type {
-  clip-path: polygon(0% 0%, 0% 100%, 50% 100%, 51% 53%, 52% 54%, 51% 53%, 50% 53%, 50% 99%, 100% 100%, 100% 0%);
 }

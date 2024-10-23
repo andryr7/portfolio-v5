@@ -18,15 +18,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: clip-path var(--transition-quick);
+  transition: transform var(--transition-normal);
   background-color: var(--color-main);
 }
 
-.icon-container:last-of-type {
+.container:hover .icon-container {
+  background-color: var(--color-accent);
+}
+
+/* .icon-container:last-of-type {
   background-color: var(--color-accent);
   clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%, 100% 100%, 100% 0%);
 }
 
 .container:hover .icon-container:last-of-type {
   clip-path: polygon(0% 0%, 0% 100%, 50% 100%, 51% 53%, 52% 54%, 51% 53%, 50% 53%, 50% 99%, 100% 100%, 100% 0%);
-}
+} */
