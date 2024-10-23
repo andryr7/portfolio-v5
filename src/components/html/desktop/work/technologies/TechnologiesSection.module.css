@@ -7,7 +7,7 @@
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* 11 columns of equal width */
   gap: 0.75rem;
   border: 2px solid var(--color-main);
-  border-radius: var(--br-s);
+  border-radius: var(--br-xs);
   padding: 0.75rem;
 }
 

@@ -38,7 +38,7 @@ export function GeneralSection({ work }: { work: Work }) {
           {work?.liveUrl && (
             <LinkButton
               url={work?.liveUrl}
-              label={lang === "en" ? "live website" : "visiter"}
+              label={lang === "en" ? "visit" : "visiter"}
             />
           )}
         </div>

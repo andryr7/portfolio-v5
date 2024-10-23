@@ -1,8 +1,12 @@
 .container {
   padding: 1rem;
   border-radius: var(--br-xs);
-  border: 2px solid var(--color-accent);
-  color: var(--color-accent);
+  color: var(--color-background-one);
+  background-color: var(--color-main);
+  /* aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
 }
 
 .container:hover {
