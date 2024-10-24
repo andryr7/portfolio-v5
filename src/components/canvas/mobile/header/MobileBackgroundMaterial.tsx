@@ -1,4 +1,4 @@
-import { MobileBackgroundMaterialType } from "@/types/canvas";
+import { MobileBackgroundMaterialType } from "@/types/canvasTypes";
 import { shaderMaterial } from "@react-three/drei";
 import { ReactThreeFiber } from "@react-three/fiber";
 import { Color } from "three";

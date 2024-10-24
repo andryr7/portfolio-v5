@@ -1,6 +1,6 @@
-import { Skill } from "./skill";
-import { Tech } from "./tech";
-import { Work } from "./work";
+import { Skill } from "./skillTypes";
+import { Tech } from "./techTypes";
+import { Work } from "./workTypes";
 
 export type Colors = {
   main: string;

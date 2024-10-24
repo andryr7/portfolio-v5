@@ -1,4 +1,4 @@
-import { Skill, SkillItem as SkillItemType } from "@/types/skill";
+import { Skill, SkillItem as SkillItemType } from "@/types/skillTypes";
 import styles from "./SkillCard.module.css";
 import { useTranslatedText } from "@/handlers/useTranslatedText";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";

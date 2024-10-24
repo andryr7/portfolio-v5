@@ -3,7 +3,7 @@ import { extend, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useMemo, useRef } from "react";
 import { MobileBackgroundMaterial } from "./MobileBackgroundMaterial";
-import { MobileBackgroundMaterialType } from "@/types/canvas";
+import { MobileBackgroundMaterialType } from "@/types/canvasTypes";
 
 extend({ MobileBackgroundMaterial });
 

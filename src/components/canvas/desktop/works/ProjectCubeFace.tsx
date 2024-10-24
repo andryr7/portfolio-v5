@@ -1,6 +1,6 @@
 import { useMemo, useRef } from "react";
 import { useTexture } from "@react-three/drei";
-import { Work } from "@/types/work";
+import { Work } from "@/types/workTypes";
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 

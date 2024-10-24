@@ -1,4 +1,4 @@
-import { Work } from "@/types/work";
+import { Work } from "@/types/workTypes";
 import styles from "./TechnologiesSection.module.css";
 import { LinkButton } from "../LinkButton";
 

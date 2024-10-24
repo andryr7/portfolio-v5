@@ -25,7 +25,7 @@ export function useTheme() {
     browserPrefersDark ? "dark" : "light"
   );
 
-  //Context state methods
+  //State methods
   const setColors = usePortfolioStore((state) => state.setColors);
   const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
   const setIsDarkTheme = usePortfolioStore((state) => state.setIsDarkTheme);

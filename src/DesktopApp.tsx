@@ -3,13 +3,14 @@ import gsap from "gsap";
 import { Canvas } from "@react-three/fiber";
 import { StatsGl, View } from "@react-three/drei";
 import { ReactLenis } from "lenis/react";
-import { LenisRef } from "./types/lenis";
+import { LenisRef } from "./types/lenisTypes";
 import { useLoadData } from "./handlers/useLoadData";
-import { Frame } from "./components/html/desktop/frame/Frame";
 import { useTheme } from "./handlers/useTheme";
-import NoiseFilter from "./components/html/desktop/noise/NoiseFilter";
+import { useLanguage } from "./handlers/useLanguage";
 import { ViewportSizeHandler } from "./handlers/viewportSizeHandler";
 import { Loader } from "./components/html/desktop/loader/Loader";
+import NoiseFilter from "./components/html/desktop/noise/NoiseFilter";
+import { Frame } from "./components/html/desktop/frame/Frame";
 import { DesktopRouter } from "./components/html/desktop/DesktopRouter";
 import "./DesktopApp.css";
 
@@ -19,8 +20,9 @@ export default function DesktopApp() {
   const isLoading = useLoadData();
   const envMode = import.meta.env.MODE;
 
-  //Theme handling
+  //Theme and language handling
   useTheme();
+  useLanguage();
 
   //GSAP and lenis RAF handling
   useEffect(() => {

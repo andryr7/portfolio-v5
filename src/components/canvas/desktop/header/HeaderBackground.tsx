@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { useTrailTexture } from "@react-three/drei";
 import * as easings from "d3-ease";
 import { useMemo, useRef } from "react";
-import { DesktopBackgroundMaterialType } from "@/types/canvas";
+import { DesktopBackgroundMaterialType } from "@/types/canvasTypes";
 
 extend({ DesktopBackgroundMaterial });
 

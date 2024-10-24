@@ -1,4 +1,4 @@
-import { DesktopBackgroundMaterialType } from "@/types/canvas";
+import { DesktopBackgroundMaterialType } from "@/types/canvasTypes";
 import { shaderMaterial } from "@react-three/drei";
 import { ReactThreeFiber } from "@react-three/fiber";
 import { Color } from "three";

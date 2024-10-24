@@ -1,6 +1,6 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./Skills.module.css";
-import { Skill } from "@/types/skill";
+import { Skill } from "@/types/skillTypes";
 
 function SkillCard({ skill }: { skill: Skill }) {
   const lang = usePortfolioStore((state) => state.language);

@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { Tech } from "@/types/tech";
+import { Tech } from "@/types/techTypes";
 import * as THREE from "three";
 import { ThreeEvent, useFrame } from "@react-three/fiber";
 import { Box, Outlines, useCursor, useTexture } from "@react-three/drei";

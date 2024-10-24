@@ -1,4 +1,4 @@
-import { Work } from "@/types/work";
+import { Work } from "@/types/workTypes";
 import { SanityImage } from "sanity-image";
 import { LinkButton } from "../LinkButton";
 import styles from "./GeneralSection.module.css";

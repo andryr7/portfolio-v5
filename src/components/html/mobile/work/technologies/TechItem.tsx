@@ -1,6 +1,6 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import styles from "./TechItem.module.css";
-import { WorkUsedTech } from "@/types/work";
+import { WorkUsedTech } from "@/types/workTypes";
 
 export function TechItem({ item }: { item: WorkUsedTech }) {
   const lang = usePortfolioStore((state) => state.language);

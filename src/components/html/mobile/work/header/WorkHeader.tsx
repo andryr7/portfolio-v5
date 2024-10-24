@@ -1,4 +1,4 @@
-import { Work } from "@/types/work";
+import { Work } from "@/types/workTypes";
 import styles from "./WorkHeader.module.css";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 

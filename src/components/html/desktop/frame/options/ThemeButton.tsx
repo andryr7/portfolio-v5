@@ -7,8 +7,7 @@ export function ThemeButton() {
   const colors = usePortfolioStore((state) => state.colors);
 
   const handleClick = () => {
-    const newTheme = isDarkTheme ? "light" : "dark";
-    setIsDarkTheme(newTheme === "dark" ? true : false);
+    setIsDarkTheme(isDarkTheme ? false : true);
   };
 
   return (

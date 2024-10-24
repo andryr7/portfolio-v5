@@ -1,4 +1,4 @@
-import { Work } from "@/types/work";
+import { Work } from "@/types/workTypes";
 import styles from "./WorkFooter.module.css";
 import { Link, useLocation } from "wouter";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";

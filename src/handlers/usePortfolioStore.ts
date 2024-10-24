@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { lightColors } from "./useTheme";
-import { Actions, Colors, State } from "@/types/state";
+import { Actions, Colors, State } from "@/types/stateTypes";
 
 export const usePortfolioStore = create<State & Actions>()((set) => ({
   //General settings

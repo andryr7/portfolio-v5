@@ -1,5 +1,5 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
-import { MeshTransmissionMaterialType } from "@/types/canvas";
+import { MeshTransmissionMaterialType } from "@/types/canvasTypes";
 import { MeshTransmissionMaterial, RoundedBox } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
