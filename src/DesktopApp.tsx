@@ -7,20 +7,20 @@ import { LenisRef } from "./types/lenisTypes";
 import { useLoadData } from "./handlers/useLoadData";
 import { useTheme } from "./handlers/useTheme";
 import { useLanguage } from "./handlers/useLanguage";
-import { ViewportSizeHandler } from "./handlers/viewportSizeHandler";
 import { Loader } from "./components/html/desktop/loader/Loader";
 import NoiseFilter from "./components/html/desktop/noise/NoiseFilter";
 import { Frame } from "./components/html/desktop/frame/Frame";
 import { DesktopRouter } from "./components/html/desktop/DesktopRouter";
 import "./DesktopApp.css";
+import { ViewportSizeHandler } from "./handlers/ViewPortSizeHandler";
 
 export default function DesktopApp() {
   const appContainerRef = useRef<HTMLDivElement | null>(null);
   const lenisRef = useRef<LenisRef | null>(null);
-  const isLoading = useLoadData();
   const envMode = import.meta.env.MODE;
 
-  //Theme and language handling
+  //Data, theme and language handling
+  const isLoading = useLoadData();
   useTheme();
   useLanguage();
 

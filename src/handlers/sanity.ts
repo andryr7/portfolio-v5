@@ -4,13 +4,14 @@ export const client = createClient({
   projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
   dataset: import.meta.env.VITE_SANITY_DATASET,
   useCdn: true, // set to `false` to bypass the edge cache
-  apiVersion: "2024-08-08", // use current date (YYYY-MM-DD) to target the latest API version
+  apiVersion: "2024-10-24", // use current date (YYYY-MM-DD) to target the latest API version
 });
 
-// export async function getGeneralInfoData() {
-//   const worksData = await client.fetch('*[_type == "generalInfo"][0]');
-//   return worksData;
-// }
+//TODO Use
+export async function getGeneralInfoData() {
+  const worksData = await client.fetch('*[_type == "generalInfo"][0]');
+  return worksData;
+}
 
 export async function getWorksData() {
   const worksData = await client.fetch(

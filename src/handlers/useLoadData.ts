@@ -12,29 +12,6 @@ export function useLoadData() {
   const setSkillsData = usePortfolioStore((state) => state.setSkillsData);
   const setTechsData = usePortfolioStore((state) => state.setTechsData);
 
-  // const readData = useCallback(
-  //   async (
-  //     url: string,
-  //     setData: typeof setWorksData | typeof setSkillsData | typeof setTechsData
-  //   ) => {
-  //     const requestHeaders = {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     };
-
-  //     try {
-  //       const response = await fetch(url, {
-  //         headers: requestHeaders,
-  //       });
-  //       const data = await response.json();
-  //       setData(data.result);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   },
-  //   []
-  // );
-
   const fetchData = useCallback(async () => {
     try {
       // const generalInfoData = await getGeneralInfoData();

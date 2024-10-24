@@ -6,8 +6,8 @@ import { useTheme } from "./handlers/useTheme";
 import { MutableRefObject, useRef } from "react";
 import { StatsGl, View } from "@react-three/drei";
 import { MobileRouter } from "./components/html/mobile/MobileRouter";
-import { ViewportSizeHandler } from "./handlers/viewportSizeHandler";
 import "./MobileApp.css";
+import { ViewportSizeHandler } from "./handlers/ViewPortSizeHandler";
 
 export default function MobileApp() {
   const envMode = import.meta.env.MODE;
