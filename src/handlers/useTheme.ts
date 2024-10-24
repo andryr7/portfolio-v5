@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { usePortfolioStore } from "./usePortfolioStore";
+import { useLocalStorage, useMediaQuery } from "usehooks-ts";
 
 export const lightColors = {
   main: "#0e0e0e",
@@ -15,20 +16,21 @@ const darkColors = {
   backgroundTwo: "#2c2c2c",
 };
 
+//Custom hook that stores colors in state and local storage and triggers css color changes
 export function useTheme() {
-  const setColors = usePortfolioStore((state) => state.setColors);
-  const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
-  const theme = isDarkTheme ? "dark" : "light";
-
-  //TODO remove ?
-  const updateStateColors = useCallback(
-    (theme: "dark" | "light") => {
-      setColors(theme === "dark" ? darkColors : lightColors);
-    },
-    [setColors]
+  //Checking and storing browser preference
+  const browserPrefersDark = useMediaQuery("(prefers-color-scheme: dark)");
+  const [storedThemePreference, setStoredThemePreference] = useLocalStorage(
+    "themePreference",
+    browserPrefersDark ? "dark" : "light"
   );
 
-  const updateCssColors = (theme: "dark" | "light") => {
+  //Context state methods
+  const setColors = usePortfolioStore((state) => state.setColors);
+  const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
+  const setIsDarkTheme = usePortfolioStore((state) => state.setIsDarkTheme);
+
+  const setCSSColors = useCallback((theme: "dark" | "light") => {
     if (theme === "dark") {
       !document.body.classList.contains("dark") &&
         document.body.classList.add("dark");
@@ -36,10 +38,38 @@ export function useTheme() {
       document.body.classList.contains("dark") &&
         document.body.classList.remove("dark");
     }
-  };
+  }, []);
 
+  //Initial theme sync
   useEffect(() => {
-    updateStateColors(theme);
-    updateCssColors(theme);
-  }, [theme, updateStateColors]);
+    if (storedThemePreference === "light") {
+      setIsDarkTheme(false);
+      setStoredThemePreference("light");
+      setColors(lightColors);
+      setCSSColors("light");
+    } else {
+      setStoredThemePreference("dark");
+      setColors(darkColors);
+      setCSSColors("dark");
+    }
+  }, [
+    setStoredThemePreference,
+    storedThemePreference,
+    setIsDarkTheme,
+    setCSSColors,
+    setColors,
+  ]);
+
+  //Updated theme sync
+  useEffect(() => {
+    if (!isDarkTheme) {
+      setStoredThemePreference("light");
+      setColors(lightColors);
+      setCSSColors("light");
+    } else {
+      setStoredThemePreference("dark");
+      setColors(darkColors);
+      setCSSColors("dark");
+    }
+  }, [isDarkTheme, setStoredThemePreference, setCSSColors, setColors]);
 }
