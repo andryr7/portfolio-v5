@@ -5,9 +5,9 @@ import { useEffect, useRef } from "react";
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 
 export function Loader() {
-  const containerRef = useRef(null);
-  const cubeRef = useRef(null);
-  const tl = useRef<any>();
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const cubeRef = useRef<HTMLDivElement | null>(null);
+  const tl = useRef<GSAPTimeline>();
   const isLoaded = usePortfolioStore((state) => state.isLoaded);
   const lang = usePortfolioStore((state) => state.language);
 
@@ -21,7 +21,7 @@ export function Loader() {
 
   const loadingEndAnimation = contextSafe(() => {
     gsap.delayedCall(1, () => {
-      tl.current.pause();
+      tl.current!.pause();
       gsap.to(containerRef.current, { opacity: 0 });
       gsap.to(cubeRef.current, { scale: 10 });
     });

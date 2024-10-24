@@ -1,7 +1,7 @@
+import { Route, Switch } from "wouter";
 import { Error } from "@/pages/desktop/error/Error";
 import { Home } from "@/pages/desktop/home/Home";
 import { Legals } from "@/pages/desktop/legals/Legals";
-import { Route, Switch } from "wouter";
 import { Work } from "@/pages/desktop/work/Work";
 
 export function DesktopRouter() {

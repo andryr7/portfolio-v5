@@ -1,12 +1,16 @@
 import { useMousePosition } from "@/handlers/useMousePosition";
 import { useFrame } from "@react-three/fiber";
-import { CuboidCollider, RigidBody } from "@react-three/rapier";
+import {
+  CuboidCollider,
+  RapierRigidBody,
+  RigidBody,
+} from "@react-three/rapier";
 import { useRef } from "react";
 import * as THREE from "three";
 import { useRoute } from "wouter";
 
 export function PointerCollider({ vec = new THREE.Vector3() }) {
-  const ref = useRef<any>(null);
+  const ref = useRef<RapierRigidBody | null>(null);
   const mousePosition = useMousePosition();
   const [isHomepage] = useRoute("/");
 

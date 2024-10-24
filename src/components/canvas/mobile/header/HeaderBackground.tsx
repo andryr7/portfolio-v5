@@ -3,6 +3,7 @@ import { extend, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useMemo, useRef } from "react";
 import { MobileBackgroundMaterial } from "./MobileBackgroundMaterial";
+import { MobileBackgroundMaterialType } from "@/types/canvas";
 
 extend({ MobileBackgroundMaterial });
 
@@ -11,7 +12,7 @@ export function HeaderBackground() {
     (state) => state.viewportSize
   );
   const colors = usePortfolioStore((state) => state.colors);
-  const materialRef = useRef<any>(null);
+  const materialRef = useRef<MobileBackgroundMaterialType | null>(null);
   const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
 
   const shaderDarkColor = useMemo(() => {
@@ -23,6 +24,9 @@ export function HeaderBackground() {
   }, [isDarkTheme]);
 
   useFrame((_, delta) => {
+    if (!materialRef.current) {
+      return;
+    }
     materialRef.current.uTime += delta * 0.05;
   });
 

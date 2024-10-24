@@ -69,3 +69,9 @@ body {
 .noscroll {
   overflow: hidden;
 }
+
+#app-container {
+  background-color: var(--color-background-one);
+  font-family: var(--font-title);
+  color: var(--color-main);
+}

@@ -20,6 +20,7 @@ export function useTheme() {
   const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
   const theme = isDarkTheme ? "dark" : "light";
 
+  //TODO remove ?
   const updateStateColors = useCallback(
     (theme: "dark" | "light") => {
       setColors(theme === "dark" ? darkColors : lightColors);

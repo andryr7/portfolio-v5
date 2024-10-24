@@ -1,11 +1,12 @@
 import { usePortfolioStore } from "@/handlers/usePortfolioStore";
+import { MeshTransmissionMaterialType } from "@/types/canvas";
 import { MeshTransmissionMaterial, RoundedBox } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 import { useEffect, useRef } from "react";
 
 export function TransparentCube() {
-  const materialRef = useRef<any>(null);
+  const materialRef = useRef<MeshTransmissionMaterialType | null>(null);
 
   const worksScrollProgress = usePortfolioStore(
     (state) => state.worksScrollProgress

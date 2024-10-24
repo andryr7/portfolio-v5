@@ -14,9 +14,10 @@ import { usePortfolioStore } from "@/handlers/usePortfolioStore";
 import { PhysicsScene } from "./physics/PhysicsScene";
 import { HeaderBackground } from "./HeaderBackground";
 import { easing } from "maath";
+import { MeshBasicMaterial } from "three";
 
 export function HeaderScene() {
-  const worksBackgroundPanel = useRef<any>(null);
+  const backgroundPanelMaterial = useRef<MeshBasicMaterial | null>(null);
   const setIsLoaded = usePortfolioStore((state) => state.setIsLoaded);
   const colors = usePortfolioStore((state) => state.colors);
   const { width: viewportWidth, height: viewportHeight } = usePortfolioStore(
@@ -62,9 +63,9 @@ export function HeaderScene() {
     );
     state.camera.updateProjectionMatrix();
 
-    if (worksBackgroundPanel.current !== null) {
+    if (backgroundPanelMaterial.current !== null) {
       easing.dampC(
-        worksBackgroundPanel.current.material.color,
+        backgroundPanelMaterial.current.color,
         worksSceneIsActive ? workBackgroundColor : colors.backgroundTwo,
         0.25,
         delta
@@ -136,13 +137,14 @@ export function HeaderScene() {
       {/* Works background */}
       <group position={worksBackgroundPosition}>
         {/* Background */}
-        <mesh
-          scale={[viewportWidth, viewportHeight, 1]}
-          ref={worksBackgroundPanel}
-        >
+        <mesh scale={[viewportWidth, viewportHeight, 1]}>
           {/* <planeGeometry args={[1, 1, 1, 1]} /> */}
           <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial color={colors.backgroundTwo} toneMapped={false} />
+          <meshBasicMaterial
+            color={colors.backgroundTwo}
+            toneMapped={false}
+            ref={backgroundPanelMaterial}
+          />
         </mesh>
       </group>
 

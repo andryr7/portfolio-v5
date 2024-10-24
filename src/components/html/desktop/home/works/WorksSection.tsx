@@ -115,11 +115,8 @@ export function WorksSection({ id }: { id: string }) {
     }
   }, [worksScrollProgress, setHoveredWorkIndex]);
 
-  const numberShift = useMemo(() => {
-    const normalizedProgress = (worksScrollProgress - 0.2) / 0.6;
-    const clampedProgress = Math.max(0, Math.min(1, normalizedProgress));
-    return clampedProgress * 300;
-  }, [worksScrollProgress]);
+  const numberShift =
+    Math.max(0, Math.min(1, (worksScrollProgress - 0.2) / 0.6)) * 300;
 
   return (
     <>

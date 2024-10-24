@@ -1,22 +1,15 @@
+import { DesktopBackgroundMaterialType } from "@/types/canvas";
 import { shaderMaterial } from "@react-three/drei";
 import { ReactThreeFiber } from "@react-three/fiber";
 import { Color } from "three";
-import * as THREE from "three";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
       desktopBackgroundMaterial: ReactThreeFiber.Object3DNode<
-        THREE.ShaderMaterial & {
-          key: string;
-          darkcolor: THREE.Color;
-          lightcolor: THREE.Color;
-          amount: number;
-          uTime: number;
-          map: THREE.Texture;
-        },
-        typeof DesktopBackgroundMaterial
+        DesktopBackgroundMaterialType,
+        DesktopBackgroundMaterialType
       >;
     }
   }

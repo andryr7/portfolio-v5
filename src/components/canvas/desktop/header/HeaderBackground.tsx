@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { useTrailTexture } from "@react-three/drei";
 import * as easings from "d3-ease";
 import { useMemo, useRef } from "react";
+import { DesktopBackgroundMaterialType } from "@/types/canvas";
 
 extend({ DesktopBackgroundMaterial });
 
@@ -13,7 +14,7 @@ export function HeaderBackground({ visible }: { visible: boolean }) {
     (state) => state.viewportSize
   );
   const colors = usePortfolioStore((state) => state.colors);
-  const materialRef = useRef<any>(null);
+  const materialRef = useRef<DesktopBackgroundMaterialType | null>(null);
   const isDarkTheme = usePortfolioStore((state) => state.isDarkTheme);
 
   const shaderDarkColor = useMemo(() => {
@@ -37,6 +38,9 @@ export function HeaderBackground({ visible }: { visible: boolean }) {
   });
 
   useFrame((_, delta) => {
+    if (!materialRef.current) {
+      return;
+    }
     materialRef.current.uTime += delta * 0.05;
   });
 
